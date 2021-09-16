@@ -17,24 +17,6 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://earyant.github.io/2021/09/16/README/"/>
-    <id>http://earyant.github.io/2021/09/16/README/</id>
-    <published>2021-09-16T14:38:49.000Z</published>
-    <updated>2021-09-16T14:38:49.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;blog&quot;&gt;&lt;a href=&quot;#blog&quot; class=&quot;headerlink&quot; title=&quot;blog&quot;&gt;&lt;/a&gt;blog&lt;/h1&gt;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>自己写一个数据库</title>
     <link href="http://earyant.github.io/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>http://earyant.github.io/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
@@ -416,6 +398,27 @@
     
     
     <category term="java基础" scheme="http://earyant.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EffectiveJava读书笔记</title>
+    <link href="http://earyant.github.io/2017/10/26/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>http://earyant.github.io/2017/10/26/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2017-10-26T14:13:26.000Z</published>
+    <updated>2021-09-16T14:38:49.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#EffectiveJava 读书笔记&lt;/p&gt;
+&lt;p&gt;本文于2017年10月26日再读一遍，对书中的内容进行整理提取，方便以后查阅&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h2 id=&quot;第一章：创建和销毁对象&quot;&gt;&lt;a href=&quot;#第一章：创建和销毁对象&quot; class=&quot;hea</summary>
+      
+    
+    
+    
     
   </entry>
   
