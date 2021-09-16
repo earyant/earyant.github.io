@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置 | 
+        
+        Earyant的技术博客
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    <meta name="keywords" content="">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Earyant的技术博客">
+    <meta name="msapplication-starturl" content="http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Earyant的技术博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置 | Earyant的技术博客">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    
+
+    
+        <meta property="article:published_time" content="Tue Dec 26 2017 00:28:39 GMT+0800">
+        <meta property="article:modified_time" content="Thu Sep 16 2021 22:38:49 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html",
+    "headline": "SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置",
+    "datePublished": "Tue Dec 26 2017 00:28:39 GMT+0800",
+    "dateModified": "Thu Sep 16 2021 22:38:49 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Earyant",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "欢迎来到Earyant的blog"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Earyant的技术博客",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": "",
+    "description": "个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Eureka-Server%E7%9A%84%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%93%8D%E4%BD%9C"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Eureka Server的集群同步操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-Eureka%E5%AE%98%E7%BD%91%E7%9A%84%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1. Eureka官网的架构图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-%E6%96%B0%E7%9A%84Eureka-Server%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4%E5%90%8E%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.3. 新的Eureka Server节点加入集群后的影响</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-%E6%96%B0%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C-Register-%E6%B3%A8%E5%86%8C%E6%97%B6%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.4. 新服务注册(Register)注册时的影响</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-5-%E6%9C%8D%E5%8A%A1%E5%BF%83%E8%B7%B3-renew"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">2.5. 服务心跳(renew)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-6-%E6%9C%8D%E5%8A%A1%E4%B8%8B%E7%BA%BF%E5%92%8C%E5%89%94%E9%99%A4"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">2.6. 服务下线和剔除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-7-%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">2.7. 自我保护模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-8-%E9%85%8D%E7%BD%AEdemo"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">2.8 配置demo</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Earyant</strong>
+        <span>12月 26, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置&url=http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html&pic=http://earyant.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置&url=http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html&via=Earyant" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>本文在上文 Spring cloud系列四 Eureka 之概述和服务注册中心集群的基础上，继续介绍Eureka新的内容:</p>
+<pre><code>集群重要类：PeerAwareInstanceRegistryImpl
+新的Eureka Server节点加入集群后的影响
+新服务注册(Register)注册时的影响
+服务心跳(renew)
+服务下线和剔除
+自我保护模式
+</code></pre>
+<h1 id="2-Eureka-Server的集群同步操作"><a href="#2-Eureka-Server的集群同步操作" class="headerlink" title="2. Eureka Server的集群同步操作"></a>2. Eureka Server的集群同步操作</h1><h2 id="2-1-Eureka官网的架构图"><a href="#2-1-Eureka官网的架构图" class="headerlink" title="2.1. Eureka官网的架构图"></a>2.1. Eureka官网的架构图</h2><p>下方的操作需要结合下图理解：<br>这里写图片描述<br>##2.2. PeerAwareInstanceRegistryImpl</p>
+<p>集群相关重要的类com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: 为了保证集群里所有Eureka Server节点的状态同步，所有以下操作都会同步到集群的所有服务上：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）。以下是一些部分方法：</p>
+<pre><code>syncUp：在Eureka Server重启或新的Eureka Server节点加进来的，会执行初始化，从集群其他节点中获取所有的实例注册信息，从而能够正常提供服务。当Eureka Server启动时，它会从其它节点获取所有的注册信息，如果获取同步失败，它在一定时间（此值由决定）内拒绝服务。
+replicateToPeers： 同步以下操作到所有的集群节点：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）
+register: 注册实例，并且复印此实例的信息到所有的eureka server的节点。如果其它Eureka Server调用此节点，只在本节点更新实例信息，避免通知其他节点执行更新
+renew：心跳，同步集群
+cancel
+其他
+</code></pre>
+<p>Eureka Server集群之间的状态是采用异步方式同步的，所以不保证节点间的状态一定是一致的，不过基本能保证最终状态是一致的。</p>
+<h2 id="2-3-新的Eureka-Server节点加入集群后的影响"><a href="#2-3-新的Eureka-Server节点加入集群后的影响" class="headerlink" title="2.3. 新的Eureka Server节点加入集群后的影响"></a>2.3. 新的Eureka Server节点加入集群后的影响</h2><p>当有新的节点加入到集群中，会对现在Eureka Server和Eureka Client有什么影响以及他们如何发现新增的Eureka Server节点：</p>
+<pre><code>新增的Eureka Server：在Eureka Server重启或新的Eureka Server节点加进来的，它会从集群里其它节点获取所有的实例注册信息。如果获取同步失败，它会在一定时间（此值由决定eureka.server.peer-eureka-nodes-update-interval-ms决定）内拒绝服务。
+
+已有Eureka Server和Service Consumer如何发现新的Eureka Server
+    已有的Eureka Server：在运行过程中，Eureka Server之间会定时同步实例的注册信息。这样即使新的Application Service只向集群中一台注册服务，则经过一段时间会集群中所有的Eureka Server都会有这个实例的信息。那么Eureka Server节点之间如何相互发现，各个节点之间定时（时间由eureka.server.peer-eureka-nodes-update-interval-ms决定）更新节点信息，进行相互发现。
+    Service Consumer：Service Consumer刚启动时，它会从配置文件读取Eureka Server的地址信息。当集群中新增一个Eureka Server中时，那么Service Provider如何发现这个Eureka Server？Service Consumer会定时（此值由eureka.client.eureka-service-url-poll-interval-seconds决定）调用Eureka Server集群接口，获取所有的Eureka Server信息的并更新本地配置。
+</code></pre>
+<h2 id="2-4-新服务注册-Register-注册时的影响"><a href="#2-4-新服务注册-Register-注册时的影响" class="headerlink" title="2.4. 新服务注册(Register)注册时的影响"></a>2.4. 新服务注册(Register)注册时的影响</h2><p>Service Provider要对外提供服务，把自己注册到Eureka Server上。如果配置参数eureka.client.registerWithEureka=true（默认值true）时，会向Eureka Server注册进行注册，Eureka Server会保存注册信息到内存中。</p>
+<p>Service Consumer为了避免每次调用服务请求都需要向Eureka Server获取服务实例的注册信息，此时需要设置eureka.client.fetchRegistry=true，它会在本地缓存所有实例注册信息。为了保证缓存数据的有效性，它会定时（值由eureka.client.registry-fetch-interval-seconds定义，默认值为30s）向注册中心更新实例。</p>
+<h2 id="2-5-服务心跳-renew"><a href="#2-5-服务心跳-renew" class="headerlink" title="2.5. 服务心跳(renew)"></a>2.5. 服务心跳(renew)</h2><p>服务实例会通过心跳(eureka.instance.lease-renewal-interval-in-seconds定义心跳的频率，默认值为30s)续约的方式向Eureka Server定时更新自己的状态。Eureka Server收到心跳后，会通知集群里的其它Eureka Server更新此实例的状态。Service Provider/Service Consumer也会定时更新缓存的实例信息。</p>
+<h2 id="2-6-服务下线和剔除"><a href="#2-6-服务下线和剔除" class="headerlink" title="2.6. 服务下线和剔除"></a>2.6. 服务下线和剔除</h2><p>服务的下线有两种情况：</p>
+<pre><code>在Service Provider服务shutdown的时候，主动通知Eureka Server把自己剔除，从而避免客户端调用已经下线的服务。
+Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms，默认值为0，默认情况不删除实例）进行检查，如果发现实例在在一定时间（此值由eureka.instance.lease-expiration-duration-in-seconds定义，默认值为90s）内没有收到心跳，则会注销此实例。
+</code></pre>
+<p>这种情况下，Eureka Client的最多需要[eureka.instance.lease-renewal-interval-in-seconds + eureka.client.registry-fetch-interval-seconds]时间才发现服务已经下线。同理，一个新的服务上线后，Eureka Client的服务消费方最多需要相同的时间才发现服务已经上线</p>
+<p>服务下线，同时会更新到Eureka Server其他节点和Eureka client的缓存，流程类似同以上的register过程</p>
+<h2 id="2-7-自我保护模式"><a href="#2-7-自我保护模式" class="headerlink" title="2.7. 自我保护模式"></a>2.7. 自我保护模式</h2><p>如果Eureka Server最近1分钟收到renew的次数小于阈值（即预期的最小值），则会触发自我保护模式，此时Eureka Server此时会认为这是网络问题，它不会注销任何过期的实例。等到最近收到renew的次数大于阈值后，则Eureka Server退出自我保护模式。</p>
+<p>自我保护模式阈值计算：</p>
+<pre><code>每个instance的预期心跳数目 = 60/每个instance的心跳间隔秒数
+阈值 = 所有注册到服务的instance的数量的预期心跳之和 *自我保护系数
+</code></pre>
+<p>以上的参数都可配置的：</p>
+<pre><code>instance的心跳间隔秒数：eureka.instance.lease-renewal-interval-in-seconds
+自我保护系数：eureka.server.renewal-percent-threshold
+</code></pre>
+<p>如果我们的实例比较少且是内部网络时，推荐关掉此选项。我们也可以通过eureka.server.enable-self-preservation = false来禁用自我保护系数</p>
+<h2 id="2-8-配置demo"><a href="#2-8-配置demo" class="headerlink" title="2.8 配置demo"></a>2.8 配置demo</h2><p>以下配置的demo如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10761</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-registration-center</span></span><br><span class="line"><span class="comment">## eureka ： 主要配置属性在EurekaInstanceConfigBean和EurekaClientConfigBean中</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># hostname: 127.0.0.1</span></span><br><span class="line">    <span class="comment"># 使用IP注册</span></span><br><span class="line">    <span class="attr">preferIpAddress:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 心跳间隔</span></span><br><span class="line">    <span class="attr">lease-renewal-interval-in-seconds:</span> <span class="number">3</span></span><br><span class="line">    <span class="comment"># 服务失效时间： 如果多久没有收到请求，则可以删除服务</span></span><br><span class="line">    <span class="attr">lease-expiration-duration-in-seconds:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment"># 关闭eureka client</span></span><br><span class="line">    <span class="comment"># enabled: false</span></span><br><span class="line">    <span class="comment"># 注册自身到eureka服务器</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 表示是否从eureka服务器获取注册信息</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># 客户端从Eureka Server集群里更新Eureka Server信息的频率</span></span><br><span class="line">    <span class="attr">eureka-service-url-poll-interval-seconds:</span> <span class="number">60</span></span><br><span class="line">    <span class="comment"># 定义从注册中心获取注册服务的信息</span></span><br><span class="line">    <span class="attr">registry-fetch-interval-seconds:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 设置eureka服务器所在的地址，查询服务和注册服务都需要依赖这个地址</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10761/eureka/</span></span><br><span class="line">       <span class="comment"># 设置eureka服务器所在的地址，可以同时向多个服务注册服务</span></span><br><span class="line">       <span class="comment"># defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold: 0.1</span></span><br><span class="line">     <span class="comment"># 关闭自我保护模式</span></span><br><span class="line">     <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br><span class="line">     <span class="comment"># Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold:</span></span><br><span class="line">     <span class="comment"># 设置清理间隔,单位为毫秒,默认为0</span></span><br><span class="line">     <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">3000</span></span><br><span class="line">     <span class="comment"># 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务</span></span><br><span class="line">     <span class="attr">wait-time-in-ms-when-sync-empty:</span> <span class="number">6000000</span></span><br><span class="line">     <span class="comment"># 集群之间相互更新节点信息的时间频率</span></span><br><span class="line">     <span class="attr">peer-eureka-nodes-update-interval-ms:</span> <span class="number">60000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/01/14/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/11/09/%E7%B4%A2%E5%BC%95/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Earyant's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2021/09/">九月 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">24</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">22</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Earyant的技术博客
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 0000;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

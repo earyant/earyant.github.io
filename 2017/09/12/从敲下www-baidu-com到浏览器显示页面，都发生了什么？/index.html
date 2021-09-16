@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            从敲下www.baidu.com到浏览器显示页面，都发生了什么？ | 
+        
+        Earyant的技术博客
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    <meta name="keywords" content="">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Earyant的技术博客">
+    <meta name="msapplication-starturl" content="http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Earyant的技术博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="从敲下www.baidu.com到浏览器显示页面，都发生了什么？ | Earyant的技术博客">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    
+
+    
+        <meta property="article:published_time" content="Tue Sep 12 2017 18:16:00 GMT+0800">
+        <meta property="article:modified_time" content="Thu Sep 16 2021 22:38:49 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html",
+    "headline": "从敲下www.baidu.com到浏览器显示页面，都发生了什么？",
+    "datePublished": "Tue Sep 12 2017 18:16:00 GMT+0800",
+    "dateModified": "Thu Sep 16 2021 22:38:49 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Earyant",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "欢迎来到Earyant的blog"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Earyant的技术博客",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": "",
+    "description": "个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%90%8D%E8%AF%8D%E5%AE%9A%E4%B9%89"><span class="post-toc-number">1.</span> <span class="post-toc-text">名词定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#URL"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">URL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DNS"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">DNS</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="post-toc-number">2.</span> <span class="post-toc-text">查找</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">域名解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">1. 浏览器缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E6%9C%AC%E5%9C%B0hosts%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BEip%E5%9C%B0%E5%9D%80"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">2. 本地hosts文件查找ip地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-%E6%9F%A5%E6%89%BE%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BC%93%E5%AD%98"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">3. 查找路由器缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-%E6%9F%A5%E6%89%BEISP-Internet-Service-Provider-DNS-%E7%BC%93%E5%AD%98"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">4. 查找ISP(Internet Service Provider) DNS 缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-%E8%BF%AD%E4%BB%A3%E6%9F%A5%E8%AF%A2"><span class="post-toc-number">2.1.5.</span> <span class="post-toc-text">5. 迭代查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-CDN"><span class="post-toc-number">2.1.6.</span> <span class="post-toc-text">6. CDN</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7%E8%AF%B7%E6%B1%82"><span class="post-toc-number">3.</span> <span class="post-toc-text">服务器处理用户请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">代理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">正向代理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">反向代理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%88%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">负载均衡（反向代理的实现）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">硬件负载均衡</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">软件负载均衡</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%B9%E5%99%A8%E5%A4%84%E7%90%86"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">容器处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E5%A4%84%E7%90%86"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">应用处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mysql%E6%9E%B6%E6%9E%84"><span class="post-toc-number">3.2.5.</span> <span class="post-toc-text">Mysql架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MySQL%E8%83%BD%E5%A4%9F%E5%A4%84%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="post-toc-number">3.2.5.1.</span> <span class="post-toc-text">MySQL能够处理的优化类型：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93"><span class="post-toc-number">4.</span> <span class="post-toc-text">浏览器渲染</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                从敲下www.baidu.com到浏览器显示页面，都发生了什么？
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Earyant</strong>
+        <span>9月 12, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=从敲下www.baidu.com到浏览器显示页面，都发生了什么？&url=http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html&pic=http://earyant.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=从敲下www.baidu.com到浏览器显示页面，都发生了什么？&url=http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html&via=Earyant" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://earyant.github.io/2017/09/12/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h1><h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><pre><code>URL（Uniform Resource Locator），统一资源定位符，实际就是网站网址，又称域名。在茫茫网络世界中，浏览器就是靠URL来查找资源位置。URL包含协议部分，是浏览器和www万维网之间的沟通方式，它会告诉浏览器正确在网路上找到资源位置。常见的协议有http、https、ftp、file、telnet等。其中http是最常见的网络传输协议，而https则是进行加密的网络传输。
+</code></pre>
+<h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><pre><code>为了便于记忆或辨识，人们使用域名来登录网站，每个域名背后有对应的IP地址。每个网站就是靠IP来定位的。IP是因特网中的每台连接到网络的计算机为实现相互通信而遵循的规则协议。IP分为局域网IP和全网IP。办公中常用的飞秋工具，就是使用办公室局域网IP进行通信的典型表现。每台计算机的本机IP都是127.0.0.1（即localhost）。浏览器并不能识别URL是什么，因此从输入URL开始，浏览器就要做域名解析，也就是IP寻址的工作。
+</code></pre>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><pre><code>DNS（Domain Name System，域名系统）——记录域名和IP地址相互映射的信息，人们可以免于记住IP数串。全国DNS信息可在网上查找到，各省都有对应分配不同的IP网段。大型企业会有自己的DNS服务器，专门存储域名和IP的映射关系，例如为大多数人熟知的谷歌DNS服务器，地址8.8.8.8。
+</code></pre>
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>  当用户在浏览器中输入url后,你使用的电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动,DNS请求到达本地DNS服务器之后会有以下几个步骤：</p>
+<h3 id="1-浏览器缓存"><a href="#1-浏览器缓存" class="headerlink" title="1. 浏览器缓存"></a>1. 浏览器缓存</h3><p>  浏览器对本地缓存进行查找，查看是否有该域名历史记录，如果有首先直接对缓存地址访问。<br>  Chrome浏览器看本身的DNS缓存时间比较方便，在地址栏输入chrome://net-internals/#dns，就可以看到了</p>
+<h3 id="2-本地hosts文件查找ip地址"><a href="#2-本地hosts文件查找ip地址" class="headerlink" title="2. 本地hosts文件查找ip地址"></a>2. 本地hosts文件查找ip地址</h3><p>  浏览器若无缓存或者缓存地址访问无效，则首先对hosts文件查找对应域名对应ip地址。</p>
+<h3 id="3-查找路由器缓存"><a href="#3-查找路由器缓存" class="headerlink" title="3. 查找路由器缓存"></a>3. 查找路由器缓存</h3><p>  如果系统缓存中也找不到，那么查询请求就会发向路由器，路由器一般会有自己的DNS缓存。</p>
+<h3 id="4-查找ISP-Internet-Service-Provider-DNS-缓存"><a href="#4-查找ISP-Internet-Service-Provider-DNS-缓存" class="headerlink" title="4. 查找ISP(Internet Service Provider) DNS 缓存"></a>4. 查找ISP(Internet Service Provider) DNS 缓存</h3><p>如果路由器缓存中也找不到，那么就查询ISP DNS 缓存服务器了。<br>我们都知道在我们的网络配置中都会有”DNS服务器地址”这一项，操作系统会把这个域名发送给这里设置的DNS，比如114.114.114.114,也就是本地区的域名服务器，通常是提供给你接入互联网的应用提供商。而114.114.114.114是国内移动、电信和联通通用的DNS。</p>
+<h3 id="5-迭代查询"><a href="#5-迭代查询" class="headerlink" title="5. 迭代查询"></a>5. 迭代查询</h3><p>  如果前面都找不到DNS缓存的话，会有以下几个步骤：</p>
+<ol>
+<li>本地 DNS服务器将该请求转发到互联网上的根域（根域没有名字，在DNS系统中就用一个空字符串来表示。例如<a target="_blank" rel="noopener" href="http://www.baidu.com.现在的dns系统都不会要求域名以.来结束,即www.baidu.com就可以解析了,但是现在很多dns解析服务商还是会要求在填写dns记录的时候以.来结尾域名.)/">www.baidu.com.现在的DNS系统都不会要求域名以.来结束，即www.baidu.com就可以解析了，但是现在很多DNS解析服务商还是会要求在填写DNS记录的时候以.来结尾域名。）</a></li>
+<li>根域将所要查询域名中的顶级域（比如要查询<a target="_blank" rel="noopener" href="http://www.baidu.com,该域名的顶级域就是com)的服务器ip地址返回到本地dns./">www.baidu.com，该域名的顶级域就是com）的服务器IP地址返回到本地DNS。</a></li>
+<li>本地DNS根据返回的IP地址，再向顶级域（就是com域）发送请求， com域服务器再将域名中的二级域（即<a target="_blank" rel="noopener" href="http://www.baidu.com中的baidu.com)的ip地址返回给本地dns./">www.baidu.com中的baidu.com）的IP地址返回给本地DNS。</a></li>
+<li>本地DNS再向二级域发送请求进行查询。</li>
+<li>之后不断重复这样的过程，直到本地DNS服务器得到最终的查询结果，并返回到主机。这时候主机才能通过域名访问该网站。<br>下图能很好的说明这个迭代查询:<br><img src="./dns%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B.gif"><br>当查找到对应的IP地址之后，通过IP地址查找到对应的服务器，浏览器将用户发起的http请求发送给服务器。例如：GET <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a> HTTP/1.1<h3 id="6-CDN"><a href="#6-CDN" class="headerlink" title="6. CDN"></a>6. CDN</h3>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。<h1 id="服务器处理用户请求"><a href="#服务器处理用户请求" class="headerlink" title="服务器处理用户请求"></a>服务器处理用户请求</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3>正向代理是一种最终用户知道并主动使用的代理方式，比如三台支付服务服务器在微服务SpringCloud中的服务注册中心中注册了三个地址（1.1.1.1,2.2.2.2,3.3.3.3），用户服务服务器访问服务注册中心请求地址正向代理返回某一个地址（1.1.1.1），支付服务缓存到本地，在缓存有效期时间内，直接访问1.1.1.1服务器就可以了。<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3>在计算机世界里，由于单个服务器的处理客户端（用户）请求能力有一个极限，当用户的接入请求蜂拥而入时，会造成服务器忙不过来的局面，可以使用多个服务器来共同分担成千上万的用户请求，这些服务器提供相同的服务，对于用户来说，根本感觉不到任何差别。比如你只需要敲下<a target="_blank" rel="noopener" href="http://www.baidu.com这一个域名,其实背后有很多服务器支持着,每个人的请求会被分发到不同的服务器中./">www.baidu.com这一个域名，其实背后有很多服务器支持着，每个人的请求会被分发到不同的服务器中。</a></li>
+</ol>
+<p>  反向代理需要有一个负载均衡设备来分发用户请求，将用户请求分发到空闲的服务器上，负载均衡设备本身也可以有多个。</p>
+<p>  <strong>好处</strong>：<br>  用户服务做域名解析时，解析到的ip地址是负载均衡设备的ip地址，不会暴露服务器地址。当需要增加、减少服务器数量时，用户一点都察觉不到。</p>
+<h2 id="负载均衡（反向代理的实现）"><a href="#负载均衡（反向代理的实现）" class="headerlink" title="负载均衡（反向代理的实现）"></a>负载均衡（反向代理的实现）</h2><h3 id="硬件负载均衡"><a href="#硬件负载均衡" class="headerlink" title="硬件负载均衡"></a>硬件负载均衡</h3><p>  F5</p>
+<h3 id="软件负载均衡"><a href="#软件负载均衡" class="headerlink" title="软件负载均衡"></a>软件负载均衡</h3><ul>
+<li>LVS(七层协议第四层)<br>  LVS是Linux Virtual Server。lvs工作在4层，所以它可以对几乎所有应用做负载均衡，包括http、数据库、聊天室等等。同时，若跟硬件负载均衡相比它的缺点也不容忽视，LVS要求技术水平很高，操作上也比较复杂，配置也很繁琐，没有赖以保障的服务支持，稳定性来说也相对较低（人为和网络环境因素更多一些）。</li>
+<li>nginx(七层协议第七层)<br>  Nginx是工作在第七层，对于网络的依赖性就小的多。与LVS相比，Nginx的安装和配置也相对简单一些，另外测试方面也更简单，主要还是因为对网络依赖性小的缘故。Nginx有一点不好的就是应用要比LVS少。一般我们做软件负载均衡的时候，通常会先考虑LVS，但是遇到比较复杂的网络环境时，用LVS可能会遇到很多麻烦，不妨就考虑尝试一下Nginx。</li>
+</ul>
+<h3 id="容器处理"><a href="#容器处理" class="headerlink" title="容器处理"></a>容器处理</h3><ul>
+<li>常用Java EE容器<ul>
+<li>tomcat</li>
+<li>jetty</li>
+<li>jBoss<br>tomcat服务器启动main方法，当command命令行是start，就执行start方法。反射调用Catalina类的start()方法。这里面会弄出一个StandardServer对象（内部会使用Digester库去解析server.xml，那个里面的东西），并调用它的start()方法，把那些组件都启动起来。<br>其中在连接器的启动过程中，会弄出一个叫做endpoint的东西去和底层的网络IO打交道，会调用其bind()方法，绑定端口号。<br>connector将请求交给他所在的service里对应的engine，来处理；<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Engine</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+每当HttpConnector的ServerSocket得到客户端的连接时，会创建一个Socket。<br>考虑到客户端同时发来的请求数可能有很多， 所以tomcat 中默认维护着一个连接池<br>NioChannel channel = nioChannels.pop();<br>channel.setIOChannel(socket);<br>channel.reset();<br>getPoller0().register(channel);<br>context随后在自己的mapping table里寻找servlet-mapping拦截路径为*.jsp的servlet，这里找到得是JSPServlet处理<br>找到JSPServlet后，调用JSPServlet的doGet或doPOST方法；<br>context执行完毕后，将HttpServletResponse 返回给Host；<br>host将HttpServletResponse 返回给engine；<br>engine 将HttpServletResponse 返回给 connector；<br>connector 将 HttpServletResponse 返回给用户的browser；</li>
+</ul>
+</li>
+</ul>
+<p>  tomcat容器在启动后，context对应的项目在初始化的时候，要加载相应的servlet，加载的顺序为：<br>  $CATALINA_HOME/conf/web.xml里定义的servlet（对应于上面第5步的JSPServlet）；<br>  context对应的项目WEB-INF下的web.xml中定义的servlet；</p>
+<h3 id="应用处理"><a href="#应用处理" class="headerlink" title="应用处理"></a>应用处理</h3><ol>
+<li>Controller接收到请求，转发给service；</li>
+<li>service进行逻辑处理，如果有redis、ehcache等缓存则优先查询缓存；</li>
+<li>如果是dubbo或者springcloud分布式，则通过dubbo服务或者restful请求调用其他服务模块请求信息；</li>
+<li>调用dao查询数据库；</li>
+<li>返回数据给service再给controller，controller再组装数据以及view返回；</li>
+<li>view层jsp或者velocity等模板引擎解析数据</li>
+</ol>
+<h3 id="Mysql架构"><a href="#Mysql架构" class="headerlink" title="Mysql架构"></a>Mysql架构</h3><ol>
+<li>服务器先会检查查询缓存，如果命中了缓存，则立即返回存储在缓存中的结果。</li>
+<li>服务器端进行SQL解析、预处理，再由优化器生成对应的执行计划；</li>
+<li>MySQL根据优化器生成的执行计划，调用存储引擎的API来执行查询；</li>
+<li>将结果返回给客户端。<h4 id="MySQL能够处理的优化类型："><a href="#MySQL能够处理的优化类型：" class="headerlink" title="MySQL能够处理的优化类型："></a>MySQL能够处理的优化类型：</h4></li>
+<li>重新定义关联表的顺序<br>数据表的关联并不总是按照在查询中指定的顺序进行，决定关联的顺序是优化器很重要的一部分功能。</li>
+<li>将外连接转化成内连接<br>并不是所有的outer join语句都必须以外连接的方式执行。诸多因素，例如where条件、库表结构都可能会让外连接等价于一个内连接。MySQL能够识别这点并重写查询，让其可以调整关联顺序。</li>
+<li>使用等价变换规则<br>MySQL可以使用一些等价变换来简化并规范表达式。它可以合并和减少一些比较，还可以移除一些恒成立和一些恒不成立的判断。例如：（5=5 and a&gt;5）将被改写为a&gt;5。类似的，如果有（a<b and b=c）and a=5，则会被改写为 b>5 and b=c and a=5。</li>
+<li>优化count()、min()和max()<br>索引和列是否为空通常可以帮助MySQL优化这类表达式。例如，要找到一列的最小值，只需要查询对应B-tree索引最左端的记录，MySQL可以直接获取索引的第一行记录。在优化器生成执行计划的时候就可以利用这一点，在B-tree索引中，优化器会讲这个表达式最为一个常数对待。类似的，如果要查找一个最大值，也只需要读取B-tree索引的最后一个记录。如果MySQL使用了这种类型的优化，那么在explain中就可以看到“select tables optimized away”。从字面意思可以看出，它表示优化器已经从执行计划中移除了该表，并以一个常数取而代之。<br>类似的，没有任何where条件的count(*)查询通常也可以使用存储引擎提供的一些优化，例如，MyISAM维护了一个变量来存放数据表的行数。</li>
+<li>预估并转化为常数表达式</li>
+<li>覆盖索引扫描<br>当索引中的列包含所有查询中需要使用的列的时候，MySQL就可以使用索引返回需要的数据，而无需查询对应的数据行。</li>
+<li>子查询优化<br>MySQL在某些情况下可以将子查询转换成一种效率更高的形式，从而减少多个查询多次对数据进行访问。</li>
+<li>提前终止查询<br>在发现已经满足查询需求的时候，MySQL总是能够立即终止查询。一个典型的例子就是当使用了limit子句的时候。除此之外，MySQL还有几种情况也会提前终止查询，例如发现了一个不成立的条件，这时MySQL可以立即返回一个空结果。<br>上面的例子可以看出，查询在优化阶段就已经终止。</li>
+<li>等值传播</li>
+<li>列表in()的比较<br>在很多数据库系统中，in()完全等同于多个or条件的字句，因为这两者是完全等价的。在MySQL中这点是不成立的，MySQL将in()列表中的数据先进行排序，然后通过二分查找的方式来确定列表中的值是否满足条件，这是一个o(log n)复杂度的操作，等价转换成or的查询的复杂度为o(n)，对于in()列表中有大量取值的时候，MySQL的处理速度会更快。</li>
+</ol>
+<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/09/15/JVM%E8%B0%83%E4%BC%98/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/09/12/SpringMvc%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Earyant's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2021/09/">九月 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">24</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">22</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Earyant的技术博客
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 0000;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
