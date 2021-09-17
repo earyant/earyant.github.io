@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-16T14:38:49.000Z</updated>
+  <updated>2021-09-17T14:55:28.635Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>机器学习路线</title>
+    <link href="http://earyant.github.io/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
+    <id>http://earyant.github.io/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</id>
+    <published>2021-09-17T09:20:02.000Z</published>
+    <updated>2021-09-17T14:55:28.635Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;机器学习路线图&quot;&gt;&lt;a href=&quot;#机器学习路线图&quot; class=&quot;headerlink&quot; title=&quot;机器学习路线图&quot;&gt;&lt;/a&gt;机器学习路线图&lt;/h1&gt;&lt;h2 id=&quot;入门课程&quot;&gt;&lt;a href=&quot;#入门课程&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>自己写一个数据库</title>
@@ -398,27 +416,6 @@
     
     
     <category term="java基础" scheme="http://earyant.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EffectiveJava读书笔记</title>
-    <link href="http://earyant.github.io/2017/10/26/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>http://earyant.github.io/2017/10/26/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
-    <published>2017-10-26T14:13:26.000Z</published>
-    <updated>2021-09-16T14:38:49.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#EffectiveJava 读书笔记&lt;/p&gt;
-&lt;p&gt;本文于2017年10月26日再读一遍，对书中的内容进行整理提取，方便以后查阅&lt;/p&gt;
-&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h2 id=&quot;第一章：创建和销毁对象&quot;&gt;&lt;a href=&quot;#第一章：创建和销毁对象&quot; class=&quot;hea</summary>
-      
-    
-    
-    
     
   </entry>
   
