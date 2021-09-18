@@ -1,1280 +1,1361 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.6 -->
-    <script>
-        window.materialVersion = "1.5.6"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0',
-            '1.5.2',
-            '1.5.5'
-        ]
-    </script>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Earyant的技术博客">
+<meta property="og:url" content="http://earyant.github.io/page/2/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://earyant.github.io/page/2/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
 
-
-
-
-
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
-    
-    <title>
-        
-        Earyant的技术博客
-    </title>
-
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" href="/img/favicon.png">
-
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    <meta name="keywords" content="">
-    <meta name="theme-color" content="#0097A7">
-
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
-
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
-    <!-- Import CSS -->
-    
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-        
-
-    
-
-    
-
-    <!-- Config CSS -->
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
+  <title>Earyant的技术博客</title>
   
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
   }
 
-  a {
-    color: #00838F;
-  }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-color: #F5F5F5;
-      }
-
-      /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-        background-color: #fff;
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Earyant的技术博客">
-    <meta name="msapplication-starturl" content="http://earyant.github.io/page/2/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Earyant的技术博客">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- Site Verification -->
-    
-    
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://earyant.github.io/page/2/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Earyant的技术博客">
-    <meta property="og:image" content="/img/favicon.png">
-    <meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    
-
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="http://earyant.github.io/page/2/index.html" />
-    
-
-    <!-- Structured-data for SEO -->
-    
-        
-
-
-
-    
-
-    <!-- Analytics -->
-    
-    
-    
-
-    <!-- Custom Head -->
-    
-
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-    
-        <body id="scheme-Paradox" class="lazy">
-            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span id="MD-burger-id" class="MD-burger-layer"></span>
-                        </button>
-                    
-
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
-
-    <!-- Pin on top -->
-    
-
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/03/27/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/">JDK1.5-JDK1.8各个新特性</a></p>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
+  </div>
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/03/27/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>3月 27, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
+  <div class="site-meta">
 
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/03/22/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">java内存模型</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            参考
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/03/22/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>3月 22, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/02/25/%E6%B7%B1%E7%88%B1%E4%B8%8D%E5%AF%BF/">深爱不寿</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            如果我孑身一人是个赛车手无牵无挂，无畏无惧即使受伤、死亡也会为我爱的事倾尽所有
-如果我生在乱世是个将军...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/02/25/%E6%B7%B1%E7%88%B1%E4%B8%8D%E5%AF%BF/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>2月 25, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/02/25/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/">爱吃西瓜</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            最甜的是西瓜中间的那口
-可我连籽都吃掉
-我爱的东西本来就不多
-爱就爱它的所有
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/02/25/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>2月 25, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/02/13/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">docker简单结合elk、logstash</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/02/13/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>2月 13, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/02/12/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/">docker简单部署elk服务</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/02/12/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>2月 12, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/01/20/java8%E6%96%B0%E7%89%B9%E6%80%A7/">java8新特性</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/01/20/java8%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>1月 20, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/01/14/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">springcloud配置问题</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-注册中心不自动上线下线
-异步返回值
-bean参数传值
-
-
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/01/14/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>1月 14, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1. 概述...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>12月 26, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/11/09/%E7%B4%A2%E5%BC%95/">索引</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            索引介绍
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/11/09/%E7%B4%A2%E5%BC%95/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>11月 09, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-    <!-- Index nav -->
-        <nav class="material-nav mdl-cell mdl-cell--12-col">
-            <a class="extend prev" rel="prev" href="/">&lt;button aria-label&#x3D;&quot;Last page&quot; class&#x3D;&quot;mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon&quot;&gt;&lt;i class&#x3D;&quot;material-icons&quot; role&#x3D;&quot;presentation&quot;&gt;arrow_back&lt;&#x2F;i&gt;&lt;&#x2F;button&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">&lt;button aria-label&#x3D;&quot;Next page&quot; class&#x3D;&quot;mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon&quot;&gt;&lt;i class&#x3D;&quot;material-icons&quot; role&#x3D;&quot;presentation&quot;&gt;arrow_forward&lt;&#x2F;i&gt;&lt;&#x2F;button&gt;</a>
-        </nav>
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 20; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
-</script>
-
-    
-</div>
-
-
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
-
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.png" alt="Earyant's avatar">
-    </div>
-
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        23769262@qq.com
-        <b class="caret"></b>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
             
-                <li>
-                    <a href="#" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/03/27/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/">
 
-    <!-- Homepage -->
-    
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
-        
-    
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
 
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2021/09/">九月 2021<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">24</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">22</span></a>
-            </ul>
-        </li>
-        
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/27/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">JDK1.5-JDK1.8各个新特性</a>
+        </h2>
 
-    <!-- Categories  -->
-    
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-    <!-- Pages  -->
-    
+              <time title="创建时间：2018-03-27 12:40:30" itemprop="dateCreated datePublished" datetime="2018-03-27T12:40:30+08:00">2018-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
 
-    <!-- Article Number  -->
+          
+
+        </div>
+      </header>
+
     
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://juejin.im/entry/5ab860ce5188255587238a36?utm_source=gold_browser_extension">转载来源</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/03/22/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/22/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">java内存模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-22 17:24:53" itemprop="dateCreated datePublished" datetime="2018-03-22T17:24:53+08:00">2018-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://ifeve.com/jmm-faq/">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/02/25/%E6%B7%B1%E7%88%B1%E4%B8%8D%E5%AF%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/25/%E6%B7%B1%E7%88%B1%E4%B8%8D%E5%AF%BF/" class="post-title-link" itemprop="url">深爱不寿</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 20:31:09" itemprop="dateCreated datePublished" datetime="2018-02-25T20:31:09+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>如果我孑身一人是个赛车手<br>无牵无挂，无畏无惧<br>即使受伤、死亡<br>也会为我爱的事倾尽所有</p>
+<p>如果我生在乱世是个将军<br>交出我爱的人换取一时和平<br>不要和我讲大义<br>提枪上马，马革裹尸不休</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/02/25/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/25/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/" class="post-title-link" itemprop="url">爱吃西瓜</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 20:11:37" itemprop="dateCreated datePublished" datetime="2018-02-25T20:11:37+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最甜的是西瓜中间的那口</p>
+<p>可我连籽都吃掉</p>
+<p>我爱的东西本来就不多</p>
+<p>爱就爱它的所有</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/02/13/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/13/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/" class="post-title-link" itemprop="url">docker简单结合elk、logstash</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-13 10:40:28" itemprop="dateCreated datePublished" datetime="2018-02-13T10:40:28+08:00">2018-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="本文记录docker搭建elk，并简单结合logstash日志输出"><a href="#本文记录docker搭建elk，并简单结合logstash日志输出" class="headerlink" title="本文记录docker搭建elk，并简单结合logstash日志输出"></a>本文记录docker搭建elk，并简单结合logstash日志输出</h2><h3 id="filebeat"><a href="#filebeat" class="headerlink" title="filebeat"></a>filebeat</h3><blockquote>
+<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
+</blockquote>
+<ul>
+<li>filebeat.yml</li>
 </ul>
+<p><strong>enabled要改为true，filebeat默认为false</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>docker run -it –name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
+</blockquote>
+<h3 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
+<ul>
+<li>logstash.yml</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-    <div class="sidebar-divider"></div>
-
-
-<!-- Theme Material -->
-
-    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            主题 - Material
-            <span class="sidebar-badge badge-circle">i</span>
-        </div>
-    </a>
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
-
+      
     </div>
 
-    <!-- Sidebar Image -->
     
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-</aside>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/02/12/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/">
 
-                    
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
 
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/12/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">docker简单部署elk服务</a>
+        </h2>
 
-                    
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
-    
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
+              <time title="创建时间：2018-02-12 17:32:51" itemprop="dateCreated datePublished" datetime="2018-02-12T17:32:51+08:00">2018-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
 
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
-                <span class="visuallyhidden">Facebook</span>
-            </button><!--
-     --></a>
-    
+          
 
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
-                <span class="visuallyhidden">Google Plus</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Weibo -->
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/earyantLe" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/lirui940403" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-
-    <!-- Telegram -->
-    
-
-    <!-- V2EX -->
-    
-
-    <!-- Segmentfault -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Earyant的技术博客
-            
         </div>
+      </header>
 
-        <!-- Paradox Footer Right Section -->
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-        <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
+      
+          <h1 id="本文章记录自己通过docker搭建elk的过程"><a href="#本文章记录自己通过docker搭建elk的过程" class="headerlink" title="本文章记录自己通过docker搭建elk的过程"></a>本文章记录自己通过docker搭建elk的过程</h1><h2 id="docker下载镜像"><a href="#docker下载镜像" class="headerlink" title="docker下载镜像"></a>docker下载镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
 
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
+<h2 id="docker-至少分配3g内存"><a href="#docker-至少分配3g内存" class="headerlink" title="docker 至少分配3g内存"></a>docker 至少分配3g内存</h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
+<h2 id="设置最大运行线程数"><a href="#设置最大运行线程数" class="headerlink" title="设置最大运行线程数"></a>设置最大运行线程数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
 
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
+<ul>
+<li><p>使用docker toolbox方式 先进入虚拟机</p>
+<blockquote>
+<p>docker-machine ssh default</p>
+</blockquote>
+</li>
+<li><p>永久生效配置</p>
+<blockquote>
+<p>sudo vi /etc/sysctl.conf</p>
+</blockquote>
+<blockquote>
+<p>vm.max_map_count=262144</p>
+</blockquote>
+<blockquote>
+<p>sudo sysctl -p //生效</p>
+</blockquote>
+</li>
+<li><p>临时生效配置</p>
+<blockquote>
+<p>sysctl -w vm.max_map_count=262144</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动，并配置端口映射</p>
+<blockquote>
+<p>docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it –name elk sebp/elk</p>
+</blockquote>
+<h2 id="查看kibana"><a href="#查看kibana" class="headerlink" title="查看kibana"></a>查看kibana</h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
+<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><ol>
+<li>进入容器</li>
+</ol>
+<blockquote>
+<p>docker exec -it elk /bin/bash</p>
+</blockquote>
+<ol start="2">
+<li>配置logstash</li>
+</ol>
+<blockquote>
+<p>/opt/logstash/bin/logstash -e ‘input { stdin { } } output { elasticsearch { hosts =&gt; [“localhost”] } }’</p>
+</blockquote>
+<blockquote>
+<p><strong>注意</strong>：如果看到这样的报错信息 Logstash could not be started because there is already another instance using the configured data directory. If you wish to run multiple instances, you must change the “path.data” setting. 请执行命令：service logstash stop 然后在执行就可以了。</p>
+</blockquote>
+<blockquote>
+<p>当命令成功被执行后，看到：Successfully started Logstash API endpoint {:port=&gt;9600} 信息后，输入：test 然后回车，模拟一条日志进行测试。</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>打开浏览器，输入：<a target="_blank" rel="noopener" href="http://192.168.99.100:9200/_search?pretty">http://192.168.99.100:9200/_search?pretty</a> ，就会看到我们刚刚输入的日志内容</li>
+<li>创建kibana与logstash关联</li>
+<li>index name or pattern 输入 logstash-*</li>
+<li>time-field name 输入 @timestamp</li>
+<li>create</li>
+<li>打开kibana首页即可看到刚刚输入的内容</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/01/20/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/20/java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-20 09:47:36" itemprop="dateCreated datePublished" datetime="2018-01-20T09:47:36+08:00">2018-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
         </div>
+      </header>
+
     
-</footer>
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="java8新特性"><a href="#java8新特性" class="headerlink" title="java8新特性"></a>java8新特性</h1><h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><blockquote>
+<p>java8接受一个函数作为另一个函数的参数传入进去</p>
+</blockquote>
+<p>Arrays.asList( “a”, “b”, “d” ).forEach( e -&gt; System.out.println( e ) ); 参数的类型是编译器推断出来的</p>
+<blockquote>
+<p>Lambda可以引用类的成员变量与局部变量（如果这些变量不是final的话，它们会被隐含的转为final，这样效率更高）。</p>
+</blockquote>
+<h2 id="默认方法和静态方法"><a href="#默认方法和静态方法" class="headerlink" title="默认方法和静态方法"></a>默认方法和静态方法</h2><blockquote>
+<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到java.util.Collection接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
+</blockquote>
+<h2 id="重复注解"><a href="#重复注解" class="headerlink" title="重复注解"></a>重复注解</h2><h2 id="Java编译器的新特性"><a href="#Java编译器的新特性" class="headerlink" title="Java编译器的新特性"></a>Java编译器的新特性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterNames</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Method method = ParameterNames.class.getMethod( <span class="string">&quot;main&quot;</span>, String[].class );</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">final</span> Parameter parameter: method.getParameters() ) &#123;</span><br><span class="line">            System.out.println( <span class="string">&quot;Parameter: &quot;</span> + parameter.getName() );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Parameter: args</p>
+</blockquote>
+<p>对于有经验的Maven用户，通过maven-compiler-plugin的配置可以将-parameters参数添加到编译器中去。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">compilerArgument</span>&gt;</span>-parameters<span class="tag">&lt;/<span class="name">compilerArgument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Java-类库的新特性"><a href="#Java-类库的新特性" class="headerlink" title="Java 类库的新特性"></a>Java 类库的新特性</h2><h3 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h3><p>平时用的判空：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (name == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改成Optional：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  Optional&lt;String &gt; names = Opntional.of(name);</span><br><span class="line">  <span class="keyword">if</span> (names.isPresent())&#123;</span><br><span class="line">      <span class="keyword">return</span> names.get();</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果单纯改成这样，还不如直接写成 ==null，看起来更加繁琐。 应该改成这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Opntional.of(name).get().orElse(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> totalPointsOfOpenTasks = tasks</span><br><span class="line">    .stream()</span><br><span class="line">    .filter( task -&gt; task.getStatus() == Status.OPEN )</span><br><span class="line">    .mapToInt( Task::getPoints )</span><br><span class="line">    .sum();</span><br></pre></td></tr></table></figure>
+
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><blockquote>
+<p>对于Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素；</p>
+</blockquote>
+<h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><blockquote>
+<p>映射转换</p>
+</blockquote>
+<h4 id="mapTo"><a href="#mapTo" class="headerlink" title="mapTo*"></a>mapTo*</h4><blockquote>
+<p>映射转换成 <em>的类型，</em> 包括Integer、Double、Long</p>
+</blockquote>
+<h4 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h4><blockquote>
+<p>合并集合,和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;1,2&#125;，&#123;3,4&#125;，&#123;5,6&#125;&#125; - &gt; flatMap - &gt; &#123;1,2,3,4,5,6&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#x27;a&#x27;，&#x27;b&#x27;&#125;，&#123;&#x27;c&#x27;，&#x27;d&#x27;&#125;，&#123;&#x27;e&#x27;，&#x27;f&#x27;&#125;&#125; - &gt; flatMap - &gt; &#123;&#x27;a&#x27;，&#x27;b&#x27;，&#x27;c&#x27; D&quot;， &#x27;E&#x27;， &#x27;F&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="flatMapTo"><a href="#flatMapTo" class="headerlink" title="flatMapTo*"></a>flatMapTo*</h4><h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><blockquote>
+<p>对于Stream中包含的元素进行去重操作（去重逻辑依赖元素的equals方法），新生成的Stream中没有重复的元素；</p>
+</blockquote>
+<blockquote>
+<h4 id="sorted"><a href="#sorted" class="headerlink" title="sorted"></a>sorted</h4></blockquote>
+<h4 id="peek"><a href="#peek" class="headerlink" title="peek"></a>peek</h4><blockquote>
+<p>监控器</p>
+</blockquote>
+<p>提供一个Consumer消费函数，返回一个新的Stream，如果只写 Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)) 是不会打印结果的 新Stream每个元素被<strong>消费</strong>的时候都会执行给定的消费函数； Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)).collect(Collectors.toList());</p>
+<h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>对一个Stream进行截断操作，获取其前N个元素，如果原Stream中包含的元素个数小于N，那就获取其所有的元素；</p>
+<h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><p>返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；</p>
+<h4 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h4><blockquote>
+<p>遍历</p>
+</blockquote>
+<h4 id="forEachOrdered"><a href="#forEachOrdered" class="headerlink" title="forEachOrdered"></a>forEachOrdered</h4><blockquote>
+<p>与forEach一样，只不过每次遍历结果都是相同的，forEach不是固定的序列</p>
+</blockquote>
+<h4 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h4><p>给定一个生成函数，生成一个无限的队列 Stream.generate(Math::random);</p>
+<h4 id="iterate"><a href="#iterate" class="headerlink" title="iterate"></a>iterate</h4><p>也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环</p>
+<p>Stream.iterate(1, item -&gt; item + 1).limit(10).forEach(System.out::println);</p>
+<h4 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h4><blockquote>
+<p>汇聚函数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>方法参数</th>
+<th>返回类型</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toList</td>
+<td>List<code>&lt;T &gt;</code></td>
+<td>把流中的参数汇聚成List集合</td>
+<td>示例:List<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>Set<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到Set中,删除重复项</td>
+<td>Set<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>Collection<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到给定的供应源创建的集合中</td>
+<td><code>ArrayList&lt;Menu&gt; menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</code></td>
+</tr>
+<tr>
+<td>Counting</td>
+<td>Long</td>
+<td>计算流中元素个数</td>
+<td>Long count=Menu.getMenus.stream().collect(Collectors.counting());</td>
+</tr>
+<tr>
+<td>SummingInt</td>
+<td>Integer</td>
+<td>对流中元素的一个整数属性求和</td>
+<td>Integer count=Menu.getMenus.stream().collect(Collectors.summingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>Double</td>
+<td>计算流中元素integer属性的平均值</td>
+<td>Double averaging=Menu.getMenus.stream().collect((Collectors.averagingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Joining</td>
+<td>String</td>
+<td>连接流中每个元素的toString方法生成的字符串</td>
+<td>String name=Menu.getMenus.stream().map(Menu::getName).collect(Collectors.joining(“, “))</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> fattest=Menu.getMenus.stream().collectCollectors.maxBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Reducing</td>
+<td>归约操作产生的类型</td>
+<td>从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
+<td>int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>转换函数返回的类型</td>
+<td>包裹另一个转换器,对其结果应用转换函数</td>
+<td>Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>Map<code>&lt;K,List&lt;T&gt;&gt;</code></td>
+<td>根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
+<td>Map<code>&lt;Type,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>Map<code>&lt;Boolean,List&lt;T&gt;&gt;</code></td>
+<td>根据流中每个元素应用谓语的结果来对项目进行分区</td>
+<td>Map<code>&lt;Boolean,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
+</tr>
+</tbody></table>
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><ul>
+<li><code>Optional&lt;t&gt; reduce(BinaryOperator&lt;t&gt; accumulator);</code></li>
+</ul>
+<p>List <code>&lt;integer&gt;</code> ints = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10); System.out.println(“ints sum is:” + ints.stream().reduce((sum, item) -&gt; sum + item).get());</p>
+<p>可以看到reduce方法接受一个函数，这个函数有两个参数，第一个参数是上次函数执行的返回值（也称为中间结果），第二个参数是stream中的元素，这个函数把这两个值相加，得到的和会被赋值给下次执行这个函数的第一个参数。要注意的是：<strong>第一次执行的时候第一个参数的值是Stream的第一个元素，第二个参数是Stream的第二个元素</strong>。这个方法返回值类型是Optional，这是Java8防止出现NPE的一种可行方法，后面的文章会详细介绍，这里就简单的认为是一个容器，其中可能会包含0个或者1个对象。</p>
+<ul>
+<li>T reduce(T identity, BinaryOperator<code>&lt;t&gt;</code> accumulator);<br>这个定义上上面已经介绍过的基本一致，不同的是：它允许用户提供一个循环计算的初始值，如果Stream为空，就直接返回该值。而且这个方法不会返回Optional，因为其不会出现null值。</li>
+</ul>
+<h4 id="count"><a href="#count" class="headerlink" title="count"></a>count</h4><blockquote>
+<p>个数</p>
+</blockquote>
+<h4 id="allMatch"><a href="#allMatch" class="headerlink" title="allMatch"></a>allMatch</h4><p>是不是所有都满足给定的条件</p>
+<h4 id="anyMatch"><a href="#anyMatch" class="headerlink" title="anyMatch"></a>anyMatch</h4><p>是不是存在某一个元素满足给定的条件</p>
+<h4 id="findFirst"><a href="#findFirst" class="headerlink" title="findFirst"></a>findFirst</h4><p>返回第一个，返回的是Optional值</p>
+<h4 id="noneMatch"><a href="#noneMatch" class="headerlink" title="noneMatch"></a>noneMatch</h4><p>是否没有一个元素满足给定的条件</p>
+<h4 id="max和min"><a href="#max和min" class="headerlink" title="max和min"></a>max和min</h4><p>给定的比较条件，返回最大最小值</p>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/stream/">参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dm_vincent/article/category/2268127">好文收藏</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/01/14/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/14/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>注册中心不自动上线下线</li>
+<li>异步返回值</li>
+<li>bean参数传值</li>
+<li></li>
+</ul>
+<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
+<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
+<p>解决方法：设置enableSelfPreservation:false</p>
+<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
+<h3 id="负载均衡在服务下掉后的重试策略："><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/26/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-26 00:28:39" itemprop="dateCreated datePublished" datetime="2017-12-26T00:28:39+08:00">2017-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>本文在上文 Spring cloud系列四 Eureka 之概述和服务注册中心集群的基础上，继续介绍Eureka新的内容:</p>
+<pre><code>集群重要类：PeerAwareInstanceRegistryImpl
+新的Eureka Server节点加入集群后的影响
+新服务注册(Register)注册时的影响
+服务心跳(renew)
+服务下线和剔除
+自我保护模式
+</code></pre>
+<h1 id="2-Eureka-Server的集群同步操作"><a href="#2-Eureka-Server的集群同步操作" class="headerlink" title="2. Eureka Server的集群同步操作"></a>2. Eureka Server的集群同步操作</h1><h2 id="2-1-Eureka官网的架构图"><a href="#2-1-Eureka官网的架构图" class="headerlink" title="2.1. Eureka官网的架构图"></a>2.1. Eureka官网的架构图</h2><p>下方的操作需要结合下图理解：<br>这里写图片描述<br>##2.2. PeerAwareInstanceRegistryImpl</p>
+<p>集群相关重要的类com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: 为了保证集群里所有Eureka Server节点的状态同步，所有以下操作都会同步到集群的所有服务上：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）。以下是一些部分方法：</p>
+<pre><code>syncUp：在Eureka Server重启或新的Eureka Server节点加进来的，会执行初始化，从集群其他节点中获取所有的实例注册信息，从而能够正常提供服务。当Eureka Server启动时，它会从其它节点获取所有的注册信息，如果获取同步失败，它在一定时间（此值由决定）内拒绝服务。
+replicateToPeers： 同步以下操作到所有的集群节点：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）
+register: 注册实例，并且复印此实例的信息到所有的eureka server的节点。如果其它Eureka Server调用此节点，只在本节点更新实例信息，避免通知其他节点执行更新
+renew：心跳，同步集群
+cancel
+其他
+</code></pre>
+<p>Eureka Server集群之间的状态是采用异步方式同步的，所以不保证节点间的状态一定是一致的，不过基本能保证最终状态是一致的。</p>
+<h2 id="2-3-新的Eureka-Server节点加入集群后的影响"><a href="#2-3-新的Eureka-Server节点加入集群后的影响" class="headerlink" title="2.3. 新的Eureka Server节点加入集群后的影响"></a>2.3. 新的Eureka Server节点加入集群后的影响</h2><p>当有新的节点加入到集群中，会对现在Eureka Server和Eureka Client有什么影响以及他们如何发现新增的Eureka Server节点：</p>
+<pre><code>新增的Eureka Server：在Eureka Server重启或新的Eureka Server节点加进来的，它会从集群里其它节点获取所有的实例注册信息。如果获取同步失败，它会在一定时间（此值由决定eureka.server.peer-eureka-nodes-update-interval-ms决定）内拒绝服务。
+
+已有Eureka Server和Service Consumer如何发现新的Eureka Server
+    已有的Eureka Server：在运行过程中，Eureka Server之间会定时同步实例的注册信息。这样即使新的Application Service只向集群中一台注册服务，则经过一段时间会集群中所有的Eureka Server都会有这个实例的信息。那么Eureka Server节点之间如何相互发现，各个节点之间定时（时间由eureka.server.peer-eureka-nodes-update-interval-ms决定）更新节点信息，进行相互发现。
+    Service Consumer：Service Consumer刚启动时，它会从配置文件读取Eureka Server的地址信息。当集群中新增一个Eureka Server中时，那么Service Provider如何发现这个Eureka Server？Service Consumer会定时（此值由eureka.client.eureka-service-url-poll-interval-seconds决定）调用Eureka Server集群接口，获取所有的Eureka Server信息的并更新本地配置。
+</code></pre>
+<h2 id="2-4-新服务注册-Register-注册时的影响"><a href="#2-4-新服务注册-Register-注册时的影响" class="headerlink" title="2.4. 新服务注册(Register)注册时的影响"></a>2.4. 新服务注册(Register)注册时的影响</h2><p>Service Provider要对外提供服务，把自己注册到Eureka Server上。如果配置参数eureka.client.registerWithEureka=true（默认值true）时，会向Eureka Server注册进行注册，Eureka Server会保存注册信息到内存中。</p>
+<p>Service Consumer为了避免每次调用服务请求都需要向Eureka Server获取服务实例的注册信息，此时需要设置eureka.client.fetchRegistry=true，它会在本地缓存所有实例注册信息。为了保证缓存数据的有效性，它会定时（值由eureka.client.registry-fetch-interval-seconds定义，默认值为30s）向注册中心更新实例。</p>
+<h2 id="2-5-服务心跳-renew"><a href="#2-5-服务心跳-renew" class="headerlink" title="2.5. 服务心跳(renew)"></a>2.5. 服务心跳(renew)</h2><p>服务实例会通过心跳(eureka.instance.lease-renewal-interval-in-seconds定义心跳的频率，默认值为30s)续约的方式向Eureka Server定时更新自己的状态。Eureka Server收到心跳后，会通知集群里的其它Eureka Server更新此实例的状态。Service Provider/Service Consumer也会定时更新缓存的实例信息。</p>
+<h2 id="2-6-服务下线和剔除"><a href="#2-6-服务下线和剔除" class="headerlink" title="2.6. 服务下线和剔除"></a>2.6. 服务下线和剔除</h2><p>服务的下线有两种情况：</p>
+<pre><code>在Service Provider服务shutdown的时候，主动通知Eureka Server把自己剔除，从而避免客户端调用已经下线的服务。
+Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms，默认值为0，默认情况不删除实例）进行检查，如果发现实例在在一定时间（此值由eureka.instance.lease-expiration-duration-in-seconds定义，默认值为90s）内没有收到心跳，则会注销此实例。
+</code></pre>
+<p>这种情况下，Eureka Client的最多需要[eureka.instance.lease-renewal-interval-in-seconds + eureka.client.registry-fetch-interval-seconds]时间才发现服务已经下线。同理，一个新的服务上线后，Eureka Client的服务消费方最多需要相同的时间才发现服务已经上线</p>
+<p>服务下线，同时会更新到Eureka Server其他节点和Eureka client的缓存，流程类似同以上的register过程</p>
+<h2 id="2-7-自我保护模式"><a href="#2-7-自我保护模式" class="headerlink" title="2.7. 自我保护模式"></a>2.7. 自我保护模式</h2><p>如果Eureka Server最近1分钟收到renew的次数小于阈值（即预期的最小值），则会触发自我保护模式，此时Eureka Server此时会认为这是网络问题，它不会注销任何过期的实例。等到最近收到renew的次数大于阈值后，则Eureka Server退出自我保护模式。</p>
+<p>自我保护模式阈值计算：</p>
+<pre><code>每个instance的预期心跳数目 = 60/每个instance的心跳间隔秒数
+阈值 = 所有注册到服务的instance的数量的预期心跳之和 *自我保护系数
+</code></pre>
+<p>以上的参数都可配置的：</p>
+<pre><code>instance的心跳间隔秒数：eureka.instance.lease-renewal-interval-in-seconds
+自我保护系数：eureka.server.renewal-percent-threshold
+</code></pre>
+<p>如果我们的实例比较少且是内部网络时，推荐关掉此选项。我们也可以通过eureka.server.enable-self-preservation = false来禁用自我保护系数</p>
+<h2 id="2-8-配置demo"><a href="#2-8-配置demo" class="headerlink" title="2.8 配置demo"></a>2.8 配置demo</h2><p>以下配置的demo如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10761</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-registration-center</span></span><br><span class="line"><span class="comment">## eureka ： 主要配置属性在EurekaInstanceConfigBean和EurekaClientConfigBean中</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># hostname: 127.0.0.1</span></span><br><span class="line">    <span class="comment"># 使用IP注册</span></span><br><span class="line">    <span class="attr">preferIpAddress:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 心跳间隔</span></span><br><span class="line">    <span class="attr">lease-renewal-interval-in-seconds:</span> <span class="number">3</span></span><br><span class="line">    <span class="comment"># 服务失效时间： 如果多久没有收到请求，则可以删除服务</span></span><br><span class="line">    <span class="attr">lease-expiration-duration-in-seconds:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment"># 关闭eureka client</span></span><br><span class="line">    <span class="comment"># enabled: false</span></span><br><span class="line">    <span class="comment"># 注册自身到eureka服务器</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 表示是否从eureka服务器获取注册信息</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># 客户端从Eureka Server集群里更新Eureka Server信息的频率</span></span><br><span class="line">    <span class="attr">eureka-service-url-poll-interval-seconds:</span> <span class="number">60</span></span><br><span class="line">    <span class="comment"># 定义从注册中心获取注册服务的信息</span></span><br><span class="line">    <span class="attr">registry-fetch-interval-seconds:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 设置eureka服务器所在的地址，查询服务和注册服务都需要依赖这个地址</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10761/eureka/</span></span><br><span class="line">       <span class="comment"># 设置eureka服务器所在的地址，可以同时向多个服务注册服务</span></span><br><span class="line">       <span class="comment"># defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold: 0.1</span></span><br><span class="line">     <span class="comment"># 关闭自我保护模式</span></span><br><span class="line">     <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br><span class="line">     <span class="comment"># Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold:</span></span><br><span class="line">     <span class="comment"># 设置清理间隔,单位为毫秒,默认为0</span></span><br><span class="line">     <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">3000</span></span><br><span class="line">     <span class="comment"># 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务</span></span><br><span class="line">     <span class="attr">wait-time-in-ms-when-sync-empty:</span> <span class="number">6000000</span></span><br><span class="line">     <span class="comment"># 集群之间相互更新节点信息的时间频率</span></span><br><span class="line">     <span class="attr">peer-eureka-nodes-update-interval-ms:</span> <span class="number">60000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2017/11/09/%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/11/09/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-11-09 17:27:04" itemprop="dateCreated datePublished" datetime="2017-11-09T17:27:04+08:00">2017-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="索引介绍"><a href="#索引介绍" class="headerlink" title="索引介绍"></a>索引介绍</h2><blockquote>
+<p>索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I/O，假设磁盘每次I/O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好很多很多)。如果对之建立B-Tree索引，则只需要进行log100(10^6^)=3次页面读取，最坏情况下耗时30ms。这就是索引带来的效果，很多时候，当你的应用程序进行SQL查询速度很慢时，应该想想是否可以建索引</p>
+</blockquote>
+<h2 id="索引与优化"><a href="#索引与优化" class="headerlink" title="索引与优化"></a>索引与优化</h2><h3 id="索引的数据类型"><a href="#索引的数据类型" class="headerlink" title="索引的数据类型"></a>索引的数据类型</h3><pre><code>选择索引类型原则：
+</code></pre>
+<ol>
+<li>数据整形： 越小的整形在磁盘、内存、和CPU之间都需要更少的空间，处理起来更快。    2. 简单的数据类型更好： 整形数据比起字符型，处理开销更小，因为字符串的比较更复杂，在Mysql中，应该用内置的日期和时间数据类型，而不是字符串来存储时间，以及用整形数据类型存储ip地址。    3. 尽量避免NULL： 应该指定列为NOT NULL ，除非想存储NULL。在mysql中，含有空值的列很难进行查询优化，以为他使得索引、索引的统计信息以及比较运算符更加复杂。应该用0、一个特殊值、或者一个空串代替空值。</li>
+</ol>
+<h4 id="选择标识符"><a href="#选择标识符" class="headerlink" title="选择标识符"></a>选择标识符</h4><p>  选择合适的标识符是非常重要的，选择是不仅应该考虑存储类型，而且应该考虑mysql是怎么进行运算和比较的，一旦选定数据类型，应该保证所有的表都使用相同的数据类型。<br>    1. 整形： 通常是作为标识符最好的选择，因为更苦阿爹处理，因为可以更快的处理，而且可以设置为AUTO_INCREMENT。<br>    2. 字符串：尽量避免使用字符串作为标识符，它们消耗更好的空间，处理起来也较慢。而且，通常来说，字符串都是随机的，所以它们在索引中的位置也是随机的，这会导致页面分裂、随机访问磁盘，聚簇索引分裂（对于使用聚簇索引的存储引擎）。</p>
+<h3 id="索引入门"><a href="#索引入门" class="headerlink" title="索引入门"></a>索引入门</h3><pre><code>对于任何DBMS，索引都是进行优化的最主要的因素。对于少量的数据，没有合适的索引影响不是很大，但是，当随着数据量的增加，性能会急剧下降。
+如果对多列进行索引(组合索引)，**列的顺序**非常重要，MySQL仅能对索引最左边的前缀进行有效的查找。例如：
+</code></pre>
+<p>假设存在组合索引 表t1 建立 c1c2(c1,c2)联合索引，查询语句select * from t1 where c1=1 and c2=2能够使用该索引。查询语句select * from t1 where c1=1也能够使用该索引。但是，查询语句select * from t1 where c2=2不能够使用该索引，因为没有组合索引的引导列，即，要想使用c2列进行查找，必需出现c1等于某值。</p>
+<h4 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h4><p>索引是在存储引擎中实现的，而不是在服务器层中实现的。所以，每种存储引擎的索引都不一定完全相同，并不是所有的存储引擎都支持所有的索引类型。</p>
+<h5 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE People (</span><br><span class="line"></span><br><span class="line"> last_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> first_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> dob        date           not null,</span><br><span class="line"></span><br><span class="line"> gender     enum(&#x27;m&#x27;, &#x27;f&#x27;) not null,</span><br><span class="line"></span><br><span class="line"> key(last_name, first_name, dob)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>其索引包含表中每一行的last_name、first_name和dob列。其结构大致如下：<br><img src="img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg"><br>索引存储的值按索引列中的顺序排列。可以利用B-Tree索引进行全关键字、关键字范围和关键字前缀查询，当然，如果想使用索引，你必须保证按索引的最左边前缀(leftmost prefix of the index)来进行查询。</p>
+<ol>
+<li>匹配全值(Match the full value)：对索引中的所有列都指定具体的值。例如，上图中索引可以帮助你查找出生于1960-01-01的Cuba Allen。</li>
+<li>匹配最左前缀(Match a leftmost prefix)：你可以利用索引查找last name为Allen的人，仅仅使用索引中的第1列。</li>
+<li>匹配列前缀(Match a column prefix)：例如，你可以利用索引查找last name以J开始的人，这仅仅使用索引中的第1列。</li>
+<li>匹配值的范围查询(Match a range of values)：可以利用索引查找last name在Allen和Barrymore之间的人，仅仅使用索引中第1列。</li>
+<li>匹配部分精确而其它部分进行范围匹配(Match one part exactly and match a range on another part)：可以利用索引查找last name为Allen，而first name以字母K开始的人。</li>
+<li>仅对索引进行查询(Index-only queries)：如果查询的列都位于索引中，则不需要读取元组的值。</li>
+</ol>
+<p>由于B-树中的节点都是<strong>顺序存储</strong>的，所以可以利用索引进行查找(找某些值)，也可以对查询结果进行ORDER BY。当然，使用B-tree索引有以下一些限制：</p>
+<ol>
+<li>查询必须从索引的最左边的列开始。关于这点已经提了很多遍了。例如你不能利用索引查找在某一天出生的人。</li>
+<li>不能跳过某一索引列。例如，你不能利用索引查找last name为Smith且出生于某一天的人。</li>
+<li>存储引擎不能使用索引中范围条件右边的列。例如，如果你的查询语句为WHERE last_name=”Smith” AND first_name LIKE ‘J%’ AND dob=’1976-12-23’，则该查询只会使用索引中的前两列，因为LIKE是范围查询。<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><blockquote>
+<p>MySQL中，只有Memory存储引擎显示支持hash索引，是Memory表的默认索引类型，尽管Memory表也可以使用B-Tree索引。Memory存储引擎支持非唯一hash索引，这在数据库领域是罕见的，如果多个值有相同的hash code，索引把它们的行指针用链表保存到同一个hash表项中。</p>
+</blockquote>
+</li>
+</ol>
+<p>  假设创建如下一个表：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE testhash (</span><br><span class="line">   fname VARCHAR(50) NOT NULL,</span><br><span class="line">   lname VARCHAR(50) NOT NULL,</span><br><span class="line">   KEY USING HASH(fname)</span><br><span class="line">) ENGINE=MEMORY;</span><br></pre></td></tr></table></figure><br>  假设索引使用hash函数f( )，如下：</p>
+<blockquote>
+<p>  f(‘Arjen’) = 2323<br>    f(‘Baron’) = 7437<br>  f(‘Peter’) = 8784<br>  f(‘Vadim’) = 2458<br>此时，索引的结构大概如下：<br><img src="img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg"></p>
+</blockquote>
+<p>Slots是有序的，但是记录不是有序的。当你执行<br>mysql&gt; SELECT lname FROM testhash WHERE fname=’Peter’;<br>MySQL会计算’Peter’的hash值，然后通过它来查询索引的行指针。因为f(‘Peter’) = 8784，MySQL会在索引中查找8784，得到指向记录3的指针。<br>因为索引自己仅仅存储很短的值，所以，索引非常紧凑。Hash值不取决于列的数据类型，一个TINYINT列的索引与一个长字符串列的索引一样大。<br>Hash索引有以下一些<strong>限制</strong>：</p>
+<ol>
+<li>由于索引仅包含hash code和记录指针，所以，MySQL不能通过使用索引避免读取记录。但是访问内存中的记录是非常迅速的，不会对性造成太大的影响。</li>
+<li>不能使用hash索引排序。</li>
+<li>Hash索引不支持键的部分匹配，因为是通过整个索引值来计算hash值的。</li>
+<li>Hash索引只支持等值比较，例如使用=，IN( )和&lt;=&gt;。对于WHERE price&gt;100并不能加速查询。</li>
+</ol>
+<h5 id="空间-R-Tree-索引"><a href="#空间-R-Tree-索引" class="headerlink" title="空间(R-Tree)索引"></a>空间(R-Tree)索引</h5><pre><code>MyISAM支持空间索引，主要用于地理空间数据类型，例如GEOMETRY。
+</code></pre>
+<h5 id="全文-Full-text-索引"><a href="#全文-Full-text-索引" class="headerlink" title="全文(Full-text)索引"></a>全文(Full-text)索引</h5><pre><code>全文索引是MyISAM的一个特殊索引类型，主要用于全文检索。
+</code></pre>
+<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="聚簇索引-Clustered-Indexes"><a href="#聚簇索引-Clustered-Indexes" class="headerlink" title="聚簇索引(Clustered Indexes)"></a>聚簇索引(Clustered Indexes)</h3><blockquote>
+<p>mysql聚簇索引保证关键字的值相近的元组存储的物理位置也相同（所以字符串类型不宜建立聚簇索引，特别是随机字符串，会使得系统进行大量的移动操作），且一个表只能有一个聚簇索引。因为由存储引擎实现索引，所以，并不是所有的引擎都支持聚簇索引。目前，只有solidDB和InnoDB支持。<br> 结构如下：<br> <img src="img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg"><br>注：叶子页面包含完整的元组，而内节点页面仅包含索引的列(索引的列为整型)。一些DBMS允许用户指定聚簇索引，但是MySQL的存储引擎到目前为止都不支持。InnoDB对主键建立聚簇索引。如果你不指定主键，InnoDB会用一个具有唯一且非空值的索引来代替。如果不存在这样的索引，InnoDB会定义一个隐藏的主键，然后对其建立聚簇索引。一般来说，DBMS都会以聚簇索引的形式来存储实际的数据，它是其它二级索引的基础。</p>
+</blockquote>
+<h4 id="InnoDB和MyISAM的数据布局的比较"><a href="#InnoDB和MyISAM的数据布局的比较" class="headerlink" title="InnoDB和MyISAM的数据布局的比较"></a>InnoDB和MyISAM的数据布局的比较</h4><blockquote>
+<p>为了更加理解聚簇索引和非聚簇索引，或者primary索引和second索引(MyISAM不支持聚簇索引)，来比较一下InnoDB和MyISAM的数据布局，对于如下表：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE layout_test (</span><br><span class="line"></span><br><span class="line">col1 int NOT NULL,</span><br><span class="line"></span><br><span class="line">col2 int NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(col1),</span><br><span class="line"></span><br><span class="line">KEY(col2)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>假设主键的值位于1—10,000之间，且按随机顺序插入，然后用OPTIMIZE TABLE进行优化。col2随机赋予1—100之间的值，所以会存在许多重复的值。</p>
+<ol>
+<li>MyISAM的数据布局<br>其布局十分简单，MyISAM按照插入的顺序在磁盘上存储数据，如下：<br><img src="img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg"></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
 
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
-
-
-
-    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+          </div>
+          
 
-
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
-    });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- UC Browser Compatible -->
 <script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('
-<link rel="stylesheet" href="/css/uc.css">
-');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-
-
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
-    
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
-
-
-
-<script>
-    var copyrightNow = new Date().getFullYear();
-    var textContent = document.querySelector('span[year]')
-
-    copyrightSince = 0000;
-    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
-        textContent.textContent = copyrightNow
-    } else {
-        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
-
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-                </main>
-            </div>
-        <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-    
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

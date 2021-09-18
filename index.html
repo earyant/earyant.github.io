@@ -1,1426 +1,1604 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.6 -->
-    <script>
-        window.materialVersion = "1.5.6"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0',
-            '1.5.2',
-            '1.5.5'
-        ]
-    </script>
-
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-
-
-
-
-
-
-
-
-
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
-    
-    <title>
-        
-        Earyant的技术博客
-    </title>
-
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" href="/img/favicon.png">
-
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    <meta name="keywords" content="">
-    <meta name="theme-color" content="#0097A7">
-
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
-
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
-    <!-- Import CSS -->
-    
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-        
-
-    
-
-    
-
-    <!-- Config CSS -->
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
-  
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-color: #F5F5F5;
-      }
-
-      /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-        background-color: #fff;
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Earyant的技术博客">
-    <meta name="msapplication-starturl" content="http://earyant.github.io/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Earyant的技术博客">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- Site Verification -->
-    
-    
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://earyant.github.io/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Earyant的技术博客">
-    <meta property="og:image" content="/img/favicon.png">
-    <meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    
-
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="http://earyant.github.io" />
-    
-
-    <!-- Structured-data for SEO -->
-    
-        
-<script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "Website",
-    "publisher": {
-        "@type": "Organization",
-        "name": "Earyant的技术博客",
-        "logo": "/img/favicon.png"
-    },
-    "url": "http://earyant.github.io",
-    "image": {
-        "@type": "ImageObject",
-        "url": "/img/favicon.png"
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "http://earyant.github.io"
-    },
-    "description": "个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。"
-}
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Earyant的技术博客">
+<meta property="og:url" content="http://earyant.github.io/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://earyant.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
 </script>
 
+  <title>Earyant的技术博客</title>
+  
 
 
 
-    
 
-    <!-- Analytics -->
-    
-    
-    
 
-    <!-- Custom Head -->
-    
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-    
-        <body id="scheme-Paradox" class="lazy">
-            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span id="MD-burger-id" class="MD-burger-layer"></span>
-                        </button>
-                    
-
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-        <!-- Paradox Header -->
-        <!-- Daily pic -->
-<div class="mdl-card mdl-shadow--2dp daily-pic mdl-cell mdl-cell--8-col index-top-block">
-
-    <!-- Pic & Slogan -->
-    <div class="mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/daily_pic.png)">
-        <p class="index-top-block-slogan"><a href="#">
-        
-            
-                欢迎来到Earyant的blog
-            
-        
-        </a></p>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
+  </div>
 
-    <!-- Avatar & Name -->
-    <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
-        <!-- Author Avatar -->
-        <div id="author-avatar">
-            <img src="/img/avatar.png" width="32px" height="32px" alt="avatar">
-        </div>
-        <div>
-            <strong>Earyant</strong>
-        </div>
-    </div>
-</div>
+  <div class="site-meta">
 
-        <!-- Blog info -->
-<div class="mdl-card mdl-shadow--2dp something-else mdl-cell mdl-cell--8-col mdl-cell--4-col-desktop index-top-block">
-
-    <!-- Search -->
-    
-    <!-- Google -->
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" method="post" action="">
-        <label id="search-label" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent mdl-shadow--4dp" for="search">
-            <i class="material-icons mdl-color-text--white" role="presentation">search</i>
-        </label>
-
-        <form autocomplete="off" id="search-form" method="get" action="//google.com/search" accept-charset="UTF-8" class="mdl-textfield__expandable-holder" target="_blank">
-            <input class="mdl-textfield__input search-input" type="search" name="q" id="search" placeholder="">
-            <label id="search-form-label" class="mdl-textfield__label" for="search"></label>
-
-            <input type="hidden" name="sitesearch" value="http://earyant.github.io">
-        </form>
-    </div>
-
-
-
-
-
-
-
-    <!-- LOGO -->
-    <div class="something-else-logo mdl-color--white mdl-color-text--grey-600">
-        <a href="#" target="_blank">
-            <img src="/img/logo.png" alt="logo" />
-        </a>
-    </div>
-
-    <!-- Infomation -->
-    <div class="mdl-card__supporting-text meta meta--fill mdl-color-text--grey-600">
-        <!-- Blog Title -->
-        <div>
-            <strong>Earyant的技术博客</strong>
-        </div>
-        <div class="section-spacer"></div>
-
-        <!-- Pages -->
-        <button id="show-pages-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">view_carousel</i>
-            <span class="visuallyhidden">Pages</span>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="show-pages-button">
-            
-        </ul>
-
-        <!-- Menu -->
-        <button id="menubtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">more_vert</i>
-            <span class="visuallyhidden">show menu</span>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="menubtn">
-            
-
-            
-
-            
-                <a class="index_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Earyant的技术博客&url=http://earyant.github.io&pic=http://earyant.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
-                    <li class="mdl-menu__item mdl-js-ripple-effect">
-                        分享到微博
-                    </li>
-                </a>
-            
-
-            
-                <a class="index_share-link" href="https://twitter.com/intent/tweet?text=Earyant的技术博客&url=http://earyant.github.io&via=Earyant" target="_blank">
-                    <li class="mdl-menu__item mdl-js-ripple-effect">
-                        分享到 Twitter
-                    </li>
-                </a>
-            
-
-            
-                <a class="index_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://earyant.github.io" target="_blank">
-                    <li class="mdl-menu__item mdl-js-ripple-effect">
-                        分享到 Facebook
-                    </li>
-                </a>
-            
-
-            
-                <a class="index_share-link" href="https://plus.google.com/share?url=http://earyant.github.io" target="_blank">
-                    <li class="mdl-menu__item mdl-js-ripple-effect">
-                        分享到 Google+
-                    </li>
-                </a>
-            
-
-            
-
-            
-
-            
-        </ul>
-    </div>
-</div>
-
-    
-    <div class="locate-thumbnail-symbol"></div>
-
-    <!-- Pin on top -->
-    
-
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/">机器学习书单</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            数据分析
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>9月 18, 2021</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">机器学习路线</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            机器...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>9月 17, 2021</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/">自己写一个数据库</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            godb
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>1月 01, 2019</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/07/27/String-intern%E6%96%B9%E6%B3%95%E7%90%86%E8%A7%A3/">String.intern方法理解</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/07/27/String-intern%E6%96%B9%E6%B3%95%E7%90%86%E8%A7%A3/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>7月 27, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/07/18/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/">谷歌jib工具试用</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            Jib好久没...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/07/18/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>7月 18, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/06/01/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/">持续实战</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
- mysql主从配置
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/06/01/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>6月 01, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/05/12/jvm%E7%B3%BB%E5%88%97/">jvm系列</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/05/12/jvm%E7%B3%BB%E5%88%97/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>5月 12, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">日志分析脚本</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            sed编辑...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>5月 04, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">日志分析常用命令</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            查看...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>5月 04, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/04/19/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/">Guava 1.1基本工具</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/04/19/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Earyant's avatar">
-            </div>
-            <div>
-                <strong>Earyant</strong>
-                <span>4月 19, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-    <!-- Index nav -->
-        <nav class="material-nav mdl-cell mdl-cell--12-col">
-            <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">&lt;button aria-label&#x3D;&quot;Next page&quot; class&#x3D;&quot;mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon&quot;&gt;&lt;i class&#x3D;&quot;material-icons&quot; role&#x3D;&quot;presentation&quot;&gt;arrow_forward&lt;&#x2F;i&gt;&lt;&#x2F;button&gt;</a>
-        </nav>
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 20; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
-</script>
-
-    
-</div>
-
-
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
-
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.png" alt="Earyant's avatar">
-    </div>
-
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        23769262@qq.com
-        <b class="caret"></b>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
             
-                <li>
-                    <a href="#" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/">
 
-    <!-- Homepage -->
-    
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
-        
-    
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
 
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2021/09/">九月 2021<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">24</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">22</span></a>
-            </ul>
-        </li>
-        
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/" class="post-title-link" itemprop="url">机器学习书单</a>
+        </h2>
 
-    <!-- Categories  -->
-    
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-    <!-- Pages  -->
-    
+              <time title="创建时间：2021-09-18 11:11:47 / 修改时间：11:45:43" itemprop="dateCreated datePublished" datetime="2021-09-18T11:11:47+08:00">2021-09-18</time>
+            </span>
 
-    <!-- Article Number  -->
+          
+
+        </div>
+      </header>
+
     
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><ol>
+<li>利用python进行数据分析</li>
+</ol>
+<h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><ol>
+<li>python机器学习基础教程</li>
+<li>机器学习实战：基于Scikit-Learn和TensorFlow</li>
+<li>机器学习（周志华）</li>
+<li>统计学习方法（李航）</li>
+<li>优达学城-机器学习入门</li>
+<li>Cousera-机器学习-吴恩达</li>
+<li>Python机器学习实践指南</li>
+<li>Python机器学习——预测分析核心算法</li>
+<li>实用机器学习</li>
+<li>深入理解XGBoost：高效机器学习算法与进阶</li>
+<li>分布式机器学习：算法、理论与实践</li>
+</ol>
+<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><ol>
+<li>python神经网络编程</li>
+<li>深度学习入门-基于python的理论与实现</li>
+<li>python深度学习</li>
+<li>深度学习</li>
+<li>deeplearning.ai-深度学习吴恩达</li>
+<li>TensorFlow技术解析与实战</li>
+<li>精通Python自然语言处理</li>
+<li>Hands-On Machine Learning with Scikit-Learn and TensorFlow</li>
+</ol>
+<h1 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h1><ol>
+<li>Reinforcement learning</li>
+</ol>
+<h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><ol>
+<li>可汗学院</li>
+<li>线性代数及其应用</li>
+<li>概率论基础教程</li>
+<li>统计学</li>
+</ol>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><ol>
+<li>智能风控：原理、算法与工程实践</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">机器学习路线</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-17 17:20:02" itemprop="dateCreated datePublished" datetime="2021-09-17T17:20:02+08:00">2021-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 11:24:47" itemprop="dateModified" datetime="2021-09-18T11:24:47+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p>
+<ol start="2">
+<li><p><a target="_blank" rel="noopener" href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual RecognitionStanford</a><br>最受欢迎的课之一.</p>
+</li>
+<li><p>机器学习体系图</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425205801254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2MDYzMDc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">自己写一个数据库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 17:12:09" itemprop="dateCreated datePublished" datetime="2019-01-01T17:12:09+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="godb"><a href="#godb" class="headerlink" title="godb"></a>godb</h1><blockquote>
+<p>本项目中，数据库就是本地一个文件夹，表也是数据库下的目录，里面的数据就是表文件夹下的文件，<br>表目录下的scheme.json保存着表结构<br>表目录下data0.json data1.json分别存储着数据，每个文件里的数据不超过1000行。</p>
+</blockquote>
+<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><ul>
+<li>  代码分为client端和server端</li>
+<li>  server端开启端口，接收指令，并执行指令</li>
+<li>  client端连接端口，发送指令</li>
+<li>server端分层执行<ul>
+<li>  解析语句，判断类型，建库、建表、插入数据等等</li>
+<li>  不同类型语句进入不同service执行，互不干扰</li>
+<li>  验证语句，返回数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><blockquote>
+<p>暂时建表只支持这种格式，实际实现是在项目tmp目录下新建一个db1的文件夹</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database db1</span><br></pre></td></tr></table></figure>
+
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><blockquote>
+<p>暂时只支持  ‘id’ 列名， varchar（255） 类型长度，以及默认值<br>以及主键<br>实际实现是在数据库目录下新建一个表名的文件夹，并有一个scheme.json文件记录各列属性</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  table1 (`id` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
+<p>支持语句格式,value 只支持一个括号，values支持多个括号多行数据插入<br>实际实现是在表文件夹下，新建data(i).json文件，里面存储具体数据，i是预留数据量大的情况下的分文件存储，每个文件暂时最多支持存储1000行。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> feature_conf <span class="keyword">values</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>// TODO</p>
+<ul>
+<li>  [ ] 增加索引文件，指向data(i).json并指明多少列</li>
+<li>  [ ] 索引文件分层，类似B+树存储</li>
 </ul>
 
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-    <div class="sidebar-divider"></div>
-
-
-<!-- Theme Material -->
-
-    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            主题 - Material
-            <span class="sidebar-badge badge-circle">i</span>
-        </div>
-    </a>
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
-
+      
     </div>
 
-    <!-- Sidebar Image -->
     
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-</aside>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/07/27/String-intern%E6%96%B9%E6%B3%95%E7%90%86%E8%A7%A3/">
 
-                    
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
 
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/27/String-intern%E6%96%B9%E6%B3%95%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">String.intern方法理解</a>
+        </h2>
 
-                    
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
-    
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
+              <time title="创建时间：2018-07-27 14:50:23" itemprop="dateCreated datePublished" datetime="2018-07-27T14:50:23+08:00">2018-07-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
 
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
-                <span class="visuallyhidden">Facebook</span>
-            </button><!--
-     --></a>
-    
+          
 
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
-                <span class="visuallyhidden">Google Plus</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Weibo -->
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/earyantLe" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/lirui940403" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-
-    <!-- Telegram -->
-    
-
-    <!-- V2EX -->
-    
-
-    <!-- Segmentfault -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Earyant的技术博客
-            
         </div>
+      </header>
 
-        <!-- Paradox Footer Right Section -->
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-        <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
+      
+          <h2 id="intern作用"><a href="#intern作用" class="headerlink" title="intern作用"></a>intern作用</h2><blockquote>
+<p>如果常量池中存在当前字符串, 就会直接返回当前字符串. 如果常量池中没有此字符串, 会将此字符串放入常量池中后, 再返回</p>
+</blockquote>
+<p>先明白含义是什么，再看一道题，copy美团的文章，详见参考一</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String s = <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    s.intern();</span><br><span class="line">    String s2 = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    System.out.println(s == s2);</span><br><span class="line"></span><br><span class="line">    String s3 = <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    s3.intern();</span><br><span class="line">    String s4 = <span class="string">&quot;11&quot;</span>;</span><br><span class="line">    System.out.println(s3 == s4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jdk7,8下false true<br>jdk6以下false false</p>
+</blockquote>
+<p>接下来把intern下移一行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String s = <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    String s2 = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    s.intern();</span><br><span class="line">    System.out.println(s == s2);</span><br><span class="line"></span><br><span class="line">    String s3 = <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    String s4 = <span class="string">&quot;11&quot;</span>;</span><br><span class="line">    s3.intern();</span><br><span class="line">    System.out.println(s3 == s4);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jdk7,8下false false<br>jdk6以下false false</p>
+</blockquote>
+<p>看完答案后，我是很懵逼的，我有看了美团文章的解释，瞬间，更懵逼了。美团文章解释的其实挺好的，但是没有抓住重点。<br>详细论证两篇文章都有，基本都能看明白（看不明白可以找我交流），重点在两点：</p>
+<ul>
+<li>jdk7、8和6有什么不同： 7以上将常量池从perm区移到了heap中</li>
+<li>jdk7、8第一个程序中为什么一个是false，一个是true，<strong>jdk7以后常量去不仅仅可以保存对象，也可以保存对象的引用</strong>，所以s3的引用被保存到常量区中，s4直接在常量区找到了对象的引用，所以为true。</li>
+</ul>
+<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#97;&#114;&#x79;&#97;&#110;&#x74;&#76;&#101;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#101;&#97;&#114;&#x79;&#97;&#110;&#x74;&#76;&#101;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a></p>
+<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/in_depth_understanding_string_intern.html">参考一</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Kidezyq/p/8040338.html">参考二</a></p>
 
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
+      
+    </div>
 
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/07/18/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/18/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/" class="post-title-link" itemprop="url">谷歌jib工具试用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-18 21:13:21" itemprop="dateCreated datePublished" datetime="2018-07-18T21:13:21+08:00">2018-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
         </div>
+      </header>
+
     
-</footer>
-
-
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
-
-
-
-    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
-
-
-
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
-
-
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
-    });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Swiftye -->
     
-
-    <!-- Local Search-->
     
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jib"><a href="#Jib" class="headerlink" title="Jib"></a>Jib</h1><p>好久没写blog了，最近看到google新开源的工具心痒痒，试着玩下~<br>首先什么是Jib，：</p>
+<blockquote>
+<p>Jib 是 Google 开发的可以直接构建 Java 应用的 Docker 和 OCI 镜像的类库，以 Maven 和 Gradle 插件形式提供。<br>通过 Jib，Java 开发者可以使用他们熟悉的 Java 工具来构建容器。Jib 是一个快速而简单的容器镜像构建工具，它负责处理将应用程序打包到容器镜像中所需的所有步骤。它不需要你编写 Dockerfile 或安装 Docker，而且可以直接集成到 Maven 和 Gradle中 —— 只需要将插件添加到构建中，就可以立即将 Java 应用程序容器化。</p>
+</blockquote>
+<h2 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h2><ul>
+<li><p>Docker构建的复杂流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155927_vHQt_2720166.png"></p>
+</li>
+<li><p>Jib构建流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155918_xYRX_2720166.png"></p>
+</li>
+</ul>
+<p>从此可以告别繁琐的Dockerfile啦~~</p>
+<h2 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h2><ol>
+<li><p>首先配置jib插件<br> maven:</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.cloud.tools<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jib-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">from</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">                        registry.hub.docker.com/adoptopenjdk/openjdk8</span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span>&gt;</span>registry.hub.docker.com/earyant/earyant<span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> gradle</p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">  id <span class="string">&#x27;com.google.cloud.tools.jib&#x27;</span> version <span class="string">&#x27;0.9.6&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">jib.to.image = <span class="string">&#x27;registry.hub.docker.com/earyant/earyant&#x27;</span></span><br><span class="line">jib.<span class="keyword">from</span>.image = <span class="string">&#x27;registry.hub.docker.com/adoptopenjdk/openjdk8&#x27;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>需要注意的是image不加域名的话，默认是gcr.io,google Cloud下的镜像，<strong>需要梯子</strong>，所以没有梯子的话，请使用 registry.hub.docker.com,阿里云加速同理</p>
+</li>
+</ol>
+<p>如果不加from标签，也是默认访问grc.io去下载jdk镜像，emmmm，同样需要梯子，报错如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Build to Docker daemon failed: Connect to gcr.io/108.177.97.82:443 timed out</span><br></pre></td></tr></table></figure>
+<p>所以记得加上from镜像标签哦~~</p>
+<p>如果报错信息如下，请先登录docker login -name=earyant registry.hub.docker.com  ，如果没有注册过，请到docker官网注册~<br>Retrieving registry credentials for registry.hub.docker.com</p>
+<ol start="2">
+<li>Build</li>
+</ol>
+<ul>
+<li><p>build到远程仓库</p>
+<ul>
+<li>gradle jib</li>
+<li>mvn compile jib:build</li>
+</ul>
+</li>
+<li><p>本地运行（确保本地docker已运行 ）</p>
+<ul>
+<li>mvn compile jib:dockerBuild</li>
+<li>gradle jibDockerBuild</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>运行<br>本地镜像查看如下：<br>docker images<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">earyant/earyant       latest              e34b4cad637b        48 years ago        367MB</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>docker run -p 8880:8880  -it –rm –name earyant registry.hub.docker.com/earyant/earyant</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:8880/">http://localhost:8880</a> 即可纵享丝滑，开心~~~</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/06/01/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/01/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">持续实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-01 10:29:09" itemprop="dateCreated datePublished" datetime="2018-06-01T10:29:09+08:00">2018-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><input disabled="" type="checkbox"> mysql主从配置</li>
+<li><input disabled="" type="checkbox"> mybatis自动生成代码</li>
+<li><input disabled="" type="checkbox"> 读写分离，与主从配置相关联</li>
+<li><input disabled="" type="checkbox"> 分布式redis缓存</li>
+<li><input disabled="" type="checkbox"> tomcat session共享、session绑定</li>
+<li><input disabled="" type="checkbox"> 分布式锁：redis、mysql</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/05/12/jvm%E7%B3%BB%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/12/jvm%E7%B3%BB%E5%88%97/" class="post-title-link" itemprop="url">jvm系列</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-12 15:42:13" itemprop="dateCreated datePublished" datetime="2018-05-12T15:42:13+08:00">2018-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="jvm系列-一-java类的加载机制"><a href="#jvm系列-一-java类的加载机制" class="headerlink" title="jvm系列(一):java类的加载机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483934&idx=1&sn=41c46eceb2add54b7cde9eeb01412a90&chksm=ebf6da61dc81537721d36aadb5d20613b0449762842f9128753e716ce5fefe2b659d8654c4e8&scene=21#wechat_redirect">jvm系列(一):java类的加载机制</a></h2><ul>
+<li><p>什么是类的加载</p>
+<blockquote>
+<p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+</blockquote>
+</li>
+<li><p>类的生命周期</p>
+<ul>
+<li>  加载，查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象</li>
+<li>  连接，连接又包含三块内容：验证、准备、初始化。1）验证，文件格式、元数据、字节码、符号引用验证；2）准备，为类的静态变量分配内存，并将其初始化为默认值；3）解析，把类中的符号引用转换为直接引用</li>
+<li>  初始化，为类的静态变量赋予正确的初始值</li>
+<li>  使用，new出对象程序中使用</li>
+<li>  卸载，执行垃圾回收</li>
+</ul>
+</li>
+<li><p>类加载器</p>
+<ul>
+<li><p>  启动类加载器：Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库</p>
+</li>
+<li><p>  扩展类加载器：Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载DK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
+</li>
+<li><p>  应用程序类加载器：Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器</p>
+</li>
+</ul>
+</li>
+<li><p>双亲委派模型</p>
+<pre><code>  \-  全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入
+
+  - 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类
+
+  - 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效
+</code></pre>
+<h2 id="jvm系列-二-JVM内存结构"><a href="#jvm系列-二-JVM内存结构" class="headerlink" title="jvm系列(二):JVM内存结构"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483949&idx=1&sn=8b69d833bbc805e63d5b2fa7c73655f5&chksm=ebf6da52dc815344add64af6fb78fee439c8c27b539b3c0e87d8f6861c8422144d516ae0a837&scene=21#wechat_redirect">jvm系列(二):JVM内存结构</a></h2><p>  <img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
+</li>
+</ul>
+<blockquote>
+<p>方法区和堆是所有线程共享的内存区域；而java栈、本地方法栈和程序计数器是运行是线程私有的内存区域。</p>
+</blockquote>
+<ul>
+<li><p>  Java堆（Heap）,是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。</p>
+</li>
+<li><p>  方法区（Method Area）,方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+</li>
+<li><p>  程序计数器（Program Counter Register）,程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。</p>
+</li>
+<li><p>  JVM栈（JVM Stacks）,与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
+</li>
+<li><p>  本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
+</li>
+</ul>
+<h3 id="对象分配规则"><a href="#对象分配规则" class="headerlink" title="对象分配规则"></a>对象分配规则</h3><ul>
+<li><p>  对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。</p>
+</li>
+<li><p>  大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。</p>
+</li>
+<li><p>  长期存活的对象进入老年代。虚拟机为每个对象定义了一个年龄计数器，如果对象经过了1次Minor GC那么对象会进入Survivor区，之后每经过一次Minor GC那么对象的年龄加1，知道达到阀值对象进入老年区。</p>
+</li>
+<li><p>  动态判断对象的年龄。如果Survivor区中相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。</p>
+</li>
+<li><p>  空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。</p>
+</li>
+</ul>
+<h2 id="jvm系列-三-GC算法-垃圾收集器"><a href="#jvm系列-三-GC算法-垃圾收集器" class="headerlink" title="jvm系列(三):GC算法 垃圾收集器"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483952&idx=1&sn=ea12792a9b7c67baddfaf425d8272d33&chksm=ebf6da4fdc815359869107a4acd15538b3596ba006b4005b216688b69372650dbd18c0184643&scene=21#wechat_redirect">jvm系列(三):GC算法 垃圾收集器</a></h2><h3 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h3><blockquote>
+<p>判断对象是否存活一般有两种方式：</p>
+</blockquote>
+<ul>
+<li><p>  引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。</p>
+</li>
+<li><p>  可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，不可达对象。</p>
+</li>
+</ul>
+<h3 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h3><ul>
+<li><p>  GC最基础的算法有三种：标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。</p>
+</li>
+<li><p>  标记 -清除算法，“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。</p>
+</li>
+<li><p>  复制算法，“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
+</li>
+<li><p>  标记-压缩算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
+</li>
+<li><p>  分代收集算法，“分代收集”（Generational Collection）算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
+</li>
+</ul>
+<h3 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h3><ul>
+<li><p>  Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。</p>
+</li>
+<li><p>  ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。</p>
+</li>
+<li><p>  Parallel收集器，Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。</p>
+</li>
+<li><p>  Parallel Old 收集器，Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法</p>
+</li>
+<li><p>  CMS收集器，CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。</p>
+</li>
+<li><p>  G1收集器，G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征</p>
+</li>
+</ul>
+<p>在Java语言中，GC Roots包括：</p>
+<ul>
+<li>  虚拟机栈中引用的对象。</li>
+<li>  方法区中类静态属性实体引用的对象。</li>
+<li>  方法区中常量引用的对象。</li>
+<li>  本地方法栈中JNI引用的对象。</li>
+</ul>
+<h2 id="jvm系列-四-jvm调优-命令篇"><a href="#jvm系列-四-jvm调优-命令篇" class="headerlink" title="jvm系列(四):jvm调优-命令篇"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483966&idx=1&sn=dfa3375d36aa2c0c25a775522e381e62&chksm=ebf6da41dc815357e0d53c73865a23f41219e75bac5a4d510bfa31cc51594b59a20e2e4f6cb8&scene=21#wechat_redirect">jvm系列(四):jvm调优-命令篇</a></h2><h3 id="调优命令"><a href="#调优命令" class="headerlink" title="调优命令"></a>调优命令</h3><blockquote>
+<p>  Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
+</blockquote>
+<ul>
+<li>  jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。</li>
+<li>  jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</li>
+<li>  jmap，JVM Memory Map命令用于生成heap dump文件</li>
+<li>  jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看</li>
+<li>  jstack，用于生成java虚拟机当前时刻的线程快照。</li>
+<li>  jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</li>
+</ul>
+<h2 id="jvm系列-五-Java-GC-分析"><a href="#jvm系列-五-Java-GC-分析" class="headerlink" title="jvm系列(五):Java GC 分析"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483986&idx=1&sn=a2d7c9f2e73dfcc938a3ec934b3ad3a4&chksm=ebf6da2ddc81533beb5e6fb54c872b5f79524d0780c484718a57ca0712916cd67bda7dee4073&scene=21#wechat_redirect">jvm系列(五):Java GC 分析</a></h2><h3 id="主要关注点："><a href="#主要关注点：" class="headerlink" title="主要关注点："></a>主要关注点：</h3><ul>
+<li><p>  GC日志分析</p>
+</li>
+<li><p>  调优命令</p>
+</li>
+<li><p>  调优工具</p>
+</li>
+</ul>
+<p><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">参考</a><br><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">参考</a></p>
+<h2 id="jvm系列-六-Java服务GC参数调优案例"><a href="#jvm系列-六-Java服务GC参数调优案例" class="headerlink" title="jvm系列(六):Java服务GC参数调优案例"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484007&idx=1&sn=e8d150bb760d0a92aad594152fc47a9d&chksm=ebf6da18dc81530eedeaff89d746cf48e7b2bdec602239faaeb4e8e490e0a4387e2a8890c327&scene=21#wechat_redirect">jvm系列(六):Java服务GC参数调优案例</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484023&idx=1&sn=39be119fdf3132240adc84a85bf8a054&chksm=ebf6da08dc81531e3719389555150f2d0237554b6b6c07a123efdea7c78c0ae2f064cc577bd4&scene=21#wechat_redirect">jvm系列(七):jvm调优-工具篇</a></p>
+<blockquote>
+<p>调优工具</p>
+</blockquote>
+<ul>
+<li>  常用调优工具分为两类,jdk自带监控工具：jconsole和jvisualvm，第三方有：MAT(Memory Analyzer Tool)、GChisto。</li>
+<li>  jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控</li>
+<li>  jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。</li>
+<li>  MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</li>
+<li>  GChisto，一款专业分析gc日志的工具</li>
+</ul>
+<h2 id="jvm系列-八-jvm知识点总览"><a href="#jvm系列-八-jvm知识点总览" class="headerlink" title="jvm系列(八):jvm知识点总览"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484038&idx=1&sn=e083cc8b248461c8916a819119b059c3&chksm=ebf6daf9dc8153ef27ecd857e6cc85372735e84042679c133892d0993074371a46dd2c28b8b3&scene=21#wechat_redirect">jvm系列(八):jvm知识点总览</a></h2><h2 id="jvm系列-九-如何优化Java-GC「译」"><a href="#jvm系列-九-如何优化Java-GC「译」" class="headerlink" title="jvm系列(九):如何优化Java GC「译」"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484042&idx=1&sn=51d2ed451151be872b601007597dd47f&chksm=ebf6daf5dc8153e3a7cb88ca97621cfae5aeaaeec0a1ff63e16278fbea6a43457e50a7fc9f0b&scene=21#wechat_redirect">jvm系列(九):如何优化Java GC「译」</a></h2><h2 id="jvm系列-十-教你如何成为Java的OOM-Killer"><a href="#jvm系列-十-教你如何成为Java的OOM-Killer" class="headerlink" title="jvm系列(十):教你如何成为Java的OOM Killer"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484071&idx=1&sn=84604a51fd18b91f73c46507c182540a&chksm=ebf6dad8dc8153cebb029372c0745a3c6570e527e1f95cee2fb9fb33c50d46c64f20722a3d96&scene=21#wechat_redirect">jvm系列(十):教你如何成为Java的OOM Killer</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484074&idx=1&sn=826318867783afaf99f62b38b2f5c268&chksm=ebf6dad5dc8153c32a6ce0201afe310b47135b07c8bb028a8fd9df7ecaf6e60950a7847c7df5&scene=21#wechat_redirect">jvm系列(十一):Java 8-从持久代到metaspace</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">日志分析脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 22:06:22" itemprop="dateCreated datePublished" datetime="2018-05-04T22:06:22+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
+<ul>
+<li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
+<blockquote>
+<p>将日志文件中的baidu替换成earyant输出<br>s表示执行的事文本替换命令</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘2,6p’ access.log</p>
+<blockquote>
+<p>-n表示只输出指定的行，’2,6p’表示选择的事第二行到第六行</p>
+</blockquote>
+</li>
+<li><p>sed ‘/earyant/d’ access.log</p>
+<blockquote>
+<p>d表示执行文本删除命令，将包含earyant的行删除</p>
+</blockquote>
+</li>
+<li><p>sed ‘=’ access.log</p>
+<blockquote>
+<p>显示文本行号</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘i\head’ access.log | head -10</p>
+<blockquote>
+<p>在行首插入文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘a\end’ access.log | head -10</p>
+<blockquote>
+<p> 在文末追加文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘/baidu/c\hello’ access.log | head -10</p>
+<blockquote>
+<p>c命令对文本进行替换，查找/baidu/匹配的行，用hello对匹配的行进行替换，与s不同的是，这个替换行，s是替换单词</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘1,5p;1,5=’ access.log</p>
+<blockquote>
+<p>多条命令，分号隔开</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
+<li><p>awk ‘{print $1}’ access.log | head -10</p>
+<blockquote>
+<p>打印指定的列</p>
+</blockquote>
+</li>
+<li><p>awk ‘/baidu/{print $5,%6}’ access.log | head -10</p>
+<blockquote>
+<p>筛选指定的行，并且打印出其中一部分列</p>
+</blockquote>
+</li>
+<li><p>awk ‘length{$0} &gt; 40 {print $3}’ access.log | head  -10</p>
+<blockquote>
+<p>$0 表示当前的行，length($0)获取当前行的长度，print $3 打印出第三列</p>
+</blockquote>
+</li>
+<li><p>awk ‘{line = sprintf (“method:%s,response:%s”,$3,$7); print line}’ access.log | head -10</p>
+<blockquote>
+<p>定义line接收sprintf输出，sprintf用户格式化输出第三行的请求式和第七行的响应时间</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
+<li>  系统load超过2或者磁盘利用率超过85%报警：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>读取日志文件，对字段切割，插入到sql。<br>  db:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create table access_log(</span><br><span class="line">  ip varchar(20),# ip地址</span><br><span class="line">  rt bigint,# 响应时间</span><br><span class="line">  method varchar(10), #请求方式</span><br><span class="line">  url varchar (400), # 请求地址</span><br><span class="line">  refer varchar(400),# 请求来源</span><br><span class="line">  return_code int,# 返回码</span><br><span class="line">  response_size bigint # 响应大小</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>shell:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"><span class="comment"># 日志路径</span></span><br><span class="line">ACCESS_FILE=<span class="string">&quot;D:\\0\\nginx-1.11.13\\logs\\access2.log&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> LINE</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 系统数组分隔符</span></span><br><span class="line">  OLD_IFS=<span class="string">&quot;<span class="variable">$IFS</span>&quot;</span></span><br><span class="line">  IFS=<span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="comment"># 每行分割成数组</span></span><br><span class="line">  field_arr=(<span class="variable">$LINE</span>)</span><br><span class="line">  IFS=<span class="string">&quot;<span class="variable">$OLD_IFS</span>&quot;</span></span><br><span class="line">  <span class="comment"># 生成插入语句，各列的值对应什么，懒得改了。</span></span><br><span class="line">  STATEMENT=<span class="string">&quot;insert into access_log values(&#x27;<span class="variable">$&#123;field_arr[0]&#125;</span>&#x27; , &#x27;<span class="variable">$&#123;field_arr[1]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[2]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[3]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[4]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[5]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[6]&#125;</span>&#x27;);&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$STATEMENT</span></span><br><span class="line">  mysql earyant -u root -p123456 -e <span class="string">&quot;<span class="variable">$&#123;STATEMENT&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$ACCESS_FILE</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">日志分析常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 16:06:10" itemprop="dateCreated datePublished" datetime="2018-05-04T16:06:10+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
+<li><p>cat：正序查看</p>
+<blockquote>
+<p>cat access.log</p>
+</blockquote>
+</li>
+<li><p>tac：倒序查看</p>
+<blockquote>
+<p>tac access.log</p>
+</blockquote>
+</li>
+</ul>
+<p>##分页显示文件</p>
+<ul>
+<li><p>more</p>
+<blockquote>
+<p>more access.log</p>
+</blockquote>
+<p>   Enter显示文件下一行<br>   空格显示下一页<br>   F显示下一屏内容<br>   B显示上一屏内容</p>
+</li>
+<li><p>less</p>
+<blockquote>
+<p>/GET 查找GET字符串</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
+<li><p>tail</p>
+<blockquote>
+<p>tail  -f -n 500 access.log</p>
+</blockquote>
+<p>   -f  持续查看<br>   -n 显示最后n行</p>
+</li>
+</ul>
+<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
+<li>head<blockquote>
+<p>head -n2 access.log</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
+<li><p>sort</p>
+<blockquote>
+<p>sort -n -r access.log</p>
+</blockquote>
+<p>   -n 按照数字排序<br>   -r 逆序排序</p>
+<blockquote>
+<p>sort -k 2 -t “ “ -n access.log</p>
+</blockquote>
+<p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
+</li>
+</ul>
+<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
+<li><p>wc</p>
+<blockquote>
+<p>  wc -l access.log</p>
+</blockquote>
+<pre><code>-l 统计文件中的行数
+</code></pre>
+<blockquote>
+<p>  wc -c access.log</p>
+</blockquote>
+<pre><code>-c 显示文件的字节数
+</code></pre>
+<blockquote>
+<p>  wc -L access.log</p>
+</blockquote>
+<pre><code>-L得出最长的行长度
+</code></pre>
+<blockquote>
+<p>  wc -w access.log</p>
+</blockquote>
+<pre><code>-w 查看文件包含多少单词
+</code></pre>
+</li>
+</ul>
+<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
+<li><p>uniq</p>
+<blockquote>
+<p> sort uniqfile| uniq -c</p>
+</blockquote>
+<pre><code>\-c 用来在每一行前面加上该行出现的次数
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -u</p>
+</blockquote>
+<pre><code>\-u 只会显示出现一次的行
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -d</p>
+</blockquote>
+<pre><code>\-d 只会显示重复出现的行
+</code></pre>
+</li>
+</ul>
+<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
+<li><p>grep</p>
+<pre><code>  &gt;   grep earyant access.log
+
+    earyant 为指定的查找串
+
+  &gt; grep -c earyant access.log
+
+    -c 可以显示查找到的行数
+
+  &gt;   grep &#39;G.\*T&#39; access.log
+
+    支持正则表达式
+</code></pre>
+<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
+<li><p>find</p>
+<blockquote>
+<p>find /home/earyant -name access.log</p>
+</blockquote>
+<pre><code> 在/home/earyant 目录下查找文件名为access.log的文件
+</code></pre>
+<blockquote>
+<p>find /home/earyant -name “*.txt”</p>
+<p>find . -print</p>
+</blockquote>
+<pre><code> 打印当前目录所有文件
+</code></pre>
+</li>
+<li><p>whereis</p>
+<blockquote>
+<p>whereis java</p>
+</blockquote>
+</li>
+<li><p>which</p>
+<blockquote>
+<p>which java</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
+<li>expr<blockquote>
+<p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
+<li><p>tar</p>
+<blockquote>
+<p>tar -cf aaa.tar tmp1 tmp2</p>
+</blockquote>
+<pre><code>  将当前目录下的tmp1和tmp2目录打包成aaa.tar
+  -c 表示生成新包
+  -f 指定包名称
+</code></pre>
+<blockquote>
+<p>tar -tf aaa.tar</p>
+</blockquote>
+<pre><code>  -t 能够列出包中文件的名称
+</code></pre>
+<blockquote>
+<p>tar -xf aaa.tar</p>
+</blockquote>
+<pre><code>  -x 将打包文件解压
+</code></pre>
+</li>
+</ul>
+<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
+<li><p>curl</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>curl -i <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -i 返回带header的文档</p>
+<blockquote>
+<p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -I 只返回页面的header信息</p>
+<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
+</ul>
+<blockquote>
+<p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>访问量排名前10的ip地址</p>
+<blockquote>
+<p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>页面访问量排名前10的url</p>
+<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
+<p>cat access.log | sort -k 2 -n -r |head -10</p>
+</blockquote>
+<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/2018/04/19/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/19/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">Guava 1.1基本工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-19 17:13:44" itemprop="dateCreated datePublished" datetime="2018-04-19T17:13:44+08:00">2018-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-16 22:38:49" itemprop="dateModified" datetime="2021-09-16T22:38:49+08:00">2021-09-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-1-使用和避免null"><a href="#1-1-使用和避免null" class="headerlink" title="1.1-使用和避免null"></a>1.1-使用和避免null</h1><p>map允许null作为键，但只能有一个。<br>concurrentHashMap不允许null作为键。</p>
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">possible.isPresent(); <span class="comment">// returns true</span></span><br><span class="line">possible.get(); <span class="comment">// returns 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态创建方法"><a href="#静态创建方法" class="headerlink" title="静态创建方法"></a>静态创建方法</h3><ul>
+<li>  of</li>
+<li>  ofNullable</li>
+<li>empty<h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3></li>
+<li>  isPresent</li>
+<li>  get</li>
+<li>  or (jdk中是orElse)</li>
+<li>  orNull</li>
+<li>  asSet</li>
+</ul>
+<blockquote>
+<p>意义：<br>    使用Optional除了赋予null语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。Optional迫使你积极思考引用缺失的情况，因为你必须显式地从Optional获取引用。直接使用null很容易让人忘掉某些情形，尽管FindBugs可以帮助查找null相关的问题，但是我们还是认为它并不能准确地定位问题根源。<br>    如同输入参数，方法的返回值也可能是null。和其他人一样，你绝对很可能会忘记别人写的方法method(a,b)会返回一个null，就好像当你实现method(a,b)时，也很可能忘记输入参数a可以为null。将方法的返回类型指定为Optional，也可以迫使调用者思考返回的引用缺失的情形。</p>
+</blockquote>
+<h3 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><ul>
+<li>错误的使用方式：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">if</span> (user.isPresent()) &#123;</span><br><span class="line">  <span class="keyword">int</span> sex = user.getSex();</span><br><span class="line">  <span class="comment">// 链式调用，最容易出现空指针</span></span><br><span class="line">  <span class="keyword">int</span> age = user.getParent().getParent().getParent().getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>正确的使用方式  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">int</span> sex = user.map(User::getSex).orElse(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">int</span> age = user.map(User::getParent).map(User::getParent).map(User::getParent).map(User::getAge).orElse(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="其他处理null的便利方法"><a href="#其他处理null的便利方法" class="headerlink" title="其他处理null的便利方法"></a>其他处理null的便利方法</h2><ul>
+<li>  Objects.firstNonNull(T, T)</li>
+<li>  Objects还有其它一些方法专门处理null或空字符串：emptyToNull(String)，nullToEmpty(String)，isNullOrEmpty(String)。</li>
+</ul>
+<h1 id="1-2-前置条件-Preconditions"><a href="#1-2-前置条件-Preconditions" class="headerlink" title="1.2-前置条件 Preconditions"></a>1.2-前置条件 Preconditions</h1><table>
+<thead>
+<tr>
+<th>–</th>
+<th>–</th>
+<th>–</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法声明（不包括额外参数）</td>
+<td>描述</td>
+<td>检查失败时抛出的异常</td>
+</tr>
+<tr>
+<td>checkArgument(boolean)</td>
+<td>检查boolean是否为true，用来检查传递给方法的参数。</td>
+<td>IllegalArgumentException</td>
+</tr>
+<tr>
+<td>checkNotNull(T)</td>
+<td>检查value是否为null，该方法直接返回value，因此可以内嵌使用checkNotNull。</td>
+<td>NullPointerException</td>
+</tr>
+<tr>
+<td>checkState(boolean)</td>
+<td>用来检查对象的某些状态。</td>
+<td>IllegalStateException</td>
+</tr>
+<tr>
+<td>checkElementIndex(int index, int size)</td>
+<td>检查index作为索引值对某个列表、字符串或数组是否有效</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndex(int index, int size)</td>
+<td>检查index作为位置值对某个列表、字符串或数组是否有效。</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndexes(int start, int end, int size)</td>
+<td>检查[start, end]表示的位置范围对某个列表、字符串或数组是否有效*</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/google-guava-using-and-avoiding-null/">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
 
-<!-- UC Browser Compatible -->
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
 <script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('
-<link rel="stylesheet" href="/css/uc.css">
-');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-
-
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
-    
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
-
-
-
-<script>
-    var copyrightNow = new Date().getFullYear();
-    var textContent = document.querySelector('span[year]')
-
-    copyrightSince = 0000;
-    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
-        textContent.textContent = copyrightNow
-    } else {
-        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
-
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-                </main>
-            </div>
-        <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-    
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
