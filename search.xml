@@ -4,11 +4,24 @@
   
     
     <entry>
+      <title>机器学习书单</title>
+      <link href="/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/"/>
+      <url>/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><ol><li>利用python进行数据分析</li></ol><h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><ol><li>python机器学习基础教程</li><li>机器学习实战：基于Scikit-Learn和TensorFlow</li><li>机器学习（周志华）</li><li>统计学习方法（李航）</li><li>优达学城-机器学习入门</li><li>Cousera-机器学习-吴恩达</li><li>Python机器学习实践指南</li><li>Python机器学习——预测分析核心算法</li><li>实用机器学习</li></ol><h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><ol><li>python神经网络编程</li><li>深度学习入门-基于python的理论与实现</li><li>python深度学习</li><li>深度学习</li><li>deeplearning.ai-深度学习吴恩达</li><li>TensorFlow技术解析与实战</li><li>精通Python自然语言处理</li><li>Hands-On Machine Learning with Scikit-Learn and TensorFlow</li></ol><h1 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h1><ol><li>Reinforcement learning</li></ol><h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><ol><li>可汗学院</li><li>线性代数及其应用</li><li>概率论基础教程</li><li>统计学</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>机器学习路线</title>
       <link href="/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
       <url>/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
       
-        <content type="html"><![CDATA[<h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><p>1.<a href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</p><p><img src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p><p>2.<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual RecognitionStanford</a><br>最受欢迎的课之一.</p><h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><ol><li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</li></ol><p><img src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p><ol start="2"><li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual RecognitionStanford</a><br>最受欢迎的课之一.</p></li><li><p>机器学习体系图</p><p><img src="https://img-blog.csdnimg.cn/20190425205801254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2MDYzMDc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p></li></ol><h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>]]></content>
       
       
       
