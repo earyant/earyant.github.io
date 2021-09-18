@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-18T03:21:54.801Z</updated>
+  <updated>2021-09-18T03:25:11.014Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://earyant.github.io/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/"/>
     <id>http://earyant.github.io/2021/09/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</id>
     <published>2021-09-18T03:11:47.000Z</published>
-    <updated>2021-09-18T03:21:54.801Z</updated>
+    <updated>2021-09-18T03:25:11.014Z</updated>
     
     
       
@@ -35,6 +35,8 @@
     
     
     
+    <category term="机器学习，书单" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%8C%E4%B9%A6%E5%8D%95/"/>
+    
   </entry>
   
   <entry>
@@ -42,7 +44,7 @@
     <link href="http://earyant.github.io/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
     <id>http://earyant.github.io/2021/09/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</id>
     <published>2021-09-17T09:20:02.000Z</published>
-    <updated>2021-09-18T03:11:09.107Z</updated>
+    <updated>2021-09-18T03:24:47.631Z</updated>
     
     
       
@@ -52,6 +54,8 @@
     
     
     
+    
+    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
