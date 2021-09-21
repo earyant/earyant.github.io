@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ArrayList原理</title>
+    <url>/posts/ArrayList%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
+<ul>
+<li>是否允许空：<br>允许</li>
+<li>是否允许重复数据：<br>允许</li>
+<li>是否有序：<br>是</li>
+<li>是否线程安全：<br>不是</li>
+</ul>
+<h2 id="默认大小-10"><a href="#默认大小-10" class="headerlink" title="默认大小 : 10"></a>默认大小 : 10</h2>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><ul>
+<li>根据下标删除。</li>
+<li>根据元素删除。<blockquote>
+<p>删除跟元素匹配的 <em>第一个</em> 元素</p>
+</blockquote>
+</li>
+</ul>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line"></span><br><span class="line">         numMoved);</span><br><span class="line"></span><br><span class="line">elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>1、把指定元素后面位置的所有元素，利用System.arraycopy方法整体向前移动一个位置</li>
+<li>2、最后一个位置的元素指定为null，这样让gc可以去回收它<blockquote>
+<p>因为删除的时候，需要将后面所有元素向前移动一个位置，所以删除的时候，很消耗性能。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><ul>
+<li>add(T t)</li>
+<li>add(int position,T t)<blockquote>
+<p>插入时候会将所有后面的元素向后移动一个位置，很消耗性能。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="ArrayList的优缺点"><a href="#ArrayList的优缺点" class="headerlink" title="ArrayList的优缺点"></a>ArrayList的优缺点</h2><ul>
+<li>底层以数组方式存储，是一种随机访问方式，并且实现了RandomAccess接口，因此查找十分快速。</li>
+<li>添加很方便，往数组的最后添加一个就行了。</li>
+<li>删除和添加的时候涉及到移动后面所有数据，性能消耗比较大。    </li>
+</ul>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
+<p>不是线程安全的，所有方法都没有Synchronized修饰，在并发情况下会出现安全问题。可以使用Collections.synchronizedList方式</p>
+</blockquote>
+<h2 id="为什么ArrayList的elementData是用transient修饰的？"><a href="#为什么ArrayList的elementData是用transient修饰的？" class="headerlink" title="为什么ArrayList的elementData是用transient修饰的？"></a>为什么ArrayList的elementData是用transient修饰的？</h2><blockquote>
+<p>private transient Object[] elementData;</p>
+</blockquote>
+<blockquote>
+<p>ArrayList 实现了Serializable接口，所以是可以序列化的。但是elementData不一定是满的，没必要全部序列化。所以ArrayList重写了writeObject方法实现，增快了序列化的速度，见笑了序列化后的大小：<br>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line"><span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line"><span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">s.defaultWriteObject();</span><br><span class="line">        <span class="comment">// Write out array length</span></span><br><span class="line">       s.writeInt(elementData.length);</span><br><span class="line">    <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++)</span><br><span class="line">           s.writeObject(elementData[i]);</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>100块钱可以兑换50块、10块、5块、1块的算法</title>
     <url>/posts/100%E5%9D%97%E9%92%B1%E5%8F%AF%E4%BB%A5%E5%85%91%E6%8D%A250%E5%9D%97%E3%80%8110%E5%9D%97%E3%80%815%E5%9D%97%E3%80%811%E5%9D%97%E7%9A%84%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="最先想到的当然是for循环了："><a href="#最先想到的当然是for循环了：" class="headerlink" title="最先想到的当然是for循环了："></a>最先想到的当然是for循环了：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   long time1 = System.currentTimeMillis();</span><br><span class="line">           System.out.println(&quot;当前时间为&quot;+time1);</span><br><span class="line">           int n = 0;</span><br><span class="line">           int n1, n5, n10, n50;</span><br><span class="line">           for (n1 = 0; n1 &lt; 100; n1++) &#123;</span><br><span class="line">               for (n5 = 0; n5 &lt; 20; n5++) &#123;</span><br><span class="line">                   for (n10 = 0; n10 &lt; 10; n10++) &#123;</span><br><span class="line">                       for (n50 = 0; n50 &lt; 2; n50++) &#123;</span><br><span class="line">                           if (n1 * 1 + n5 * 5 + n10 * 10 + n50 * 50 == 100) &#123;</span><br><span class="line">                               n++;</span><br><span class="line">                               System.out.println(&quot;1块的：&quot; + n1 + &quot;张 5块的： &quot; + n5 + &quot;张 10块的 ：&quot; + n10 + &quot;张 50块的：&quot; + n50 + &quot;张&quot;);</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           long time2 = System.currentTimeMillis();</span><br><span class="line">           System.out.println(&quot;结束时间为&quot;+time2);</span><br><span class="line">           long time = time2 - time1;</span><br><span class="line">           System.out.println(n + &quot; 耗费时间为 &quot; + time);</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
@@ -10,20 +65,73 @@
 ]]></content>
   </entry>
   <entry>
-    <title>ArrayList和LinkedList对比</title>
-    <url>/posts/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
-<li>ArrayList ： 继承自List接口</li>
-<li>LinkedList ： 继承自List和Deque接口</li>
+    <title>EffectiveJava读书笔记</title>
+    <url>/posts/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>#EffectiveJava 读书笔记</p>
+<p>本文于2017年10月26日再读一遍，对书中的内容进行整理提取，方便以后查阅</p>
+<p>[TOC]</p>
+<h2 id="第一章：创建和销毁对象"><a href="#第一章：创建和销毁对象" class="headerlink" title="第一章：创建和销毁对象"></a>第一章：创建和销毁对象</h2><h3 id="创建对象的方法"><a href="#创建对象的方法" class="headerlink" title="创建对象的方法"></a>创建对象的方法</h3><ul>
+<li>构造器方法new一个；</li>
+<li>公共静态方法返回实例；</li>
+<li>Build工程模式。<blockquote>
+<p>一般来说创建对象最简单的方法就是使用的时候new一个，如Person  person = new Person();既通过构造器创建对象。这种使用方法不适用于所有情况，例如一个单例工具类，不需要每次使用都new，而是通过一个公共静态方法返回类的实例。</p>
+</blockquote>
+</li>
 </ul>
-<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><ul>
-<li>ArrayList ：底层用数组进行存储</li>
-<li>LinkedList ： 底层用双链表进行存储 </li>
+<h4 id="构造器方式"><a href="#构造器方式" class="headerlink" title="构造器方式"></a>构造器方式</h4><p>  <em>缺点</em></p>
+<blockquote>
+<p>每一个构造器都与类名相同，无法知其寓意。</p>
+</blockquote>
+<p>  构造器方法时最常用的方法；</p>
+<h4 id="公共静态方法"><a href="#公共静态方法" class="headerlink" title="公共静态方法"></a>公共静态方法</h4><p>  <em>优点1</em></p>
+<blockquote>
+<p>每一个公共静态方法都有名字，顾名思义。</p>
+</blockquote>
+<p>  <em>优点2</em></p>
+<blockquote>
+<p>不必为每次调用都产生一个新的实例，可以重复利用。</p>
+</blockquote>
+<p>  <em>优点3</em></p>
+<blockquote>
+<p>可以返回原返回类型的任何子类型对象。</p>
+</blockquote>
+<p>  <em>优点3</em></p>
+<blockquote>
+<p>创建参数化类型实例，使代码变得更简洁。</p>
+</blockquote>
+<p>  <em>缺点1</em></p>
+<blockquote>
+<p>类如果不含有共有的或者受保护的构造器，就不能被子类化。</p>
+</blockquote>
+<p>  <em>缺点2</em></p>
+<blockquote>
+<p>与其他静态方法没有任何区别。</p>
+</blockquote>
+<h4 id="使用情景1-通过方法名知其方法作用"><a href="#使用情景1-通过方法名知其方法作用" class="headerlink" title="使用情景1 通过方法名知其方法作用"></a>使用情景1 通过方法名知其方法作用</h4><p>  如BigInteger(int,int,Random)返回的BitInteger可能为素数，但如果用BigInteger.probablePrime静态方法来表示，更加清楚方法寓意。</p>
+<p>  如果两个构造器方法中只是参数类型顺序上不同，很容易造成寓意混乱，需要进一步查询文档才能确定用哪一个，容错率很低。</p>
+<h4 id="使用场景2-使用预先定义好的实例。"><a href="#使用场景2-使用预先定义好的实例。" class="headerlink" title="使用场景2 使用预先定义好的实例。"></a>使用场景2 使用预先定义好的实例。</h4><p>  公共静态方法返回的实例可以控制是否是单例,或者控制是否可以实例化。</p>
+<ul>
+<li>getInstance和newInstance区别：<blockquote>
+<p>getInstance方法重点是返回已经创建好的实例。<br>newInstance方法重点是返回一个新的实例。</p>
+</blockquote>
+</li>
 </ul>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>ArrayList ： 访问速度快，插入和删除比较慢 ，需要移动元素</li>
-<li>LinkedList ： 访问比较慢，插入和删除比较快 ， 需要链式查询</li>
+<h4 id="使用场景3-Collections的32个便利实现、通过适配器提供更丰富的服务接口"><a href="#使用场景3-Collections的32个便利实现、通过适配器提供更丰富的服务接口" class="headerlink" title="使用场景3 Collections的32个便利实现、通过适配器提供更丰富的服务接口"></a>使用场景3 Collections的32个便利实现、通过适配器提供更丰富的服务接口</h4><p>  分别提供了不可修改的集合、同步集合等。<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Service interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Service provider interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Provider</span></span>&#123;</span><br><span class="line">  <span class="function">Service <span class="title">newService</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Services</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Services</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String,Provider&gt; providers = <span class="keyword">new</span> ConcurrentHashMap&lt;String,Provider&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PROVIDER_NAME = <span class="string">&quot;&lt;def&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerDefaultProvider</span><span class="params">(Provider p)</span></span>&#123;</span><br><span class="line">    registerProvider(DEFAULT_PROVIDER_NAME,p););</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerProvider</span><span class="params">(String name,Provider p)</span></span>&#123;</span><br><span class="line">    providers.put(name,p);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> newInstance(DEFAULT_PROVIDER_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">    Provider p = provider.get(name);</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;No provider registered with name:&quot;</span>+ name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p.newService();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用场景4-代替繁琐的参数声明。"><a href="#使用场景4-代替繁琐的参数声明。" class="headerlink" title="使用场景4  代替繁琐的参数声明。"></a>使用场景4  代替繁琐的参数声明。</h4><h4 id="使用场景6"><a href="#使用场景6" class="headerlink" title="使用场景6"></a>使用场景6</h4><p>  valueOf – 返回的实例与参数具有相同的值，实际上是类型转换方法。<br>  of  – valueOf的简洁替代。<br>  getInstance  – 返回的实例是通过方法的参数来描述的，但是不能说与参数有相同的值。对于Singleton来说，该方法没有参数。<br>  newInstance  – 跟getInstance一样，但是该方法确保返回的实例与其他实例不同。<br>  getType  – 跟getInstance一样，但是在工厂方法中处于不同的类中的时候使用，Type表示工厂方法锁返回的对象类型。<br>  newType  – 像newInstance一样，但是在工厂方法中处于不同的类中的时候使用。</p>
+<h3 id="构建器"><a href="#构建器" class="headerlink" title="构建器"></a>构建器</h3><p>  静态工厂和构造器都有个局限性，都不能很好的扩展到大量的可选参数。<br>  参数量大的情况下通常有两种方法：</p>
+<ul>
+<li><p>重叠构造器</p>
+<blockquote>
+<p>可行，但很难编写，难以阅读。</p>
+</blockquote>
+</li>
+<li><p><em>工厂模式</em></p>
+<blockquote>
+<p>build构造参数很简单明了，链式调用很少出错。<br>  但是在构造Bean的时候，可能出现不一致的状态，类无法仅仅通过构造器参数的有效性来保证一致性。</p>
+</blockquote>
+</li>
 </ul>
+<h3 id="用私有构造器或者枚举类型强化Singleton属性"><a href="#用私有构造器或者枚举类型强化Singleton属性" class="headerlink" title="用私有构造器或者枚举类型强化Singleton属性"></a>用私有构造器或者枚举类型强化Singleton属性</h3><p>  构造器私有，公开一个公共静态方法返回实例。</p>
 ]]></content>
   </entry>
   <entry>
@@ -104,6 +212,28 @@
       </tags>
   </entry>
   <entry>
+    <title>ArrayList和LinkedList对比</title>
+    <url>/posts/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>ArrayList ： 继承自List接口</li>
+<li>LinkedList ： 继承自List和Deque接口</li>
+</ul>
+<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><ul>
+<li>ArrayList ：底层用数组进行存储</li>
+<li>LinkedList ： 底层用双链表进行存储 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>ArrayList ： 访问速度快，插入和删除比较慢 ，需要移动元素</li>
+<li>LinkedList ： 访问比较慢，插入和删除比较快 ， 需要链式查询</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Collections类全解析</title>
+    <url>/posts/Collections%E7%B1%BB%E5%85%A8%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
     <title>HashMap全解析</title>
     <url>/posts/HashMap%E5%85%A8%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>HashMap实现了Map接口，继承自AbstactMap。其中Map接口定义了键映射到值的规则。<br>    public class HashMap&lt;K,V&gt;<br>    extends AbstractMap&lt;K,V&gt;<br>    implements Map&lt;K,V&gt;, Cloneable, Serializable<br>    <img src="../img/java.util.map%E7%B1%BB%E5%9B%BE.png"><br><em>注意</em><br>    * HashMap: 它根据键的hashCode值存储数据，大多数情况下可以直接定位到他的值，因此有很乖的访问速度，但是遍历的顺序是不确定的，HashMap最多只允许一条记录为null，允许多条记录的值为null，HashMap不是线程安全的，即任意时刻有多线程同时写HashMap可能会导致数据不一致问题。<br>    * HashTable: HashTable是遗留类，很多映射的功能和HashMap类似，但是他是继承自Dictionary类，并且是线程安全的，任何时间只有一个线程能写hashTable。<br>    * ConcurrentHashMap：<br>    * LinkedHashMap: 是HashMap的一个自雷，保存了插入顺序，在用iterator遍历LinkedHashMap时，先得到的肯定是新插入的，也可以在构造式带参数，按照访问次数进行排序。<br>    * TreeMap: TreeMap实现了SortMap接口，能够把保存的记录根据键排序，默认是按照键值升序排序，也可以指定排序的比较器，在使用TreeMap时，key必须实现Comparable接口或者在构造TreeMap传入自定义的Comparator，否则会在运行时抛出ClassCastExeption。</p>
@@ -156,128 +286,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>ArrayList原理</title>
-    <url>/posts/ArrayList%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
-<ul>
-<li>是否允许空：<br>允许</li>
-<li>是否允许重复数据：<br>允许</li>
-<li>是否有序：<br>是</li>
-<li>是否线程安全：<br>不是</li>
-</ul>
-<h2 id="默认大小-10"><a href="#默认大小-10" class="headerlink" title="默认大小 : 10"></a>默认大小 : 10</h2>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><ul>
-<li>根据下标删除。</li>
-<li>根据元素删除。<blockquote>
-<p>删除跟元素匹配的 <em>第一个</em> 元素</p>
-</blockquote>
-</li>
-</ul>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line"></span><br><span class="line">         numMoved);</span><br><span class="line"></span><br><span class="line">elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>1、把指定元素后面位置的所有元素，利用System.arraycopy方法整体向前移动一个位置</li>
-<li>2、最后一个位置的元素指定为null，这样让gc可以去回收它<blockquote>
-<p>因为删除的时候，需要将后面所有元素向前移动一个位置，所以删除的时候，很消耗性能。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><ul>
-<li>add(T t)</li>
-<li>add(int position,T t)<blockquote>
-<p>插入时候会将所有后面的元素向后移动一个位置，很消耗性能。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="ArrayList的优缺点"><a href="#ArrayList的优缺点" class="headerlink" title="ArrayList的优缺点"></a>ArrayList的优缺点</h2><ul>
-<li>底层以数组方式存储，是一种随机访问方式，并且实现了RandomAccess接口，因此查找十分快速。</li>
-<li>添加很方便，往数组的最后添加一个就行了。</li>
-<li>删除和添加的时候涉及到移动后面所有数据，性能消耗比较大。    </li>
-</ul>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
-<p>不是线程安全的，所有方法都没有Synchronized修饰，在并发情况下会出现安全问题。可以使用Collections.synchronizedList方式</p>
-</blockquote>
-<h2 id="为什么ArrayList的elementData是用transient修饰的？"><a href="#为什么ArrayList的elementData是用transient修饰的？" class="headerlink" title="为什么ArrayList的elementData是用transient修饰的？"></a>为什么ArrayList的elementData是用transient修饰的？</h2><blockquote>
-<p>private transient Object[] elementData;</p>
-</blockquote>
-<blockquote>
-<p>ArrayList 实现了Serializable接口，所以是可以序列化的。但是elementData不一定是满的，没必要全部序列化。所以ArrayList重写了writeObject方法实现，增快了序列化的速度，见笑了序列化后的大小：<br>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line"><span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line"><span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">s.defaultWriteObject();</span><br><span class="line">        <span class="comment">// Write out array length</span></span><br><span class="line">       s.writeInt(elementData.length);</span><br><span class="line">    <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++)</span><br><span class="line">           s.writeObject(elementData[i]);</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    </p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>EffectiveJava读书笔记</title>
-    <url>/posts/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>#EffectiveJava 读书笔记</p>
-<p>本文于2017年10月26日再读一遍，对书中的内容进行整理提取，方便以后查阅</p>
-<p>[TOC]</p>
-<h2 id="第一章：创建和销毁对象"><a href="#第一章：创建和销毁对象" class="headerlink" title="第一章：创建和销毁对象"></a>第一章：创建和销毁对象</h2><h3 id="创建对象的方法"><a href="#创建对象的方法" class="headerlink" title="创建对象的方法"></a>创建对象的方法</h3><ul>
-<li>构造器方法new一个；</li>
-<li>公共静态方法返回实例；</li>
-<li>Build工程模式。<blockquote>
-<p>一般来说创建对象最简单的方法就是使用的时候new一个，如Person  person = new Person();既通过构造器创建对象。这种使用方法不适用于所有情况，例如一个单例工具类，不需要每次使用都new，而是通过一个公共静态方法返回类的实例。</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="构造器方式"><a href="#构造器方式" class="headerlink" title="构造器方式"></a>构造器方式</h4><p>  <em>缺点</em></p>
-<blockquote>
-<p>每一个构造器都与类名相同，无法知其寓意。</p>
-</blockquote>
-<p>  构造器方法时最常用的方法；</p>
-<h4 id="公共静态方法"><a href="#公共静态方法" class="headerlink" title="公共静态方法"></a>公共静态方法</h4><p>  <em>优点1</em></p>
-<blockquote>
-<p>每一个公共静态方法都有名字，顾名思义。</p>
-</blockquote>
-<p>  <em>优点2</em></p>
-<blockquote>
-<p>不必为每次调用都产生一个新的实例，可以重复利用。</p>
-</blockquote>
-<p>  <em>优点3</em></p>
-<blockquote>
-<p>可以返回原返回类型的任何子类型对象。</p>
-</blockquote>
-<p>  <em>优点3</em></p>
-<blockquote>
-<p>创建参数化类型实例，使代码变得更简洁。</p>
-</blockquote>
-<p>  <em>缺点1</em></p>
-<blockquote>
-<p>类如果不含有共有的或者受保护的构造器，就不能被子类化。</p>
-</blockquote>
-<p>  <em>缺点2</em></p>
-<blockquote>
-<p>与其他静态方法没有任何区别。</p>
-</blockquote>
-<h4 id="使用情景1-通过方法名知其方法作用"><a href="#使用情景1-通过方法名知其方法作用" class="headerlink" title="使用情景1 通过方法名知其方法作用"></a>使用情景1 通过方法名知其方法作用</h4><p>  如BigInteger(int,int,Random)返回的BitInteger可能为素数，但如果用BigInteger.probablePrime静态方法来表示，更加清楚方法寓意。</p>
-<p>  如果两个构造器方法中只是参数类型顺序上不同，很容易造成寓意混乱，需要进一步查询文档才能确定用哪一个，容错率很低。</p>
-<h4 id="使用场景2-使用预先定义好的实例。"><a href="#使用场景2-使用预先定义好的实例。" class="headerlink" title="使用场景2 使用预先定义好的实例。"></a>使用场景2 使用预先定义好的实例。</h4><p>  公共静态方法返回的实例可以控制是否是单例,或者控制是否可以实例化。</p>
-<ul>
-<li>getInstance和newInstance区别：<blockquote>
-<p>getInstance方法重点是返回已经创建好的实例。<br>newInstance方法重点是返回一个新的实例。</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="使用场景3-Collections的32个便利实现、通过适配器提供更丰富的服务接口"><a href="#使用场景3-Collections的32个便利实现、通过适配器提供更丰富的服务接口" class="headerlink" title="使用场景3 Collections的32个便利实现、通过适配器提供更丰富的服务接口"></a>使用场景3 Collections的32个便利实现、通过适配器提供更丰富的服务接口</h4><p>  分别提供了不可修改的集合、同步集合等。<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Service interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Service provider interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Provider</span></span>&#123;</span><br><span class="line">  <span class="function">Service <span class="title">newService</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Services</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Services</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String,Provider&gt; providers = <span class="keyword">new</span> ConcurrentHashMap&lt;String,Provider&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PROVIDER_NAME = <span class="string">&quot;&lt;def&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerDefaultProvider</span><span class="params">(Provider p)</span></span>&#123;</span><br><span class="line">    registerProvider(DEFAULT_PROVIDER_NAME,p););</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerProvider</span><span class="params">(String name,Provider p)</span></span>&#123;</span><br><span class="line">    providers.put(name,p);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> newInstance(DEFAULT_PROVIDER_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">    Provider p = provider.get(name);</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;No provider registered with name:&quot;</span>+ name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p.newService();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="使用场景4-代替繁琐的参数声明。"><a href="#使用场景4-代替繁琐的参数声明。" class="headerlink" title="使用场景4  代替繁琐的参数声明。"></a>使用场景4  代替繁琐的参数声明。</h4><h4 id="使用场景6"><a href="#使用场景6" class="headerlink" title="使用场景6"></a>使用场景6</h4><p>  valueOf – 返回的实例与参数具有相同的值，实际上是类型转换方法。<br>  of  – valueOf的简洁替代。<br>  getInstance  – 返回的实例是通过方法的参数来描述的，但是不能说与参数有相同的值。对于Singleton来说，该方法没有参数。<br>  newInstance  – 跟getInstance一样，但是该方法确保返回的实例与其他实例不同。<br>  getType  – 跟getInstance一样，但是在工厂方法中处于不同的类中的时候使用，Type表示工厂方法锁返回的对象类型。<br>  newType  – 像newInstance一样，但是在工厂方法中处于不同的类中的时候使用。</p>
-<h3 id="构建器"><a href="#构建器" class="headerlink" title="构建器"></a>构建器</h3><p>  静态工厂和构造器都有个局限性，都不能很好的扩展到大量的可选参数。<br>  参数量大的情况下通常有两种方法：</p>
-<ul>
-<li><p>重叠构造器</p>
-<blockquote>
-<p>可行，但很难编写，难以阅读。</p>
-</blockquote>
-</li>
-<li><p><em>工厂模式</em></p>
-<blockquote>
-<p>build构造参数很简单明了，链式调用很少出错。<br>  但是在构造Bean的时候，可能出现不一致的状态，类无法仅仅通过构造器参数的有效性来保证一致性。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="用私有构造器或者枚举类型强化Singleton属性"><a href="#用私有构造器或者枚举类型强化Singleton属性" class="headerlink" title="用私有构造器或者枚举类型强化Singleton属性"></a>用私有构造器或者枚举类型强化Singleton属性</h3><p>  构造器私有，公开一个公共静态方法返回实例。</p>
+    <title>JDK1.5-JDK1.8各个新特性</title>
+    <url>/posts/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="https://juejin.im/entry/5ab860ce5188255587238a36?utm_source=gold_browser_extension">转载来源</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -330,17 +341,6 @@
     <title>JVM调优</title>
     <url>/posts/JVM%E8%B0%83%E4%BC%98/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
-  </entry>
-  <entry>
-    <title>Collections类全解析</title>
-    <url>/posts/Collections%E7%B1%BB%E5%85%A8%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
-  </entry>
-  <entry>
-    <title>JDK1.5-JDK1.8各个新特性</title>
-    <url>/posts/JDK1-5-JDK1-8%E5%90%84%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="https://juejin.im/entry/5ab860ce5188255587238a36?utm_source=gold_browser_extension">转载来源</a></p>
-]]></content>
   </entry>
   <entry>
     <title>Mysql内连接、左外连接、右外连接、全连接</title>
@@ -412,6 +412,30 @@
 ]]></content>
   </entry>
   <entry>
+    <title>RPC通俗解释</title>
+    <url>/posts/RPC%E9%80%9A%E4%BF%97%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="RPC通俗解释"><a href="#RPC通俗解释" class="headerlink" title="RPC通俗解释"></a>RPC通俗解释</h1><h2 id="IPC和RPC"><a href="#IPC和RPC" class="headerlink" title="IPC和RPC"></a>IPC和RPC</h2><p>早些时间，一个电脑中多个线程互相独立，A线程和B线程都想用发送邮件功能，就需要开发两份代码，所以就有了一个协议是：IPC（Inter-process-communication）进行进程间通信，这样就可以在A中开发一个发送邮件的代码，B进程调用A进程代码就行了。<br>同比，现在的程序员们，为了方便调用其他电脑中的代码，研究出来RPC（Remote Procedure Call Protocol）；</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Mysql索引B+树</title>
+    <url>/posts/Mysql%E7%B4%A2%E5%BC%95B-%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://blog.jobbole.com/111757/">看这篇文章讲的很好</a></p>
+<h2 id="B-树（Balance-Tree）"><a href="#B-树（Balance-Tree）" class="headerlink" title="B - 树（Balance Tree）"></a>B - 树（Balance Tree）</h2><pre><code>二叉查找树的时间复杂度是O(log(n)) 已经够快了，但是二叉查找树的查找速度取决于树的高度。
+B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决于磁盘页的大小。
+</code></pre>
+<h3 id="一个-m-阶的-B-树具有如下几个特征"><a href="#一个-m-阶的-B-树具有如下几个特征" class="headerlink" title="一个 m 阶的 B 树具有如下几个特征"></a>一个 m 阶的 B 树具有如下几个特征</h3><ul>
+<li>根节点至少有两个子女。 </li>
+<li>每个中间节点包含k-1个元素和k个孩子，其中m/2 &lt;= k &lt;= m</li>
+<li>每个叶子节点都包含k-1个元素，其中 m/2 &lt;= k &lt;=m</li>
+<li>所有叶子节点都位于同一层</li>
+<li>每个节点中的元素从小到大排列，节点当中 k-1 个元素正好是 k 个孩子包含的元素的值域分划。</li>
+</ul>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>   在b-树基础上进行改造，将索引全部建在叶子节点上，非叶子节点指向叶子节点的大小。</p>
+<p>   <a href="http://blog.jobbole.com/105644/">看这篇文章</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Mysql索引</title>
     <url>/posts/Mysql%E7%B4%A2%E5%BC%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
@@ -440,12 +464,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RPC通俗解释</title>
-    <url>/posts/RPC%E9%80%9A%E4%BF%97%E8%A7%A3%E9%87%8A/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="RPC通俗解释"><a href="#RPC通俗解释" class="headerlink" title="RPC通俗解释"></a>RPC通俗解释</h1><h2 id="IPC和RPC"><a href="#IPC和RPC" class="headerlink" title="IPC和RPC"></a>IPC和RPC</h2><p>早些时间，一个电脑中多个线程互相独立，A线程和B线程都想用发送邮件功能，就需要开发两份代码，所以就有了一个协议是：IPC（Inter-process-communication）进行进程间通信，这样就可以在A中开发一个发送邮件的代码，B进程调用A进程代码就行了。<br>同比，现在的程序员们，为了方便调用其他电脑中的代码，研究出来RPC（Remote Procedure Call Protocol）；</p>
-]]></content>
-  </entry>
-  <entry>
     <title>RabbitMQ结合Aop实现高并发Log记录</title>
     <url>/posts/RabbitMQ%E7%BB%93%E5%90%88Aop%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91Log%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><ul>
@@ -459,156 +477,6 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>跟随大神学习SpringCloud的时候，在使用docker部署时，遇到了提供者注册不到eureka上去，<a href="http://blog.csdn.net/forezp/article/details/70198649#reply">教程地址在此</a></p>
 <p>之后我搜了下docker进程间通信找到了一个<strong>解决办法</strong>：</p>
 <p>我弄了一整天也是一直注册不进去，后来又搜了搜docker进程间通信，发现一个方法，<br>eureka-server部署的时候给一个名字： docker run –name eureka-server -p 8761:8761<br>server-hi中部署使用link参数 docker run –link eureka-server（server部署时赋予的名字）:eureka-server(配置中写的地址) ……<br>注册不进去的可以试试。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Mysql索引B+树</title>
-    <url>/posts/Mysql%E7%B4%A2%E5%BC%95B-%E6%A0%91/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://blog.jobbole.com/111757/">看这篇文章讲的很好</a></p>
-<h2 id="B-树（Balance-Tree）"><a href="#B-树（Balance-Tree）" class="headerlink" title="B - 树（Balance Tree）"></a>B - 树（Balance Tree）</h2><pre><code>二叉查找树的时间复杂度是O(log(n)) 已经够快了，但是二叉查找树的查找速度取决于树的高度。
-B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决于磁盘页的大小。
-</code></pre>
-<h3 id="一个-m-阶的-B-树具有如下几个特征"><a href="#一个-m-阶的-B-树具有如下几个特征" class="headerlink" title="一个 m 阶的 B 树具有如下几个特征"></a>一个 m 阶的 B 树具有如下几个特征</h3><ul>
-<li>根节点至少有两个子女。 </li>
-<li>每个中间节点包含k-1个元素和k个孩子，其中m/2 &lt;= k &lt;= m</li>
-<li>每个叶子节点都包含k-1个元素，其中 m/2 &lt;= k &lt;=m</li>
-<li>所有叶子节点都位于同一层</li>
-<li>每个节点中的元素从小到大排列，节点当中 k-1 个元素正好是 k 个孩子包含的元素的值域分划。</li>
-</ul>
-<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>   在b-树基础上进行改造，将索引全部建在叶子节点上，非叶子节点指向叶子节点的大小。</p>
-<p>   <a href="http://blog.jobbole.com/105644/">看这篇文章</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>SpringCloud学习1EurekaServer</title>
-    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="创建EurekaServer"><a href="#创建EurekaServer" class="headerlink" title="创建EurekaServer"></a>创建EurekaServer</h2><h3 id="Idea初始化项目"><a href="#Idea初始化项目" class="headerlink" title="Idea初始化项目"></a>Idea初始化项目</h3><ul>
-<li>选择cloud discovery-&gt;eureka server 。</li>
-</ul>
-<h3 id="创建启动类"><a href="#创建启动类" class="headerlink" title="创建启动类"></a>创建启动类</h3><ul>
-<li>@EnableEurekaServer</li>
-</ul>
-<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code>server:
-  port: 8761
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
-      
-      
-      
-</code></pre>
-<h2 id="创建EurekaClient"><a href="#创建EurekaClient" class="headerlink" title="创建EurekaClient"></a>创建EurekaClient</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><ul>
-<li>通server</li>
-</ul>
-<h3 id="创阿金启动类"><a href="#创阿金启动类" class="headerlink" title="创阿金启动类"></a>创阿金启动类</h3><ul>
-<li>@EnableEurekaClient</li>
-</ul>
-<h3 id="配置参数-1"><a href="#配置参数-1" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code> eureka:
-   client:
-     serviceUrl:
-       defaultZone: http://localhost:8761/eureka/
- server:
-   port: 8762
- spring:
-   application:
-     name: service-hi    
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>SpringCloud学习3服务消费者feign</title>
-    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A03%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85feign/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="使用feign"><a href="#使用feign" class="headerlink" title="使用feign"></a>使用feign</h3><p>spring-cloud-starter-eureka<br>spring-cloud-starter-feign<br>spring-boot-starter-web<br>spring-boot-starter-test</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>eureka:<br>  client:<br>    serviceUrl:<br>      defaultZone: <a href="http://localhost:8761/eureka/">http://localhost:8761/eureka/</a><br>server:<br>  port: 8765<br>spring:<br>  application:<br>    name: service-feign</p>
-<h3 id="开启feign"><a href="#开启feign" class="headerlink" title="开启feign"></a>开启feign</h3><ul>
-<li>在程序的入口类，需要通过注解 @EnableFeignClients 来开启 feign:<h3 id="调用服务"><a href="#调用服务" class="headerlink" title="调用服务"></a>调用服务</h3></li>
-<li>定义一个 feign 接口类, 通过 @ FeignClient（“服务名”），来指定调用哪个服务：</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>SpringCloud学习4断路器（Hystrix）</title>
-    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A04%E6%96%AD%E8%B7%AF%E5%99%A8%EF%BC%88Hystrix%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在微服务架构中，我们将业务拆分成一个个的服务，服务与服务之间可以相互调用（RPC）。为了保证其高可用，单个服务又必须集群部署。由于网络原因或者自身的原因，服务并不能保证服务的 100% 可用，如果单个服务出现问题，调用这个服务就会出现网络延迟，此时若有大量的网络涌入，会形成任务累计，导致服务瘫痪，甚至导致服务 “雪崩”。<br>为了解决这个问题，就出现断路器模型。</p>
-<h3 id="断路器简介"><a href="#断路器简介" class="headerlink" title="断路器简介"></a>断路器简介</h3><ul>
-<li>Netflix 已经创建了一个名为 Hystrix 的库来实现断路器模式。 在微服务架构中，多层服务调用是非常常见的。</li>
-<li>较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用达到一个阀值（hystric 是 5 秒 20 次） 断路器将会被打开。</li>
-<li>断路打开后，可用避免连锁故障，fallback 方法可以直接返回一个固定值。</li>
-</ul>
-<h3 id="在-ribbon-使用断路器"><a href="#在-ribbon-使用断路器" class="headerlink" title="在 ribbon 使用断路器"></a>在 ribbon 使用断路器</h3><ul>
-<li>改造 serice-ribbon 工程的代码：在 pox.xml 文件中加入：</li>
-</ul>
-<pre><code>&lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
-&lt;/dependency&gt; 
-</code></pre>
-<ul>
-<li>在程序的入口类加 @EnableHystrix：   </li>
-<li>改造 HelloService 类，加上 @HystrixCommand，并指定 fallbackMethod 方法。</li>
-</ul>
-<h3 id="Feign-中使用断路器"><a href="#Feign-中使用断路器" class="headerlink" title="Feign 中使用断路器"></a>Feign 中使用断路器</h3><ul>
-<li>如果你使用了 feign，feign 是自带断路器的，并且是已经打开了。如果使用 feign 不想用断路器的话，可以在配置文件中关闭它，配置如下：feign.hystrix.enabled=false</li>
-</ul>
-<h3 id="Circuit-Breaker-Hystrix-Dashboard-断路器：hystrix-仪表盘"><a href="#Circuit-Breaker-Hystrix-Dashboard-断路器：hystrix-仪表盘" class="headerlink" title="Circuit Breaker: Hystrix Dashboard (断路器：hystrix 仪表盘)"></a>Circuit Breaker: Hystrix Dashboard (断路器：hystrix 仪表盘)</h3><ul>
-<li>基于 service-ribbon 改造下：pom.xml 加入：</li>
-</ul>
-<pre><code>&lt;dependency&gt;
-             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-             &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-         &lt;/dependency&gt;
- 
-         &lt;dependency&gt;
-             &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-             &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
-         &lt;/dependency&gt;        
-</code></pre>
-<h3 id="在主程序入口中加入-EnableHystrixDashboard-注解，开启-hystrixDashboard："><a href="#在主程序入口中加入-EnableHystrixDashboard-注解，开启-hystrixDashboard：" class="headerlink" title="在主程序入口中加入 @EnableHystrixDashboard 注解，开启 hystrixDashboard："></a>在主程序入口中加入 @EnableHystrixDashboard 注解，开启 hystrixDashboard：</h3><pre><code>  该仪表盘可以查看错误率
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>SpringCloud学习5路由网关(zuul)</title>
-    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A05%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3-zuul/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在微服务架构中，需要几个关键的组件，服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个组件可以组建一个简单的微服务架构，如下图：</p>
-<p><img src="img/%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3.png" alt="image"></p>
-<p>注意：A 服务和 B 服务是可以相互调用的，作图的时候忘记了。并且配置服务也是注册到服务注册中心的。</p>
-<p>客户端的请求首先经过负载均衡（zuul、Ngnix），再到达服务网关（zuul 集群），然后再到具体的服务，服务统一注册到高可用的服务注册中心集群，服务的所有的配置文件由配置服务管理（下一篇文章讲述），配置服务的配置文件放在 Git 仓库，方便开发人员随时改配置。</p>
-<p>一、Zuul 简介</p>
-<p>Zuul 的主要功能是路由和过滤器。路由功能是微服务的一部分，比如／api/user 映射到 user 服务，/api/shop 映射到 shop 服务。zuul 实现了负载均衡。</p>
-<p>zuul 有以下功能：</p>
-<p>Authentication<br>Insights<br>Stress Testing<br>Canary Testing<br>Dynamic Routing<br>Service Migration<br>Load Shedding<br>Security<br>Static Response handling<br>Active/Active traffic management</p>
-<p>二、准备工作</p>
-<p>继续使用上一节的工程。在原有的工程上，创建一个新的工程。</p>
-<p>三、创建 service-zuul 工程</p>
-<pre><code> &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    
-</code></pre>
-<p>在其入口 applicaton 类加上注解 @EnableZuulProxy，开启 zuul：</p>
-<p>filterType：返回一个字符串代表过滤器的类型，在 zuul 中定义了四种不同生命周期的过滤器类型，具体如下：<br>pre：路由之前<br>routing：路由之时<br>post： 路由之后<br>error：发送错误调用<br>filterOrder：过滤的顺序<br>shouldFilter：这里可以写逻辑判断，是否要过滤，本文 true, 永远过滤。<br>run：过滤器的具体逻辑。可用很复杂，包括查 sql，nosql 去判断该请求到底有没有权限访问。        </p>
 ]]></content>
   </entry>
   <entry>
@@ -659,6 +527,97 @@ eureka:
 <li>在工程的启动类中, 通过 @EnableDiscoveryClient 向服务中心注册；   </li>
 </ul>
 <h3 id="架构如下"><a href="#架构如下" class="headerlink" title="架构如下"></a>架构如下</h3><p>   <img src="img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="image">      </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringCloud学习3服务消费者feign</title>
+    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A03%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85feign/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="使用feign"><a href="#使用feign" class="headerlink" title="使用feign"></a>使用feign</h3><p>spring-cloud-starter-eureka<br>spring-cloud-starter-feign<br>spring-boot-starter-web<br>spring-boot-starter-test</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>eureka:<br>  client:<br>    serviceUrl:<br>      defaultZone: <a href="http://localhost:8761/eureka/">http://localhost:8761/eureka/</a><br>server:<br>  port: 8765<br>spring:<br>  application:<br>    name: service-feign</p>
+<h3 id="开启feign"><a href="#开启feign" class="headerlink" title="开启feign"></a>开启feign</h3><ul>
+<li>在程序的入口类，需要通过注解 @EnableFeignClients 来开启 feign:<h3 id="调用服务"><a href="#调用服务" class="headerlink" title="调用服务"></a>调用服务</h3></li>
+<li>定义一个 feign 接口类, 通过 @ FeignClient（“服务名”），来指定调用哪个服务：</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringCloud学习1EurekaServer</title>
+    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="创建EurekaServer"><a href="#创建EurekaServer" class="headerlink" title="创建EurekaServer"></a>创建EurekaServer</h2><h3 id="Idea初始化项目"><a href="#Idea初始化项目" class="headerlink" title="Idea初始化项目"></a>Idea初始化项目</h3><ul>
+<li>选择cloud discovery-&gt;eureka server 。</li>
+</ul>
+<h3 id="创建启动类"><a href="#创建启动类" class="headerlink" title="创建启动类"></a>创建启动类</h3><ul>
+<li>@EnableEurekaServer</li>
+</ul>
+<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code>server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
+      
+      
+      
+</code></pre>
+<h2 id="创建EurekaClient"><a href="#创建EurekaClient" class="headerlink" title="创建EurekaClient"></a>创建EurekaClient</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><ul>
+<li>通server</li>
+</ul>
+<h3 id="创阿金启动类"><a href="#创阿金启动类" class="headerlink" title="创阿金启动类"></a>创阿金启动类</h3><ul>
+<li>@EnableEurekaClient</li>
+</ul>
+<h3 id="配置参数-1"><a href="#配置参数-1" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code> eureka:
+   client:
+     serviceUrl:
+       defaultZone: http://localhost:8761/eureka/
+ server:
+   port: 8762
+ spring:
+   application:
+     name: service-hi    
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringCloud学习5路由网关(zuul)</title>
+    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A05%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3-zuul/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在微服务架构中，需要几个关键的组件，服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个组件可以组建一个简单的微服务架构，如下图：</p>
+<p><img src="img/%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3.png" alt="image"></p>
+<p>注意：A 服务和 B 服务是可以相互调用的，作图的时候忘记了。并且配置服务也是注册到服务注册中心的。</p>
+<p>客户端的请求首先经过负载均衡（zuul、Ngnix），再到达服务网关（zuul 集群），然后再到具体的服务，服务统一注册到高可用的服务注册中心集群，服务的所有的配置文件由配置服务管理（下一篇文章讲述），配置服务的配置文件放在 Git 仓库，方便开发人员随时改配置。</p>
+<p>一、Zuul 简介</p>
+<p>Zuul 的主要功能是路由和过滤器。路由功能是微服务的一部分，比如／api/user 映射到 user 服务，/api/shop 映射到 shop 服务。zuul 实现了负载均衡。</p>
+<p>zuul 有以下功能：</p>
+<p>Authentication<br>Insights<br>Stress Testing<br>Canary Testing<br>Dynamic Routing<br>Service Migration<br>Load Shedding<br>Security<br>Static Response handling<br>Active/Active traffic management</p>
+<p>二、准备工作</p>
+<p>继续使用上一节的工程。在原有的工程上，创建一个新的工程。</p>
+<p>三、创建 service-zuul 工程</p>
+<pre><code> &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    
+</code></pre>
+<p>在其入口 applicaton 类加上注解 @EnableZuulProxy，开启 zuul：</p>
+<p>filterType：返回一个字符串代表过滤器的类型，在 zuul 中定义了四种不同生命周期的过滤器类型，具体如下：<br>pre：路由之前<br>routing：路由之时<br>post： 路由之后<br>error：发送错误调用<br>filterOrder：过滤的顺序<br>shouldFilter：这里可以写逻辑判断，是否要过滤，本文 true, 永远过滤。<br>run：过滤器的具体逻辑。可用很复杂，包括查 sql，nosql 去判断该请求到底有没有权限访问。        </p>
 ]]></content>
   </entry>
   <entry>
@@ -754,6 +713,47 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
+    <title>SpringCloud学习4断路器（Hystrix）</title>
+    <url>/posts/SpringCloud%E5%AD%A6%E4%B9%A04%E6%96%AD%E8%B7%AF%E5%99%A8%EF%BC%88Hystrix%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在微服务架构中，我们将业务拆分成一个个的服务，服务与服务之间可以相互调用（RPC）。为了保证其高可用，单个服务又必须集群部署。由于网络原因或者自身的原因，服务并不能保证服务的 100% 可用，如果单个服务出现问题，调用这个服务就会出现网络延迟，此时若有大量的网络涌入，会形成任务累计，导致服务瘫痪，甚至导致服务 “雪崩”。<br>为了解决这个问题，就出现断路器模型。</p>
+<h3 id="断路器简介"><a href="#断路器简介" class="headerlink" title="断路器简介"></a>断路器简介</h3><ul>
+<li>Netflix 已经创建了一个名为 Hystrix 的库来实现断路器模式。 在微服务架构中，多层服务调用是非常常见的。</li>
+<li>较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用达到一个阀值（hystric 是 5 秒 20 次） 断路器将会被打开。</li>
+<li>断路打开后，可用避免连锁故障，fallback 方法可以直接返回一个固定值。</li>
+</ul>
+<h3 id="在-ribbon-使用断路器"><a href="#在-ribbon-使用断路器" class="headerlink" title="在 ribbon 使用断路器"></a>在 ribbon 使用断路器</h3><ul>
+<li>改造 serice-ribbon 工程的代码：在 pox.xml 文件中加入：</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt; 
+</code></pre>
+<ul>
+<li>在程序的入口类加 @EnableHystrix：   </li>
+<li>改造 HelloService 类，加上 @HystrixCommand，并指定 fallbackMethod 方法。</li>
+</ul>
+<h3 id="Feign-中使用断路器"><a href="#Feign-中使用断路器" class="headerlink" title="Feign 中使用断路器"></a>Feign 中使用断路器</h3><ul>
+<li>如果你使用了 feign，feign 是自带断路器的，并且是已经打开了。如果使用 feign 不想用断路器的话，可以在配置文件中关闭它，配置如下：feign.hystrix.enabled=false</li>
+</ul>
+<h3 id="Circuit-Breaker-Hystrix-Dashboard-断路器：hystrix-仪表盘"><a href="#Circuit-Breaker-Hystrix-Dashboard-断路器：hystrix-仪表盘" class="headerlink" title="Circuit Breaker: Hystrix Dashboard (断路器：hystrix 仪表盘)"></a>Circuit Breaker: Hystrix Dashboard (断路器：hystrix 仪表盘)</h3><ul>
+<li>基于 service-ribbon 改造下：pom.xml 加入：</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+             &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+         &lt;/dependency&gt;
+ 
+         &lt;dependency&gt;
+             &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+             &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
+         &lt;/dependency&gt;        
+</code></pre>
+<h3 id="在主程序入口中加入-EnableHystrixDashboard-注解，开启-hystrixDashboard："><a href="#在主程序入口中加入-EnableHystrixDashboard-注解，开启-hystrixDashboard：" class="headerlink" title="在主程序入口中加入 @EnableHystrixDashboard 注解，开启 hystrixDashboard："></a>在主程序入口中加入 @EnableHystrixDashboard 注解，开启 hystrixDashboard：</h3><pre><code>  该仪表盘可以查看错误率
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>Spring中的事务管理</title>
     <url>/posts/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h2><ul>
@@ -843,7 +843,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <li>jdk7、8和6有什么不同： 7以上将常量池从perm区移到了heap中</li>
 <li>jdk7、8第一个程序中为什么一个是false，一个是true，<strong>jdk7以后常量去不仅仅可以保存对象，也可以保存对象的引用</strong>，所以s3的引用被保存到常量区中，s4直接在常量区找到了对象的引用，所以为true。</li>
 </ul>
-<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#97;&#114;&#x79;&#97;&#110;&#116;&#76;&#x65;&#101;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;">&#101;&#97;&#114;&#x79;&#97;&#110;&#116;&#76;&#x65;&#101;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a></p>
+<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#97;&#x72;&#x79;&#97;&#x6e;&#116;&#76;&#101;&#x65;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;">&#101;&#97;&#x72;&#x79;&#97;&#x6e;&#116;&#76;&#101;&#x65;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;</a></p>
 <p><a href="https://tech.meituan.com/in_depth_understanding_string_intern.html">参考一</a><br><a href="https://www.cnblogs.com/Kidezyq/p/8040338.html">参考二</a></p>
 ]]></content>
   </entry>
@@ -931,6 +931,99 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
+    <title>docker简单结合elk、logstash</title>
+    <url>/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="本文记录docker搭建elk，并简单结合logstash日志输出"><a href="#本文记录docker搭建elk，并简单结合logstash日志输出" class="headerlink" title="本文记录docker搭建elk，并简单结合logstash日志输出"></a>本文记录docker搭建elk，并简单结合logstash日志输出</h2><h3 id="filebeat"><a href="#filebeat" class="headerlink" title="filebeat"></a>filebeat</h3><blockquote>
+<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
+</blockquote>
+<ul>
+<li>filebeat.yml</li>
+</ul>
+<p><strong>enabled要改为true，filebeat默认为false</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>docker run -it –name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
+</blockquote>
+<h3 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
+<ul>
+<li>logstash.yml</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>logstash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker简单部署elk服务</title>
+    <url>/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="本文章记录自己通过docker搭建elk的过程"><a href="#本文章记录自己通过docker搭建elk的过程" class="headerlink" title="本文章记录自己通过docker搭建elk的过程"></a>本文章记录自己通过docker搭建elk的过程</h1><h2 id="docker下载镜像"><a href="#docker下载镜像" class="headerlink" title="docker下载镜像"></a>docker下载镜像</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="docker-至少分配3g内存"><a href="#docker-至少分配3g内存" class="headerlink" title="docker 至少分配3g内存"></a>docker 至少分配3g内存</h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
+<h2 id="设置最大运行线程数"><a href="#设置最大运行线程数" class="headerlink" title="设置最大运行线程数"></a>设置最大运行线程数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用docker toolbox方式 先进入虚拟机</p>
+<blockquote>
+<p>docker-machine ssh default</p>
+</blockquote>
+</li>
+<li><p>永久生效配置</p>
+<blockquote>
+<p>sudo vi /etc/sysctl.conf</p>
+</blockquote>
+<blockquote>
+<p>vm.max_map_count=262144</p>
+</blockquote>
+<blockquote>
+<p>sudo sysctl -p //生效</p>
+</blockquote>
+</li>
+<li><p>临时生效配置</p>
+<blockquote>
+<p>sysctl -w vm.max_map_count=262144</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动，并配置端口映射</p>
+<blockquote>
+<p>docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it –name elk sebp/elk</p>
+</blockquote>
+<h2 id="查看kibana"><a href="#查看kibana" class="headerlink" title="查看kibana"></a>查看kibana</h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
+<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><ol>
+<li>进入容器</li>
+</ol>
+<blockquote>
+<p>docker exec -it elk /bin/bash</p>
+</blockquote>
+<ol start="2">
+<li>配置logstash</li>
+</ol>
+<blockquote>
+<p>/opt/logstash/bin/logstash -e ‘input { stdin { } } output { elasticsearch { hosts =&gt; [“localhost”] } }’</p>
+</blockquote>
+<blockquote>
+<p><strong>注意</strong>：如果看到这样的报错信息 Logstash could not be started because there is already another instance using the configured data directory. If you wish to run multiple instances, you must change the “path.data” setting. 请执行命令：service logstash stop 然后在执行就可以了。</p>
+</blockquote>
+<blockquote>
+<p>当命令成功被执行后，看到：Successfully started Logstash API endpoint {:port=&gt;9600} 信息后，输入：test 然后回车，模拟一条日志进行测试。</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>打开浏览器，输入：<a href="http://192.168.99.100:9200/_search?pretty">http://192.168.99.100:9200/_search?pretty</a> ，就会看到我们刚刚输入的日志内容</li>
+<li>创建kibana与logstash关联</li>
+<li>index name or pattern 输入 logstash-*</li>
+<li>time-field name 输入 @timestamp</li>
+<li>create</li>
+<li>打开kibana首页即可看到刚刚输入的内容</li>
+</ol>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>elk</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java8新增功能</title>
     <url>/posts/java8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>[TOC]</p>
@@ -962,30 +1055,6 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Supplier&lt;Person&gt; personSupplier = Person:<span class="keyword">new</span>;</span><br><span class="line">personSupplier.get();</span><br></pre></td></tr></table></figure>
 ]]></content>
-  </entry>
-  <entry>
-    <title>docker简单结合elk、logstash</title>
-    <url>/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="本文记录docker搭建elk，并简单结合logstash日志输出"><a href="#本文记录docker搭建elk，并简单结合logstash日志输出" class="headerlink" title="本文记录docker搭建elk，并简单结合logstash日志输出"></a>本文记录docker搭建elk，并简单结合logstash日志输出</h2><h3 id="filebeat"><a href="#filebeat" class="headerlink" title="filebeat"></a>filebeat</h3><blockquote>
-<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
-</blockquote>
-<ul>
-<li>filebeat.yml</li>
-</ul>
-<p><strong>enabled要改为true，filebeat默认为false</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>docker run -it –name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
-</blockquote>
-<h3 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
-<ul>
-<li>logstash.yml</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>logstash</tag>
-      </tags>
   </entry>
   <entry>
     <title>java8新特性</title>
@@ -1167,79 +1236,25 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       </tags>
   </entry>
   <entry>
-    <title>docker简单部署elk服务</title>
-    <url>/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="本文章记录自己通过docker搭建elk的过程"><a href="#本文章记录自己通过docker搭建elk的过程" class="headerlink" title="本文章记录自己通过docker搭建elk的过程"></a>本文章记录自己通过docker搭建elk的过程</h1><h2 id="docker下载镜像"><a href="#docker下载镜像" class="headerlink" title="docker下载镜像"></a>docker下载镜像</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
-
-<h2 id="docker-至少分配3g内存"><a href="#docker-至少分配3g内存" class="headerlink" title="docker 至少分配3g内存"></a>docker 至少分配3g内存</h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
-<h2 id="设置最大运行线程数"><a href="#设置最大运行线程数" class="headerlink" title="设置最大运行线程数"></a>设置最大运行线程数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用docker toolbox方式 先进入虚拟机</p>
-<blockquote>
-<p>docker-machine ssh default</p>
-</blockquote>
-</li>
-<li><p>永久生效配置</p>
-<blockquote>
-<p>sudo vi /etc/sysctl.conf</p>
-</blockquote>
-<blockquote>
-<p>vm.max_map_count=262144</p>
-</blockquote>
-<blockquote>
-<p>sudo sysctl -p //生效</p>
-</blockquote>
-</li>
-<li><p>临时生效配置</p>
-<blockquote>
-<p>sysctl -w vm.max_map_count=262144</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动，并配置端口映射</p>
-<blockquote>
-<p>docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it –name elk sebp/elk</p>
-</blockquote>
-<h2 id="查看kibana"><a href="#查看kibana" class="headerlink" title="查看kibana"></a>查看kibana</h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
-<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><ol>
-<li>进入容器</li>
-</ol>
-<blockquote>
-<p>docker exec -it elk /bin/bash</p>
-</blockquote>
-<ol start="2">
-<li>配置logstash</li>
-</ol>
-<blockquote>
-<p>/opt/logstash/bin/logstash -e ‘input { stdin { } } output { elasticsearch { hosts =&gt; [“localhost”] } }’</p>
-</blockquote>
-<blockquote>
-<p><strong>注意</strong>：如果看到这样的报错信息 Logstash could not be started because there is already another instance using the configured data directory. If you wish to run multiple instances, you must change the “path.data” setting. 请执行命令：service logstash stop 然后在执行就可以了。</p>
-</blockquote>
-<blockquote>
-<p>当命令成功被执行后，看到：Successfully started Logstash API endpoint {:port=&gt;9600} 信息后，输入：test 然后回车，模拟一条日志进行测试。</p>
-</blockquote>
-<blockquote>
-<ol>
-<li>打开浏览器，输入：<a href="http://192.168.99.100:9200/_search?pretty">http://192.168.99.100:9200/_search?pretty</a> ，就会看到我们刚刚输入的日志内容</li>
-<li>创建kibana与logstash关联</li>
-<li>index name or pattern 输入 logstash-*</li>
-<li>time-field name 输入 @timestamp</li>
-<li>create</li>
-<li>打开kibana首页即可看到刚刚输入的内容</li>
-</ol>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>elk</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java内存模型</title>
     <url>/posts/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://ifeve.com/jmm-faq/">参考</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>java单例的七种写法</title>
+    <url>/posts/java%E5%8D%95%E4%BE%8B%E7%9A%84%E4%B8%83%E7%A7%8D%E5%86%99%E6%B3%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="懒汉"><a href="#懒汉" class="headerlink" title="懒汉"></a>懒汉</h1><h2 id="线程不安全"><a href="#线程不安全" class="headerlink" title="线程不安全"></a>线程不安全</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">       <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">           instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">       &#125;  </span><br><span class="line">     <span class="keyword">return</span> instance;  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">      instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> instance;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h1 id="饿汉"><a href="#饿汉" class="headerlink" title="饿汉"></a>饿汉</h1>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">return</span> instance;  </span><br><span class="line"> &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="饿汉变种"><a href="#饿汉变种" class="headerlink" title="饿汉变种"></a>饿汉变种</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;  </span><br><span class="line">  <span class="keyword">static</span> &#123;  </span><br><span class="line">  instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.instance;  </span><br><span class="line">  &#125;  </span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">      &#125;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">          <span class="keyword">return</span> SingletonHolder.INSTANCE;  </span><br><span class="line">      &#125;  </span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     INSTANCE;  </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="双重校验锁"><a href="#双重校验锁" class="headerlink" title="双重校验锁"></a>双重校验锁</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">          <span class="keyword">synchronized</span> (Singleton.class) &#123;  </span><br><span class="line">          <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">              singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">          &#125;  </span><br><span class="line">         &#125;  </span><br><span class="line">     &#125;  </span><br><span class="line">     <span class="keyword">return</span> singleton;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>java学习路线</title>
@@ -1263,56 +1278,6 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 </li>
 </ul>
 <h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><p><a href="https://www.zhihu.com/question/39890405/answer/83676977">在北京做Java开发如何月薪达到两万，需要技术水平达到什么程度？</a><br><a href="https://www.zhihu.com/question/40801731/answer/91814769">零基础应该选择学习 java、php、前端 还是 python？</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>java单例的七种写法</title>
-    <url>/posts/java%E5%8D%95%E4%BE%8B%E7%9A%84%E4%B8%83%E7%A7%8D%E5%86%99%E6%B3%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="懒汉"><a href="#懒汉" class="headerlink" title="懒汉"></a>懒汉</h1><h2 id="线程不安全"><a href="#线程不安全" class="headerlink" title="线程不安全"></a>线程不安全</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">       <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">           instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">       &#125;  </span><br><span class="line">     <span class="keyword">return</span> instance;  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">      instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> instance;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-
-<h1 id="饿汉"><a href="#饿汉" class="headerlink" title="饿汉"></a>饿汉</h1>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">return</span> instance;  </span><br><span class="line"> &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="饿汉变种"><a href="#饿汉变种" class="headerlink" title="饿汉变种"></a>饿汉变种</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;  </span><br><span class="line">  <span class="keyword">static</span> &#123;  </span><br><span class="line">  instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.instance;  </span><br><span class="line">  &#125;  </span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">      &#125;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">          <span class="keyword">return</span> SingletonHolder.INSTANCE;  </span><br><span class="line">      &#125;  </span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     INSTANCE;  </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
-
-<h2 id="双重校验锁"><a href="#双重校验锁" class="headerlink" title="双重校验锁"></a>双重校验锁</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">          <span class="keyword">synchronized</span> (Singleton.class) &#123;  </span><br><span class="line">          <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">              singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">          &#125;  </span><br><span class="line">         &#125;  </span><br><span class="line">     &#125;  </span><br><span class="line">     <span class="keyword">return</span> singleton;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>java类解析</title>
-    <url>/posts/java%E7%B1%BB%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h2><p>  一般占用两个机器码，在32位虚拟机中，一个机器码占用4个字节，就是32位，但是如果是数组，需要占用3个机器码，需要1位确认数组大小。</p>
-<ul>
-<li>标记字段<ul>
-<li>哈希码</li>
-<li>GC分代年龄</li>
-<li>锁状态标志</li>
-<li>线程持有的锁</li>
-<li>偏向线程ID</li>
-<li>偏向时间戳</li>
-</ul>
-</li>
-<li>类型指针</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>25bit</th>
-<th>4bit</th>
-<th>1bit</th>
-<th>2bit</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>对象的hashCode</td>
-<td>分代年龄</td>
-<td>是否是偏向锁</td>
-<td>锁标记位</td>
-</tr>
-</tbody></table>
-<p>  <img src="img/java%E5%AF%B9%E8%B1%A1%E5%A4%B4.jpg"></p>
 ]]></content>
   </entry>
   <entry>
@@ -1356,75 +1321,38 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
-    <title>java集合框架</title>
-    <url>/posts/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="顶级接口："><a href="#顶级接口：" class="headerlink" title="顶级接口："></a>顶级接口：</h2><ul>
-<li>Collection<br>  <img src="img/Collection%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
-<li>Map<br>  <img src="img/Map%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
-</ul>
-<h2 id="顶级类："><a href="#顶级类：" class="headerlink" title="顶级类："></a>顶级类：</h2><ul>
-<li>Collections</li>
-</ul>
-<h3 id="接口描述"><a href="#接口描述" class="headerlink" title="接口描述"></a>接口描述</h3><ul>
-<li>Collection ：  不提供直接子类继承，只提供继承的子接口（List和Set）<ul>
-<li><p>List : 有序的Collection，控制元素的插入位置，和通过索引访问List数据，允许相同的Key。</p>
+    <title>java类解析</title>
+    <url>/posts/java%E7%B1%BB%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h2><p>  一般占用两个机器码，在32位虚拟机中，一个机器码占用4个字节，就是32位，但是如果是数组，需要占用3个机器码，需要1位确认数组大小。</p>
 <ul>
-<li><p>Verctor</p>
-<ul>
-<li>Stack</li>
+<li>标记字段<ul>
+<li>哈希码</li>
+<li>GC分代年龄</li>
+<li>锁状态标志</li>
+<li>线程持有的锁</li>
+<li>偏向线程ID</li>
+<li>偏向时间戳</li>
 </ul>
 </li>
-<li><p>ArrayList</p>
-</li>
-<li><p>LinkedList( 也继承自 Deque)</p>
-</li>
-<li><p><a href="https://earyant.github.io/2017/09/10/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/">ArrayList和LinkedList对比</a></p>
-</li>
+<li>类型指针</li>
 </ul>
-</li>
-<li><p>Set ： 不保存重复数据</p>
-<ul>
-<li>HashSet<ul>
-<li>LinkedHashSet</li>
-</ul>
-</li>
-<li>SortedSet<ul>
-<li>TreeSet</li>
-</ul>
-</li>
-<li>EnumSet</li>
-</ul>
-</li>
-<li><p>Queue</p>
-<ul>
-<li>DeQue<ul>
-<li>LinkedList</li>
-</ul>
-</li>
-<li>PriorityQueue</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Map<ul>
-<li>EnumMap</li>
-<li>HashMap<ul>
-<li>LinkedHashMap</li>
-</ul>
-</li>
-<li>IdentityMap</li>
-<li>HashTable<ul>
-<li>Properties</li>
-</ul>
-</li>
-<li>SortedMap<ul>
-<li>TreeMap</li>
-</ul>
-</li>
-<li>WeakHashMap</li>
-</ul>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>25bit</th>
+<th>4bit</th>
+<th>1bit</th>
+<th>2bit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对象的hashCode</td>
+<td>分代年龄</td>
+<td>是否是偏向锁</td>
+<td>锁标记位</td>
+</tr>
+</tbody></table>
+<p>  <img src="img/java%E5%AF%B9%E8%B1%A1%E5%A4%B4.jpg"></p>
 ]]></content>
   </entry>
   <entry>
@@ -2584,21 +2512,76 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
-    <title>node8.0方法弃用解决办法</title>
-    <url>/posts/node8-0%E6%96%B9%E6%B3%95%E5%BC%83%E7%94%A8%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="刚升级node后发现报如下的错："><a href="#刚升级node后发现报如下的错：" class="headerlink" title="刚升级node后发现报如下的错："></a>刚升级node后发现报如下的错：</h3><ul>
-<li><p>(node:34880) [DEP0061] DeprecationWarning: fs.SyncWriteStream is deprecated.</p>
-<p>  node.js从8.0开始已经弃用了fs.SyncWriteStream方法，hexo中有一个hexo-fs插件，调用了这个方法，所以就会报错。</p>
+    <title>java集合框架</title>
+    <url>/posts/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="顶级接口："><a href="#顶级接口：" class="headerlink" title="顶级接口："></a>顶级接口：</h2><ul>
+<li>Collection<br>  <img src="img/Collection%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
+<li>Map<br>  <img src="img/Map%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
+</ul>
+<h2 id="顶级类："><a href="#顶级类：" class="headerlink" title="顶级类："></a>顶级类：</h2><ul>
+<li>Collections</li>
+</ul>
+<h3 id="接口描述"><a href="#接口描述" class="headerlink" title="接口描述"></a>接口描述</h3><ul>
+<li>Collection ：  不提供直接子类继承，只提供继承的子接口（List和Set）<ul>
+<li><p>List : 有序的Collection，控制元素的插入位置，和通过索引访问List数据，允许相同的Key。</p>
+<ul>
+<li><p>Verctor</p>
+<ul>
+<li>Stack</li>
+</ul>
+</li>
+<li><p>ArrayList</p>
+</li>
+<li><p>LinkedList( 也继承自 Deque)</p>
+</li>
+<li><p><a href="https://earyant.github.io/2017/09/10/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/">ArrayList和LinkedList对比</a></p>
 </li>
 </ul>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><ul>
-<li>npm install hexo-fs –save</li>
+</li>
+<li><p>Set ： 不保存重复数据</p>
+<ul>
+<li>HashSet<ul>
+<li>LinkedHashSet</li>
 </ul>
-<p>插件就更新了，问题就解决了。</p>
+</li>
+<li>SortedSet<ul>
+<li>TreeSet</li>
+</ul>
+</li>
+<li>EnumSet</li>
+</ul>
+</li>
+<li><p>Queue</p>
+<ul>
+<li>DeQue<ul>
+<li>LinkedList</li>
+</ul>
+</li>
+<li>PriorityQueue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map<ul>
+<li>EnumMap</li>
+<li>HashMap<ul>
+<li>LinkedHashMap</li>
+</ul>
+</li>
+<li>IdentityMap</li>
+<li>HashTable<ul>
+<li>Properties</li>
+</ul>
+</li>
+<li>SortedMap<ul>
+<li>TreeMap</li>
+</ul>
+</li>
+<li>WeakHashMap</li>
+</ul>
+</li>
+</ul>
 ]]></content>
-      <tags>
-        <tag>nodejs</tag>
-      </tags>
   </entry>
   <entry>
     <title>jvm系列</title>
@@ -2742,29 +2725,21 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
-    <title>springBot配置大全（转载）</title>
-    <url>/posts/springBot%E9%85%8D%E7%BD%AE%E5%A4%A7%E5%85%A8%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
-  </entry>
-  <entry>
-    <title>springcloud配置问题</title>
-    <url>/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><ul>
-<li>注册中心不自动上线下线</li>
-<li>异步返回值</li>
-<li>bean参数传值</li>
-<li></li>
+    <title>node8.0方法弃用解决办法</title>
+    <url>/posts/node8-0%E6%96%B9%E6%B3%95%E5%BC%83%E7%94%A8%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="刚升级node后发现报如下的错："><a href="#刚升级node后发现报如下的错：" class="headerlink" title="刚升级node后发现报如下的错："></a>刚升级node后发现报如下的错：</h3><ul>
+<li><p>(node:34880) [DEP0061] DeprecationWarning: fs.SyncWriteStream is deprecated.</p>
+<p>  node.js从8.0开始已经弃用了fs.SyncWriteStream方法，hexo中有一个hexo-fs插件，调用了这个方法，所以就会报错。</p>
+</li>
 </ul>
-<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
-<p>详见：<a href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
-<p>解决方法：设置enableSelfPreservation:false</p>
-<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
-<h3 id="负载均衡在服务下掉后的重试策略："><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><ul>
+<li>npm install hexo-fs –save</li>
+</ul>
+<p>插件就更新了，问题就解决了。</p>
 ]]></content>
+      <tags>
+        <tag>nodejs</tag>
+      </tags>
   </entry>
   <entry>
     <title>七大查找算法</title>
@@ -2812,6 +2787,31 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <h3 id="5-3-平衡查找树之红黑树（Red-Black-Tree）"><a href="#5-3-平衡查找树之红黑树（Red-Black-Tree）" class="headerlink" title="5.3 平衡查找树之红黑树（Red-Black Tree）"></a>5.3 平衡查找树之红黑树（Red-Black Tree）</h3><p>  2-3查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是2-node，树的高度为lgn，从而保证了最坏情况下的时间复杂度。但是2-3树实现起来比较复杂，于是就有了一种简单实现2-3树的数据结构，即红黑树（Red-Black Tree）。</p>
 <p>  基本思想：红黑树的思想就是对2-3查找树进行编码，尤其是对2-3查找树中的3-nodes节点添加额外的信息。红黑树中将节点之间的链接分为两种不同类型，红色链接，他用来链接两个2-nodes节点来表示一个3-nodes节点。黑色链接用来链接普通的2-3节点。特别的，使用红色链接的两个2-nodes来表示一个3-nodes节点，并且向左倾斜，即一个2-node是另一个2-node的左子节点。这种做法的好处是查找的时候不用做任何修改，和普通的二叉查找树相同。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>springcloud配置问题</title>
+    <url>/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><ul>
+<li>注册中心不自动上线下线</li>
+<li>异步返回值</li>
+<li>bean参数传值</li>
+<li></li>
+</ul>
+<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
+<p>详见：<a href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
+<p>解决方法：设置enableSelfPreservation:false</p>
+<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
+<h3 id="负载均衡在服务下掉后的重试策略："><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>springBot配置大全（转载）</title>
+    <url>/posts/springBot%E9%85%8D%E7%BD%AE%E5%A4%A7%E5%85%A8%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
   </entry>
   <entry>
     <title>从敲下www.baidu.com到浏览器显示页面，都发生了什么？</title>
@@ -2879,6 +2879,11 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1>]]></content>
   </entry>
   <entry>
+    <title>取余和取模的区别</title>
+    <url>/posts/%E5%8F%96%E4%BD%99%E5%92%8C%E5%8F%96%E6%A8%A1%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
     <title>代理</title>
     <url>/posts/%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><pre><code>&gt;服务器ip地址不变，用户ip地址变。例如用户(1.1.1.1)使用正向代理(2.2.2.2)访问服务器(3.3.3.3),那么服务器收到的消息来自2.2.2.2.服务器不知道用户真正的地址。
@@ -2905,11 +2910,6 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <li>三层：根据网络层IP地址完成数据交换   </li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>取余和取模的区别</title>
-    <url>/posts/%E5%8F%96%E4%BD%99%E5%92%8C%E5%8F%96%E6%A8%A1%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
   </entry>
   <entry>
     <title>基于微信公众号的微服务架构</title>
@@ -2972,65 +2972,6 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       </tags>
   </entry>
   <entry>
-    <title>基本类型和包装类型差别</title>
-    <url>/posts/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%B7%AE%E5%88%AB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="基本类型以及包装类型"><a href="#基本类型以及包装类型" class="headerlink" title="基本类型以及包装类型"></a>基本类型以及包装类型</h2><p>   java中定义了基本类型：<br>        * 整形： byte、short、int、long<br>        * 浮点型：float、double<br>        * 逻辑型： boolean<br>        * 字符型： char<br>   以及对应的包装类型：<br>        * 整形： Byte、Short、Integer、Long<br>        * 浮点型： Float、Double<br>        * 逻辑型： Boolean<br>        * 字符型： Char </p>
-<h2 id="自动装箱、拆箱"><a href="#自动装箱、拆箱" class="headerlink" title="自动装箱、拆箱"></a>自动装箱、拆箱</h2><p>   java为满足程序员基本类型和包装类型混合使用，按需自动装箱拆箱。<br>   自动装箱拆箱使基本类型和包装类型之间的区别逐渐模糊，但是语义上有些许差别，性能上也有明显差别。</p>
-<h2 id="基本类型和包装类型差别"><a href="#基本类型和包装类型差别" class="headerlink" title="基本类型和包装类型差别"></a>基本类型和包装类型差别</h2><ul>
-<li>基本类型有默认值，例如int值默认为0 ，而Integer没有默认引用，默认为null。<br>  所以在写数据库实体类或者网络请求接收字段的时候要使用包装类型，防止接受参数为null的情况。</li>
-<li>包装类的频繁更改并不是在原来的基础上更改，而是产生新的对象，所以包装类的频繁更改性能很差.<blockquote>
-<p>使用Long情况</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        Long sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using Long total time = &quot;</span> + (end - now));</span><br></pre></td></tr></table></figure>
-<p> 耗费时间为</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">8832</span></span><br></pre></td></tr></table></figure>
-<p>使用long情况</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testlongAutoBoxing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;using long ,sum =&quot;</span> + sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using long total time = &quot;</span> + (end - now));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p> 总耗费时间为</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">787</span></span><br></pre></td></tr></table></figure>
-</blockquote>
- 在使用Long的时间比long增加10倍，原因是Long的操作过程中会构造大概2^31个实例。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>EffectJava</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何保证推送消息能够准确推送到客户端</title>
-    <url>/posts/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="如何保证推送消息能够准确推送到客户端。"><a href="#如何保证推送消息能够准确推送到客户端。" class="headerlink" title="如何保证推送消息能够准确推送到客户端。"></a>如何保证推送消息能够准确推送到客户端。</h1><h2 id="手机端："><a href="#手机端：" class="headerlink" title="手机端："></a>手机端：</h2><ul>
-<li>轮询方式获取消息。</li>
-<li>短信拦截模式。  发送短信通知消息，应用中的短信拦截模块拦截短信，并解析成数据。成本高。</li>
-<li>持久连接。</li>
-</ul>
-<p> 监听电量变化，网络变化，开关屏幕等等时候注册BroadCastReceiver来接收通知，接手后进行消息获取。<br> 有些ROM一旦用户kill掉主线程，就不会再投送广播消息给应用，导致应用无法启动，这是可以Fork一个进程,一旦发现主线程被杀，立即调用shell启动该Service（应用保活）</p>
-<h2 id="微服务间如何选择推送和拉取数据"><a href="#微服务间如何选择推送和拉取数据" class="headerlink" title="微服务间如何选择推送和拉取数据"></a>微服务间如何选择推送和拉取数据</h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
-<h4 id="数据是动态的，且实时性较强，宜采用生产端推送。"><a href="#数据是动态的，且实时性较强，宜采用生产端推送。" class="headerlink" title="数据是动态的，且实时性较强，宜采用生产端推送。"></a>数据是动态的，且实时性较强，宜采用生产端推送。</h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
-<h4 id="客户端长时间离线状态"><a href="#客户端长时间离线状态" class="headerlink" title="客户端长时间离线状态"></a>客户端长时间离线状态</h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
-<h4 id="推送的优点"><a href="#推送的优点" class="headerlink" title="推送的优点"></a>推送的优点</h4><ul>
-<li>时效性高。</li>
-<li>服务器压力小。 相对比轮询拉取模式，每次推送都会有数据，有效避免了空轮询</li>
-<li>交互简单。 只需要提供推送接口就好了，不需要额外开销。</li>
-</ul>
-<h4 id="推送的缺点"><a href="#推送的缺点" class="headerlink" title="推送的缺点"></a>推送的缺点</h4><ul>
-<li>不能保证一定能推送成功。</li>
-<li>缺乏数据多样性，推送的消息一般都有固定的模板<br>####极光推送</li>
-<li>活跃用户的到达率在90%以上。轮询获取99%以上。</li>
-<li>并发情况下第三方服务的实时性不太理想。</li>
-</ul>
-<h4 id="自主研发的推送系统"><a href="#自主研发的推送系统" class="headerlink" title="自主研发的推送系统"></a>自主研发的推送系统</h4><ul>
-<li>对客户端的海量长连接的维护管理消耗太大。</li>
-<li>App端Service稳定性，保活。</li>
-<li>有些厂商不允许有push service存在。</li>
-</ul>
-<p>##自主研发的推送架构</p>
-<h3 id="架构方案类似："><a href="#架构方案类似：" class="headerlink" title="架构方案类似："></a>架构方案类似：</h3><p>   <img src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
-<ul>
-<li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>完整写一篇博客</title>
     <url>/posts/%E5%AE%8C%E6%95%B4%E5%86%99%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h3 id="1命令行创建一个md文件。"><a href="#1命令行创建一个md文件。" class="headerlink" title="1命令行创建一个md文件。"></a>1命令行创建一个md文件。</h3><ul>
@@ -3075,13 +3016,39 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       </tags>
   </entry>
   <entry>
-    <title>微信公众平台Dubbo项目结构</title>
-    <url>/posts/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0Dubbo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
-      <tags>
-        <tag>dubbo</tag>
-        <tag>微信公众平台</tag>
-      </tags>
+    <title>如何保证推送消息能够准确推送到客户端</title>
+    <url>/posts/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="如何保证推送消息能够准确推送到客户端。"><a href="#如何保证推送消息能够准确推送到客户端。" class="headerlink" title="如何保证推送消息能够准确推送到客户端。"></a>如何保证推送消息能够准确推送到客户端。</h1><h2 id="手机端："><a href="#手机端：" class="headerlink" title="手机端："></a>手机端：</h2><ul>
+<li>轮询方式获取消息。</li>
+<li>短信拦截模式。  发送短信通知消息，应用中的短信拦截模块拦截短信，并解析成数据。成本高。</li>
+<li>持久连接。</li>
+</ul>
+<p> 监听电量变化，网络变化，开关屏幕等等时候注册BroadCastReceiver来接收通知，接手后进行消息获取。<br> 有些ROM一旦用户kill掉主线程，就不会再投送广播消息给应用，导致应用无法启动，这是可以Fork一个进程,一旦发现主线程被杀，立即调用shell启动该Service（应用保活）</p>
+<h2 id="微服务间如何选择推送和拉取数据"><a href="#微服务间如何选择推送和拉取数据" class="headerlink" title="微服务间如何选择推送和拉取数据"></a>微服务间如何选择推送和拉取数据</h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
+<h4 id="数据是动态的，且实时性较强，宜采用生产端推送。"><a href="#数据是动态的，且实时性较强，宜采用生产端推送。" class="headerlink" title="数据是动态的，且实时性较强，宜采用生产端推送。"></a>数据是动态的，且实时性较强，宜采用生产端推送。</h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
+<h4 id="客户端长时间离线状态"><a href="#客户端长时间离线状态" class="headerlink" title="客户端长时间离线状态"></a>客户端长时间离线状态</h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
+<h4 id="推送的优点"><a href="#推送的优点" class="headerlink" title="推送的优点"></a>推送的优点</h4><ul>
+<li>时效性高。</li>
+<li>服务器压力小。 相对比轮询拉取模式，每次推送都会有数据，有效避免了空轮询</li>
+<li>交互简单。 只需要提供推送接口就好了，不需要额外开销。</li>
+</ul>
+<h4 id="推送的缺点"><a href="#推送的缺点" class="headerlink" title="推送的缺点"></a>推送的缺点</h4><ul>
+<li>不能保证一定能推送成功。</li>
+<li>缺乏数据多样性，推送的消息一般都有固定的模板<br>####极光推送</li>
+<li>活跃用户的到达率在90%以上。轮询获取99%以上。</li>
+<li>并发情况下第三方服务的实时性不太理想。</li>
+</ul>
+<h4 id="自主研发的推送系统"><a href="#自主研发的推送系统" class="headerlink" title="自主研发的推送系统"></a>自主研发的推送系统</h4><ul>
+<li>对客户端的海量长连接的维护管理消耗太大。</li>
+<li>App端Service稳定性，保活。</li>
+<li>有些厂商不允许有push service存在。</li>
+</ul>
+<p>##自主研发的推送架构</p>
+<h3 id="架构方案类似："><a href="#架构方案类似：" class="headerlink" title="架构方案类似："></a>架构方案类似：</h3><p>   <img src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
+<ul>
+<li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>微信机器人流程</title>
@@ -3165,6 +3132,30 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       </tags>
   </entry>
   <entry>
+    <title>基本类型和包装类型差别</title>
+    <url>/posts/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%B7%AE%E5%88%AB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="基本类型以及包装类型"><a href="#基本类型以及包装类型" class="headerlink" title="基本类型以及包装类型"></a>基本类型以及包装类型</h2><p>   java中定义了基本类型：<br>        * 整形： byte、short、int、long<br>        * 浮点型：float、double<br>        * 逻辑型： boolean<br>        * 字符型： char<br>   以及对应的包装类型：<br>        * 整形： Byte、Short、Integer、Long<br>        * 浮点型： Float、Double<br>        * 逻辑型： Boolean<br>        * 字符型： Char </p>
+<h2 id="自动装箱、拆箱"><a href="#自动装箱、拆箱" class="headerlink" title="自动装箱、拆箱"></a>自动装箱、拆箱</h2><p>   java为满足程序员基本类型和包装类型混合使用，按需自动装箱拆箱。<br>   自动装箱拆箱使基本类型和包装类型之间的区别逐渐模糊，但是语义上有些许差别，性能上也有明显差别。</p>
+<h2 id="基本类型和包装类型差别"><a href="#基本类型和包装类型差别" class="headerlink" title="基本类型和包装类型差别"></a>基本类型和包装类型差别</h2><ul>
+<li>基本类型有默认值，例如int值默认为0 ，而Integer没有默认引用，默认为null。<br>  所以在写数据库实体类或者网络请求接收字段的时候要使用包装类型，防止接受参数为null的情况。</li>
+<li>包装类的频繁更改并不是在原来的基础上更改，而是产生新的对象，所以包装类的频繁更改性能很差.<blockquote>
+<p>使用Long情况</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        Long sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using Long total time = &quot;</span> + (end - now));</span><br></pre></td></tr></table></figure>
+<p> 耗费时间为</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">8832</span></span><br></pre></td></tr></table></figure>
+<p>使用long情况</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testlongAutoBoxing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;using long ,sum =&quot;</span> + sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using long total time = &quot;</span> + (end - now));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p> 总耗费时间为</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">787</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+ 在使用Long的时间比long增加10倍，原因是Long的操作过程中会构造大概2^31个实例。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>EffectJava</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建Material主题的Hexo博客</title>
     <url>/posts/%E6%90%AD%E5%BB%BAMaterial%E4%B8%BB%E9%A2%98%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>全篇可以在这搜到：</p>
@@ -3179,6 +3170,15 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E8%BD%AC%E5%8F%91%EF%BC%89/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://gitbook.cn/books/59be67b577cac00b9c2362fa/index.html">链接地址</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>微信公众平台Dubbo项目结构</title>
+    <url>/posts/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0Dubbo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>]]></content>
+      <tags>
+        <tag>dubbo</tag>
+        <tag>微信公众平台</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据库的count的区别</title>
@@ -3383,6 +3383,53 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
+    <title>机器学习书单</title>
+    <url>/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><ol>
+<li>利用python进行数据分析</li>
+</ol>
+<h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><ol>
+<li>python机器学习基础教程</li>
+<li>机器学习实战：基于Scikit-Learn和TensorFlow</li>
+<li>机器学习（周志华）</li>
+<li>统计学习方法（李航）</li>
+<li>优达学城-机器学习入门</li>
+<li>Cousera-机器学习-吴恩达</li>
+<li>Python机器学习实践指南</li>
+<li>Python机器学习——预测分析核心算法</li>
+<li>实用机器学习</li>
+<li>深入理解XGBoost：高效机器学习算法与进阶</li>
+<li>分布式机器学习：算法、理论与实践</li>
+</ol>
+<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><ol>
+<li>python神经网络编程</li>
+<li>深度学习入门-基于python的理论与实现</li>
+<li>python深度学习</li>
+<li>深度学习</li>
+<li>deeplearning.ai-深度学习吴恩达</li>
+<li>TensorFlow技术解析与实战</li>
+<li>精通Python自然语言处理</li>
+<li>Hands-On Machine Learning with Scikit-Learn and TensorFlow</li>
+</ol>
+<h1 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h1><ol>
+<li>Reinforcement learning</li>
+</ol>
+<h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><ol>
+<li>可汗学院</li>
+<li>线性代数及其应用</li>
+<li>概率论基础教程</li>
+<li>统计学</li>
+</ol>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><ol>
+<li>智能风控：原理、算法与工程实践</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>书单</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>日志分析脚本</title>
     <url>/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
@@ -3464,73 +3511,6 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 ]]></content>
   </entry>
   <entry>
-    <title>机器学习书单</title>
-    <url>/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><ol>
-<li>利用python进行数据分析</li>
-</ol>
-<h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><ol>
-<li>python机器学习基础教程</li>
-<li>机器学习实战：基于Scikit-Learn和TensorFlow</li>
-<li>机器学习（周志华）</li>
-<li>统计学习方法（李航）</li>
-<li>优达学城-机器学习入门</li>
-<li>Cousera-机器学习-吴恩达</li>
-<li>Python机器学习实践指南</li>
-<li>Python机器学习——预测分析核心算法</li>
-<li>实用机器学习</li>
-<li>深入理解XGBoost：高效机器学习算法与进阶</li>
-<li>分布式机器学习：算法、理论与实践</li>
-</ol>
-<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><ol>
-<li>python神经网络编程</li>
-<li>深度学习入门-基于python的理论与实现</li>
-<li>python深度学习</li>
-<li>深度学习</li>
-<li>deeplearning.ai-深度学习吴恩达</li>
-<li>TensorFlow技术解析与实战</li>
-<li>精通Python自然语言处理</li>
-<li>Hands-On Machine Learning with Scikit-Learn and TensorFlow</li>
-</ol>
-<h1 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h1><ol>
-<li>Reinforcement learning</li>
-</ol>
-<h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><ol>
-<li>可汗学院</li>
-<li>线性代数及其应用</li>
-<li>概率论基础教程</li>
-<li>统计学</li>
-</ol>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><ol>
-<li>智能风控：原理、算法与工程实践</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>书单</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习路线</title>
-    <url>/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><ol>
-<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</li>
-</ol>
-<p><img src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p>
-<ol start="2">
-<li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual RecognitionStanford</a><br>最受欢迎的课之一.</p>
-</li>
-<li><p>机器学习体系图</p>
-<p><img src="https://img-blog.csdnimg.cn/20190425205801254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2MDYzMDc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</li>
-</ol>
-<h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>求m的n次方</title>
     <url>/posts/%E6%B1%82m%E7%9A%84n%E6%AC%A1%E6%96%B9/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="初步设想"><a href="#初步设想" class="headerlink" title="初步设想"></a>初步设想</h2><p>  最简单的方法，就是for循环一下。<br>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">     result *= m;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>  这种方法结果肯定正确，但是时间复杂度上，需要O(n)。很是不理想。于是我想着改进一下。</p>
@@ -3553,6 +3533,26 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 </blockquote>
 <h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>  如果m是2的话，只需要返回2&lt;&lt;n就行了。自行判断是否越界。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>机器学习路线</title>
+    <url>/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><ol>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p>
+<ol start="2">
+<li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual RecognitionStanford</a><br>最受欢迎的课之一.</p>
+</li>
+<li><p>机器学习体系图</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425205801254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2MDYzMDc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
   </entry>
   <entry>
     <title>深入分析Synchronized</title>
@@ -3587,6 +3587,18 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
     <url>/posts/%E6%B7%B1%E7%88%B1%E4%B8%8D%E5%AF%BF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>如果我孑身一人是个赛车手<br>无牵无挂，无畏无惧<br>即使受伤、死亡<br>也会为我爱的事倾尽所有</p>
 <p>如果我生在乱世是个将军<br>交出我爱的人换取一时和平<br>不要和我讲大义<br>提枪上马，马革裹尸不休</p>
+]]></content>
+      <tags>
+        <tag>散文诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>爱吃西瓜</title>
+    <url>/posts/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>最甜的是西瓜中间的那口</p>
+<p>可我连籽都吃掉</p>
+<p>我爱的东西本来就不多</p>
+<p>爱就爱它的所有</p>
 ]]></content>
       <tags>
         <tag>散文诗</tag>
@@ -3629,86 +3641,6 @@ PSPermGen       total 4096K, used 3039K
 <h3 id="永久代溢出-java-lang-OutOfMemoryError-GC-overhead-limit-exceeded"><a href="#永久代溢出-java-lang-OutOfMemoryError-GC-overhead-limit-exceeded" class="headerlink" title="永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)"></a>永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</h3>]]></content>
   </entry>
   <entry>
-    <title>爱吃西瓜</title>
-    <url>/posts/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>最甜的是西瓜中间的那口</p>
-<p>可我连籽都吃掉</p>
-<p>我爱的东西本来就不多</p>
-<p>爱就爱它的所有</p>
-]]></content>
-      <tags>
-        <tag>散文诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>索引</title>
-    <url>/posts/%E7%B4%A2%E5%BC%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="索引介绍"><a href="#索引介绍" class="headerlink" title="索引介绍"></a>索引介绍</h2><blockquote>
-<p>索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I/O，假设磁盘每次I/O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好很多很多)。如果对之建立B-Tree索引，则只需要进行log100(10^6^)=3次页面读取，最坏情况下耗时30ms。这就是索引带来的效果，很多时候，当你的应用程序进行SQL查询速度很慢时，应该想想是否可以建索引</p>
-</blockquote>
-<h2 id="索引与优化"><a href="#索引与优化" class="headerlink" title="索引与优化"></a>索引与优化</h2><h3 id="索引的数据类型"><a href="#索引的数据类型" class="headerlink" title="索引的数据类型"></a>索引的数据类型</h3><pre><code>选择索引类型原则：
-</code></pre>
-<ol>
-<li>数据整形： 越小的整形在磁盘、内存、和CPU之间都需要更少的空间，处理起来更快。    2. 简单的数据类型更好： 整形数据比起字符型，处理开销更小，因为字符串的比较更复杂，在Mysql中，应该用内置的日期和时间数据类型，而不是字符串来存储时间，以及用整形数据类型存储ip地址。    3. 尽量避免NULL： 应该指定列为NOT NULL ，除非想存储NULL。在mysql中，含有空值的列很难进行查询优化，以为他使得索引、索引的统计信息以及比较运算符更加复杂。应该用0、一个特殊值、或者一个空串代替空值。</li>
-</ol>
-<h4 id="选择标识符"><a href="#选择标识符" class="headerlink" title="选择标识符"></a>选择标识符</h4><p>  选择合适的标识符是非常重要的，选择是不仅应该考虑存储类型，而且应该考虑mysql是怎么进行运算和比较的，一旦选定数据类型，应该保证所有的表都使用相同的数据类型。<br>    1. 整形： 通常是作为标识符最好的选择，因为更苦阿爹处理，因为可以更快的处理，而且可以设置为AUTO_INCREMENT。<br>    2. 字符串：尽量避免使用字符串作为标识符，它们消耗更好的空间，处理起来也较慢。而且，通常来说，字符串都是随机的，所以它们在索引中的位置也是随机的，这会导致页面分裂、随机访问磁盘，聚簇索引分裂（对于使用聚簇索引的存储引擎）。</p>
-<h3 id="索引入门"><a href="#索引入门" class="headerlink" title="索引入门"></a>索引入门</h3><pre><code>对于任何DBMS，索引都是进行优化的最主要的因素。对于少量的数据，没有合适的索引影响不是很大，但是，当随着数据量的增加，性能会急剧下降。
-如果对多列进行索引(组合索引)，**列的顺序**非常重要，MySQL仅能对索引最左边的前缀进行有效的查找。例如：
-</code></pre>
-<p>假设存在组合索引 表t1 建立 c1c2(c1,c2)联合索引，查询语句select * from t1 where c1=1 and c2=2能够使用该索引。查询语句select * from t1 where c1=1也能够使用该索引。但是，查询语句select * from t1 where c2=2不能够使用该索引，因为没有组合索引的引导列，即，要想使用c2列进行查找，必需出现c1等于某值。</p>
-<h4 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h4><p>索引是在存储引擎中实现的，而不是在服务器层中实现的。所以，每种存储引擎的索引都不一定完全相同，并不是所有的存储引擎都支持所有的索引类型。</p>
-<h5 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE People (</span><br><span class="line"></span><br><span class="line"> last_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> first_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> dob        date           not null,</span><br><span class="line"></span><br><span class="line"> gender     enum(&#x27;m&#x27;, &#x27;f&#x27;) not null,</span><br><span class="line"></span><br><span class="line"> key(last_name, first_name, dob)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>其索引包含表中每一行的last_name、first_name和dob列。其结构大致如下：<br><img src="img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg"><br>索引存储的值按索引列中的顺序排列。可以利用B-Tree索引进行全关键字、关键字范围和关键字前缀查询，当然，如果想使用索引，你必须保证按索引的最左边前缀(leftmost prefix of the index)来进行查询。</p>
-<ol>
-<li>匹配全值(Match the full value)：对索引中的所有列都指定具体的值。例如，上图中索引可以帮助你查找出生于1960-01-01的Cuba Allen。</li>
-<li>匹配最左前缀(Match a leftmost prefix)：你可以利用索引查找last name为Allen的人，仅仅使用索引中的第1列。</li>
-<li>匹配列前缀(Match a column prefix)：例如，你可以利用索引查找last name以J开始的人，这仅仅使用索引中的第1列。</li>
-<li>匹配值的范围查询(Match a range of values)：可以利用索引查找last name在Allen和Barrymore之间的人，仅仅使用索引中第1列。</li>
-<li>匹配部分精确而其它部分进行范围匹配(Match one part exactly and match a range on another part)：可以利用索引查找last name为Allen，而first name以字母K开始的人。</li>
-<li>仅对索引进行查询(Index-only queries)：如果查询的列都位于索引中，则不需要读取元组的值。</li>
-</ol>
-<p>由于B-树中的节点都是<strong>顺序存储</strong>的，所以可以利用索引进行查找(找某些值)，也可以对查询结果进行ORDER BY。当然，使用B-tree索引有以下一些限制：</p>
-<ol>
-<li>查询必须从索引的最左边的列开始。关于这点已经提了很多遍了。例如你不能利用索引查找在某一天出生的人。</li>
-<li>不能跳过某一索引列。例如，你不能利用索引查找last name为Smith且出生于某一天的人。</li>
-<li>存储引擎不能使用索引中范围条件右边的列。例如，如果你的查询语句为WHERE last_name=”Smith” AND first_name LIKE ‘J%’ AND dob=’1976-12-23’，则该查询只会使用索引中的前两列，因为LIKE是范围查询。<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><blockquote>
-<p>MySQL中，只有Memory存储引擎显示支持hash索引，是Memory表的默认索引类型，尽管Memory表也可以使用B-Tree索引。Memory存储引擎支持非唯一hash索引，这在数据库领域是罕见的，如果多个值有相同的hash code，索引把它们的行指针用链表保存到同一个hash表项中。</p>
-</blockquote>
-</li>
-</ol>
-<p>  假设创建如下一个表：<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE testhash (</span><br><span class="line">   fname VARCHAR(50) NOT NULL,</span><br><span class="line">   lname VARCHAR(50) NOT NULL,</span><br><span class="line">   KEY USING HASH(fname)</span><br><span class="line">) ENGINE=MEMORY;</span><br></pre></td></tr></table></figure><br>  假设索引使用hash函数f( )，如下：</p>
-<blockquote>
-<p>  f(‘Arjen’) = 2323<br>    f(‘Baron’) = 7437<br>  f(‘Peter’) = 8784<br>  f(‘Vadim’) = 2458<br>此时，索引的结构大概如下：<br><img src="img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg"></p>
-</blockquote>
-<p>Slots是有序的，但是记录不是有序的。当你执行<br>mysql&gt; SELECT lname FROM testhash WHERE fname=’Peter’;<br>MySQL会计算’Peter’的hash值，然后通过它来查询索引的行指针。因为f(‘Peter’) = 8784，MySQL会在索引中查找8784，得到指向记录3的指针。<br>因为索引自己仅仅存储很短的值，所以，索引非常紧凑。Hash值不取决于列的数据类型，一个TINYINT列的索引与一个长字符串列的索引一样大。<br>Hash索引有以下一些<strong>限制</strong>：</p>
-<ol>
-<li>由于索引仅包含hash code和记录指针，所以，MySQL不能通过使用索引避免读取记录。但是访问内存中的记录是非常迅速的，不会对性造成太大的影响。</li>
-<li>不能使用hash索引排序。</li>
-<li>Hash索引不支持键的部分匹配，因为是通过整个索引值来计算hash值的。</li>
-<li>Hash索引只支持等值比较，例如使用=，IN( )和&lt;=&gt;。对于WHERE price&gt;100并不能加速查询。</li>
-</ol>
-<h5 id="空间-R-Tree-索引"><a href="#空间-R-Tree-索引" class="headerlink" title="空间(R-Tree)索引"></a>空间(R-Tree)索引</h5><pre><code>MyISAM支持空间索引，主要用于地理空间数据类型，例如GEOMETRY。
-</code></pre>
-<h5 id="全文-Full-text-索引"><a href="#全文-Full-text-索引" class="headerlink" title="全文(Full-text)索引"></a>全文(Full-text)索引</h5><pre><code>全文索引是MyISAM的一个特殊索引类型，主要用于全文检索。
-</code></pre>
-<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="聚簇索引-Clustered-Indexes"><a href="#聚簇索引-Clustered-Indexes" class="headerlink" title="聚簇索引(Clustered Indexes)"></a>聚簇索引(Clustered Indexes)</h3><blockquote>
-<p>mysql聚簇索引保证关键字的值相近的元组存储的物理位置也相同（所以字符串类型不宜建立聚簇索引，特别是随机字符串，会使得系统进行大量的移动操作），且一个表只能有一个聚簇索引。因为由存储引擎实现索引，所以，并不是所有的引擎都支持聚簇索引。目前，只有solidDB和InnoDB支持。<br> 结构如下：<br> <img src="img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg"><br>注：叶子页面包含完整的元组，而内节点页面仅包含索引的列(索引的列为整型)。一些DBMS允许用户指定聚簇索引，但是MySQL的存储引擎到目前为止都不支持。InnoDB对主键建立聚簇索引。如果你不指定主键，InnoDB会用一个具有唯一且非空值的索引来代替。如果不存在这样的索引，InnoDB会定义一个隐藏的主键，然后对其建立聚簇索引。一般来说，DBMS都会以聚簇索引的形式来存储实际的数据，它是其它二级索引的基础。</p>
-</blockquote>
-<h4 id="InnoDB和MyISAM的数据布局的比较"><a href="#InnoDB和MyISAM的数据布局的比较" class="headerlink" title="InnoDB和MyISAM的数据布局的比较"></a>InnoDB和MyISAM的数据布局的比较</h4><blockquote>
-<p>为了更加理解聚簇索引和非聚簇索引，或者primary索引和second索引(MyISAM不支持聚簇索引)，来比较一下InnoDB和MyISAM的数据布局，对于如下表：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE layout_test (</span><br><span class="line"></span><br><span class="line">col1 int NOT NULL,</span><br><span class="line"></span><br><span class="line">col2 int NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(col1),</span><br><span class="line"></span><br><span class="line">KEY(col2)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>假设主键的值位于1—10,000之间，且按随机顺序插入，然后用OPTIMIZE TABLE进行优化。col2随机赋予1—100之间的值，所以会存在许多重复的值。</p>
-<ol>
-<li>MyISAM的数据布局<br>其布局十分简单，MyISAM按照插入的顺序在磁盘上存储数据，如下：<br><img src="img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg"></li>
-</ol>
-<p><a href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html">参考</a></p>
-]]></content>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线程间通信</title>
     <url>/posts/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://mp.weixin.qq.com/s/Nij2KMBmDn5E5nFhpwn24w">参考如下</a></p>
@@ -3716,45 +3648,6 @@ PSPermGen       total 4096K, used 3039K
       <tags>
         <tag>java基础</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>自己写一个数据库</title>
-    <url>/posts/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="godb"><a href="#godb" class="headerlink" title="godb"></a>godb</h1><blockquote>
-<p>本项目中，数据库就是本地一个文件夹，表也是数据库下的目录，里面的数据就是表文件夹下的文件，<br>表目录下的scheme.json保存着表结构<br>表目录下data0.json data1.json分别存储着数据，每个文件里的数据不超过1000行。</p>
-</blockquote>
-<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><ul>
-<li>  代码分为client端和server端</li>
-<li>  server端开启端口，接收指令，并执行指令</li>
-<li>  client端连接端口，发送指令</li>
-<li>server端分层执行<ul>
-<li>  解析语句，判断类型，建库、建表、插入数据等等</li>
-<li>  不同类型语句进入不同service执行，互不干扰</li>
-<li>  验证语句，返回数据</li>
-</ul>
-</li>
-</ul>
-<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><blockquote>
-<p>暂时建表只支持这种格式，实际实现是在项目tmp目录下新建一个db1的文件夹</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database db1</span><br></pre></td></tr></table></figure>
-
-<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><blockquote>
-<p>暂时只支持  ‘id’ 列名， varchar（255） 类型长度，以及默认值<br>以及主键<br>实际实现是在数据库目录下新建一个表名的文件夹，并有一个scheme.json文件记录各列属性</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  table1 (`id` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
-
-<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
-<p>支持语句格式,value 只支持一个括号，values支持多个括号多行数据插入<br>实际实现是在表文件夹下，新建data(i).json文件，里面存储具体数据，i是预留数据量大的情况下的分文件存储，每个文件暂时最多支持存储1000行。</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> feature_conf <span class="keyword">values</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>// TODO</p>
-<ul>
-<li>  [ ] 增加索引文件，指向data(i).json并指明多少列</li>
-<li>  [ ] 索引文件分层，类似B+树存储</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>谷歌jib工具试用</title>
@@ -3859,13 +3752,6 @@ PSPermGen       total 4096K, used 3039K
 ]]></content>
   </entry>
   <entry>
-    <title>跳跃表</title>
-    <url>/posts/%E8%B7%B3%E8%B7%83%E8%A1%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://blog.jobbole.com/111731/">看这篇文章</a></p>
-<p>和B+树很像，不过B+树插入需要Rebalance进行树重调整。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>这可能不只是一篇面经(转发)</title>
     <url>/posts/%E8%BF%99%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%8F%AA%E6%98%AF%E4%B8%80%E7%AF%87%E9%9D%A2%E7%BB%8F-%E8%BD%AC%E5%8F%91/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="https://www.nowcoder.com/discuss/29890?hmsr=toutiao.io&source=rss&utm_medium=toutiao.io&utm_source=toutiao.io">原文链接在此</a></p>
@@ -3873,9 +3759,123 @@ PSPermGen       total 4096K, used 3039K
 ]]></content>
   </entry>
   <entry>
+    <title>索引</title>
+    <url>/posts/%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="索引介绍"><a href="#索引介绍" class="headerlink" title="索引介绍"></a>索引介绍</h2><blockquote>
+<p>索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I/O，假设磁盘每次I/O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好很多很多)。如果对之建立B-Tree索引，则只需要进行log100(10^6^)=3次页面读取，最坏情况下耗时30ms。这就是索引带来的效果，很多时候，当你的应用程序进行SQL查询速度很慢时，应该想想是否可以建索引</p>
+</blockquote>
+<h2 id="索引与优化"><a href="#索引与优化" class="headerlink" title="索引与优化"></a>索引与优化</h2><h3 id="索引的数据类型"><a href="#索引的数据类型" class="headerlink" title="索引的数据类型"></a>索引的数据类型</h3><pre><code>选择索引类型原则：
+</code></pre>
+<ol>
+<li>数据整形： 越小的整形在磁盘、内存、和CPU之间都需要更少的空间，处理起来更快。    2. 简单的数据类型更好： 整形数据比起字符型，处理开销更小，因为字符串的比较更复杂，在Mysql中，应该用内置的日期和时间数据类型，而不是字符串来存储时间，以及用整形数据类型存储ip地址。    3. 尽量避免NULL： 应该指定列为NOT NULL ，除非想存储NULL。在mysql中，含有空值的列很难进行查询优化，以为他使得索引、索引的统计信息以及比较运算符更加复杂。应该用0、一个特殊值、或者一个空串代替空值。</li>
+</ol>
+<h4 id="选择标识符"><a href="#选择标识符" class="headerlink" title="选择标识符"></a>选择标识符</h4><p>  选择合适的标识符是非常重要的，选择是不仅应该考虑存储类型，而且应该考虑mysql是怎么进行运算和比较的，一旦选定数据类型，应该保证所有的表都使用相同的数据类型。<br>    1. 整形： 通常是作为标识符最好的选择，因为更苦阿爹处理，因为可以更快的处理，而且可以设置为AUTO_INCREMENT。<br>    2. 字符串：尽量避免使用字符串作为标识符，它们消耗更好的空间，处理起来也较慢。而且，通常来说，字符串都是随机的，所以它们在索引中的位置也是随机的，这会导致页面分裂、随机访问磁盘，聚簇索引分裂（对于使用聚簇索引的存储引擎）。</p>
+<h3 id="索引入门"><a href="#索引入门" class="headerlink" title="索引入门"></a>索引入门</h3><pre><code>对于任何DBMS，索引都是进行优化的最主要的因素。对于少量的数据，没有合适的索引影响不是很大，但是，当随着数据量的增加，性能会急剧下降。
+如果对多列进行索引(组合索引)，**列的顺序**非常重要，MySQL仅能对索引最左边的前缀进行有效的查找。例如：
+</code></pre>
+<p>假设存在组合索引 表t1 建立 c1c2(c1,c2)联合索引，查询语句select * from t1 where c1=1 and c2=2能够使用该索引。查询语句select * from t1 where c1=1也能够使用该索引。但是，查询语句select * from t1 where c2=2不能够使用该索引，因为没有组合索引的引导列，即，要想使用c2列进行查找，必需出现c1等于某值。</p>
+<h4 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h4><p>索引是在存储引擎中实现的，而不是在服务器层中实现的。所以，每种存储引擎的索引都不一定完全相同，并不是所有的存储引擎都支持所有的索引类型。</p>
+<h5 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE People (</span><br><span class="line"></span><br><span class="line"> last_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> first_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> dob        date           not null,</span><br><span class="line"></span><br><span class="line"> gender     enum(&#x27;m&#x27;, &#x27;f&#x27;) not null,</span><br><span class="line"></span><br><span class="line"> key(last_name, first_name, dob)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>其索引包含表中每一行的last_name、first_name和dob列。其结构大致如下：<br><img src="img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg"><br>索引存储的值按索引列中的顺序排列。可以利用B-Tree索引进行全关键字、关键字范围和关键字前缀查询，当然，如果想使用索引，你必须保证按索引的最左边前缀(leftmost prefix of the index)来进行查询。</p>
+<ol>
+<li>匹配全值(Match the full value)：对索引中的所有列都指定具体的值。例如，上图中索引可以帮助你查找出生于1960-01-01的Cuba Allen。</li>
+<li>匹配最左前缀(Match a leftmost prefix)：你可以利用索引查找last name为Allen的人，仅仅使用索引中的第1列。</li>
+<li>匹配列前缀(Match a column prefix)：例如，你可以利用索引查找last name以J开始的人，这仅仅使用索引中的第1列。</li>
+<li>匹配值的范围查询(Match a range of values)：可以利用索引查找last name在Allen和Barrymore之间的人，仅仅使用索引中第1列。</li>
+<li>匹配部分精确而其它部分进行范围匹配(Match one part exactly and match a range on another part)：可以利用索引查找last name为Allen，而first name以字母K开始的人。</li>
+<li>仅对索引进行查询(Index-only queries)：如果查询的列都位于索引中，则不需要读取元组的值。</li>
+</ol>
+<p>由于B-树中的节点都是<strong>顺序存储</strong>的，所以可以利用索引进行查找(找某些值)，也可以对查询结果进行ORDER BY。当然，使用B-tree索引有以下一些限制：</p>
+<ol>
+<li>查询必须从索引的最左边的列开始。关于这点已经提了很多遍了。例如你不能利用索引查找在某一天出生的人。</li>
+<li>不能跳过某一索引列。例如，你不能利用索引查找last name为Smith且出生于某一天的人。</li>
+<li>存储引擎不能使用索引中范围条件右边的列。例如，如果你的查询语句为WHERE last_name=”Smith” AND first_name LIKE ‘J%’ AND dob=’1976-12-23’，则该查询只会使用索引中的前两列，因为LIKE是范围查询。<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><blockquote>
+<p>MySQL中，只有Memory存储引擎显示支持hash索引，是Memory表的默认索引类型，尽管Memory表也可以使用B-Tree索引。Memory存储引擎支持非唯一hash索引，这在数据库领域是罕见的，如果多个值有相同的hash code，索引把它们的行指针用链表保存到同一个hash表项中。</p>
+</blockquote>
+</li>
+</ol>
+<p>  假设创建如下一个表：<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE testhash (</span><br><span class="line">   fname VARCHAR(50) NOT NULL,</span><br><span class="line">   lname VARCHAR(50) NOT NULL,</span><br><span class="line">   KEY USING HASH(fname)</span><br><span class="line">) ENGINE=MEMORY;</span><br></pre></td></tr></table></figure><br>  假设索引使用hash函数f( )，如下：</p>
+<blockquote>
+<p>  f(‘Arjen’) = 2323<br>    f(‘Baron’) = 7437<br>  f(‘Peter’) = 8784<br>  f(‘Vadim’) = 2458<br>此时，索引的结构大概如下：<br><img src="img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg"></p>
+</blockquote>
+<p>Slots是有序的，但是记录不是有序的。当你执行<br>mysql&gt; SELECT lname FROM testhash WHERE fname=’Peter’;<br>MySQL会计算’Peter’的hash值，然后通过它来查询索引的行指针。因为f(‘Peter’) = 8784，MySQL会在索引中查找8784，得到指向记录3的指针。<br>因为索引自己仅仅存储很短的值，所以，索引非常紧凑。Hash值不取决于列的数据类型，一个TINYINT列的索引与一个长字符串列的索引一样大。<br>Hash索引有以下一些<strong>限制</strong>：</p>
+<ol>
+<li>由于索引仅包含hash code和记录指针，所以，MySQL不能通过使用索引避免读取记录。但是访问内存中的记录是非常迅速的，不会对性造成太大的影响。</li>
+<li>不能使用hash索引排序。</li>
+<li>Hash索引不支持键的部分匹配，因为是通过整个索引值来计算hash值的。</li>
+<li>Hash索引只支持等值比较，例如使用=，IN( )和&lt;=&gt;。对于WHERE price&gt;100并不能加速查询。</li>
+</ol>
+<h5 id="空间-R-Tree-索引"><a href="#空间-R-Tree-索引" class="headerlink" title="空间(R-Tree)索引"></a>空间(R-Tree)索引</h5><pre><code>MyISAM支持空间索引，主要用于地理空间数据类型，例如GEOMETRY。
+</code></pre>
+<h5 id="全文-Full-text-索引"><a href="#全文-Full-text-索引" class="headerlink" title="全文(Full-text)索引"></a>全文(Full-text)索引</h5><pre><code>全文索引是MyISAM的一个特殊索引类型，主要用于全文检索。
+</code></pre>
+<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="聚簇索引-Clustered-Indexes"><a href="#聚簇索引-Clustered-Indexes" class="headerlink" title="聚簇索引(Clustered Indexes)"></a>聚簇索引(Clustered Indexes)</h3><blockquote>
+<p>mysql聚簇索引保证关键字的值相近的元组存储的物理位置也相同（所以字符串类型不宜建立聚簇索引，特别是随机字符串，会使得系统进行大量的移动操作），且一个表只能有一个聚簇索引。因为由存储引擎实现索引，所以，并不是所有的引擎都支持聚簇索引。目前，只有solidDB和InnoDB支持。<br> 结构如下：<br> <img src="img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg"><br>注：叶子页面包含完整的元组，而内节点页面仅包含索引的列(索引的列为整型)。一些DBMS允许用户指定聚簇索引，但是MySQL的存储引擎到目前为止都不支持。InnoDB对主键建立聚簇索引。如果你不指定主键，InnoDB会用一个具有唯一且非空值的索引来代替。如果不存在这样的索引，InnoDB会定义一个隐藏的主键，然后对其建立聚簇索引。一般来说，DBMS都会以聚簇索引的形式来存储实际的数据，它是其它二级索引的基础。</p>
+</blockquote>
+<h4 id="InnoDB和MyISAM的数据布局的比较"><a href="#InnoDB和MyISAM的数据布局的比较" class="headerlink" title="InnoDB和MyISAM的数据布局的比较"></a>InnoDB和MyISAM的数据布局的比较</h4><blockquote>
+<p>为了更加理解聚簇索引和非聚簇索引，或者primary索引和second索引(MyISAM不支持聚簇索引)，来比较一下InnoDB和MyISAM的数据布局，对于如下表：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE layout_test (</span><br><span class="line"></span><br><span class="line">col1 int NOT NULL,</span><br><span class="line"></span><br><span class="line">col2 int NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(col1),</span><br><span class="line"></span><br><span class="line">KEY(col2)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>假设主键的值位于1—10,000之间，且按随机顺序插入，然后用OPTIMIZE TABLE进行优化。col2随机赋予1—100之间的值，所以会存在许多重复的值。</p>
+<ol>
+<li>MyISAM的数据布局<br>其布局十分简单，MyISAM按照插入的顺序在磁盘上存储数据，如下：<br><img src="img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg"></li>
+</ol>
+<p><a href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html">参考</a></p>
+]]></content>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>高可用+高并发+负载均衡架构设计(转发)</title>
     <url>/posts/%E9%AB%98%E5%8F%AF%E7%94%A8-%E9%AB%98%E5%B9%B6%E5%8F%91-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-%E8%BD%AC%E5%8F%91/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><img src="https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960393&idx=1&sn=23cf8438b436c531c81b3f09a3d5e8fb&chksm=bd2d01958a5a88838e6ef493ccb1fe0854f7216f3863fbe9798eec5019dc58d73d4e95b3132f&mpshare=1&scene=1&srcid=09082gOCvZ5mjeN9YZ8HSg0o#rd" alt="原地址"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>跳跃表</title>
+    <url>/posts/%E8%B7%B3%E8%B7%83%E8%A1%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><a href="http://blog.jobbole.com/111731/">看这篇文章</a></p>
+<p>和B+树很像，不过B+树插入需要Rebalance进行树重调整。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>自己写一个数据库</title>
+    <url>/posts/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="godb"><a href="#godb" class="headerlink" title="godb"></a>godb</h1><blockquote>
+<p>本项目中，数据库就是本地一个文件夹，表也是数据库下的目录，里面的数据就是表文件夹下的文件，<br>表目录下的scheme.json保存着表结构<br>表目录下data0.json data1.json分别存储着数据，每个文件里的数据不超过1000行。</p>
+</blockquote>
+<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><ul>
+<li>  代码分为client端和server端</li>
+<li>  server端开启端口，接收指令，并执行指令</li>
+<li>  client端连接端口，发送指令</li>
+<li>server端分层执行<ul>
+<li>  解析语句，判断类型，建库、建表、插入数据等等</li>
+<li>  不同类型语句进入不同service执行，互不干扰</li>
+<li>  验证语句，返回数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><blockquote>
+<p>暂时建表只支持这种格式，实际实现是在项目tmp目录下新建一个db1的文件夹</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database db1</span><br></pre></td></tr></table></figure>
+
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><blockquote>
+<p>暂时只支持  ‘id’ 列名， varchar（255） 类型长度，以及默认值<br>以及主键<br>实际实现是在数据库目录下新建一个表名的文件夹，并有一个scheme.json文件记录各列属性</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  table1 (`id` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
+<p>支持语句格式,value 只支持一个括号，values支持多个括号多行数据插入<br>实际实现是在表文件夹下，新建data(i).json文件，里面存储具体数据，i是预留数据量大的情况下的分文件存储，每个文件暂时最多支持存储1000行。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> feature_conf <span class="keyword">values</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>// TODO</p>
+<ul>
+<li>  [ ] 增加索引文件，指向data(i).json并指明多少列</li>
+<li>  [ ] 索引文件分层，类似B+树存储</li>
+</ul>
 ]]></content>
   </entry>
 </search>
