@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、第14章 数据分析案例本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。 下载本书代码：https:&#x2F;&#x2F;github.com&#x2F;wesm&#x2F;pydata-book（建议把代码下载下来之后，安装好Anaconda 3.6，在目录文件夹中用Ju">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用python进行数据分析-pandas">
+<meta property="og:url" content="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="一、第14章 数据分析案例本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。 下载本书代码：https:&#x2F;&#x2F;github.com&#x2F;wesm&#x2F;pydata-book（建议把代码下载下来之后，安装好Anaconda 3.6，在目录文件夹中用Ju">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-21T14:38:35.000Z">
+<meta property="article:modified_time" content="2021-09-21T15:12:08.328Z">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>利用python进行数据分析-pandas | Earyant的技术博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">83</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          利用python进行数据分析-pandas
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-21 22:38:35 / 修改时间：23:12:08" itemprop="dateCreated datePublished" datetime="2021-09-21T22:38:35+08:00">2021-09-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一、第14章 数据分析案例<br>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
+<p>下载本书代码：<a target="_blank" rel="noopener" href="https://github.com/wesm/pydata-book%EF%BC%88%E5%BB%BA%E8%AE%AE%E6%8A%8A%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD%E4%B8%8B%E6%9D%A5%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%AE%89%E8%A3%85%E5%A5%BDAnaconda">https://github.com/wesm/pydata-book（建议把代码下载下来之后，安装好Anaconda</a> 3.6，在目录文件夹中用Jupyter notebook打开）</p>
+<p>二、实例<br>2.4 MovieLens 1M数据集<br>GroupLens Research（<a target="_blank" rel="noopener" href="http://www.grouplens.org/node/73%EF%BC%89%E9%87%87%E9%9B%86%E4%BA%86%E4%B8%80%E7%BB%84%E4%BB%8E20%E4%B8%96%E7%BA%AA90%E5%B9%B4%E6%9C%AB%E5%88%B021%E4%B8%96%E7%BA%AA%E5%88%9D%E7%94%B1MovieLens%E7%94%A8%E6%88%B7%E6%8F%90%E4%BE%9B%E7%9A%84%E7%94%B5%E5%BD%B1%E8%AF%84%E5%88%86%E6%95%B0%E6%8D%AE%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8C%85%E6%8B%AC%E7%94%B5%E5%BD%B1%E8%AF%84%E5%88%86%E3%80%81%E7%94%B5%E5%BD%B1%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E9%A3%8E%E6%A0%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B9%B4%E4%BB%A3%EF%BC%89%E4%BB%A5%E5%8F%8A%E5%85%B3%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84%E4%BA%BA%E5%8F%A3%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%95%B0%E6%8D%AE%EF%BC%88%E5%B9%B4%E9%BE%84%E3%80%81%E9%82%AE%E7%BC%96%E3%80%81%E6%80%A7%E5%88%AB%E5%92%8C%E8%81%8C%E4%B8%9A%E7%AD%89%EF%BC%89%E3%80%82%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%88%AC%E9%83%BD%E4%BC%9A%E5%AF%B9%E6%AD%A4%E7%B1%BB%E6%95%B0%E6%8D%AE%E6%84%9F%E5%85%B4%E8%B6%A3%E3%80%82%E8%99%BD%E7%84%B6%E6%88%91%E4%B8%8D%E4%BC%9A%E5%9C%A8%E6%9C%AC%E4%B9%A6%E4%B8%AD%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%BD%86%E6%88%91%E4%BC%9A%E5%91%8A%E8%AF%89%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AF%B9%E8%BF%99%E7%A7%8D%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E5%88%87%E7%89%87%E5%88%87%E5%9D%97%E4%BB%A5%E6%BB%A1%E8%B6%B3%E5%AE%9E%E9%99%85%E9%9C%80%E6%B1%82%E3%80%82">http://www.grouplens.org/node/73）采集了一组从20世纪90年末到21世纪初由MovieLens用户提供的电影评分数据。这些数据中包括电影评分、电影元数据（风格类型和年代）以及关于用户的人口统计学数据（年龄、邮编、性别和职业等）。基于机器学习算法的推荐系统一般都会对此类数据感兴趣。虽然我不会在本书中详细介绍机器学习技术，但我会告诉你如何对这种数据进行切片切块以满足实际需求。</a></p>
+<p>MovieLens 1M数据集含有来自6000名用户对4000部电影的100万条评分数据。它分为三个表：评分、用户信息和电影信息。将该数据从zip文件中解压出来之后，可以通过pandas.read_table将各个表分别读到一个pandas DataFrame对象中：</p>
+<p>import pandas as pd</p>
+<p>pd.options.display.max_rows = 10 #限制显示数量</p>
+<p>unames = [‘user_id’, ‘gender’, ‘age’, ‘occupation’, ‘zip’]</p>
+<p>users = pd.read_table(‘datasets/movielens/users.dat’, sep=’::’,</p>
+<p>header=None, names=unames)</p>
+<p>rnames = [‘user_id’, ‘movie_id’, ‘rating’, ‘timestamp’]</p>
+<p>ratings = pd.read_table(‘datasets/movielens/ratings.dat’, sep=’::’,</p>
+<p>header=None, names=rnames)</p>
+<p>mnames = [‘movie_id’, ‘title’, ‘genres’]</p>
+<p>movies = pd.read_table(‘datasets/movielens/movies.dat’, sep=’::’,</p>
+<p>header=None, names=mnames)</p>
+<p>利用Python的切片语法，通过查看每个DataFrame的前几行即可验证数据加载工作是否一切顺利：</p>
+<p>In [69]: users[:5]</p>
+<p>Out[69]:</p>
+<p>user_id gender age occupation zip</p>
+<p>0 1 F 1 10 48067</p>
+<p>1 2 M 56 16 70072</p>
+<p>2 3 M 25 15 55117</p>
+<p>3 4 M 45 7 02460</p>
+<p>4 5 M 25 20 55455</p>
+<p>In [70]: ratings[:5]</p>
+<p>Out[70]:</p>
+<p>user_id movie_id rating timestamp</p>
+<p>0 1 1193 5 978300760</p>
+<p>1 1 661 3 978302109</p>
+<p>2 1 914 3 978301968</p>
+<p>3 1 3408 4 978300275</p>
+<p>4 1 2355 5 978824291</p>
+<p>In [71]: movies[:5]</p>
+<p>Out[71]:</p>
+<p>movie_id title genres</p>
+<p>0 1 Toy Story (1995) Animation|Children’s|Comedy</p>
+<p>1 2 Jumanji (1995) Adventure|Children’s|Fantasy</p>
+<p>2 3 Grumpier Old Men (1995) Comedy|Romance</p>
+<p>3 4 Waiting to Exhale (1995) Comedy|Drama</p>
+<p>4 5 Father of the Bride Part II (1995) Comedy</p>
+<p>In [72]: ratings</p>
+<p>Out[72]:</p>
+<p>user_id movie_id rating timestamp</p>
+<p>0 1 1193 5 978300760</p>
+<p>1 1 661 3 978302109</p>
+<p>2 1 914 3 978301968</p>
+<p>3 1 3408 4 978300275</p>
+<p>4 1 2355 5 978824291</p>
+<p>… … … … …</p>
+<p>1000204 6040 1091 1 956716541</p>
+<p>1000205 6040 1094 5 956704887</p>
+<p>1000206 6040 562 5 956704746</p>
+<p>1000207 6040 1096 4 956715648</p>
+<p>1000208 6040 1097 4 956715569</p>
+<p>注意，其中的年龄和职业是以编码形式给出的，它们的具体含义请参考该数据集的README文件。分析散布在三个表中的数据可不是一件轻松的事情。假设我们想要根据性别和年龄计算某部电影的平均得分，如果将所有数据都合并到一个表中的话问题就简单多了。我们先用pandas的merge函数将ratings跟users合并到一起，然后再将movies也合并进去。pandas会根据列名的重叠情况推断出哪些列是合并（或连接）键：</p>
+<p>In [73]: data = pd.merge(pd.merge(ratings, users), movies)</p>
+<p>In [74]: data</p>
+<p>Out[74]:</p>
+<p>user_id … genres</p>
+<p>0 1 … Drama</p>
+<p>1 2 … Drama</p>
+<p>2 12 … Drama</p>
+<p>3 15 … Drama</p>
+<p>4 17 … Drama</p>
+<p>… … … …</p>
+<p>1000204 5949 … Documentary</p>
+<p>1000205 5675 … Drama</p>
+<p>1000206 5780 … Drama</p>
+<p>1000207 5851 … Comedy|Drama|Western</p>
+<p>1000208 5938 … Documentary</p>
+<p>[1000209 rows x 10 columns]</p>
+<p>In [75]: data.iloc[0]</p>
+<p>Out[75]:</p>
+<p>user_id 1</p>
+<p>movie_id 1193</p>
+<p>rating 5</p>
+<p>timestamp 978300760</p>
+<p>gender F</p>
+<p>age 1</p>
+<p>occupation 10</p>
+<p>zip 48067</p>
+<p>title One Flew Over the Cuckoo’s Nest (1975)</p>
+<p>genres Drama</p>
+<p>Name: 0, dtype: object</p>
+<p>为了按性别计算每部电影的平均得分，我们可以使用pivot_table方法：</p>
+<p>In [76]: mean_ratings = data.pivot_table(‘rating’, index=’title’,</p>
+<p>….: columns=’gender’, aggfunc=’mean’)</p>
+<p>In [77]: mean_ratings[:5]</p>
+<p>Out[77]:</p>
+<p>gender F M</p>
+<p>title</p>
+<p>$1,000,000 Duck (1971) 3.375000 2.761905</p>
+<p>‘Night Mother (1986) 3.388889 3.352941</p>
+<p>‘Til There Was You (1997) 2.675676 2.733333</p>
+<p>‘burbs, The (1989) 2.793478 2.962085</p>
+<p>…And Justice for All (1979) 3.828571 3.689024</p>
+<p>该操作产生了另一个DataFrame，其内容为电影平均得分，行标为电影名称，列标为性别。现在，我打算过滤掉评分数据不够250条的电影。为了达到这个目的，我先对title进行分组，然后利用size()得到一个含有各电影分组大小的Series对象：</p>
+<p>In [78]: ratings_by_title = data.groupby(‘title’).size()</p>
+<p>In [79]: ratings_by_title[:10]</p>
+<p>Out[79]:</p>
+<p>title</p>
+<p>$1,000,000 Duck (1971) 37</p>
+<p>‘Night Mother (1986) 70</p>
+<p>‘Til There Was You (1997) 52</p>
+<p>‘burbs, The (1989) 303</p>
+<p>…And Justice for All (1979) 199</p>
+<p>1-900 (1994) 2</p>
+<p>10 Things I Hate About You (1999) 700</p>
+<p>101 Dalmatians (1961) 565</p>
+<p>101 Dalmatians (1996) 364</p>
+<p>12 Angry Men (1957) 616</p>
+<p>dtype: int64</p>
+<p>In [80]: active_titles = ratings_by_title.index[ratings_by_title &gt;= 250]</p>
+<p>In [81]: active_titles</p>
+<p>Out[81]:</p>
+<p>Index([‘’burbs, The (1989)’, ‘10 Things I Hate About You (1999)’,</p>
+<p>‘101 Dalmatians (1961)’, ‘101 Dalmatians (1996)’, ‘12 Angry Men (1957)’,</p>
+<p>‘13th Warrior, The (1999)’, ‘2 Days in the Valley (1996)’,</p>
+<p>‘20,000 Leagues Under the Sea (1954)’, ‘2001: A Space Odyssey (1968)’,</p>
+<p>‘2010 (1984)’,</p>
+<p>…</p>
+<p>‘X-Men (2000)’, ‘Year of Living Dangerously (1982)’,</p>
+<p>‘Yellow Submarine (1968)’, ‘You’ve Got Mail (1998)’,</p>
+<p>‘Young Frankenstein (1974)’, ‘Young Guns (1988)’,</p>
+<p>‘Young Guns II (1990)’, ‘Young Sherlock Holmes (1985)’,</p>
+<p>‘Zero Effect (1998)’, ‘eXistenZ (1999)’],</p>
+<p>dtype=’object’, name=’title’, length=1216)</p>
+<p>标题索引中含有评分数据大于250条的电影名称，然后我们就可以据此从前面的mean_ratings中选取所需的行了：</p>
+<p>In [82]: mean_ratings = mean_ratings.loc[active_titles]</p>
+<p>In [83]: mean_ratings</p>
+<p>Out[83]:</p>
+<p>gender F M</p>
+<p>title</p>
+<p>‘burbs, The (1989) 2.793478 2.962085</p>
+<p>10 Things I Hate About You (1999) 3.646552 3.311966</p>
+<p>101 Dalmatians (1961) 3.791444 3.500000</p>
+<p>101 Dalmatians (1996) 3.240000 2.911215</p>
+<p>12 Angry Men (1957) 4.184397 4.328421</p>
+<p>… … …</p>
+<p>Young Guns (1988) 3.371795 3.425620</p>
+<p>Young Guns II (1990) 2.934783 2.904025</p>
+<p>Young Sherlock Holmes (1985) 3.514706 3.363344</p>
+<p>Zero Effect (1998) 3.864407 3.723140</p>
+<p>eXistenZ (1999) 3.098592 3.289086</p>
+<p>[1216 rows x 2 columns]</p>
+<p>为了了解女性观众最喜欢的电影，我们可以对F列降序排列：</p>
+<p>In [85]: top_female_ratings = mean_ratings.sort_values(by=’F’, ascending=False)</p>
+<p>In [86]: top_female_ratings[:10]</p>
+<p>Out[86]:</p>
+<p>gender F M<br>title<br>Close Shave, A (1995) 4.644444 4.473795<br>Wrong Trousers, The (1993) 4.588235 4.478261<br>Sunset Blvd. (a.k.a. Sunset Boulevard) (1950) 4.572650 4.464589<br>Wallace &amp; Gromit: The Best of Aardman Animation… 4.563107 4.385075<br>Schindler’s List (1993) 4.562602 4.491415<br>Shawshank Redemption, The (1994) 4.539075 4.560625<br>Grand Day Out, A (1992) 4.537879 4.293255<br>To Kill a Mockingbird (1962) 4.536667 4.372611<br>Creature Comforts (1990) 4.513889 4.272277<br>Usual Suspects, The (1995) 4.513317 4.518248<br>2.5计算评分分歧<br>假设我们想要找出男性和女性观众分歧最大的电影。一个办法是给mean_ratings加上一个用于存放平均得分之差的列，并对其进行排序：</p>
+<p>In [87]: mean_ratings[‘diff’] = mean_ratings[‘M’] - mean_ratings[‘F’]</p>
+<p>按”diff”排序即可得到分歧最大且女性观众更喜欢的电影：</p>
+<p>In [88]: sorted_by_diff = mean_ratings.sort_values(by=’diff’)</p>
+<p>In [89]: sorted_by_diff[:10]</p>
+<p>Out[89]:</p>
+<p>gender F M diff</p>
+<p>title</p>
+<p>Dirty Dancing (1987) 3.790378 2.959596 -0.830782</p>
+<p>Jumpin’ Jack Flash (1986) 3.254717 2.578358 -0.676359</p>
+<p>Grease (1978) 3.975265 3.367041 -0.608224</p>
+<p>Little Women (1994) 3.870588 3.321739 -0.548849</p>
+<p>Steel Magnolias (1989) 3.901734 3.365957 -0.535777</p>
+<p>Anastasia (1997) 3.800000 3.281609 -0.518391</p>
+<p>Rocky Horror Picture Show, The (1975) 3.673016 3.160131 -0.512885</p>
+<p>Color Purple, The (1985) 4.158192 3.659341 -0.498851</p>
+<p>Age of Innocence, The (1993) 3.827068 3.339506 -0.487561</p>
+<p>Free Willy (1993) 2.921348 2.438776 -0.482573</p>
+<p>对排序结果反序并取出前10行，得到的则是男性观众更喜欢的电影：</p>
+<p>In [90]: sorted_by_diff[::-1][:10] #倒序</p>
+<p>Out[90]:</p>
+<p>gender F M diff</p>
+<p>title</p>
+<p>Good, The Bad and The Ugly, The (1966) 3.494949 4.221300 0.726351</p>
+<p>Kentucky Fried Movie, The (1977) 2.878788 3.555147 0.676359</p>
+<p>Dumb &amp; Dumber (1994) 2.697987 3.336595 0.638608</p>
+<p>Longest Day, The (1962) 3.411765 4.031447 0.619682</p>
+<p>Cable Guy, The (1996) 2.250000 2.863787 0.613787</p>
+<p>Evil Dead II (Dead By Dawn) (1987) 3.297297 3.909283 0.611985</p>
+<p>Hidden, The (1987) 3.137931 3.745098 0.607167</p>
+<p>Rocky III (1982) 2.361702 2.943503 0.581801</p>
+<p>Caddyshack (1980) 3.396135 3.969737 0.573602</p>
+<p>For a Few Dollars More (1965) 3.409091 3.953795 0.544704</p>
+<p>如果只是想要找出分歧最大的电影（不考虑性别因素），则可以计算得分数据的方差或标准差：</p>
+<p>In [91]: rating_std_by_title = data.groupby(‘title’)[‘rating’].std()#标准差</p>
+<p>In [92]: rating_std_by_title = rating_std_by_title.loc[active_titles]#选择列</p>
+<p>In [93]: rating_std_by_title.sort_values(ascending=False)[:10]#排序</p>
+<p>Out[93]:</p>
+<p>title</p>
+<p>Dumb &amp; Dumber (1994) 1.321333</p>
+<p>Blair Witch Project, The (1999) 1.316368</p>
+<p>Natural Born Killers (1994) 1.307198</p>
+<p>Tank Girl (1995) 1.277695</p>
+<p>Rocky Horror Picture Show, The (1975) 1.260177</p>
+<p>Eyes Wide Shut (1999) 1.259624</p>
+<p>Evita (1996) 1.253631</p>
+<p>Billy Madison (1995) 1.249970</p>
+<p>Fear and Loathing in Las Vegas (1998) 1.246408</p>
+<p>Bicentennial Man (1999) 1.245533</p>
+<p>Name: rating, dtype: float64</p>
+<p>可能你已经注意到了，电影分类是以竖线（|）分隔的字符串形式给出的。如果想对电影分类进行分析的话，就需要先将其转换成更有用的形式才行。</p>
+<p>三、小结<br>pd.options.display.max_rows = 10 #限制显示数量</p>
+<p>data = pd.merge(pd.merge(ratings, users), movies)</p>
+<p>data.iloc[0]</p>
+<p>mean_ratings = data.pivot_table(‘rating’, index=’title’,</p>
+<p>….: columns=’gender’, aggfunc=’mean’)</p>
+<p>ratings_by_title = data.groupby(‘title’).size()</p>
+<p>active_titles = ratings_by_title.index[ratings_by_title &gt;= 250]</p>
+<p>mean_ratings = mean_ratings.loc[active_titles]</p>
+<p>top_female_ratings = mean_ratings.sort_values(by=’F’, ascending=False)</p>
+<p>mean_ratings[‘diff’] = mean_ratings[‘M’] - mean_ratings[‘F’]</p>
+<p>sorted_by_diff = mean_ratings.sort_values(by=’diff’)</p>
+<p>sorted_by_diff[::-1][:10] #倒序</p>
+<p>rating_std_by_title = data.groupby(‘title’)[‘rating’].std()#标准差</p>
+<p>rating_std_by_title = rating_std_by_title.loc[active_titles]#选择列</p>
+<p>rating_std_by_title.sort_values(ascending=False)[:10]#排序</p>
+<p>·后记<br>最后一章，查缺补漏。本节涉及了表的读取、合并、选择、透视、分组、排序、筛选、统计，功能相对齐全。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-numpy/" rel="prev" title="利用python进行数据分析-numpy">
+      <i class="fa fa-chevron-left"></i> 利用python进行数据分析-numpy
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/" rel="next" title="利用python进行数据分析-数据清洗">
+      利用python进行数据分析-数据清洗 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

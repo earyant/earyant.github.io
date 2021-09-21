@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">83</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -203,6 +203,544 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E7%82%B8%E4%BA%86%E9%82%A3%E4%B8%AAJvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E7%82%B8%E4%BA%86%E9%82%A3%E4%B8%AAJvm/" class="post-title-link" itemprop="url">炸了那个Jvm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-25 17:39:16" itemprop="dateCreated datePublished" datetime="2017-09-25T17:39:16+08:00">2017-09-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://zhuanlan.51cto.com/art/201709/550451.htm">http://zhuanlan.51cto.com/art/201709/550451.htm</a></p>
+<h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>   <img src="img/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.jpg"></p>
+<p>   打印出来的信息：</p>
+<pre><code>PSYoungGen      total 3072K, used 128K 
+    eden space 2560K, 5% used  
+    survivor  space 
+        from space 512K, 0% used  
+         to   space 512K, 0% used  
+ 
+ParOldGen       total 6656K, used 408K 
+    object space 6656K, 6% used   
+ 
+PSPermGen       total 4096K, used 3039K    
+    object space 4096K, 74% used  
+    
+</code></pre>
+<h2 id="GC过程"><a href="#GC过程" class="headerlink" title="GC过程"></a>GC过程</h2><ul>
+<li>年轻代：<br>  存放对象的特点： 生命周期短，多为临时变量。<blockquote>
+<p>新实例化的对象都会在eden中new出来，经过手动System.gc()（本质上也是调用Runtime的gc）、Runtime.getRuntime().gc()（本地方法）或者一段时间后系统自动触发gc，年轻代使用 <em>复制清除</em>算法 ，从Root对象开始标记为存活，存活的对象引用的对象也会标记为存活，扫描整个eden区后，将存活的对象存放到其中一个survivor区，清除eden区和另外一个eden区。下次再产生新的对象仍然是放到eden区内，再gc时将eden区和有对象存储的survivor存活的对象复制到另外一个survivor区内，清除这两个区，反复如此，清除一定次数后（之前看过介绍15次，不太确定）将仍然存活的放到年老代。</p>
+</blockquote>
+</li>
+<li>年老代<br>  存放对象特点： 生命周期长。<blockquote>
+<p>年老代使用<em>标记整理</em>算法，还是从Root对象开始搜索，标记所有存活的对象，把所有存活的对象复制到一个区域内，再清除其他区域。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="栈内存溢出-java-lang-StackOverflowError"><a href="#栈内存溢出-java-lang-StackOverflowError" class="headerlink" title="栈内存溢出(java.lang.StackOverflowError)"></a>栈内存溢出(java.lang.StackOverflowError)</h3><pre><code> &gt; -Xmx10m
+   -XX:MaxPermSize=5m
+   -XX:MaxDirectMemorySize=5m
+   -XX:+PrintGCDetails
+</code></pre>
+<h3 id="永久代溢出-java-lang-OutOfMemoryError-GC-overhead-limit-exceeded"><a href="#永久代溢出-java-lang-OutOfMemoryError-GC-overhead-limit-exceeded" class="headerlink" title="永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)"></a>永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Collections%E7%B1%BB%E5%85%A8%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/Collections%E7%B1%BB%E5%85%A8%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Collections类全解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-24 15:09:50" itemprop="dateCreated datePublished" datetime="2017-09-24T15:09:50+08:00">2017-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Mysql%E5%86%85%E8%BF%9E%E6%8E%A5%E3%80%81%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E3%80%81%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5%E3%80%81%E5%85%A8%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/Mysql%E5%86%85%E8%BF%9E%E6%8E%A5%E3%80%81%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E3%80%81%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5%E3%80%81%E5%85%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">Mysql内连接、左外连接、右外连接、全连接</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-23 14:57:51" itemprop="dateCreated datePublished" datetime="2017-09-23T14:57:51+08:00">2017-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="指定方式"><a href="#指定方式" class="headerlink" title="指定方式"></a>指定方式</h2><blockquote>
+<p>连接条件可以在FROM或WHERE语句中指定。</p>
+</blockquote>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li><p>内连接</p>
+<blockquote>
+<p>典型的连接运算，使用=或者&lt;&gt;之类的比较运算。包括相等连接和自然连接。<br>内连接使用比较运算符根据每个表共有的值匹配两个表中的行。</p>
+</blockquote>
+</li>
+<li><p>外连接</p>
+<ul>
+<li><p>左外连接</p>
+<blockquote>
+<p>left join 结果集包括左表中的所有行，如果左表的某行在右表中没有匹配行，结果集中显示为空。</p>
+</blockquote>
+</li>
+<li><p>右外连接</p>
+<blockquote>
+<p>与左外连接相反。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>全连接</p>
+<blockquote>
+<p>返回左表和右表中所有的行。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Mysql%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/Mysql%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">Mysql索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-23 14:47:32" itemprop="dateCreated datePublished" datetime="2017-09-23T14:47:32+08:00">2017-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-21 14:23:56" itemprop="dateModified" datetime="2021-09-21T14:23:56+08:00">2021-09-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
+<p>由用户创建的，能够被修改和删除的，实际存储在数据库中的物理存在。它是某一表中一列或者若干列值得集合和相应的指向表中物理标志这些值的数据页的逻辑指针清单</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>通过创建唯一索引，可以保证数据库中每一行数据的唯一性。</li>
+<li>大大加快数据的检索速度。</li>
+<li>加速表与表之间的联系。</li>
+<li>在使用分组和排序子句进行数据检索时，可以显著减少查询中分组和排序的时间。</li>
+<li>通过使用索引，可以在查询的过程中使用优化隐藏器，提高系统性能。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>创建和维护索引需要耗费时间，时间随数据量增加而增加。</li>
+<li>索引占据物理空间，如果建立聚簇索引，占用空间更大。</li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>聚集索引，表中数据按照索引的顺序来存储。叶子节点存储了真实的数据行，没有另外单独的数据页。</li>
+<li>非聚集索引，表数据存储顺序与索引顺序无关，叶节点包含索引字段值及指向数据页数据行的逻辑指针。</li>
+<li>一张表上只能创建一个聚集索引，因为真实数据的物理顺序只能是一种。如果一张表没有聚集索引，它被称为“堆集”，没有特定的顺序，新加的元行被添加到末尾。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/ArrayList%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ArrayList%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">ArrayList原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-23 14:36:39" itemprop="dateCreated datePublished" datetime="2017-09-23T14:36:39+08:00">2017-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
+<ul>
+<li>是否允许空：<br>允许</li>
+<li>是否允许重复数据：<br>允许</li>
+<li>是否有序：<br>是</li>
+<li>是否线程安全：<br>不是</li>
+</ul>
+<h2 id="默认大小-10"><a href="#默认大小-10" class="headerlink" title="默认大小 : 10"></a>默认大小 : 10</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><ul>
+<li>根据下标删除。</li>
+<li>根据元素删除。<blockquote>
+<p>删除跟元素匹配的 <em>第一个</em> 元素</p>
+</blockquote>
+</li>
+</ul>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line"></span><br><span class="line">         numMoved);</span><br><span class="line"></span><br><span class="line">elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>1、把指定元素后面位置的所有元素，利用System.arraycopy方法整体向前移动一个位置</li>
+<li>2、最后一个位置的元素指定为null，这样让gc可以去回收它<blockquote>
+<p>因为删除的时候，需要将后面所有元素向前移动一个位置，所以删除的时候，很消耗性能。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><ul>
+<li>add(T t)</li>
+<li>add(int position,T t)<blockquote>
+<p>插入时候会将所有后面的元素向后移动一个位置，很消耗性能。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="ArrayList的优缺点"><a href="#ArrayList的优缺点" class="headerlink" title="ArrayList的优缺点"></a>ArrayList的优缺点</h2><ul>
+<li>底层以数组方式存储，是一种随机访问方式，并且实现了RandomAccess接口，因此查找十分快速。</li>
+<li>添加很方便，往数组的最后添加一个就行了。</li>
+<li>删除和添加的时候涉及到移动后面所有数据，性能消耗比较大。    </li>
+</ul>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
+<p>不是线程安全的，所有方法都没有Synchronized修饰，在并发情况下会出现安全问题。可以使用Collections.synchronizedList方式</p>
+</blockquote>
+<h2 id="为什么ArrayList的elementData是用transient修饰的？"><a href="#为什么ArrayList的elementData是用transient修饰的？" class="headerlink" title="为什么ArrayList的elementData是用transient修饰的？"></a>为什么ArrayList的elementData是用transient修饰的？</h2><blockquote>
+<p>private transient Object[] elementData;</p>
+</blockquote>
+<blockquote>
+<p>ArrayList 实现了Serializable接口，所以是可以序列化的。但是elementData不一定是满的，没必要全部序列化。所以ArrayList重写了writeObject方法实现，增快了序列化的速度，见笑了序列化后的大小：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line"><span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line"><span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">s.defaultWriteObject();</span><br><span class="line">        <span class="comment">// Write out array length</span></span><br><span class="line">       s.writeInt(elementData.length);</span><br><span class="line">    <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++)</span><br><span class="line">           s.writeObject(elementData[i]);</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">java8新增功能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-18 21:34:40" itemprop="dateCreated datePublished" datetime="2017-09-18T21:34:40+08:00">2017-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h1 id="接口中default关键字修饰方法可以增加默认实现。"><a href="#接口中default关键字修饰方法可以增加默认实现。" class="headerlink" title="接口中default关键字修饰方法可以增加默认实现。"></a>接口中default关键字修饰方法可以增加默认实现。</h1>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a )</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(names,(a,b)-&gt;b.compareTo(a));</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Coverter</span>&lt;<span class="title">F</span>,<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Convert&lt;String,Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="方法和构造函数引用"><a href="#方法和构造函数引用" class="headerlink" title="方法和构造函数引用"></a>方法和构造函数引用</h1><ul>
+<li>静态方法引用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Convert&lt;String,Integer&gt; converter = Integer::valueOf;</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>通过:: 关键字获取方法或者构造函数的引用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span></span>&#123;</span><br><span class="line">  <span class="function">String <span class="title">startsWith</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Something something = <span class="keyword">new</span> Something();</span><br><span class="line">Converter&lt;String,String&gt; converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(<span class="string">&quot;java&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引用构造函数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  String firstName；</span><br><span class="line">  String lastName；</span><br><span class="line">  Person()&#123;&#125;;</span><br><span class="line">  Person(String firstName,String lastName)&#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName=firstName;</span><br><span class="line">    <span class="keyword">this</span>.lastName=lastName;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新建工厂类</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function">P <span class="title">create</span><span class="params">(String firstName,String lastName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过构造函数引用将所有东西拼到一起，通过手动实现。</span></span><br><span class="line"></span><br><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">&quot;earyant&quot;</span>,<span class="string">&quot;Lee&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="类库示例"><a href="#类库示例" class="headerlink" title="类库示例"></a>类库示例</h1><h2 id="Predicates-断言"><a href="#Predicates-断言" class="headerlink" title="Predicates(断言)"></a>Predicates(断言)</h2><blockquote>
+<p>是一个布尔类型的函数，该函数只有一个输入函数，它实现了多种默认方法，用于处理复杂的逻辑动词。(and ,or,negate(否定))</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate = (s)-&gt;s.length()&gt;<span class="number">0</span>;</span><br><span class="line">predicate.test(<span class="string">&quot;earyant&quot;</span>)  <span class="comment">// true</span></span><br><span class="line">predicate.negate().test(<span class="string">&quot;earyant&quot;</span>); <span class="comment">//false  </span></span><br><span class="line"></span><br><span class="line">Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;</span><br><span class="line">Predicate&lt;Boolean&gt; isNull = Objects::isNull;</span><br><span class="line"></span><br><span class="line">Predicate&lt;String&gt; isEmpty = String::isEmpty;</span><br><span class="line">Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><blockquote>
+<p>接收一个参数，并返回单一的结果，默认方法可以将多个函数穿在一起(compose，andThen)：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String,Integer&gt; toInteger = Integer:valueOf;</span><br><span class="line">Function&lt;String,String&gt; backToString = toInteger.andThen(String::valueOf);</span><br><span class="line">backToString.apply(<span class="string">&quot;123&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Suppliers"><a href="#Suppliers" class="headerlink" title="Suppliers"></a>Suppliers</h2><blockquote>
+<p>Supplier 接口产生一个给定类型的结果，与Function不同的是，Supplier没有输入参数。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;Person&gt; personSupplier = Person:<span class="keyword">new</span>;</span><br><span class="line">personSupplier.get();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -539,1672 +1077,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E4%BB%8E%E6%95%B2%E4%B8%8Bwww-baidu-com%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/" class="post-title-link" itemprop="url">从敲下www.baidu.com到浏览器显示页面，都发生了什么？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-12 18:16:00" itemprop="dateCreated datePublished" datetime="2017-09-12T18:16:00+08:00">2017-09-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h1><h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><pre><code>URL（Uniform Resource Locator），统一资源定位符，实际就是网站网址，又称域名。在茫茫网络世界中，浏览器就是靠URL来查找资源位置。URL包含协议部分，是浏览器和www万维网之间的沟通方式，它会告诉浏览器正确在网路上找到资源位置。常见的协议有http、https、ftp、file、telnet等。其中http是最常见的网络传输协议，而https则是进行加密的网络传输。
-</code></pre>
-<h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><pre><code>为了便于记忆或辨识，人们使用域名来登录网站，每个域名背后有对应的IP地址。每个网站就是靠IP来定位的。IP是因特网中的每台连接到网络的计算机为实现相互通信而遵循的规则协议。IP分为局域网IP和全网IP。办公中常用的飞秋工具，就是使用办公室局域网IP进行通信的典型表现。每台计算机的本机IP都是127.0.0.1（即localhost）。浏览器并不能识别URL是什么，因此从输入URL开始，浏览器就要做域名解析，也就是IP寻址的工作。
-</code></pre>
-<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><pre><code>DNS（Domain Name System，域名系统）——记录域名和IP地址相互映射的信息，人们可以免于记住IP数串。全国DNS信息可在网上查找到，各省都有对应分配不同的IP网段。大型企业会有自己的DNS服务器，专门存储域名和IP的映射关系，例如为大多数人熟知的谷歌DNS服务器，地址8.8.8.8。
-</code></pre>
-<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>  当用户在浏览器中输入url后,你使用的电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动,DNS请求到达本地DNS服务器之后会有以下几个步骤：</p>
-<h3 id="1-浏览器缓存"><a href="#1-浏览器缓存" class="headerlink" title="1. 浏览器缓存"></a>1. 浏览器缓存</h3><p>  浏览器对本地缓存进行查找，查看是否有该域名历史记录，如果有首先直接对缓存地址访问。<br>  Chrome浏览器看本身的DNS缓存时间比较方便，在地址栏输入chrome://net-internals/#dns，就可以看到了</p>
-<h3 id="2-本地hosts文件查找ip地址"><a href="#2-本地hosts文件查找ip地址" class="headerlink" title="2. 本地hosts文件查找ip地址"></a>2. 本地hosts文件查找ip地址</h3><p>  浏览器若无缓存或者缓存地址访问无效，则首先对hosts文件查找对应域名对应ip地址。</p>
-<h3 id="3-查找路由器缓存"><a href="#3-查找路由器缓存" class="headerlink" title="3. 查找路由器缓存"></a>3. 查找路由器缓存</h3><p>  如果系统缓存中也找不到，那么查询请求就会发向路由器，路由器一般会有自己的DNS缓存。</p>
-<h3 id="4-查找ISP-Internet-Service-Provider-DNS-缓存"><a href="#4-查找ISP-Internet-Service-Provider-DNS-缓存" class="headerlink" title="4. 查找ISP(Internet Service Provider) DNS 缓存"></a>4. 查找ISP(Internet Service Provider) DNS 缓存</h3><p>如果路由器缓存中也找不到，那么就查询ISP DNS 缓存服务器了。<br>我们都知道在我们的网络配置中都会有”DNS服务器地址”这一项，操作系统会把这个域名发送给这里设置的DNS，比如114.114.114.114,也就是本地区的域名服务器，通常是提供给你接入互联网的应用提供商。而114.114.114.114是国内移动、电信和联通通用的DNS。</p>
-<h3 id="5-迭代查询"><a href="#5-迭代查询" class="headerlink" title="5. 迭代查询"></a>5. 迭代查询</h3><p>  如果前面都找不到DNS缓存的话，会有以下几个步骤：</p>
-<ol>
-<li>本地 DNS服务器将该请求转发到互联网上的根域（根域没有名字，在DNS系统中就用一个空字符串来表示。例如<a target="_blank" rel="noopener" href="http://www.baidu.com.现在的dns系统都不会要求域名以.来结束,即www.baidu.com就可以解析了,但是现在很多dns解析服务商还是会要求在填写dns记录的时候以.来结尾域名.)/">www.baidu.com.现在的DNS系统都不会要求域名以.来结束，即www.baidu.com就可以解析了，但是现在很多DNS解析服务商还是会要求在填写DNS记录的时候以.来结尾域名。）</a></li>
-<li>根域将所要查询域名中的顶级域（比如要查询<a target="_blank" rel="noopener" href="http://www.baidu.com,该域名的顶级域就是com)的服务器ip地址返回到本地dns./">www.baidu.com，该域名的顶级域就是com）的服务器IP地址返回到本地DNS。</a></li>
-<li>本地DNS根据返回的IP地址，再向顶级域（就是com域）发送请求， com域服务器再将域名中的二级域（即<a target="_blank" rel="noopener" href="http://www.baidu.com中的baidu.com)的ip地址返回给本地dns./">www.baidu.com中的baidu.com）的IP地址返回给本地DNS。</a></li>
-<li>本地DNS再向二级域发送请求进行查询。</li>
-<li>之后不断重复这样的过程，直到本地DNS服务器得到最终的查询结果，并返回到主机。这时候主机才能通过域名访问该网站。<br>下图能很好的说明这个迭代查询:<br><img src="./dns%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B.gif"><br>当查找到对应的IP地址之后，通过IP地址查找到对应的服务器，浏览器将用户发起的http请求发送给服务器。例如：GET <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a> HTTP/1.1<h3 id="6-CDN"><a href="#6-CDN" class="headerlink" title="6. CDN"></a>6. CDN</h3>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。<h1 id="服务器处理用户请求"><a href="#服务器处理用户请求" class="headerlink" title="服务器处理用户请求"></a>服务器处理用户请求</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3>正向代理是一种最终用户知道并主动使用的代理方式，比如三台支付服务服务器在微服务SpringCloud中的服务注册中心中注册了三个地址（1.1.1.1,2.2.2.2,3.3.3.3），用户服务服务器访问服务注册中心请求地址正向代理返回某一个地址（1.1.1.1），支付服务缓存到本地，在缓存有效期时间内，直接访问1.1.1.1服务器就可以了。<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3>在计算机世界里，由于单个服务器的处理客户端（用户）请求能力有一个极限，当用户的接入请求蜂拥而入时，会造成服务器忙不过来的局面，可以使用多个服务器来共同分担成千上万的用户请求，这些服务器提供相同的服务，对于用户来说，根本感觉不到任何差别。比如你只需要敲下<a target="_blank" rel="noopener" href="http://www.baidu.com这一个域名,其实背后有很多服务器支持着,每个人的请求会被分发到不同的服务器中./">www.baidu.com这一个域名，其实背后有很多服务器支持着，每个人的请求会被分发到不同的服务器中。</a></li>
-</ol>
-<p>  反向代理需要有一个负载均衡设备来分发用户请求，将用户请求分发到空闲的服务器上，负载均衡设备本身也可以有多个。</p>
-<p>  <strong>好处</strong>：<br>  用户服务做域名解析时，解析到的ip地址是负载均衡设备的ip地址，不会暴露服务器地址。当需要增加、减少服务器数量时，用户一点都察觉不到。</p>
-<h2 id="负载均衡（反向代理的实现）"><a href="#负载均衡（反向代理的实现）" class="headerlink" title="负载均衡（反向代理的实现）"></a>负载均衡（反向代理的实现）</h2><h3 id="硬件负载均衡"><a href="#硬件负载均衡" class="headerlink" title="硬件负载均衡"></a>硬件负载均衡</h3><p>  F5</p>
-<h3 id="软件负载均衡"><a href="#软件负载均衡" class="headerlink" title="软件负载均衡"></a>软件负载均衡</h3><ul>
-<li>LVS(七层协议第四层)<br>  LVS是Linux Virtual Server。lvs工作在4层，所以它可以对几乎所有应用做负载均衡，包括http、数据库、聊天室等等。同时，若跟硬件负载均衡相比它的缺点也不容忽视，LVS要求技术水平很高，操作上也比较复杂，配置也很繁琐，没有赖以保障的服务支持，稳定性来说也相对较低（人为和网络环境因素更多一些）。</li>
-<li>nginx(七层协议第七层)<br>  Nginx是工作在第七层，对于网络的依赖性就小的多。与LVS相比，Nginx的安装和配置也相对简单一些，另外测试方面也更简单，主要还是因为对网络依赖性小的缘故。Nginx有一点不好的就是应用要比LVS少。一般我们做软件负载均衡的时候，通常会先考虑LVS，但是遇到比较复杂的网络环境时，用LVS可能会遇到很多麻烦，不妨就考虑尝试一下Nginx。</li>
-</ul>
-<h3 id="容器处理"><a href="#容器处理" class="headerlink" title="容器处理"></a>容器处理</h3><ul>
-<li>常用Java EE容器<ul>
-<li>tomcat</li>
-<li>jetty</li>
-<li>jBoss<br>tomcat服务器启动main方法，当command命令行是start，就执行start方法。反射调用Catalina类的start()方法。这里面会弄出一个StandardServer对象（内部会使用Digester库去解析server.xml，那个里面的东西），并调用它的start()方法，把那些组件都启动起来。<br>其中在连接器的启动过程中，会弄出一个叫做endpoint的东西去和底层的网络IO打交道，会调用其bind()方法，绑定端口号。<br>connector将请求交给他所在的service里对应的engine，来处理；<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Engine</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-每当HttpConnector的ServerSocket得到客户端的连接时，会创建一个Socket。<br>考虑到客户端同时发来的请求数可能有很多， 所以tomcat 中默认维护着一个连接池<br>NioChannel channel = nioChannels.pop();<br>channel.setIOChannel(socket);<br>channel.reset();<br>getPoller0().register(channel);<br>context随后在自己的mapping table里寻找servlet-mapping拦截路径为*.jsp的servlet，这里找到得是JSPServlet处理<br>找到JSPServlet后，调用JSPServlet的doGet或doPOST方法；<br>context执行完毕后，将HttpServletResponse 返回给Host；<br>host将HttpServletResponse 返回给engine；<br>engine 将HttpServletResponse 返回给 connector；<br>connector 将 HttpServletResponse 返回给用户的browser；</li>
-</ul>
-</li>
-</ul>
-<p>  tomcat容器在启动后，context对应的项目在初始化的时候，要加载相应的servlet，加载的顺序为：<br>  $CATALINA_HOME/conf/web.xml里定义的servlet（对应于上面第5步的JSPServlet）；<br>  context对应的项目WEB-INF下的web.xml中定义的servlet；</p>
-<h3 id="应用处理"><a href="#应用处理" class="headerlink" title="应用处理"></a>应用处理</h3><ol>
-<li>Controller接收到请求，转发给service；</li>
-<li>service进行逻辑处理，如果有redis、ehcache等缓存则优先查询缓存；</li>
-<li>如果是dubbo或者springcloud分布式，则通过dubbo服务或者restful请求调用其他服务模块请求信息；</li>
-<li>调用dao查询数据库；</li>
-<li>返回数据给service再给controller，controller再组装数据以及view返回；</li>
-<li>view层jsp或者velocity等模板引擎解析数据</li>
-</ol>
-<h3 id="Mysql架构"><a href="#Mysql架构" class="headerlink" title="Mysql架构"></a>Mysql架构</h3><ol>
-<li>服务器先会检查查询缓存，如果命中了缓存，则立即返回存储在缓存中的结果。</li>
-<li>服务器端进行SQL解析、预处理，再由优化器生成对应的执行计划；</li>
-<li>MySQL根据优化器生成的执行计划，调用存储引擎的API来执行查询；</li>
-<li>将结果返回给客户端。<h4 id="MySQL能够处理的优化类型："><a href="#MySQL能够处理的优化类型：" class="headerlink" title="MySQL能够处理的优化类型："></a>MySQL能够处理的优化类型：</h4></li>
-<li>重新定义关联表的顺序<br>数据表的关联并不总是按照在查询中指定的顺序进行，决定关联的顺序是优化器很重要的一部分功能。</li>
-<li>将外连接转化成内连接<br>并不是所有的outer join语句都必须以外连接的方式执行。诸多因素，例如where条件、库表结构都可能会让外连接等价于一个内连接。MySQL能够识别这点并重写查询，让其可以调整关联顺序。</li>
-<li>使用等价变换规则<br>MySQL可以使用一些等价变换来简化并规范表达式。它可以合并和减少一些比较，还可以移除一些恒成立和一些恒不成立的判断。例如：（5=5 and a&gt;5）将被改写为a&gt;5。类似的，如果有（a<b and b=c）and a=5，则会被改写为 b>5 and b=c and a=5。</li>
-<li>优化count()、min()和max()<br>索引和列是否为空通常可以帮助MySQL优化这类表达式。例如，要找到一列的最小值，只需要查询对应B-tree索引最左端的记录，MySQL可以直接获取索引的第一行记录。在优化器生成执行计划的时候就可以利用这一点，在B-tree索引中，优化器会讲这个表达式最为一个常数对待。类似的，如果要查找一个最大值，也只需要读取B-tree索引的最后一个记录。如果MySQL使用了这种类型的优化，那么在explain中就可以看到“select tables optimized away”。从字面意思可以看出，它表示优化器已经从执行计划中移除了该表，并以一个常数取而代之。<br>类似的，没有任何where条件的count(*)查询通常也可以使用存储引擎提供的一些优化，例如，MyISAM维护了一个变量来存放数据表的行数。</li>
-<li>预估并转化为常数表达式</li>
-<li>覆盖索引扫描<br>当索引中的列包含所有查询中需要使用的列的时候，MySQL就可以使用索引返回需要的数据，而无需查询对应的数据行。</li>
-<li>子查询优化<br>MySQL在某些情况下可以将子查询转换成一种效率更高的形式，从而减少多个查询多次对数据进行访问。</li>
-<li>提前终止查询<br>在发现已经满足查询需求的时候，MySQL总是能够立即终止查询。一个典型的例子就是当使用了limit子句的时候。除此之外，MySQL还有几种情况也会提前终止查询，例如发现了一个不成立的条件，这时MySQL可以立即返回一个空结果。<br>上面的例子可以看出，查询在优化阶段就已经终止。</li>
-<li>等值传播</li>
-<li>列表in()的比较<br>在很多数据库系统中，in()完全等同于多个or条件的字句，因为这两者是完全等价的。在MySQL中这点是不成立的，MySQL将in()列表中的数据先进行排序，然后通过二分查找的方式来确定列表中的值是否满足条件，这是一个o(log n)复杂度的操作，等价转换成or的查询的复杂度为o(n)，对于in()列表中有大量取值的时候，MySQL的处理速度会更快。</li>
-</ol>
-<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/SpringMvc%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/SpringMvc%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">SpringMvc工作流程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-12 18:14:53" itemprop="dateCreated datePublished" datetime="2017-09-12T18:14:53+08:00">2017-09-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="SpringMVC核心流程-主要在doDispatch方法中"><a href="#SpringMVC核心流程-主要在doDispatch方法中" class="headerlink" title="SpringMVC核心流程,主要在doDispatch方法中"></a>SpringMVC核心流程,主要在doDispatch方法中</h2><ul>
-<li> 1、用户发送请求，被SpringMvc的DispatcherServlet捕获到</li>
-<li> 2、DispatcherServlet对获取到的URL进行解析，得到统一定位符URI，然后根据URI调用HandlerMapping获得Handler对象以及跟handler相关的拦截器，最后以HandlerExecutionChain对象形式返回。</li>
-<li> 3、DispatcherServlet根据返回的Handler选择合适的HandlerAdapter，如果找到了HandlerAdapter,在之前就会执行preHandler方法</li>
-<li>4、提取request中的模型数据，填充Handler入参，开始执行Handler<ul>
-<li>在填充的过程中，SpringMvc会做一些操作：<ul>
-<li>HttpMessageConvert ： 将消息转换成一个对象，将对象转换成指定的响应信息。</li>
-<li>数据转换： 比如将String转换成Integer等</li>
-<li>数据格式化： 日期格式化等</li>
-<li>数据验证： 验证数据的有效性，包括长度、类型等等，验证结果存储到BindingResult或者Error中。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li> 5、Handler执行完成后，像DispatcherServlet返回一个ModelAndView。</li>
-<li> 6、根据返回的ModelAndView选择一个合适的ViewResolver返回给DispatcherServlet</li>
-<li> 7、ViewResolveModel和View来渲染视图</li>
-<li> 8、将渲染结果返回给客户端</li>
-</ul>
-<h2 id="处理关键"><a href="#处理关键" class="headerlink" title="处理关键"></a>处理关键</h2><ul>
-<li>DispatcherServlet的HandlerMapping集合中根据请求的URL匹配每一个handlerMapping对象中的某个handler,匹配成功后将会返回这个handler的处理连接handlerExecutorChain对象，而这个对象中包括多个handlerInterceptor。</li>
-<li>HandlerInterceptor中包含三个方法<ul>
-<li>preHandler，在Handler执行之前调用。</li>
-<li>postHandler，在Handler执行之后调用。</li>
-<li>afterComplete，在view渲染完成后，dispatchServlet返回之前调用。</li>
-</ul>
-</li>
-<li>当preHandler返回false时，请求将在执行afterComplete后直接返回，不会执行handler。    </li>
-</ul>
-<h2 id="首先有几个类需要声明-ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。"><a href="#首先有几个类需要声明-ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。" class="headerlink" title="首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。"></a>首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</h2><ul>
-<li>1、HandlerMethod(org.springframework.web.method.HandlerMethod)，这个类为中存放了某个bean对象和该bean对象的某个要处理的Method对象。</li>
-<li>2、HandlerMapping,作用为通过request对象，获取对应的HandlerMethod对象。</li>
-<li>3、HandlerExecutionChain作用为通过加入Interceptor拦截器包装HandlerMapping返回的HandlerMethod对象。让待处理的方法对象与拦截器称为一个整体,即执行链。</li>
-<li>4、ModelAndView,顾名思义。Model即MVC的M，View即MVC的V。其对象存放的正是数据与视图信息。</li>
-<li>5、HandlerAdapter:作用为具体处理HandlerMethod,即通过它调用某个方法。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%8F%96%E4%BD%99%E5%92%8C%E5%8F%96%E6%A8%A1%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E5%8F%96%E4%BD%99%E5%92%8C%E5%8F%96%E6%A8%A1%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">取余和取模的区别</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-10 17:45:03" itemprop="dateCreated datePublished" datetime="2017-09-10T17:45:03+08:00">2017-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">ArrayList和LinkedList对比</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-10 17:12:21" itemprop="dateCreated datePublished" datetime="2017-09-10T17:12:21+08:00">2017-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
-<li>ArrayList ： 继承自List接口</li>
-<li>LinkedList ： 继承自List和Deque接口</li>
-</ul>
-<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><ul>
-<li>ArrayList ：底层用数组进行存储</li>
-<li>LinkedList ： 底层用双链表进行存储 </li>
-</ul>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>ArrayList ： 访问速度快，插入和删除比较慢 ，需要移动元素</li>
-<li>LinkedList ： 访问比较慢，插入和删除比较快 ， 需要链式查询</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">java集合框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-10 16:51:45" itemprop="dateCreated datePublished" datetime="2017-09-10T16:51:45+08:00">2017-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="顶级接口："><a href="#顶级接口：" class="headerlink" title="顶级接口："></a>顶级接口：</h2><ul>
-<li>Collection<br>  <img src="img/Collection%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
-<li>Map<br>  <img src="img/Map%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
-</ul>
-<h2 id="顶级类："><a href="#顶级类：" class="headerlink" title="顶级类："></a>顶级类：</h2><ul>
-<li>Collections</li>
-</ul>
-<h3 id="接口描述"><a href="#接口描述" class="headerlink" title="接口描述"></a>接口描述</h3><ul>
-<li>Collection ：  不提供直接子类继承，只提供继承的子接口（List和Set）<ul>
-<li><p>List : 有序的Collection，控制元素的插入位置，和通过索引访问List数据，允许相同的Key。</p>
-<ul>
-<li><p>Verctor</p>
-<ul>
-<li>Stack</li>
-</ul>
-</li>
-<li><p>ArrayList</p>
-</li>
-<li><p>LinkedList( 也继承自 Deque)</p>
-</li>
-<li><p><a href="https://earyant.github.io/2017/09/10/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/">ArrayList和LinkedList对比</a></p>
-</li>
-</ul>
-</li>
-<li><p>Set ： 不保存重复数据</p>
-<ul>
-<li>HashSet<ul>
-<li>LinkedHashSet</li>
-</ul>
-</li>
-<li>SortedSet<ul>
-<li>TreeSet</li>
-</ul>
-</li>
-<li>EnumSet</li>
-</ul>
-</li>
-<li><p>Queue</p>
-<ul>
-<li>DeQue<ul>
-<li>LinkedList</li>
-</ul>
-</li>
-<li>PriorityQueue</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Map<ul>
-<li>EnumMap</li>
-<li>HashMap<ul>
-<li>LinkedHashMap</li>
-</ul>
-</li>
-<li>IdentityMap</li>
-<li>HashTable<ul>
-<li>Properties</li>
-</ul>
-</li>
-<li>SortedMap<ul>
-<li>TreeMap</li>
-</ul>
-</li>
-<li>WeakHashMap</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">java整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-09 21:36:59" itemprop="dateCreated datePublished" datetime="2017-09-09T21:36:59+08:00">2017-09-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="算法和数据结构（性能，场景）："><a href="#算法和数据结构（性能，场景）：" class="headerlink" title="算法和数据结构（性能，场景）："></a>算法和数据结构（性能，场景）：</h2><h3 id="数据结构："><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h3><ul>
-<li><p>  数组</p>
-</li>
-<li><p>  链表</p>
-</li>
-<li><p>树</p>
-<ul>
-<li>二叉树<ul>
-<li>  满二叉树</li>
-<li>  完美二叉树</li>
-<li>  完全二叉树</li>
-<li>二叉搜索树： 其任何节点中的值都会大于或者等于其做字数中存储的值并小于或者等于其右子树的值。<ul>
-<li>时间复杂度：<ul>
-<li>  索引: O(log(n))</li>
-<li>  搜索: O(log(n))</li>
-<li>  插入: O(log(n))</li>
-<li>  删除: O(log(n))</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>  红黑树</li>
-<li>  AVL树</li>
-<li>  Hash树</li>
-<li>  tire树</li>
-<li>  b-树（读b树，也叫balance树，不读b减树 “-”代表横杠）</li>
-<li>  b+树</li>
-<li>  LSM（Log-Structured Merge-Trees）树</li>
-<li>  Trie 字典树，基数树或者前缀树，能够存储键为字符串的动态集合或者关联数组的搜索树，树中节点没有存储键值，而是在该节点在树中的挂载位置决定了其关联键值，某个节点的所有子节点都拥有相同的前缀，整树根节点则是空字符串</li>
-<li>Fenwick Tree：树状数组，又称为 Binary Indexed Tree，其表现形式为树，不过本质上是以数组实现，数组的下标代表着树中的顶点，每个顶点的父节点或者子节点的下标能够通过位运算获得，数组中的每个元素包含了预计算的区间值之和，在整颗数更新的过程中同样会更新这些预计算的值。<ul>
-<li>时间复杂度：<ul>
-<li>  区间求值： O(log(n))</li>
-<li>  更新： O(log(n))</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Segment Tree<ul>
-<li>线段树是用于存放间隔或者线段的树形数据结构，它允许快速查找某一个节点在某若干条线段中出现的次数。<ul>
-<li>  区间查询： O(log(n))</li>
-<li>  更新: O(log(n))</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>  队列</p>
-</li>
-<li><p>  栈</p>
-</li>
-<li><p>堆<br>   堆是一种特殊的基于树的满足某些特性的数据结构，整个堆中的所有父子节点的键值都会满足相同的排序条件。堆更准确地可以分为最大堆与最小堆，在最大堆中，父节点的键值永远大于或者等于子节点的值，并且整个堆中的最大值存储于根节点；而最小堆中，父节点的键值永远小于或者等于其子节点的键值，并且整个堆中的最小值存储于根节点。</p>
-</li>
-<li><p>Hashing</p>
-<ul>
-<li>  哈希能够将任意长度的数据映射到固定长度的数据，哈希函数返回的即是哈希值，如果两个不同的键得到相同的哈希值，将这种现象称为碰撞。</li>
-<li>Hash Map<br>   是一种能够建立起键与值之间关系的数据结构，Hash Map能够使用哈希函数将键转化为桶或者槽中的下标，从而优化对于目标值的搜索速度。</li>
-<li>碰撞解决：<ul>
-<li>链地址法：<br>   每个桶都是互相独立的，包含一系列索引的列表，搜索操作的时间复杂度即是搜索桶的时间（固定时间）与遍历列表的时间之和。</li>
-<li>开地址法：<br>   当插入新值时，会判断该值对应的哈希桶是否存在，如果存在则根据某种算法一次选择下一个可能的位置，知道找到一个尚未被占用的地址，所谓开地址法也是只某个元素的位置并不永远由其哈希值决定。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Graph</p>
-<pre><code>       图是一种数据元素间为多对多关系的数据结构，加上一组基本操作构成的抽象数据类型
-       \- 无向图：
-          无向图具有对称的邻接矩阵，因此如果存在某条从节点u到节点v的边，反之从v到u的边也存在。
-       \- 有向图：
-          有向图的邻接矩阵是非对称的，即如果存在从u到v的表并不意味着存在v到u的边。
-</code></pre>
-<h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/gane-cheng/article/details/52652705">算法</a>：</h3></li>
-<li><p>查找：</p>
-<ul>
-<li>  二分查找，以及变种二分查找。</li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/0kk470/p/7555033.html">深度优先、广度优先</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/MrSaver/p/8641971.html">贪心算法</a><ul>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/a345017062/article/details/52443781">参考二</a></li>
-</ul>
-</li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/qfikh/article/details/51960331">回溯算法</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/luningcsdn/article/details/50930276">剪枝算法</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/little-YTMM/p/5372680.html">动态规划</a><ul>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/yao_zi_jie/article/details/54580283">参考二</a></li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/amds123/article/details/70173402">朴素贝叶斯</a><ul>
-<li>  <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html">参考二</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_two.html">参考三</a></li>
-</ul>
-</li>
-<li>  <a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/recommendation-algorithm-overview-part01">推荐算法</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.oschina.net/news/51297/top-10-open-source-recommendation-systems">参考二</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/luoshixian099/article/details/51908175">最小生成树算法</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35644234/article/details/60870719">最短路径算法</a></li>
-</ul>
-</li>
-<li><p>排序：</p>
-<ul>
-<li>7种排序<pre><code>  \- [选择排序](https://www.cnblogs.com/shen-hua/p/5424059.html)
-    &gt; 每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕。
-  - [冒泡排序](https://blog.csdn.net/shuaizai88/article/details/73250615)
-      &gt; 相邻元素前后交换、把最大的排到最后。
-      &gt; 时间复杂度 O(n²)
-  - [插入排序](https://www.cnblogs.com/hapjin/p/5517667.html)
-  -   [快速排序](http://developer.51cto.com/art/201403/430986.htm)
-      -   稳定： 否
-      -   时间复杂度：
-          -   最优时间：O(nlog(n))
-          -   最坏时间: O(n^2)
-          -   平均时间：O(nlog(n))
-  -   [归并排序：](http://www.cnblogs.com/chengxiao/p/6194356.html)
-      -   分治算法，不断将某个数组分为两个部分，分别对左子数组与右子数组进行排序，然后将两个数组合并为新的有序数组
-      -   稳定：是
-      -   时间复杂度
-          -   最优时间： O(nlog(n))
-          -   最坏时间： O(nlog(n))
-          -   平均时间： O(nlog(n))
-  -   [桶排序：](http://blog.51cto.com/ahalei/1362789)
-      - [参考二](https://blog.csdn.net/sunjinshengli/article/details/70738527)
-      -   桶排序将数组分到有限数量的筒子里，每个桶子再个别排序，有可能在使用别的排序算法或者以地柜方式继续使用桶排序。
-      -   时间复杂度：
-          -   最优时间： O(n+k)
-          -   最坏时间： O(n^2)
-          -   平均时间： O(n+k)
-              [参考](https://github.com/kdn251/interviews/blob/master/README-zh-cn.md)
-  -  [计数排序](https://www.cnblogs.com/suvllian/p/5495780.html)
-  -   时间、空间复杂度（理解并分析）
-  -   动态规划、贪心算法
-</code></pre>
-<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3></li>
-</ul>
-</li>
-<li><p>OSI7层协议（TCP四层）</p>
-<ul>
-<li>  URL到页面的过程</li>
-</ul>
-</li>
-<li><p>http&#x3A;</p>
-<ul>
-<li>  http/https 1.0、1.1、2.0</li>
-<li>  get/post 以及幂等性</li>
-<li>  http相关头协议</li>
-</ul>
-</li>
-<li><p>  网络攻击（CSRF、XSS）</p>
-</li>
-<li><p>TCP/IP</p>
-<ul>
-<li>  三次握手、四次握手</li>
-<li>  拥塞控制（过程、阙值）</li>
-<li>  TCP与UDP比较</li>
-<li>  子网掩码</li>
-<li>  DDos攻击</li>
-</ul>
-</li>
-<li><p>BIO、IO、NIO、AIO</p>
-<ul>
-<li>  原理</li>
-<li>  Netty</li>
-<li>  linux内核的select poll epoll</li>
-</ul>
-</li>
-</ul>
-<h3 id="数据库-mysql"><a href="#数据库-mysql" class="headerlink" title="数据库(mysql)"></a>数据库(mysql)</h3><ul>
-<li>索引<ul>
-<li>分类<ul>
-<li>  全文索引</li>
-<li>  HASH索引</li>
-<li>  BTree索引</li>
-<li>  RTree索引</li>
-<li>  普通索引</li>
-<li>  唯一索引</li>
-<li>  主索引</li>
-<li>  外键索引</li>
-<li>  复合索引</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>优化方式<ul>
-<li>  失效条件</li>
-<li>  底层结构</li>
-</ul>
-</li>
-<li>sql语法<ul>
-<li>  join、union、子查询、having、group by</li>
-</ul>
-</li>
-<li>引擎对比<ul>
-<li>  InnoDB</li>
-<li>  MyISAM</li>
-</ul>
-</li>
-<li>[锁]{}<ul>
-<li>  行锁、表锁、页级锁、意向锁、读锁、写锁、悲观锁、乐观锁、以及枷锁的select sql方式</li>
-</ul>
-</li>
-<li>隔离级别<ul>
-<li>  脏读</li>
-<li>  不可重复读</li>
-<li>  幻读</li>
-</ul>
-</li>
-<li>  事务的ACID</li>
-<li>  B树</li>
-<li>  B+树</li>
-<li>优化<ul>
-<li>  explain</li>
-<li>  慢查询</li>
-<li>  show profile</li>
-<li>  数据库的范式</li>
-<li>  分库分表</li>
-<li>  主从复制</li>
-<li>  读写分离</li>
-</ul>
-</li>
-</ul>
-<h3 id="NoSql"><a href="#NoSql" class="headerlink" title="NoSql"></a>NoSql</h3><ul>
-<li>  redis</li>
-<li>  memcached</li>
-<li>  mongdb</li>
-<li>  <a target="_blank" rel="noopener" href="http://www.runoob.com/Memcached/Memcached-tutorial.html">《Memcached 教程》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/chenleixing/article/details/47035453">《深入理解Memcached原理》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/36e5cd400580">《Memcached软件工作原理》</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://zhihuzeye.com/archives/2361">《Memcache技术分享：介绍、使用、存储、算法、优化、命中率》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/liu251890347/article/details/37690045">《memcache 中 add 、 set 、replace 的区别》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1qX00Lti?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=">《memcached全面剖析》</a></li>
-</ul>
-<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/q291611265/article/details/48465113">设计模式的六大原则</a></p>
-<ul>
-<li>  开闭原则：对扩展开放,对修改关闭，多使用抽象类和接口。</li>
-<li>  里氏替换原则：基类可以被子类替换，使用抽象类继承,不使用具体类继承。</li>
-<li>  依赖倒转原则：要依赖于抽象,不要依赖于具体，针对接口编程,不针对实现编程。</li>
-<li>  接口隔离原则：使用多个隔离的接口,比使用单个接口好，建立最小的接口。</li>
-<li>  迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用，通过中间类建立联系。</li>
-<li>  合成复用原则：尽量使用合成/聚合,而不是使用继承。</li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html">23种常见设计模式</a></p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/susanws/p/5510229.html">参考二</a></li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://blog.jobbole.com/62314/">《细数JDK里的设计模式》</a></p>
-<ul>
-<li><p>结构型模式：</p>
-<ul>
-<li>  适配器：用来把一个接口转化成另一个接口，如 java.util.Arrays#asList()。</li>
-<li>  桥接模式：这个模式将抽象和抽象操作的实现进行了解耦，这样使得抽象和实现可以独立地变化，如JDBC；</li>
-<li>  组合模式：使得客户端看来单个对象和对象的组合是同等的。换句话说，某个类型的方法同时也接受自身类型作为参数，如 Map.putAll，List.addAll、Set.addAll。</li>
-<li>  装饰者模式：动态的给一个对象附加额外的功能，这也是子类的一种替代方式，如 java.util.Collections#checkedList|Map|Set|SortedSet|SortedMap。</li>
-<li>  享元模式：使用缓存来加速大量小对象的访问时间，如 valueOf(int)。</li>
-<li>  代理模式：代理模式是用一个简单的对象来代替一个复杂的或者创建耗时的对象，如 java.lang.reflect.Proxy</li>
-</ul>
-</li>
-<li><p>创建模式:</p>
-<ul>
-<li>  抽象工厂模式：抽象工厂模式提供了一个协议来生成一系列的相关或者独立的对象，而不用指定具体对象的类型，如 java.util.Calendar#getInstance()。</li>
-<li>  建造模式(Builder)：定义了一个新的类来构建另一个类的实例，以简化复杂对象的创建，如：java.lang.StringBuilder#append()。</li>
-<li>  工厂方法：就是 一个返* 回具体对象的方法，而不是多个，如 java.lang.Object#toString()、java.lang.Class#newInstance()。</li>
-<li>  原型模式：使得类的实例能够生成自身的拷贝、如：java.lang.Object#clone()。</li>
-<li>  单例模式：全局只有一个实例，如 java.lang.Runtime#getRuntime()。</li>
-</ul>
-</li>
-<li><p>行为模式：</p>
-<ul>
-<li>  责任链模式：通过把请求从一个对象传递到链条中下一个对象的方式，直到请求被处理完毕，以实现对象间的解耦。如 javax.servlet.Filter#doFilter()。</li>
-<li>  命令模式：将操作封装到对象内，以便存储，传递和返回，如：java.lang.Runnable。</li>
-<li>  解释器模式：定义了一个语言的语法，然后解析相应语法的语句，如，java.text.Format，java.text.Normalizer。</li>
-<li>  迭代器模式：提供一个一致的方法来顺序访问集合中的对象，如 java.util.Iterator。</li>
-<li>  中介者模式：通过使用一个中间对象来进行消息分发以及减少类之间的直接依赖，java.lang.reflect.Method#invoke()。</li>
-<li>  空对象模式：如 java.util.Collections#emptyList()。</li>
-<li>  观察者模式：它使得一个对象可以灵活的将消息发送给感兴趣的对象，如 java.util.EventListener。</li>
-<li>  模板方法模式：让子类可以重写方法的一部分，而不是整个重写，如 java.util.Collections#sort()。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/hwaggLee/p/4510687.html">《Spring-涉及到的设计模式汇总》</a></p>
-</li>
-<li><p>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012387062/article/details/54719114">《Mybatis使用的设计模式》</a></p>
-</li>
-</ul>
-<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ul>
-<li><p>  进程通信IPC，与线程区别</p>
-</li>
-<li><p>  OS集中策略、进程调度</p>
-</li>
-<li><p>  互斥与死锁</p>
-</li>
-<li><p>linux相关命令</p>
-<ul>
-<li>  cpu命令</li>
-<li>  内存</li>
-<li>  部署</li>
-<li>vim<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3></li>
-</ul>
-</li>
-<li><p>  面向对象</p>
-</li>
-<li><p><a href="https://earyant.github.io/2017/09/10/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">集合</a></p>
-<ul>
-<li><p>map</p>
-<ul>
-<li>  <a href="https://earyant.github.io/2017/08/09/HashMap%E5%85%A8%E8%A7%A3%E6%9E%90/">Hashmap</a></li>
-<li>  EnumMap: 枚举类型座位键值的Map，效率要高于HashMap</li>
-<li>  HashTable：</li>
-<li>ConcurrentHashMap：<ul>
-<li>  get操作全并发访问，put操作可配置并发操作的哈希表，并发级别可以通过构造参数中的concurrentLevel参数设置(默认级别为16).该参数会在Map内部划分一些分区，在put的时候，只有更新的分区是锁住的。</li>
-</ul>
-</li>
-<li>  ConcurrentSkipListMap： 基于跳跃表的ConcurrentNavigableMap实现。本质上这种集合可以当做TreeMap的线程安全版本来使用。</li>
-<li>  IdentityHashMap</li>
-<li>  LinkedHashMap</li>
-<li>  TreeMap</li>
-<li>  WeakHashMap</li>
-</ul>
-</li>
-<li><p>list</p>
-<ul>
-<li>ArrayList<ul>
-<li>  内部用一个整形数字或者数组存储了集合的大小。</li>
-<li>  访问速度稳定；</li>
-<li>  在尾部添加成本低，在头部添加成本高(线性复杂度)。</li>
-</ul>
-</li>
-<li>LinkedList<ul>
-<li>Deque实现，每一个节点都保存着上一个节点和下一个节点的指针。所以数据的存取和更新都具有线性复杂度。<br>  <a href="https://earyant.github.io/2017/09/10/ArrayList%E5%92%8CLinkedList%E5%AF%B9%E6%AF%94/">ArrayList和LinkedList对比</a></li>
-<li>时间复杂度：<ul>
-<li>  索引:  O(n)</li>
-<li>  搜索:  O(n)</li>
-<li>  插入:  O(1)</li>
-<li>  移除:  O(1)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>  Vector</li>
-</ul>
-</li>
-<li><p>set</p>
-<ul>
-<li>  HashSet</li>
-<li>  EnumSet</li>
-<li>  BitSet</li>
-<li>  LinkedHashMap</li>
-<li>  TreeSet</li>
-<li>  ConcurrentSkipListSet ： 使用ConcurrentSkipListMap来存储线程安全的Set。</li>
-<li>  CopyOnWriteArraySet： 使用CopyOnWriteArrayList存储的线程安全的Set</li>
-</ul>
-</li>
-<li><p>Queues/Deques</p>
-<ul>
-<li><p>  ArrayDeQue ： Deque是基于有首尾指针的数组（环形缓冲区）实现的。和LinkedList不同，这个类没有实现List接口，因此，如果没有收尾元素的话，就不能去除任何元素。比LinkedList好一点，产生的垃圾数量较少。</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lemon-flm/p/7877898.html">Queue</a></p>
-<ul>
-<li>  enqueue： 插入到队列中</li>
-<li>  dequeue： 将队头移除</li>
-<li>时间复杂度：<ul>
-<li>  索引: O(n)</li>
-<li>  搜索: O(n)</li>
-<li>  插入: O(1)</li>
-<li>  移除: O(1)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Stack ：后进先出的队列</p>
-<ul>
-<li>  push： 将元素压入栈</li>
-<li>  pop：  将栈顶元素移除</li>
-<li>时间复杂度：<ul>
-<li>  索引: O(n)</li>
-<li>  搜索: O(n)</li>
-<li>  插入: O(1)</li>
-<li>  移除: O(1)</li>
-</ul>
-</li>
-</ul>
-<p>  -- 并发 –</p>
-</li>
-<li><p>  ArrayBlockingQueue： 基于书实现的一个有界阻塞对，大小不能重新定义，试图向一个满的队列添加元素的时候，就会受到阻塞，知道另一个方法从队列中取出元素。</p>
-</li>
-<li><p>  ConcurrentLinkedDeque、ConcurrentLinkedQueue：基于链表实现的无解队列，添加元素不阻塞。要求消费者的速度至少要比生产一样快，不然内存就会耗尽，严重依赖于CAS操作。</p>
-</li>
-<li><p>  DelayQueue ： 无界的保存Delayed元素的集合，元素只有在延时已经过期的时候才能被取出。队列的第一个元素延期最小(包含负值，延时已经过期)，要实现一个延期任务的队列的时候使用(不要自己手动实现–使用ScheduledThreadPoolExecutor)</p>
-</li>
-<li><p>  LinkedBlockingDeque/LinkedBlockingQueue： 可选择有界或者无界基于链表的实现。在队列为空或者满的情况下使用ReentrantLock</p>
-</li>
-<li><p>  LinkedTransferQueue: 基于链表的无界队列，除了通常的队列操作，还有一系列的transfer方法，可以让生产者直接给等待的消费者传递信息，这样就不用将元素存储到队列中了，这是一个基于CAS的无锁集合</p>
-</li>
-<li><p>  PriorityBlockingQueue：PriorityQueue的无界的版本。</p>
-</li>
-<li><p>  SynchronousQueue：一个有界队列，其中没有任何内存容量。这就意味着任何插入操作必须等到响应的取出操作才能执行，反之亦反。如果不需要Queue接口的话，通过Exchanger类也能完成响应的功能。</p>
-</li>
-</ul>
-</li>
-<li><p>Lists类</p>
-<ul>
-<li>  CopyOnWriteArrayList ： list的实现每一次都会产生一个新的隐含数组副本，所以这个操作成本很高，适合遍历操作比更新操作多的集合，例如listeners/observers集合</li>
-</ul>
-</li>
-<li><p>Collections 工具类</p>
-<ul>
-<li>checked* : 检查要添加的元素的类型并返回结果，尝试添加非法类型的变量都会抛出一个ClassCastException<ul>
-<li>  checkedCollection</li>
-<li>  checkedList</li>
-<li>  checkedMap</li>
-<li>  checkSet</li>
-<li>  checkedSortedMap</li>
-<li>  checkedSortedSet</li>
-</ul>
-</li>
-<li>empty* : 返回一个固定的空集合。<ul>
-<li>  emptyList</li>
-<li>  emptyMap</li>
-<li>  emptySet</li>
-</ul>
-</li>
-<li>singleton* : 返回一个只有一个入口的set、list、map集合<ul>
-<li>  singletonList</li>
-<li>  singletonMap</li>
-</ul>
-</li>
-<li>synchronized* ： 获得集合的线程安全版本<ul>
-<li>  synchronizedCollection</li>
-<li>  synchronizedList</li>
-<li>  synchronizedMap</li>
-<li>  synchronizedSet</li>
-<li>  synchronizedSortedMap</li>
-<li>  synchronizedSortedSet</li>
-</ul>
-</li>
-<li>unmodifiable* : 返回一个不可变的集合<ul>
-<li>  unmodifiableCollection</li>
-<li>  unmodifiableList</li>
-<li>  unmodifiableMap</li>
-<li>  unmodifiableSet</li>
-<li>  unmodifiableSortedMap</li>
-<li>  unmodifiableSortedSet</li>
-</ul>
-</li>
-<li>  addAll : 添加一些元素或者一个数组的内容到集合中</li>
-<li>  binarySearch ： 和数组的Arrays.binarySearch功能相同</li>
-<li>  disjoint : 检查两个集合是不是没有相同元素</li>
-<li>  fill ： 用一个指定的值代替集合中的所有元素</li>
-<li>  frequency: 集合中有多少元素是和给定元素相同的。</li>
-<li>  indexOfSubList、lastIndexOfSubList\indexOf\lashIndexOf 找出给定list中第一个出现和最后一个出现的子表</li>
-<li>  max、min 找出基于自然顺序或者比较器排序的集合、最大或者最小的元素</li>
-<li>  replaceAll： 替换所有</li>
-<li>  reverse: 掉到排序元素和集合中的顺序</li>
-<li>  rotate ： 根据给定的距离旋转元素</li>
-<li>  shuffle： 随机排放List集合中的节点，而已给定自己的生成器</li>
-<li>  sort ： 自然排序或者指定的排序器排序</li>
-<li>  swap 交换集合中的两个元素的位置</li>
-</ul>
-</li>
-<li><p>Arrays</p>
-<ul>
-<li>  Arrays.asList(): 可以将Array转换成List。</li>
-<li>  Arrays.binarySearch : 在一个已排序的或者其中一段中快速查找</li>
-<li>  Arrays.copyOf : 如果扩大数组容量又不想改变内容时候用这个方法</li>
-<li>  Arrays.copyOfRange :  可以复制整个数组或者其中一个部分</li>
-<li>  Arrays.deepEquals、Arrays.deepHashCode : Arrays.equals、hashCode的高级版本，支持子数据操作。</li>
-<li>  Arrays.equals : 比较两个数组是否想相等。</li>
-<li>  Arrays.fill  : 用一个给定的值填充整个数组或者其中一个部分</li>
-<li>  Arrays.hashCode : 根据数组内容计算器hash值。</li>
-<li>  Arrays.sort : 对整个数组或者数组一部分进行排序。</li>
-<li>  Arrays.toString : 打印数组的内容</li>
-<li>所有集合都可以用 T[] Collection.toArray(T[] a)方法复制到整个数组：<pre><code>return coll.toArray(new T[coll.size()]);
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>并发和多线程</p>
-<ul>
-<li><p>参考：</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/CL0610/Java-concurrency">Java 并发知识合集</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/CL0610/Java-concurrency/blob/master/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1.png">JAVA并发知识图谱</a></li>
-<li>  java并发编程网</li>
-<li>  <a target="_blank" rel="noopener" href="http://www.importnew.com/18459.html">《40个Java多线程问题总结》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanht/p/5450325.html">《Java并发编程——线程安全及解决机制简介》</a></li>
-</ul>
-</li>
-<li><p>锁</p>
-<ul>
-<li>  ReetrantLock</li>
-<li>  ReetranReadWriteLock</li>
-<li>  Condition</li>
-</ul>
-</li>
-<li><p>开发工具类</p>
-<ul>
-<li>  CyclicBarrier</li>
-<li>  CountDownLatch</li>
-<li>  Semphere</li>
-</ul>
-</li>
-<li><p>并发集合</p>
-<ul>
-<li>  ConcurrentHashMap</li>
-<li>  ConcurrentLinkedQueue</li>
-</ul>
-</li>
-<li><p>线程池</p>
-<ul>
-<li>  Excutor</li>
-<li>  ThreadPoolExcutor</li>
-<li>  Callable和Future</li>
-<li>  ScheduledExecutorService</li>
-</ul>
-</li>
-<li><p>原子操作</p>
-<ul>
-<li>基本类型<ul>
-<li>  AtomicBoolean</li>
-<li>  AtomicInteger</li>
-<li>  AtomicLong</li>
-</ul>
-</li>
-<li>引用类型<ul>
-<li>  AtomicReference</li>
-<li>  AtomicReferenceArrayFieldUpdater</li>
-</ul>
-</li>
-<li>数组<ul>
-<li>  AtomicIntegerArray</li>
-<li>  AtomicLongArray</li>
-<li>  AtomicReferenceArray</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>synchronized</p>
-<ul>
-<li>  同步、重量级锁，synchronized原理</li>
-<li>锁优化<ul>
-<li>  自旋锁</li>
-<li>  轻量级锁</li>
-<li>  重量级锁</li>
-<li>  偏向锁</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>  Lock机制</p>
-</li>
-<li><p>  线程通信</p>
-</li>
-<li><p>volatile</p>
-<ul>
-<li>  实现机制</li>
-<li>  内存语义</li>
-<li>  内存模型</li>
-</ul>
-</li>
-<li><p>  ThreadLocal</p>
-</li>
-<li><p>  Fork\Join</p>
-</li>
-<li><p>  concurrent包</p>
-</li>
-<li><p>AQS</p>
-<ul>
-<li>  AbstractqueuedSynchronized同步器</li>
-<li>  CLH同步队列</li>
-<li>  同步状态的获取及释放</li>
-<li>  线程阻塞和唤醒</li>
-</ul>
-</li>
-<li><p>CAS</p>
-<ul>
-<li>  Compare And Swap缺陷</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>优化调优</p>
-<ul>
-<li>工具<ul>
-<li>  MAT</li>
-<li>  Jmeter</li>
-</ul>
-</li>
-<li>理解性能优化<ul>
-<li>  性能基准</li>
-<li>  性能优化到底是什么</li>
-<li>  衡量维度</li>
-</ul>
-</li>
-<li>JVM调优<ul>
-<li>  什么是JVM内存模型JMM</li>
-<li>  各垃圾回收气使用场景</li>
-<li>  理解GC日志</li>
-<li>  实战MAT分析DUMP文件</li>
-</ul>
-</li>
-<li>Tomcat调优<ul>
-<li>  tomcat运行机制</li>
-<li>  线程模型</li>
-<li>  系统参数认识及调优</li>
-<li>  基准测试</li>
-</ul>
-</li>
-<li>MySQL调优<ul>
-<li>  理解MySQL底层B+树</li>
-<li>  SQL执行计划详解索引优化详解</li>
-<li>  SQL语句优化</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>JVM</p>
-<blockquote>
-<p>《深入理解Java虚拟机：JVM高级特性与最佳实践》</p>
-</blockquote>
-<ul>
-<li>内存模型<ul>
-<li>  重排序</li>
-<li>  顺序一致性</li>
-<li>  happens-hefore</li>
-<li>  as-if-serial</li>
-</ul>
-</li>
-<li>  GC垃圾回收机制</li>
-<li>  分代算法，GC算法</li>
-<li>  收集器</li>
-<li>  类加载、双亲委派</li>
-<li>JVM调优<ul>
-<li>  jvm参数</li>
-</ul>
-</li>
-<li>  内存泄露和内存溢出</li>
-</ul>
-</li>
-<li><p>  IO和NIO</p>
-</li>
-<li><p>  反射和代理、异常、java8、序列化</p>
-</li>
-<li><p>设计模式：</p>
-<ul>
-<li>24中常用的设计模式<ul>
-<li>  proxy代理模式</li>
-<li>  Factory工厂模式</li>
-<li>  Singleton单例模式</li>
-<li>  Delegate委派模式</li>
-<li>  Strategy策略模式</li>
-<li>  prototype原型模式</li>
-<li>  Adapter适配器模式</li>
-</ul>
-</li>
-<li>  java源码中或者spring中用到哪些</li>
-</ul>
-</li>
-<li><p>web</p>
-<ul>
-<li>  servlet</li>
-<li>  cookie、session</li>
-<li>spring<ul>
-<li>aop<ul>
-<li>  AOP设计原理</li>
-</ul>
-</li>
-<li>ioc<ul>
-<li>  IOC容器设计原理及高级特性</li>
-</ul>
-</li>
-<li>  FactoryBean与BeanFactory</li>
-<li>  mvc</li>
-<li>  <a href="https://earyant.github.io/2017/09/17/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/">事务</a></li>
-<li>  基于SpringJDBC手写ORM框架</li>
-<li>  SpringMVC九大组件</li>
-<li>  手写实现SpringMVC框架</li>
-<li>  SpringMVC与Struts2对比分析</li>
-<li>  Spring5新特性</li>
-<li>  动态代理</li>
-</ul>
-</li>
-<li>mybatis<ul>
-<li>  代码自动生成器</li>
-<li>  关联查询、嵌套 查询</li>
-<li>  缓存使用场景及选择策略</li>
-<li>  Spring集成下的SqlSession与Mapper</li>
-<li>  事务</li>
-<li>  分析MyBatis的动态代理</li>
-<li>  手写实现Mini版的MyBatis</li>
-</ul>
-</li>
-<li>tomcat<ul>
-<li>参考<ul>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/hggen/p/6264475.html">《TOMCAT原理详解及请求过程》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/crazylqy/p/4706223.html">《Tomcat服务器原理详解》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/">《Tomcat 系统架构与设计模式,第 1 部分: 工作原理》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/xlgen157387/article/details/79006434">《四张图带你了解Tomcat系统架构》</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.futurehosting.com/blog/jboss-vs-tomcat-choosing-a-java-application-server/">《JBoss vs. Tomcat: Choosing A Java Application Server》</a><ul>
-<li>  Tomcat 是轻量级的 Serverlet 容器，没有实现全部 JEE 特性（比如持久化和事务处理），但可以通过其他组件代替，比如Srping。</li>
-<li>  Jboss 实现全部了JEE特性，软件开源免费、文档收费。</li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunfenqing/p/7339058.html">《Tomcat 调优方案》</a></li>
-<li>  启动NIO模式（或者APR）；调整线程池；禁用AJP连接器（Nginx+tomcat的架构，不需要AJP）；</li>
-<li>  <a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20662363-id-3012760.html">《tomcat http协议与ajp协议》</a></li>
-<li><a target="_blank" rel="noopener" href="http://dmouse.iteye.com/blog/1354527">《AJP与HTTP比较和分析》</a><ul>
-<li>  AJP 协议（8009端口）用于降低和前端Server（如Apache，而且需要支持AJP协议）的连接数(前端)，通过长连接提高性能。</li>
-<li>  并发高时，AJP协议优于HTTP协议。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>  类加载机制</li>
-</ul>
-</li>
-<li>Jetty<ul>
-<li>参考<ul>
-<li>  <a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/">《Jetty 的工作原理以及与 Tomcat 的比较》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/doutao6677/article/details/51957288">《jetty和tomcat优势比较》</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>  hibernate</li>
-</ul>
-</li>
-<li><p>  源码</p>
-</li>
-<li><p>  Guava</p>
-</li>
-</ul>
-<h3 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h3><ul>
-<li>  python</li>
-<li>  shell</li>
-</ul>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><ul>
-<li><p>微框架</p>
-<ul>
-<li>  与微服务之间的关系</li>
-<li>  热部署实战</li>
-<li>  核心组件Starter\Actuator\AutoConfiguration\Cli</li>
-<li>  集成Mybatis实现多数据源路由实战</li>
-<li>  集成Dubbo实战</li>
-<li>  集成Redis缓存实战</li>
-<li>  集成Swagger2实战</li>
-<li>  API管理及测试体系</li>
-<li>  实现多环境配置动态解析</li>
-</ul>
-</li>
-<li><p>SpringCloud</p>
-<ul>
-<li>注册中心<ul>
-<li>  Eureka</li>
-<li>  Zookeeper</li>
-</ul>
-</li>
-<li>  Ribbon集成REST实现负载均衡</li>
-<li>  Fegion生命是服务调用</li>
-<li>  Hystrix服务熔断降级方式</li>
-<li>  Zuul实现微服务网管</li>
-<li>  Config分布式统一配置中心（与disconf作对比）</li>
-<li>  Sleuth调用链路跟踪</li>
-<li>  BUS消息总线</li>
-<li>  基于Hystrix实现接口降级实战</li>
-<li>  集成SpringCloud实现统一整合方案</li>
-</ul>
-</li>
-<li><p>Docker虚拟化</p>
-<ul>
-<li>  Docker的镜像、仓库、容器</li>
-<li>  Docker File文件</li>
-<li>  Docker Compose</li>
-<li>  Swarm K8s</li>
-</ul>
-</li>
-<li><p>漫谈微服务架构</p>
-<pre><code>  \-  SOA架构和微服务架构之间的区别和联系
-  \- 如何设计微服务及设计原则
-  \- 全局分析Spring Cloud各个组件所能解决的问题
-</code></pre>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3></li>
-<li><p>分布式架构原理</p>
-<ul>
-<li>  分布式架构严谨过程</li>
-<li>  如何把应用从单机扩展到分布式</li>
-<li>  CDN加速静态文件访问</li>
-<li>  系统监控、容灾、存储动态扩容</li>
-<li>  架构设计及业务驱动划分</li>
-<li>  CAP原理和BASE理论</li>
-</ul>
-</li>
-<li><p>分布式架构策略</p>
-<ul>
-<li>  分布式架构网络通信原理剖析</li>
-<li>  通信协议中的序列化和反序列化</li>
-<li>基于框架的RPC技术<ul>
-<li>  WebService、RMI、Hession</li>
-</ul>
-</li>
-<li>  深入分析Zookeeper在disconf配置中心的应用</li>
-<li>  基于Zookeeper实现分布式服务器动态上下线感知</li>
-<li>  深入分析Zookeeper Zab协议及选举机制源码解读</li>
-<li>  Dubbo管理中心及监控平台安装部署</li>
-<li>  基于Dubbo的分布式系统架构实战</li>
-<li>  Dubbo容错机制及高扩展性分析</li>
-</ul>
-</li>
-<li><p>分布式架构中间件</p>
-<ul>
-<li>  分布式消息通信</li>
-<li>  ActiveMq\Kafka\RabbitMQ</li>
-<li>  Redis主从复制原理及无磁盘复制分析</li>
-<li>  图解Redis中AOF和RDB持久化策略的原理</li>
-<li>  MongoDb企业级集群解决方案</li>
-<li>  MongoDb数据分片、转存及恢复策略</li>
-<li>  基于OpenResty部署应用层Nginx以及Nginx+lua实践</li>
-<li>  Nginx反向代理服务器及负载均衡服务配置实战</li>
-<li>  基于Netty实现高性能IM聊天</li>
-<li>  基于Netty实现Dubbo多协议通信支持</li>
-<li>  Netty无锁化串行设计及高并发处理机制</li>
-</ul>
-</li>
-<li><p>分布式架构实战</p>
-<ul>
-<li>  分布式全局ID生成方案</li>
-<li>  Session跨域共享及企业级单点登录解决方案实战</li>
-<li>  分布式事务解决方案实战</li>
-<li>  高并发下的服务降级、限流实战</li>
-<li>  基于分布式架构下的分布式锁的解决方案实战</li>
-<li>  分布式架构下实现分布式定时调度</li>
-</ul>
-</li>
-<li><p>  NoSql和KV存储(redis,hbase,mongodb,etcd,springcloud)</p>
-</li>
-<li><p>  负载均衡(原理，cdn，一致性hash)</p>
-</li>
-<li><p>RPC框架</p>
-<ul>
-<li>  通信 netty</li>
-<li>  序列化协议 thrift，protobuff</li>
-</ul>
-</li>
-<li><p>消息队列</p>
-<ul>
-<li>  原理</li>
-<li>  kafka</li>
-<li>  activeMQ</li>
-<li>  rocketMQ</li>
-</ul>
-</li>
-<li><p>分布式存储系统</p>
-<ul>
-<li>  GFS</li>
-<li>  HDFS</li>
-<li>  fastDFS</li>
-<li>存储模型<ul>
-<li>  skipList</li>
-<li>  LSM</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>分布式事务</p>
-<ul>
-<li>  redis分布锁</li>
-</ul>
-</li>
-<li><p>分布式锁</p>
-<h3 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h3></li>
-<li><p>hadoop生态圈</p>
-<ul>
-<li>  hive</li>
-<li>  hbase</li>
-<li>  hdfs</li>
-<li>  zoopkeeper</li>
-<li>  storm</li>
-<li>  kafka</li>
-</ul>
-</li>
-<li><p>  spark</p>
-</li>
-<li><p>  搜索引擎与技术</p>
-</li>
-<li><p>  机器学习与技术</p>
-</li>
-<li><p>  人工智能</p>
-</li>
-</ul>
-<h3 id="运维-amp-统计-amp-技术支持"><a href="#运维-amp-统计-amp-技术支持" class="headerlink" title="运维 &amp; 统计 &amp; 技术支持"></a>运维 &amp; 统计 &amp; 技术支持</h3><ul>
-<li><p>常规监控</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/enweitech/article/details/77849205">《腾讯业务系统监控的修炼之路》</a></p>
-<ul>
-<li>  监控的方式：主动、被动、旁路(比如舆情监控)</li>
-<li>  监控类型： 基础监控、服务端监控、客户端监控、 监控、用户端监控</li>
-<li>  监控的目标：全、块、准</li>
-<li>  核心指标：请求量、成功率、耗时</li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.oschina.net/news/67525/monitoring-tools">《开源还是商用？十大云运维监控工具横评》</a></p>
-<blockquote>
-<p>Zabbix、Nagios、Ganglia、Zenoss、Open-falcon、监控宝、 360网站服务监控、阿里云监控、百度云观测、小蜜蜂网站监测等。</p>
-</blockquote>
-</li>
-<li><p>  <a target="_blank" rel="noopener" href="http://developer.51cto.com/art/201612/525373.htm">《监控报警系统搭建及二次开发经验》</a></p>
-</li>
-</ul>
-</li>
-<li><p>命令行监控工具</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://coderxing.gitbooks.io/architecture-evolution/di-er-pian-ff1a-feng-kuang-yuan-shi-ren/44-an-quan-yu-yun-wei/445-fu-wu-qi-zhuang-tai-jian-ce/4451-ming-ling-xing-gong-ju.html">《常用命令行监控工具》</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://blog.jobbole.com/96846/">《20个命令行工具监控 Linux 系统性能》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://my.oschina.net/feichexia/blog/196575">《JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、hprof使用详解》</a></li>
-<li>  <a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">日志分析常用命令</a></li>
-<li>  <a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">日志分析脚本</a></li>
-</ul>
-</li>
-<li><p>统计分析</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25195217">《流量统计的基础：埋点》</a><blockquote>
-<p>常用指标：访问与访客、停留时长、跳出率、退出率、转化率、参与度</p>
-</blockquote>
-</li>
-<li><a target="_blank" rel="noopener" href="http://www.25xt.com/company/17066.html">《APP埋点常用的统计工具、埋点目标和埋点内容》</a><blockquote>
-<p>第三方统计：友盟、百度移动、魔方、App Annie、talking data、神策数据等。</p>
-</blockquote>
-</li>
-<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/mt-mobile-analytics-practice.html">《美团点评前端无痕埋点实践》</a><blockquote>
-<p>所谓无痕、即通过可视化工具配置采集节点，在前端自动解析配置并上报埋点数据，而非硬编码。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>持续集成(CI/CD)</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html">《持续集成是什么？》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.testwo.com/article/1170">《8个流行的持续集成工具》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/article/001463233913442cdb2d1bd1b1b42e3b0b29eb1ba736c5e000">《使用Jenkins进行持续集成》</a></li>
-</ul>
-</li>
-<li><p>环境分离</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://my.oschina.net/sancuo/blog/214904">《开发环境、生产环境、测试环境的基本理解和区》</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
-<li>TDD 理论<ul>
-<li>-<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/62f16cd4fef3">《深度解读 - TDD（测试驱动开发）》</a><ul>
-<li>  基于测试用例编码功能代码，XP（Extreme Programming）的核心实践.</li>
-<li>  好处：一次关注一个点，降低思维负担；迎接需求变化或改善代码的设计；提前澄清需求；快速反馈；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>单元测试<ul>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/happyzm/p/6482886.html">《Java单元测试之JUnit篇》</a></li>
-<li>  <a href="TestNG%20%E8%A6%86%E7%9B%96%20JUnit%20%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%80%82%E7%94%A8%E4%BA%8E%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E5%9C%BA%E6%99%AF%E3%80%82">《JUnit 4 与 TestNG 对比》</a></li>
-<li>  <a href="%E6%A8%A1%E5%9D%97%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E3%80%81%E5%B1%80%E9%83%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%B5%8B%E8%AF%95%E3%80%81%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%20%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%B5%8B%E8%AF%95%E3%80%81%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95%20%E3%80%82">《单元测试主要的测试功能点》</a></li>
-</ul>
-</li>
-<li>压力测试<ul>
-<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/blueheart20/article/details/52170790">《Apache ab 测试使用指南》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/binyue/p/6141088.html">《大型网站压力测试及优化方案》</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://news.chinabyte.com/466/14126966.shtml">《10大主流压力/负载/性能测试工具推荐》</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://quentinxxz.iteye.com/blog/2249799">《真实流量压测工具 tcpcopy应用浅析》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/jwentest/p/7136727.html">《nGrinder 简易使用教程》</a></li>
-</ul>
-</li>
-<li>全链路压测<ul>
-<li>  <a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/jd-618-upgrade-full-link-voltage-test-program-forcebot">《京东618：升级全链路压测方案，打造军演机器人ForceBot》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30306892">《饿了么全链路压测的探索与实践》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28355759">《四大语言，八大框架｜滴滴全链路压测解决之道》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/27060fd61f72">《全链路压测经验》</a></li>
-</ul>
-</li>
-<li>A/B 、灰度、蓝绿测试<ul>
-<li>  <a target="_blank" rel="noopener" href="https://testerhome.com/topics/11165">《技术干货 | AB 测试和灰度发布探索及实践》</a></li>
-<li>  <a target="_blank" rel="noopener" href="http://blog.51cto.com/purplegrape/1403123">《nginx 根据IP 进行灰度发布》</a></li>
-<li>  <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/344341">《蓝绿部署、A/B 测试以及灰度发布》</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h2><ul>
-<li>算法与数据结构<ul>
-<li>  数据结构（严蔚敏）/大话数据结构              * 剑指Offer/程序员面试金典/编程珠玑/编程之美/牛客网+leetcode</li>
-<li>  程序员笔试面试最优解（左程云）/不如直接看左神的笔试面试指南视频</li>
-<li>  数据结构与算法经典问题解析（Java语言描述）</li>
-<li>  图解数据结构（使用Java）</li>
-</ul>
-</li>
-<li>计算机网络：<ul>
-<li>  计算机网络（谢希仁）</li>
-<li>  TCP/IP 详解</li>
-<li>  HTTP权威指南</li>
-<li>  图解TCP/IP</li>
-<li>  图解HTTP</li>
-</ul>
-</li>
-<li>数据库：//数据库主要是多用，书上主要看索引和性能的部分<ul>
-<li>  高性能MySQL/深入浅出MySQL</li>
-</ul>
-</li>
-<li>操作系统：<ul>
-<li>  OS原理：操作系统（课本，黑色的那个）</li>
-<li>Linux：<ul>
-<li>  Linux私房菜 //鸟哥写的，很全，包括bash部分</li>
-<li>  跟阿铭学Linux //主要偏重于命令和操作，比较浅显</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>java：<ul>
-<li>  Java疯狂讲义/Java编程思想/Java核心技术 卷1</li>
-<li>  深入理解Java虚拟机</li>
-<li>  并发编程的艺术/多线程编程核心技术</li>
-<li>  Effective Java</li>
-<li>  Java程序员面试笔试宝典 //何昊的那本，个人感觉是突击知识点的神器</li>
-<li>  Java程序性能优化</li>
-<li>  实战Java高并发程序设计</li>
-</ul>
-</li>
-<li>Java Web：<ul>
-<li>  Spring实战/轻量级JavaEE 企业应用（红皮，讲SSH的） //主要看最后一部分Spring的就可以</li>
-<li>  深入JavaWeb技术内幕（阿里 许令波）//这个讲的还是比较深的</li>
-<li>  SpringBoot实战/深入实践SpringBoot</li>
-</ul>
-</li>
-<li>设计模式：<ul>
-<li>  大话设计模式 //通俗易懂</li>
-<li>  各类博客的总结</li>
-</ul>
-</li>
-<li>分布式与大数据：<ul>
-<li>  分布式服务框架原理与实践</li>
-<li>  大型网站技术架构</li>
-<li>  Hadoop实战（hadoop体系包括得很全）</li>
-</ul>
-</li>
-<li>其他：<ul>
-<li>Git：<ul>
-<li>  Git权威指南</li>
-<li>  Git官方讲解视频（牛客网有带字幕的）</li>
-</ul>
-</li>
-<li>Redis：<ul>
-<li>  Redis实战</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>  docker</li>
-<li>  springcloud</li>
-</ul>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="实践一个双十一电商项目"><a href="#实践一个双十一电商项目" class="headerlink" title="实践一个双十一电商项目"></a>实践一个双十一电商项目</h3><ul>
-<li>用户认证<ul>
-<li>  用户注册</li>
-<li>  SSO单点登录</li>
-<li>  第三方登陆</li>
-<li>  UI界面拦截</li>
-<li>  业务拦截</li>
-</ul>
-</li>
-<li>店铺、商品<ul>
-<li>  聚合检索</li>
-<li>  动静分离</li>
-<li>  店铺管理</li>
-<li>  商品管理</li>
-</ul>
-</li>
-<li>订单、支付<ul>
-<li>  订单号统一生成规则</li>
-<li>  下单流程管理</li>
-<li>  库存管理</li>
-<li>  购物车</li>
-<li>  优惠券支付</li>
-<li>  积分支付</li>
-<li>  第三方支付</li>
-</ul>
-</li>
-<li>数据统计分析<ul>
-<li>  用户行为分析</li>
-<li>  行业分析</li>
-<li>  区域分析</li>
-</ul>
-</li>
-<li>通知推送<ul>
-<li>  融云推送</li>
-<li>  消息中间件</li>
-<li>  用户群聊</li>
-<li>  点对点聊天</li>
-<li>  文件断点续传</li>
-</ul>
-</li>
-</ul>
-<p>感谢：<br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/29890?hmsr=toutiao.io&source=rss&utm-medium=toutiao.io&utm-source=toutiao.io">这可能不只是一篇面经</a><br><a target="_blank" rel="noopener" href="https://github.com/kdn251/interviews/blob/master/README-zh-cn.md">java整理</a><br><a target="_blank" rel="noopener" href="https://github.com/xingshaocheng/architect-awesome/blob/master/README.md#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98">后端架构师技术图谱</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2270,7 +1146,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2283,7 +1159,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

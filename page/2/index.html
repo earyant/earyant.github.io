@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">83</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -203,6 +203,912 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E8%B0%B7%E6%AD%8Cjib%E5%B7%A5%E5%85%B7%E8%AF%95%E7%94%A8/" class="post-title-link" itemprop="url">谷歌jib工具试用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-18 21:13:21" itemprop="dateCreated datePublished" datetime="2018-07-18T21:13:21+08:00">2018-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jib"><a href="#Jib" class="headerlink" title="Jib"></a>Jib</h1><p>好久没写blog了，最近看到google新开源的工具心痒痒，试着玩下~<br>首先什么是Jib，：</p>
+<blockquote>
+<p>Jib 是 Google 开发的可以直接构建 Java 应用的 Docker 和 OCI 镜像的类库，以 Maven 和 Gradle 插件形式提供。<br>通过 Jib，Java 开发者可以使用他们熟悉的 Java 工具来构建容器。Jib 是一个快速而简单的容器镜像构建工具，它负责处理将应用程序打包到容器镜像中所需的所有步骤。它不需要你编写 Dockerfile 或安装 Docker，而且可以直接集成到 Maven 和 Gradle中 —— 只需要将插件添加到构建中，就可以立即将 Java 应用程序容器化。</p>
+</blockquote>
+<h2 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h2><ul>
+<li><p>Docker构建的复杂流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155927_vHQt_2720166.png"></p>
+</li>
+<li><p>Jib构建流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155918_xYRX_2720166.png"></p>
+</li>
+</ul>
+<p>从此可以告别繁琐的Dockerfile啦~~</p>
+<h2 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h2><ol>
+<li><p>首先配置jib插件<br> maven:</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.cloud.tools<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jib-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">from</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">                        registry.hub.docker.com/adoptopenjdk/openjdk8</span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span>&gt;</span>registry.hub.docker.com/earyant/earyant<span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> gradle</p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">  id <span class="string">&#x27;com.google.cloud.tools.jib&#x27;</span> version <span class="string">&#x27;0.9.6&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">jib.to.image = <span class="string">&#x27;registry.hub.docker.com/earyant/earyant&#x27;</span></span><br><span class="line">jib.<span class="keyword">from</span>.image = <span class="string">&#x27;registry.hub.docker.com/adoptopenjdk/openjdk8&#x27;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>需要注意的是image不加域名的话，默认是gcr.io,google Cloud下的镜像，<strong>需要梯子</strong>，所以没有梯子的话，请使用 registry.hub.docker.com,阿里云加速同理</p>
+</li>
+</ol>
+<p>如果不加from标签，也是默认访问grc.io去下载jdk镜像，emmmm，同样需要梯子，报错如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Build to Docker daemon failed: Connect to gcr.io/108.177.97.82:443 timed out</span><br></pre></td></tr></table></figure>
+<p>所以记得加上from镜像标签哦~~</p>
+<p>如果报错信息如下，请先登录docker login -name=earyant registry.hub.docker.com  ，如果没有注册过，请到docker官网注册~<br>Retrieving registry credentials for registry.hub.docker.com</p>
+<ol start="2">
+<li>Build</li>
+</ol>
+<ul>
+<li><p>build到远程仓库</p>
+<ul>
+<li>gradle jib</li>
+<li>mvn compile jib:build</li>
+</ul>
+</li>
+<li><p>本地运行（确保本地docker已运行 ）</p>
+<ul>
+<li>mvn compile jib:dockerBuild</li>
+<li>gradle jibDockerBuild</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>运行<br>本地镜像查看如下：<br>docker images<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">earyant/earyant       latest              e34b4cad637b        48 years ago        367MB</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>docker run -p 8880:8880  -it –rm –name earyant registry.hub.docker.com/earyant/earyant</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:8880/">http://localhost:8880</a> 即可纵享丝滑，开心~~~</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%8C%81%E7%BB%AD%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">持续实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-01 10:29:09" itemprop="dateCreated datePublished" datetime="2018-06-01T10:29:09+08:00">2018-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-21 11:24:47" itemprop="dateModified" datetime="2021-09-21T11:24:47+08:00">2021-09-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><input disabled="" type="checkbox"> mysql主从配置</li>
+<li><input disabled="" type="checkbox"> mybatis自动生成代码</li>
+<li><input disabled="" type="checkbox"> 读写分离，与主从配置相关联</li>
+<li><input disabled="" type="checkbox"> 分布式redis缓存</li>
+<li><input disabled="" type="checkbox"> tomcat session共享、session绑定</li>
+<li><input disabled="" type="checkbox"> 分布式锁：redis、mysql</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/jvm%E7%B3%BB%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/jvm%E7%B3%BB%E5%88%97/" class="post-title-link" itemprop="url">jvm系列</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-12 15:42:13" itemprop="dateCreated datePublished" datetime="2018-05-12T15:42:13+08:00">2018-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="jvm系列-一-java类的加载机制"><a href="#jvm系列-一-java类的加载机制" class="headerlink" title="jvm系列(一):java类的加载机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483934&idx=1&sn=41c46eceb2add54b7cde9eeb01412a90&chksm=ebf6da61dc81537721d36aadb5d20613b0449762842f9128753e716ce5fefe2b659d8654c4e8&scene=21#wechat_redirect">jvm系列(一):java类的加载机制</a></h2><ul>
+<li><p>什么是类的加载</p>
+<blockquote>
+<p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+</blockquote>
+</li>
+<li><p>类的生命周期</p>
+<ul>
+<li>  加载，查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象</li>
+<li>  连接，连接又包含三块内容：验证、准备、初始化。1）验证，文件格式、元数据、字节码、符号引用验证；2）准备，为类的静态变量分配内存，并将其初始化为默认值；3）解析，把类中的符号引用转换为直接引用</li>
+<li>  初始化，为类的静态变量赋予正确的初始值</li>
+<li>  使用，new出对象程序中使用</li>
+<li>  卸载，执行垃圾回收</li>
+</ul>
+</li>
+<li><p>类加载器</p>
+<ul>
+<li><p>  启动类加载器：Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库</p>
+</li>
+<li><p>  扩展类加载器：Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载DK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
+</li>
+<li><p>  应用程序类加载器：Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器</p>
+</li>
+</ul>
+</li>
+<li><p>双亲委派模型</p>
+<pre><code>  \-  全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入
+
+  - 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类
+
+  - 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效
+</code></pre>
+<h2 id="jvm系列-二-JVM内存结构"><a href="#jvm系列-二-JVM内存结构" class="headerlink" title="jvm系列(二):JVM内存结构"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483949&idx=1&sn=8b69d833bbc805e63d5b2fa7c73655f5&chksm=ebf6da52dc815344add64af6fb78fee439c8c27b539b3c0e87d8f6861c8422144d516ae0a837&scene=21#wechat_redirect">jvm系列(二):JVM内存结构</a></h2><p>  <img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
+</li>
+</ul>
+<blockquote>
+<p>方法区和堆是所有线程共享的内存区域；而java栈、本地方法栈和程序计数器是运行是线程私有的内存区域。</p>
+</blockquote>
+<ul>
+<li><p>  Java堆（Heap）,是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。</p>
+</li>
+<li><p>  方法区（Method Area）,方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+</li>
+<li><p>  程序计数器（Program Counter Register）,程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。</p>
+</li>
+<li><p>  JVM栈（JVM Stacks）,与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
+</li>
+<li><p>  本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
+</li>
+</ul>
+<h3 id="对象分配规则"><a href="#对象分配规则" class="headerlink" title="对象分配规则"></a>对象分配规则</h3><ul>
+<li><p>  对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。</p>
+</li>
+<li><p>  大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。</p>
+</li>
+<li><p>  长期存活的对象进入老年代。虚拟机为每个对象定义了一个年龄计数器，如果对象经过了1次Minor GC那么对象会进入Survivor区，之后每经过一次Minor GC那么对象的年龄加1，知道达到阀值对象进入老年区。</p>
+</li>
+<li><p>  动态判断对象的年龄。如果Survivor区中相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。</p>
+</li>
+<li><p>  空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。</p>
+</li>
+</ul>
+<h2 id="jvm系列-三-GC算法-垃圾收集器"><a href="#jvm系列-三-GC算法-垃圾收集器" class="headerlink" title="jvm系列(三):GC算法 垃圾收集器"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483952&idx=1&sn=ea12792a9b7c67baddfaf425d8272d33&chksm=ebf6da4fdc815359869107a4acd15538b3596ba006b4005b216688b69372650dbd18c0184643&scene=21#wechat_redirect">jvm系列(三):GC算法 垃圾收集器</a></h2><h3 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h3><blockquote>
+<p>判断对象是否存活一般有两种方式：</p>
+</blockquote>
+<ul>
+<li><p>  引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。</p>
+</li>
+<li><p>  可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，不可达对象。</p>
+</li>
+</ul>
+<h3 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h3><ul>
+<li><p>  GC最基础的算法有三种：标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。</p>
+</li>
+<li><p>  标记 -清除算法，“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。</p>
+</li>
+<li><p>  复制算法，“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
+</li>
+<li><p>  标记-压缩算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
+</li>
+<li><p>  分代收集算法，“分代收集”（Generational Collection）算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
+</li>
+</ul>
+<h3 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h3><ul>
+<li><p>  Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。</p>
+</li>
+<li><p>  ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。</p>
+</li>
+<li><p>  Parallel收集器，Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。</p>
+</li>
+<li><p>  Parallel Old 收集器，Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法</p>
+</li>
+<li><p>  CMS收集器，CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。</p>
+</li>
+<li><p>  G1收集器，G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征</p>
+</li>
+</ul>
+<p>在Java语言中，GC Roots包括：</p>
+<ul>
+<li>  虚拟机栈中引用的对象。</li>
+<li>  方法区中类静态属性实体引用的对象。</li>
+<li>  方法区中常量引用的对象。</li>
+<li>  本地方法栈中JNI引用的对象。</li>
+</ul>
+<h2 id="jvm系列-四-jvm调优-命令篇"><a href="#jvm系列-四-jvm调优-命令篇" class="headerlink" title="jvm系列(四):jvm调优-命令篇"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483966&idx=1&sn=dfa3375d36aa2c0c25a775522e381e62&chksm=ebf6da41dc815357e0d53c73865a23f41219e75bac5a4d510bfa31cc51594b59a20e2e4f6cb8&scene=21#wechat_redirect">jvm系列(四):jvm调优-命令篇</a></h2><h3 id="调优命令"><a href="#调优命令" class="headerlink" title="调优命令"></a>调优命令</h3><blockquote>
+<p>  Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
+</blockquote>
+<ul>
+<li>  jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。</li>
+<li>  jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</li>
+<li>  jmap，JVM Memory Map命令用于生成heap dump文件</li>
+<li>  jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看</li>
+<li>  jstack，用于生成java虚拟机当前时刻的线程快照。</li>
+<li>  jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</li>
+</ul>
+<h2 id="jvm系列-五-Java-GC-分析"><a href="#jvm系列-五-Java-GC-分析" class="headerlink" title="jvm系列(五):Java GC 分析"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483986&idx=1&sn=a2d7c9f2e73dfcc938a3ec934b3ad3a4&chksm=ebf6da2ddc81533beb5e6fb54c872b5f79524d0780c484718a57ca0712916cd67bda7dee4073&scene=21#wechat_redirect">jvm系列(五):Java GC 分析</a></h2><h3 id="主要关注点："><a href="#主要关注点：" class="headerlink" title="主要关注点："></a>主要关注点：</h3><ul>
+<li><p>  GC日志分析</p>
+</li>
+<li><p>  调优命令</p>
+</li>
+<li><p>  调优工具</p>
+</li>
+</ul>
+<p><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">参考</a><br><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">参考</a></p>
+<h2 id="jvm系列-六-Java服务GC参数调优案例"><a href="#jvm系列-六-Java服务GC参数调优案例" class="headerlink" title="jvm系列(六):Java服务GC参数调优案例"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484007&idx=1&sn=e8d150bb760d0a92aad594152fc47a9d&chksm=ebf6da18dc81530eedeaff89d746cf48e7b2bdec602239faaeb4e8e490e0a4387e2a8890c327&scene=21#wechat_redirect">jvm系列(六):Java服务GC参数调优案例</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484023&idx=1&sn=39be119fdf3132240adc84a85bf8a054&chksm=ebf6da08dc81531e3719389555150f2d0237554b6b6c07a123efdea7c78c0ae2f064cc577bd4&scene=21#wechat_redirect">jvm系列(七):jvm调优-工具篇</a></p>
+<blockquote>
+<p>调优工具</p>
+</blockquote>
+<ul>
+<li>  常用调优工具分为两类,jdk自带监控工具：jconsole和jvisualvm，第三方有：MAT(Memory Analyzer Tool)、GChisto。</li>
+<li>  jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控</li>
+<li>  jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。</li>
+<li>  MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</li>
+<li>  GChisto，一款专业分析gc日志的工具</li>
+</ul>
+<h2 id="jvm系列-八-jvm知识点总览"><a href="#jvm系列-八-jvm知识点总览" class="headerlink" title="jvm系列(八):jvm知识点总览"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484038&idx=1&sn=e083cc8b248461c8916a819119b059c3&chksm=ebf6daf9dc8153ef27ecd857e6cc85372735e84042679c133892d0993074371a46dd2c28b8b3&scene=21#wechat_redirect">jvm系列(八):jvm知识点总览</a></h2><h2 id="jvm系列-九-如何优化Java-GC「译」"><a href="#jvm系列-九-如何优化Java-GC「译」" class="headerlink" title="jvm系列(九):如何优化Java GC「译」"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484042&idx=1&sn=51d2ed451151be872b601007597dd47f&chksm=ebf6daf5dc8153e3a7cb88ca97621cfae5aeaaeec0a1ff63e16278fbea6a43457e50a7fc9f0b&scene=21#wechat_redirect">jvm系列(九):如何优化Java GC「译」</a></h2><h2 id="jvm系列-十-教你如何成为Java的OOM-Killer"><a href="#jvm系列-十-教你如何成为Java的OOM-Killer" class="headerlink" title="jvm系列(十):教你如何成为Java的OOM Killer"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484071&idx=1&sn=84604a51fd18b91f73c46507c182540a&chksm=ebf6dad8dc8153cebb029372c0745a3c6570e527e1f95cee2fb9fb33c50d46c64f20722a3d96&scene=21#wechat_redirect">jvm系列(十):教你如何成为Java的OOM Killer</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484074&idx=1&sn=826318867783afaf99f62b38b2f5c268&chksm=ebf6dad5dc8153c32a6ce0201afe310b47135b07c8bb028a8fd9df7ecaf6e60950a7847c7df5&scene=21#wechat_redirect">jvm系列(十一):Java 8-从持久代到metaspace</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">日志分析脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 22:06:22" itemprop="dateCreated datePublished" datetime="2018-05-04T22:06:22+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
+<ul>
+<li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
+<blockquote>
+<p>将日志文件中的baidu替换成earyant输出<br>s表示执行的事文本替换命令</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘2,6p’ access.log</p>
+<blockquote>
+<p>-n表示只输出指定的行，’2,6p’表示选择的事第二行到第六行</p>
+</blockquote>
+</li>
+<li><p>sed ‘/earyant/d’ access.log</p>
+<blockquote>
+<p>d表示执行文本删除命令，将包含earyant的行删除</p>
+</blockquote>
+</li>
+<li><p>sed ‘=’ access.log</p>
+<blockquote>
+<p>显示文本行号</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘i\head’ access.log | head -10</p>
+<blockquote>
+<p>在行首插入文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘a\end’ access.log | head -10</p>
+<blockquote>
+<p> 在文末追加文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘/baidu/c\hello’ access.log | head -10</p>
+<blockquote>
+<p>c命令对文本进行替换，查找/baidu/匹配的行，用hello对匹配的行进行替换，与s不同的是，这个替换行，s是替换单词</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘1,5p;1,5=’ access.log</p>
+<blockquote>
+<p>多条命令，分号隔开</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
+<li><p>awk ‘{print $1}’ access.log | head -10</p>
+<blockquote>
+<p>打印指定的列</p>
+</blockquote>
+</li>
+<li><p>awk ‘/baidu/{print $5,%6}’ access.log | head -10</p>
+<blockquote>
+<p>筛选指定的行，并且打印出其中一部分列</p>
+</blockquote>
+</li>
+<li><p>awk ‘length{$0} &gt; 40 {print $3}’ access.log | head  -10</p>
+<blockquote>
+<p>$0 表示当前的行，length($0)获取当前行的长度，print $3 打印出第三列</p>
+</blockquote>
+</li>
+<li><p>awk ‘{line = sprintf (“method:%s,response:%s”,$3,$7); print line}’ access.log | head -10</p>
+<blockquote>
+<p>定义line接收sprintf输出，sprintf用户格式化输出第三行的请求式和第七行的响应时间</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
+<li>  系统load超过2或者磁盘利用率超过85%报警：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>读取日志文件，对字段切割，插入到sql。<br>  db:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create table access_log(</span><br><span class="line">  ip varchar(20),# ip地址</span><br><span class="line">  rt bigint,# 响应时间</span><br><span class="line">  method varchar(10), #请求方式</span><br><span class="line">  url varchar (400), # 请求地址</span><br><span class="line">  refer varchar(400),# 请求来源</span><br><span class="line">  return_code int,# 返回码</span><br><span class="line">  response_size bigint # 响应大小</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>shell:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"><span class="comment"># 日志路径</span></span><br><span class="line">ACCESS_FILE=<span class="string">&quot;D:\\0\\nginx-1.11.13\\logs\\access2.log&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> LINE</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 系统数组分隔符</span></span><br><span class="line">  OLD_IFS=<span class="string">&quot;<span class="variable">$IFS</span>&quot;</span></span><br><span class="line">  IFS=<span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="comment"># 每行分割成数组</span></span><br><span class="line">  field_arr=(<span class="variable">$LINE</span>)</span><br><span class="line">  IFS=<span class="string">&quot;<span class="variable">$OLD_IFS</span>&quot;</span></span><br><span class="line">  <span class="comment"># 生成插入语句，各列的值对应什么，懒得改了。</span></span><br><span class="line">  STATEMENT=<span class="string">&quot;insert into access_log values(&#x27;<span class="variable">$&#123;field_arr[0]&#125;</span>&#x27; , &#x27;<span class="variable">$&#123;field_arr[1]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[2]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[3]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[4]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[5]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[6]&#125;</span>&#x27;);&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$STATEMENT</span></span><br><span class="line">  mysql earyant -u root -p123456 -e <span class="string">&quot;<span class="variable">$&#123;STATEMENT&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$ACCESS_FILE</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">日志分析常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 16:06:10" itemprop="dateCreated datePublished" datetime="2018-05-04T16:06:10+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
+<li><p>cat：正序查看</p>
+<blockquote>
+<p>cat access.log</p>
+</blockquote>
+</li>
+<li><p>tac：倒序查看</p>
+<blockquote>
+<p>tac access.log</p>
+</blockquote>
+</li>
+</ul>
+<p>##分页显示文件</p>
+<ul>
+<li><p>more</p>
+<blockquote>
+<p>more access.log</p>
+</blockquote>
+<p>   Enter显示文件下一行<br>   空格显示下一页<br>   F显示下一屏内容<br>   B显示上一屏内容</p>
+</li>
+<li><p>less</p>
+<blockquote>
+<p>/GET 查找GET字符串</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
+<li><p>tail</p>
+<blockquote>
+<p>tail  -f -n 500 access.log</p>
+</blockquote>
+<p>   -f  持续查看<br>   -n 显示最后n行</p>
+</li>
+</ul>
+<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
+<li>head<blockquote>
+<p>head -n2 access.log</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
+<li><p>sort</p>
+<blockquote>
+<p>sort -n -r access.log</p>
+</blockquote>
+<p>   -n 按照数字排序<br>   -r 逆序排序</p>
+<blockquote>
+<p>sort -k 2 -t “ “ -n access.log</p>
+</blockquote>
+<p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
+</li>
+</ul>
+<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
+<li><p>wc</p>
+<blockquote>
+<p>  wc -l access.log</p>
+</blockquote>
+<pre><code>-l 统计文件中的行数
+</code></pre>
+<blockquote>
+<p>  wc -c access.log</p>
+</blockquote>
+<pre><code>-c 显示文件的字节数
+</code></pre>
+<blockquote>
+<p>  wc -L access.log</p>
+</blockquote>
+<pre><code>-L得出最长的行长度
+</code></pre>
+<blockquote>
+<p>  wc -w access.log</p>
+</blockquote>
+<pre><code>-w 查看文件包含多少单词
+</code></pre>
+</li>
+</ul>
+<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
+<li><p>uniq</p>
+<blockquote>
+<p> sort uniqfile| uniq -c</p>
+</blockquote>
+<pre><code>\-c 用来在每一行前面加上该行出现的次数
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -u</p>
+</blockquote>
+<pre><code>\-u 只会显示出现一次的行
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -d</p>
+</blockquote>
+<pre><code>\-d 只会显示重复出现的行
+</code></pre>
+</li>
+</ul>
+<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
+<li><p>grep</p>
+<pre><code>  &gt;   grep earyant access.log
+
+    earyant 为指定的查找串
+
+  &gt; grep -c earyant access.log
+
+    -c 可以显示查找到的行数
+
+  &gt;   grep &#39;G.\*T&#39; access.log
+
+    支持正则表达式
+</code></pre>
+<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
+<li><p>find</p>
+<blockquote>
+<p>find /home/earyant -name access.log</p>
+</blockquote>
+<pre><code> 在/home/earyant 目录下查找文件名为access.log的文件
+</code></pre>
+<blockquote>
+<p>find /home/earyant -name “*.txt”</p>
+<p>find . -print</p>
+</blockquote>
+<pre><code> 打印当前目录所有文件
+</code></pre>
+</li>
+<li><p>whereis</p>
+<blockquote>
+<p>whereis java</p>
+</blockquote>
+</li>
+<li><p>which</p>
+<blockquote>
+<p>which java</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
+<li>expr<blockquote>
+<p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
+<li><p>tar</p>
+<blockquote>
+<p>tar -cf aaa.tar tmp1 tmp2</p>
+</blockquote>
+<pre><code>  将当前目录下的tmp1和tmp2目录打包成aaa.tar
+  -c 表示生成新包
+  -f 指定包名称
+</code></pre>
+<blockquote>
+<p>tar -tf aaa.tar</p>
+</blockquote>
+<pre><code>  -t 能够列出包中文件的名称
+</code></pre>
+<blockquote>
+<p>tar -xf aaa.tar</p>
+</blockquote>
+<pre><code>  -x 将打包文件解压
+</code></pre>
+</li>
+</ul>
+<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
+<li><p>curl</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>curl -i <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -i 返回带header的文档</p>
+<blockquote>
+<p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -I 只返回页面的header信息</p>
+<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
+</ul>
+<blockquote>
+<p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>访问量排名前10的ip地址</p>
+<blockquote>
+<p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>页面访问量排名前10的url</p>
+<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
+<p>cat access.log | sort -k 2 -n -r |head -10</p>
+</blockquote>
+<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">Guava 1.1基本工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-19 17:13:44" itemprop="dateCreated datePublished" datetime="2018-04-19T17:13:44+08:00">2018-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-1-使用和避免null"><a href="#1-1-使用和避免null" class="headerlink" title="1.1-使用和避免null"></a>1.1-使用和避免null</h1><p>map允许null作为键，但只能有一个。<br>concurrentHashMap不允许null作为键。</p>
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">possible.isPresent(); <span class="comment">// returns true</span></span><br><span class="line">possible.get(); <span class="comment">// returns 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态创建方法"><a href="#静态创建方法" class="headerlink" title="静态创建方法"></a>静态创建方法</h3><ul>
+<li>  of</li>
+<li>  ofNullable</li>
+<li>empty<h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3></li>
+<li>  isPresent</li>
+<li>  get</li>
+<li>  or (jdk中是orElse)</li>
+<li>  orNull</li>
+<li>  asSet</li>
+</ul>
+<blockquote>
+<p>意义：<br>    使用Optional除了赋予null语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。Optional迫使你积极思考引用缺失的情况，因为你必须显式地从Optional获取引用。直接使用null很容易让人忘掉某些情形，尽管FindBugs可以帮助查找null相关的问题，但是我们还是认为它并不能准确地定位问题根源。<br>    如同输入参数，方法的返回值也可能是null。和其他人一样，你绝对很可能会忘记别人写的方法method(a,b)会返回一个null，就好像当你实现method(a,b)时，也很可能忘记输入参数a可以为null。将方法的返回类型指定为Optional，也可以迫使调用者思考返回的引用缺失的情形。</p>
+</blockquote>
+<h3 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><ul>
+<li>错误的使用方式：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">if</span> (user.isPresent()) &#123;</span><br><span class="line">  <span class="keyword">int</span> sex = user.getSex();</span><br><span class="line">  <span class="comment">// 链式调用，最容易出现空指针</span></span><br><span class="line">  <span class="keyword">int</span> age = user.getParent().getParent().getParent().getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>正确的使用方式  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">int</span> sex = user.map(User::getSex).orElse(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">int</span> age = user.map(User::getParent).map(User::getParent).map(User::getParent).map(User::getAge).orElse(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="其他处理null的便利方法"><a href="#其他处理null的便利方法" class="headerlink" title="其他处理null的便利方法"></a>其他处理null的便利方法</h2><ul>
+<li>  Objects.firstNonNull(T, T)</li>
+<li>  Objects还有其它一些方法专门处理null或空字符串：emptyToNull(String)，nullToEmpty(String)，isNullOrEmpty(String)。</li>
+</ul>
+<h1 id="1-2-前置条件-Preconditions"><a href="#1-2-前置条件-Preconditions" class="headerlink" title="1.2-前置条件 Preconditions"></a>1.2-前置条件 Preconditions</h1><table>
+<thead>
+<tr>
+<th>–</th>
+<th>–</th>
+<th>–</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法声明（不包括额外参数）</td>
+<td>描述</td>
+<td>检查失败时抛出的异常</td>
+</tr>
+<tr>
+<td>checkArgument(boolean)</td>
+<td>检查boolean是否为true，用来检查传递给方法的参数。</td>
+<td>IllegalArgumentException</td>
+</tr>
+<tr>
+<td>checkNotNull(T)</td>
+<td>检查value是否为null，该方法直接返回value，因此可以内嵌使用checkNotNull。</td>
+<td>NullPointerException</td>
+</tr>
+<tr>
+<td>checkState(boolean)</td>
+<td>用来检查对象的某些状态。</td>
+<td>IllegalStateException</td>
+</tr>
+<tr>
+<td>checkElementIndex(int index, int size)</td>
+<td>检查index作为索引值对某个列表、字符串或数组是否有效</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndex(int index, int size)</td>
+<td>检查index作为位置值对某个列表、字符串或数组是否有效。</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndexes(int start, int end, int size)</td>
+<td>检查[start, end]表示的位置范围对某个列表、字符串或数组是否有效*</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/google-guava-using-and-avoiding-null/">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -467,763 +1373,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/" class="post-title-link" itemprop="url">docker简单结合elk、logstash</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-13 10:40:28" itemprop="dateCreated datePublished" datetime="2018-02-13T10:40:28+08:00">2018-02-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="本文记录docker搭建elk，并简单结合logstash日志输出"><a href="#本文记录docker搭建elk，并简单结合logstash日志输出" class="headerlink" title="本文记录docker搭建elk，并简单结合logstash日志输出"></a>本文记录docker搭建elk，并简单结合logstash日志输出</h2><h3 id="filebeat"><a href="#filebeat" class="headerlink" title="filebeat"></a>filebeat</h3><blockquote>
-<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
-</blockquote>
-<ul>
-<li>filebeat.yml</li>
-</ul>
-<p><strong>enabled要改为true，filebeat默认为false</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>docker run -it –name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
-</blockquote>
-<h3 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
-<ul>
-<li>logstash.yml</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">docker简单部署elk服务</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-12 17:32:51" itemprop="dateCreated datePublished" datetime="2018-02-12T17:32:51+08:00">2018-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="本文章记录自己通过docker搭建elk的过程"><a href="#本文章记录自己通过docker搭建elk的过程" class="headerlink" title="本文章记录自己通过docker搭建elk的过程"></a>本文章记录自己通过docker搭建elk的过程</h1><h2 id="docker下载镜像"><a href="#docker下载镜像" class="headerlink" title="docker下载镜像"></a>docker下载镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
-
-<h2 id="docker-至少分配3g内存"><a href="#docker-至少分配3g内存" class="headerlink" title="docker 至少分配3g内存"></a>docker 至少分配3g内存</h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
-<h2 id="设置最大运行线程数"><a href="#设置最大运行线程数" class="headerlink" title="设置最大运行线程数"></a>设置最大运行线程数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用docker toolbox方式 先进入虚拟机</p>
-<blockquote>
-<p>docker-machine ssh default</p>
-</blockquote>
-</li>
-<li><p>永久生效配置</p>
-<blockquote>
-<p>sudo vi /etc/sysctl.conf</p>
-</blockquote>
-<blockquote>
-<p>vm.max_map_count=262144</p>
-</blockquote>
-<blockquote>
-<p>sudo sysctl -p //生效</p>
-</blockquote>
-</li>
-<li><p>临时生效配置</p>
-<blockquote>
-<p>sysctl -w vm.max_map_count=262144</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动，并配置端口映射</p>
-<blockquote>
-<p>docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it –name elk sebp/elk</p>
-</blockquote>
-<h2 id="查看kibana"><a href="#查看kibana" class="headerlink" title="查看kibana"></a>查看kibana</h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
-<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><ol>
-<li>进入容器</li>
-</ol>
-<blockquote>
-<p>docker exec -it elk /bin/bash</p>
-</blockquote>
-<ol start="2">
-<li>配置logstash</li>
-</ol>
-<blockquote>
-<p>/opt/logstash/bin/logstash -e ‘input { stdin { } } output { elasticsearch { hosts =&gt; [“localhost”] } }’</p>
-</blockquote>
-<blockquote>
-<p><strong>注意</strong>：如果看到这样的报错信息 Logstash could not be started because there is already another instance using the configured data directory. If you wish to run multiple instances, you must change the “path.data” setting. 请执行命令：service logstash stop 然后在执行就可以了。</p>
-</blockquote>
-<blockquote>
-<p>当命令成功被执行后，看到：Successfully started Logstash API endpoint {:port=&gt;9600} 信息后，输入：test 然后回车，模拟一条日志进行测试。</p>
-</blockquote>
-<blockquote>
-<ol>
-<li>打开浏览器，输入：<a target="_blank" rel="noopener" href="http://192.168.99.100:9200/_search?pretty">http://192.168.99.100:9200/_search?pretty</a> ，就会看到我们刚刚输入的日志内容</li>
-<li>创建kibana与logstash关联</li>
-<li>index name or pattern 输入 logstash-*</li>
-<li>time-field name 输入 @timestamp</li>
-<li>create</li>
-<li>打开kibana首页即可看到刚刚输入的内容</li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-20 09:47:36" itemprop="dateCreated datePublished" datetime="2018-01-20T09:47:36+08:00">2018-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="java8新特性"><a href="#java8新特性" class="headerlink" title="java8新特性"></a>java8新特性</h1><h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><blockquote>
-<p>java8接受一个函数作为另一个函数的参数传入进去</p>
-</blockquote>
-<p>Arrays.asList( “a”, “b”, “d” ).forEach( e -&gt; System.out.println( e ) ); 参数的类型是编译器推断出来的</p>
-<blockquote>
-<p>Lambda可以引用类的成员变量与局部变量（如果这些变量不是final的话，它们会被隐含的转为final，这样效率更高）。</p>
-</blockquote>
-<h2 id="默认方法和静态方法"><a href="#默认方法和静态方法" class="headerlink" title="默认方法和静态方法"></a>默认方法和静态方法</h2><blockquote>
-<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到java.util.Collection接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
-</blockquote>
-<h2 id="重复注解"><a href="#重复注解" class="headerlink" title="重复注解"></a>重复注解</h2><h2 id="Java编译器的新特性"><a href="#Java编译器的新特性" class="headerlink" title="Java编译器的新特性"></a>Java编译器的新特性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterNames</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Method method = ParameterNames.class.getMethod( <span class="string">&quot;main&quot;</span>, String[].class );</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">final</span> Parameter parameter: method.getParameters() ) &#123;</span><br><span class="line">            System.out.println( <span class="string">&quot;Parameter: &quot;</span> + parameter.getName() );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Parameter: args</p>
-</blockquote>
-<p>对于有经验的Maven用户，通过maven-compiler-plugin的配置可以将-parameters参数添加到编译器中去。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">compilerArgument</span>&gt;</span>-parameters<span class="tag">&lt;/<span class="name">compilerArgument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Java-类库的新特性"><a href="#Java-类库的新特性" class="headerlink" title="Java 类库的新特性"></a>Java 类库的新特性</h2><h3 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h3><p>平时用的判空：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (name == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>改成Optional：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  Optional&lt;String &gt; names = Opntional.of(name);</span><br><span class="line">  <span class="keyword">if</span> (names.isPresent())&#123;</span><br><span class="line">      <span class="keyword">return</span> names.get();</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果单纯改成这样，还不如直接写成 ==null，看起来更加繁琐。 应该改成这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Opntional.of(name).get().orElse(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> totalPointsOfOpenTasks = tasks</span><br><span class="line">    .stream()</span><br><span class="line">    .filter( task -&gt; task.getStatus() == Status.OPEN )</span><br><span class="line">    .mapToInt( Task::getPoints )</span><br><span class="line">    .sum();</span><br></pre></td></tr></table></figure>
-
-<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><blockquote>
-<p>对于Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素；</p>
-</blockquote>
-<h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><blockquote>
-<p>映射转换</p>
-</blockquote>
-<h4 id="mapTo"><a href="#mapTo" class="headerlink" title="mapTo*"></a>mapTo*</h4><blockquote>
-<p>映射转换成 <em>的类型，</em> 包括Integer、Double、Long</p>
-</blockquote>
-<h4 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h4><blockquote>
-<p>合并集合,和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;1,2&#125;，&#123;3,4&#125;，&#123;5,6&#125;&#125; - &gt; flatMap - &gt; &#123;1,2,3,4,5,6&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#x27;a&#x27;，&#x27;b&#x27;&#125;，&#123;&#x27;c&#x27;，&#x27;d&#x27;&#125;，&#123;&#x27;e&#x27;，&#x27;f&#x27;&#125;&#125; - &gt; flatMap - &gt; &#123;&#x27;a&#x27;，&#x27;b&#x27;，&#x27;c&#x27; D&quot;， &#x27;E&#x27;， &#x27;F&#x27;&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="flatMapTo"><a href="#flatMapTo" class="headerlink" title="flatMapTo*"></a>flatMapTo*</h4><h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><blockquote>
-<p>对于Stream中包含的元素进行去重操作（去重逻辑依赖元素的equals方法），新生成的Stream中没有重复的元素；</p>
-</blockquote>
-<blockquote>
-<h4 id="sorted"><a href="#sorted" class="headerlink" title="sorted"></a>sorted</h4></blockquote>
-<h4 id="peek"><a href="#peek" class="headerlink" title="peek"></a>peek</h4><blockquote>
-<p>监控器</p>
-</blockquote>
-<p>提供一个Consumer消费函数，返回一个新的Stream，如果只写 Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)) 是不会打印结果的 新Stream每个元素被<strong>消费</strong>的时候都会执行给定的消费函数； Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)).collect(Collectors.toList());</p>
-<h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>对一个Stream进行截断操作，获取其前N个元素，如果原Stream中包含的元素个数小于N，那就获取其所有的元素；</p>
-<h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><p>返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；</p>
-<h4 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h4><blockquote>
-<p>遍历</p>
-</blockquote>
-<h4 id="forEachOrdered"><a href="#forEachOrdered" class="headerlink" title="forEachOrdered"></a>forEachOrdered</h4><blockquote>
-<p>与forEach一样，只不过每次遍历结果都是相同的，forEach不是固定的序列</p>
-</blockquote>
-<h4 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h4><p>给定一个生成函数，生成一个无限的队列 Stream.generate(Math::random);</p>
-<h4 id="iterate"><a href="#iterate" class="headerlink" title="iterate"></a>iterate</h4><p>也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环</p>
-<p>Stream.iterate(1, item -&gt; item + 1).limit(10).forEach(System.out::println);</p>
-<h4 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h4><blockquote>
-<p>汇聚函数</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>方法参数</th>
-<th>返回类型</th>
-<th>作用</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>toList</td>
-<td>List<code>&lt;T &gt;</code></td>
-<td>把流中的参数汇聚成List集合</td>
-<td>示例:List<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
-</tr>
-<tr>
-<td>toSet</td>
-<td>Set<code>&lt;T&gt;</code></td>
-<td>把流中所有元素收集到Set中,删除重复项</td>
-<td>Set<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
-</tr>
-<tr>
-<td>toCollection</td>
-<td>Collection<code>&lt;T&gt;</code></td>
-<td>把流中所有元素收集到给定的供应源创建的集合中</td>
-<td><code>ArrayList&lt;Menu&gt; menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</code></td>
-</tr>
-<tr>
-<td>Counting</td>
-<td>Long</td>
-<td>计算流中元素个数</td>
-<td>Long count=Menu.getMenus.stream().collect(Collectors.counting());</td>
-</tr>
-<tr>
-<td>SummingInt</td>
-<td>Integer</td>
-<td>对流中元素的一个整数属性求和</td>
-<td>Integer count=Menu.getMenus.stream().collect(Collectors.summingInt(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>averagingInt</td>
-<td>Double</td>
-<td>计算流中元素integer属性的平均值</td>
-<td>Double averaging=Menu.getMenus.stream().collect((Collectors.averagingInt(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>Joining</td>
-<td>String</td>
-<td>连接流中每个元素的toString方法生成的字符串</td>
-<td>String name=Menu.getMenus.stream().map(Menu::getName).collect(Collectors.joining(“, “))</td>
-</tr>
-<tr>
-<td>maxBy</td>
-<td>Optional<code>&lt;T&gt;</code></td>
-<td>一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
-<td>Optional<code>&lt;Menu&gt;</code> fattest=Menu.getMenus.stream().collectCollectors.maxBy(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>minBy</td>
-<td>Optional<code>&lt;T&gt;</code></td>
-<td>一个包裹了流中按照给定比较器选出的最大元素的optional如果为空返回的是Optional.empty()</td>
-<td>Optional<code>&lt;Menu&gt;</code> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>Reducing</td>
-<td>归约操作产生的类型</td>
-<td>从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
-<td>int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
-</tr>
-<tr>
-<td>collectingAndThen</td>
-<td>转换函数返回的类型</td>
-<td>包裹另一个转换器,对其结果应用转换函数</td>
-<td>Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
-</tr>
-<tr>
-<td>groupingBy</td>
-<td>Map<code>&lt;K,List&lt;T&gt;&gt;</code></td>
-<td>根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
-<td>Map<code>&lt;Type,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
-</tr>
-<tr>
-<td>partitioningBy</td>
-<td>Map<code>&lt;Boolean,List&lt;T&gt;&gt;</code></td>
-<td>根据流中每个元素应用谓语的结果来对项目进行分区</td>
-<td>Map<code>&lt;Boolean,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
-</tr>
-</tbody></table>
-<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><ul>
-<li><code>Optional&lt;t&gt; reduce(BinaryOperator&lt;t&gt; accumulator);</code></li>
-</ul>
-<p>List <code>&lt;integer&gt;</code> ints = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10); System.out.println(“ints sum is:” + ints.stream().reduce((sum, item) -&gt; sum + item).get());</p>
-<p>可以看到reduce方法接受一个函数，这个函数有两个参数，第一个参数是上次函数执行的返回值（也称为中间结果），第二个参数是stream中的元素，这个函数把这两个值相加，得到的和会被赋值给下次执行这个函数的第一个参数。要注意的是：<strong>第一次执行的时候第一个参数的值是Stream的第一个元素，第二个参数是Stream的第二个元素</strong>。这个方法返回值类型是Optional，这是Java8防止出现NPE的一种可行方法，后面的文章会详细介绍，这里就简单的认为是一个容器，其中可能会包含0个或者1个对象。</p>
-<ul>
-<li>T reduce(T identity, BinaryOperator<code>&lt;t&gt;</code> accumulator);<br>这个定义上上面已经介绍过的基本一致，不同的是：它允许用户提供一个循环计算的初始值，如果Stream为空，就直接返回该值。而且这个方法不会返回Optional，因为其不会出现null值。</li>
-</ul>
-<h4 id="count"><a href="#count" class="headerlink" title="count"></a>count</h4><blockquote>
-<p>个数</p>
-</blockquote>
-<h4 id="allMatch"><a href="#allMatch" class="headerlink" title="allMatch"></a>allMatch</h4><p>是不是所有都满足给定的条件</p>
-<h4 id="anyMatch"><a href="#anyMatch" class="headerlink" title="anyMatch"></a>anyMatch</h4><p>是不是存在某一个元素满足给定的条件</p>
-<h4 id="findFirst"><a href="#findFirst" class="headerlink" title="findFirst"></a>findFirst</h4><p>返回第一个，返回的是Optional值</p>
-<h4 id="noneMatch"><a href="#noneMatch" class="headerlink" title="noneMatch"></a>noneMatch</h4><p>是否没有一个元素满足给定的条件</p>
-<h4 id="max和min"><a href="#max和min" class="headerlink" title="max和min"></a>max和min</h4><p>给定的比较条件，返回最大最小值</p>
-<p><a target="_blank" rel="noopener" href="http://ifeve.com/stream/">参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dm_vincent/article/category/2268127">好文收藏</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>注册中心不自动上线下线</li>
-<li>异步返回值</li>
-<li>bean参数传值</li>
-<li></li>
-</ul>
-<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
-<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
-<p>解决方法：设置enableSelfPreservation:false</p>
-<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
-<h3 id="负载均衡在服务下掉后的重试策略："><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-12-26 00:28:39" itemprop="dateCreated datePublished" datetime="2017-12-26T00:28:39+08:00">2017-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>本文在上文 Spring cloud系列四 Eureka 之概述和服务注册中心集群的基础上，继续介绍Eureka新的内容:</p>
-<pre><code>集群重要类：PeerAwareInstanceRegistryImpl
-新的Eureka Server节点加入集群后的影响
-新服务注册(Register)注册时的影响
-服务心跳(renew)
-服务下线和剔除
-自我保护模式
-</code></pre>
-<h1 id="2-Eureka-Server的集群同步操作"><a href="#2-Eureka-Server的集群同步操作" class="headerlink" title="2. Eureka Server的集群同步操作"></a>2. Eureka Server的集群同步操作</h1><h2 id="2-1-Eureka官网的架构图"><a href="#2-1-Eureka官网的架构图" class="headerlink" title="2.1. Eureka官网的架构图"></a>2.1. Eureka官网的架构图</h2><p>下方的操作需要结合下图理解：<br>这里写图片描述<br>##2.2. PeerAwareInstanceRegistryImpl</p>
-<p>集群相关重要的类com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: 为了保证集群里所有Eureka Server节点的状态同步，所有以下操作都会同步到集群的所有服务上：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）。以下是一些部分方法：</p>
-<pre><code>syncUp：在Eureka Server重启或新的Eureka Server节点加进来的，会执行初始化，从集群其他节点中获取所有的实例注册信息，从而能够正常提供服务。当Eureka Server启动时，它会从其它节点获取所有的注册信息，如果获取同步失败，它在一定时间（此值由决定）内拒绝服务。
-replicateToPeers： 同步以下操作到所有的集群节点：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）
-register: 注册实例，并且复印此实例的信息到所有的eureka server的节点。如果其它Eureka Server调用此节点，只在本节点更新实例信息，避免通知其他节点执行更新
-renew：心跳，同步集群
-cancel
-其他
-</code></pre>
-<p>Eureka Server集群之间的状态是采用异步方式同步的，所以不保证节点间的状态一定是一致的，不过基本能保证最终状态是一致的。</p>
-<h2 id="2-3-新的Eureka-Server节点加入集群后的影响"><a href="#2-3-新的Eureka-Server节点加入集群后的影响" class="headerlink" title="2.3. 新的Eureka Server节点加入集群后的影响"></a>2.3. 新的Eureka Server节点加入集群后的影响</h2><p>当有新的节点加入到集群中，会对现在Eureka Server和Eureka Client有什么影响以及他们如何发现新增的Eureka Server节点：</p>
-<pre><code>新增的Eureka Server：在Eureka Server重启或新的Eureka Server节点加进来的，它会从集群里其它节点获取所有的实例注册信息。如果获取同步失败，它会在一定时间（此值由决定eureka.server.peer-eureka-nodes-update-interval-ms决定）内拒绝服务。
-
-已有Eureka Server和Service Consumer如何发现新的Eureka Server
-    已有的Eureka Server：在运行过程中，Eureka Server之间会定时同步实例的注册信息。这样即使新的Application Service只向集群中一台注册服务，则经过一段时间会集群中所有的Eureka Server都会有这个实例的信息。那么Eureka Server节点之间如何相互发现，各个节点之间定时（时间由eureka.server.peer-eureka-nodes-update-interval-ms决定）更新节点信息，进行相互发现。
-    Service Consumer：Service Consumer刚启动时，它会从配置文件读取Eureka Server的地址信息。当集群中新增一个Eureka Server中时，那么Service Provider如何发现这个Eureka Server？Service Consumer会定时（此值由eureka.client.eureka-service-url-poll-interval-seconds决定）调用Eureka Server集群接口，获取所有的Eureka Server信息的并更新本地配置。
-</code></pre>
-<h2 id="2-4-新服务注册-Register-注册时的影响"><a href="#2-4-新服务注册-Register-注册时的影响" class="headerlink" title="2.4. 新服务注册(Register)注册时的影响"></a>2.4. 新服务注册(Register)注册时的影响</h2><p>Service Provider要对外提供服务，把自己注册到Eureka Server上。如果配置参数eureka.client.registerWithEureka=true（默认值true）时，会向Eureka Server注册进行注册，Eureka Server会保存注册信息到内存中。</p>
-<p>Service Consumer为了避免每次调用服务请求都需要向Eureka Server获取服务实例的注册信息，此时需要设置eureka.client.fetchRegistry=true，它会在本地缓存所有实例注册信息。为了保证缓存数据的有效性，它会定时（值由eureka.client.registry-fetch-interval-seconds定义，默认值为30s）向注册中心更新实例。</p>
-<h2 id="2-5-服务心跳-renew"><a href="#2-5-服务心跳-renew" class="headerlink" title="2.5. 服务心跳(renew)"></a>2.5. 服务心跳(renew)</h2><p>服务实例会通过心跳(eureka.instance.lease-renewal-interval-in-seconds定义心跳的频率，默认值为30s)续约的方式向Eureka Server定时更新自己的状态。Eureka Server收到心跳后，会通知集群里的其它Eureka Server更新此实例的状态。Service Provider/Service Consumer也会定时更新缓存的实例信息。</p>
-<h2 id="2-6-服务下线和剔除"><a href="#2-6-服务下线和剔除" class="headerlink" title="2.6. 服务下线和剔除"></a>2.6. 服务下线和剔除</h2><p>服务的下线有两种情况：</p>
-<pre><code>在Service Provider服务shutdown的时候，主动通知Eureka Server把自己剔除，从而避免客户端调用已经下线的服务。
-Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms，默认值为0，默认情况不删除实例）进行检查，如果发现实例在在一定时间（此值由eureka.instance.lease-expiration-duration-in-seconds定义，默认值为90s）内没有收到心跳，则会注销此实例。
-</code></pre>
-<p>这种情况下，Eureka Client的最多需要[eureka.instance.lease-renewal-interval-in-seconds + eureka.client.registry-fetch-interval-seconds]时间才发现服务已经下线。同理，一个新的服务上线后，Eureka Client的服务消费方最多需要相同的时间才发现服务已经上线</p>
-<p>服务下线，同时会更新到Eureka Server其他节点和Eureka client的缓存，流程类似同以上的register过程</p>
-<h2 id="2-7-自我保护模式"><a href="#2-7-自我保护模式" class="headerlink" title="2.7. 自我保护模式"></a>2.7. 自我保护模式</h2><p>如果Eureka Server最近1分钟收到renew的次数小于阈值（即预期的最小值），则会触发自我保护模式，此时Eureka Server此时会认为这是网络问题，它不会注销任何过期的实例。等到最近收到renew的次数大于阈值后，则Eureka Server退出自我保护模式。</p>
-<p>自我保护模式阈值计算：</p>
-<pre><code>每个instance的预期心跳数目 = 60/每个instance的心跳间隔秒数
-阈值 = 所有注册到服务的instance的数量的预期心跳之和 *自我保护系数
-</code></pre>
-<p>以上的参数都可配置的：</p>
-<pre><code>instance的心跳间隔秒数：eureka.instance.lease-renewal-interval-in-seconds
-自我保护系数：eureka.server.renewal-percent-threshold
-</code></pre>
-<p>如果我们的实例比较少且是内部网络时，推荐关掉此选项。我们也可以通过eureka.server.enable-self-preservation = false来禁用自我保护系数</p>
-<h2 id="2-8-配置demo"><a href="#2-8-配置demo" class="headerlink" title="2.8 配置demo"></a>2.8 配置demo</h2><p>以下配置的demo如下：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10761</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-registration-center</span></span><br><span class="line"><span class="comment">## eureka ： 主要配置属性在EurekaInstanceConfigBean和EurekaClientConfigBean中</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># hostname: 127.0.0.1</span></span><br><span class="line">    <span class="comment"># 使用IP注册</span></span><br><span class="line">    <span class="attr">preferIpAddress:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 心跳间隔</span></span><br><span class="line">    <span class="attr">lease-renewal-interval-in-seconds:</span> <span class="number">3</span></span><br><span class="line">    <span class="comment"># 服务失效时间： 如果多久没有收到请求，则可以删除服务</span></span><br><span class="line">    <span class="attr">lease-expiration-duration-in-seconds:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment"># 关闭eureka client</span></span><br><span class="line">    <span class="comment"># enabled: false</span></span><br><span class="line">    <span class="comment"># 注册自身到eureka服务器</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 表示是否从eureka服务器获取注册信息</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># 客户端从Eureka Server集群里更新Eureka Server信息的频率</span></span><br><span class="line">    <span class="attr">eureka-service-url-poll-interval-seconds:</span> <span class="number">60</span></span><br><span class="line">    <span class="comment"># 定义从注册中心获取注册服务的信息</span></span><br><span class="line">    <span class="attr">registry-fetch-interval-seconds:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 设置eureka服务器所在的地址，查询服务和注册服务都需要依赖这个地址</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10761/eureka/</span></span><br><span class="line">       <span class="comment"># 设置eureka服务器所在的地址，可以同时向多个服务注册服务</span></span><br><span class="line">       <span class="comment"># defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold: 0.1</span></span><br><span class="line">     <span class="comment"># 关闭自我保护模式</span></span><br><span class="line">     <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br><span class="line">     <span class="comment"># Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold:</span></span><br><span class="line">     <span class="comment"># 设置清理间隔,单位为毫秒,默认为0</span></span><br><span class="line">     <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">3000</span></span><br><span class="line">     <span class="comment"># 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务</span></span><br><span class="line">     <span class="attr">wait-time-in-ms-when-sync-empty:</span> <span class="number">6000000</span></span><br><span class="line">     <span class="comment"># 集群之间相互更新节点信息的时间频率</span></span><br><span class="line">     <span class="attr">peer-eureka-nodes-update-interval-ms:</span> <span class="number">60000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">索引</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-11-09 17:27:04" itemprop="dateCreated datePublished" datetime="2017-11-09T17:27:04+08:00">2017-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="索引介绍"><a href="#索引介绍" class="headerlink" title="索引介绍"></a>索引介绍</h2><blockquote>
-<p>索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I/O，假设磁盘每次I/O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好很多很多)。如果对之建立B-Tree索引，则只需要进行log100(10^6^)=3次页面读取，最坏情况下耗时30ms。这就是索引带来的效果，很多时候，当你的应用程序进行SQL查询速度很慢时，应该想想是否可以建索引</p>
-</blockquote>
-<h2 id="索引与优化"><a href="#索引与优化" class="headerlink" title="索引与优化"></a>索引与优化</h2><h3 id="索引的数据类型"><a href="#索引的数据类型" class="headerlink" title="索引的数据类型"></a>索引的数据类型</h3><pre><code>选择索引类型原则：
-</code></pre>
-<ol>
-<li>数据整形： 越小的整形在磁盘、内存、和CPU之间都需要更少的空间，处理起来更快。    2. 简单的数据类型更好： 整形数据比起字符型，处理开销更小，因为字符串的比较更复杂，在Mysql中，应该用内置的日期和时间数据类型，而不是字符串来存储时间，以及用整形数据类型存储ip地址。    3. 尽量避免NULL： 应该指定列为NOT NULL ，除非想存储NULL。在mysql中，含有空值的列很难进行查询优化，以为他使得索引、索引的统计信息以及比较运算符更加复杂。应该用0、一个特殊值、或者一个空串代替空值。</li>
-</ol>
-<h4 id="选择标识符"><a href="#选择标识符" class="headerlink" title="选择标识符"></a>选择标识符</h4><p>  选择合适的标识符是非常重要的，选择是不仅应该考虑存储类型，而且应该考虑mysql是怎么进行运算和比较的，一旦选定数据类型，应该保证所有的表都使用相同的数据类型。<br>    1. 整形： 通常是作为标识符最好的选择，因为更苦阿爹处理，因为可以更快的处理，而且可以设置为AUTO_INCREMENT。<br>    2. 字符串：尽量避免使用字符串作为标识符，它们消耗更好的空间，处理起来也较慢。而且，通常来说，字符串都是随机的，所以它们在索引中的位置也是随机的，这会导致页面分裂、随机访问磁盘，聚簇索引分裂（对于使用聚簇索引的存储引擎）。</p>
-<h3 id="索引入门"><a href="#索引入门" class="headerlink" title="索引入门"></a>索引入门</h3><pre><code>对于任何DBMS，索引都是进行优化的最主要的因素。对于少量的数据，没有合适的索引影响不是很大，但是，当随着数据量的增加，性能会急剧下降。
-如果对多列进行索引(组合索引)，**列的顺序**非常重要，MySQL仅能对索引最左边的前缀进行有效的查找。例如：
-</code></pre>
-<p>假设存在组合索引 表t1 建立 c1c2(c1,c2)联合索引，查询语句select * from t1 where c1=1 and c2=2能够使用该索引。查询语句select * from t1 where c1=1也能够使用该索引。但是，查询语句select * from t1 where c2=2不能够使用该索引，因为没有组合索引的引导列，即，要想使用c2列进行查找，必需出现c1等于某值。</p>
-<h4 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h4><p>索引是在存储引擎中实现的，而不是在服务器层中实现的。所以，每种存储引擎的索引都不一定完全相同，并不是所有的存储引擎都支持所有的索引类型。</p>
-<h5 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE People (</span><br><span class="line"></span><br><span class="line"> last_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> first_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> dob        date           not null,</span><br><span class="line"></span><br><span class="line"> gender     enum(&#x27;m&#x27;, &#x27;f&#x27;) not null,</span><br><span class="line"></span><br><span class="line"> key(last_name, first_name, dob)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>其索引包含表中每一行的last_name、first_name和dob列。其结构大致如下：<br><img src="img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg"><br>索引存储的值按索引列中的顺序排列。可以利用B-Tree索引进行全关键字、关键字范围和关键字前缀查询，当然，如果想使用索引，你必须保证按索引的最左边前缀(leftmost prefix of the index)来进行查询。</p>
-<ol>
-<li>匹配全值(Match the full value)：对索引中的所有列都指定具体的值。例如，上图中索引可以帮助你查找出生于1960-01-01的Cuba Allen。</li>
-<li>匹配最左前缀(Match a leftmost prefix)：你可以利用索引查找last name为Allen的人，仅仅使用索引中的第1列。</li>
-<li>匹配列前缀(Match a column prefix)：例如，你可以利用索引查找last name以J开始的人，这仅仅使用索引中的第1列。</li>
-<li>匹配值的范围查询(Match a range of values)：可以利用索引查找last name在Allen和Barrymore之间的人，仅仅使用索引中第1列。</li>
-<li>匹配部分精确而其它部分进行范围匹配(Match one part exactly and match a range on another part)：可以利用索引查找last name为Allen，而first name以字母K开始的人。</li>
-<li>仅对索引进行查询(Index-only queries)：如果查询的列都位于索引中，则不需要读取元组的值。</li>
-</ol>
-<p>由于B-树中的节点都是<strong>顺序存储</strong>的，所以可以利用索引进行查找(找某些值)，也可以对查询结果进行ORDER BY。当然，使用B-tree索引有以下一些限制：</p>
-<ol>
-<li>查询必须从索引的最左边的列开始。关于这点已经提了很多遍了。例如你不能利用索引查找在某一天出生的人。</li>
-<li>不能跳过某一索引列。例如，你不能利用索引查找last name为Smith且出生于某一天的人。</li>
-<li>存储引擎不能使用索引中范围条件右边的列。例如，如果你的查询语句为WHERE last_name=”Smith” AND first_name LIKE ‘J%’ AND dob=’1976-12-23’，则该查询只会使用索引中的前两列，因为LIKE是范围查询。<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><blockquote>
-<p>MySQL中，只有Memory存储引擎显示支持hash索引，是Memory表的默认索引类型，尽管Memory表也可以使用B-Tree索引。Memory存储引擎支持非唯一hash索引，这在数据库领域是罕见的，如果多个值有相同的hash code，索引把它们的行指针用链表保存到同一个hash表项中。</p>
-</blockquote>
-</li>
-</ol>
-<p>  假设创建如下一个表：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE testhash (</span><br><span class="line">   fname VARCHAR(50) NOT NULL,</span><br><span class="line">   lname VARCHAR(50) NOT NULL,</span><br><span class="line">   KEY USING HASH(fname)</span><br><span class="line">) ENGINE=MEMORY;</span><br></pre></td></tr></table></figure><br>  假设索引使用hash函数f( )，如下：</p>
-<blockquote>
-<p>  f(‘Arjen’) = 2323<br>    f(‘Baron’) = 7437<br>  f(‘Peter’) = 8784<br>  f(‘Vadim’) = 2458<br>此时，索引的结构大概如下：<br><img src="img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg"></p>
-</blockquote>
-<p>Slots是有序的，但是记录不是有序的。当你执行<br>mysql&gt; SELECT lname FROM testhash WHERE fname=’Peter’;<br>MySQL会计算’Peter’的hash值，然后通过它来查询索引的行指针。因为f(‘Peter’) = 8784，MySQL会在索引中查找8784，得到指向记录3的指针。<br>因为索引自己仅仅存储很短的值，所以，索引非常紧凑。Hash值不取决于列的数据类型，一个TINYINT列的索引与一个长字符串列的索引一样大。<br>Hash索引有以下一些<strong>限制</strong>：</p>
-<ol>
-<li>由于索引仅包含hash code和记录指针，所以，MySQL不能通过使用索引避免读取记录。但是访问内存中的记录是非常迅速的，不会对性造成太大的影响。</li>
-<li>不能使用hash索引排序。</li>
-<li>Hash索引不支持键的部分匹配，因为是通过整个索引值来计算hash值的。</li>
-<li>Hash索引只支持等值比较，例如使用=，IN( )和&lt;=&gt;。对于WHERE price&gt;100并不能加速查询。</li>
-</ol>
-<h5 id="空间-R-Tree-索引"><a href="#空间-R-Tree-索引" class="headerlink" title="空间(R-Tree)索引"></a>空间(R-Tree)索引</h5><pre><code>MyISAM支持空间索引，主要用于地理空间数据类型，例如GEOMETRY。
-</code></pre>
-<h5 id="全文-Full-text-索引"><a href="#全文-Full-text-索引" class="headerlink" title="全文(Full-text)索引"></a>全文(Full-text)索引</h5><pre><code>全文索引是MyISAM的一个特殊索引类型，主要用于全文检索。
-</code></pre>
-<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="聚簇索引-Clustered-Indexes"><a href="#聚簇索引-Clustered-Indexes" class="headerlink" title="聚簇索引(Clustered Indexes)"></a>聚簇索引(Clustered Indexes)</h3><blockquote>
-<p>mysql聚簇索引保证关键字的值相近的元组存储的物理位置也相同（所以字符串类型不宜建立聚簇索引，特别是随机字符串，会使得系统进行大量的移动操作），且一个表只能有一个聚簇索引。因为由存储引擎实现索引，所以，并不是所有的引擎都支持聚簇索引。目前，只有solidDB和InnoDB支持。<br> 结构如下：<br> <img src="img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg"><br>注：叶子页面包含完整的元组，而内节点页面仅包含索引的列(索引的列为整型)。一些DBMS允许用户指定聚簇索引，但是MySQL的存储引擎到目前为止都不支持。InnoDB对主键建立聚簇索引。如果你不指定主键，InnoDB会用一个具有唯一且非空值的索引来代替。如果不存在这样的索引，InnoDB会定义一个隐藏的主键，然后对其建立聚簇索引。一般来说，DBMS都会以聚簇索引的形式来存储实际的数据，它是其它二级索引的基础。</p>
-</blockquote>
-<h4 id="InnoDB和MyISAM的数据布局的比较"><a href="#InnoDB和MyISAM的数据布局的比较" class="headerlink" title="InnoDB和MyISAM的数据布局的比较"></a>InnoDB和MyISAM的数据布局的比较</h4><blockquote>
-<p>为了更加理解聚簇索引和非聚簇索引，或者primary索引和second索引(MyISAM不支持聚簇索引)，来比较一下InnoDB和MyISAM的数据布局，对于如下表：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE layout_test (</span><br><span class="line"></span><br><span class="line">col1 int NOT NULL,</span><br><span class="line"></span><br><span class="line">col2 int NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(col1),</span><br><span class="line"></span><br><span class="line">KEY(col2)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>假设主键的值位于1—10,000之间，且按随机顺序插入，然后用OPTIMIZE TABLE进行优化。col2随机赋予1—100之间的值，所以会存在许多重复的值。</p>
-<ol>
-<li>MyISAM的数据布局<br>其布局十分简单，MyISAM按照插入的顺序在磁盘上存储数据，如下：<br><img src="img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg"></li>
-</ol>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html">参考</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1289,7 +1442,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1302,7 +1455,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-21T06:24:52.277Z</updated>
+  <updated>2021-09-21T15:13:10.512Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,118 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scikit-Learn与TensorFlow机器学习实用指南-1</title>
+    <link href="http://earyant.github.io/posts/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/"/>
+    <id>http://earyant.github.io/posts/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/</id>
+    <published>2021-09-21T15:10:25.000Z</published>
+    <updated>2021-09-21T15:13:10.512Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-高级pandas</title>
+    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E9%AB%98%E7%BA%A7pandas/"/>
+    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E9%AB%98%E7%BA%A7pandas/</id>
+    <published>2021-09-21T14:39:32.000Z</published>
+    <updated>2021-09-21T14:44:12.592Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-时间序列</title>
+    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/</id>
+    <published>2021-09-21T14:39:04.000Z</published>
+    <updated>2021-09-21T15:14:03.116Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-数据清洗</title>
+    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/"/>
+    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</id>
+    <published>2021-09-21T14:38:52.000Z</published>
+    <updated>2021-09-21T14:44:12.592Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-pandas</title>
+    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas/"/>
+    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas/</id>
+    <published>2021-09-21T14:38:35.000Z</published>
+    <updated>2021-09-21T15:12:08.328Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-numpy</title>
+    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-numpy/"/>
+    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-numpy/</id>
+    <published>2021-09-21T14:29:02.000Z</published>
+    <updated>2021-09-21T14:50:07.553Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="numpy" scheme="http://earyant.github.io/tags/numpy/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>机器学习书单</title>
@@ -281,122 +393,6 @@
     
     
     <category term="散文诗" scheme="http://earyant.github.io/tags/%E6%95%A3%E6%96%87%E8%AF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker简单结合elk、logstash</title>
-    <link href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/"/>
-    <id>http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/</id>
-    <published>2018-02-13T02:40:28.000Z</published>
-    <updated>2021-09-18T07:57:49.217Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-    <category term="logstash" scheme="http://earyant.github.io/tags/logstash/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker简单部署elk服务</title>
-    <link href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/"/>
-    <id>http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/</id>
-    <published>2018-02-12T09:32:51.000Z</published>
-    <updated>2021-09-18T07:57:49.217Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-    <category term="elk" scheme="http://earyant.github.io/tags/elk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java8新特性</title>
-    <link href="http://earyant.github.io/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/"/>
-    <id>http://earyant.github.io/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/</id>
-    <published>2018-01-20T01:47:36.000Z</published>
-    <updated>2021-09-18T07:57:49.221Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-    <category term="java8" scheme="http://earyant.github.io/tags/java8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springcloud配置问题</title>
-    <link href="http://earyant.github.io/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
-    <id>http://earyant.github.io/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</id>
-    <published>2018-01-14T13:41:03.000Z</published>
-    <updated>2021-09-18T07:57:49.232Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置</title>
-    <link href="http://earyant.github.io/posts/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/"/>
-    <id>http://earyant.github.io/posts/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/</id>
-    <published>2017-12-25T16:28:39.000Z</published>
-    <updated>2021-09-18T07:57:49.214Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>索引</title>
-    <link href="http://earyant.github.io/posts/%E7%B4%A2%E5%BC%95/"/>
-    <id>http://earyant.github.io/posts/%E7%B4%A2%E5%BC%95/</id>
-    <published>2017-11-09T09:27:04.000Z</published>
-    <updated>2021-09-18T07:57:49.245Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-    <category term="mysql" scheme="http://earyant.github.io/tags/mysql/"/>
     
   </entry>
   

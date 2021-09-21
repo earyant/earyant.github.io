@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、第14章 数据分析案例本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。 下载本书代码：https:&#x2F;&#x2F;github.com&#x2F;wesm&#x2F;pydata-book（建议把代码下载下来之后，安装好Anaconda 3.6，在目录文件夹中用Ju">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用python进行数据分析-时间序列">
+<meta property="og:url" content="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="一、第14章 数据分析案例本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。 下载本书代码：https:&#x2F;&#x2F;github.com&#x2F;wesm&#x2F;pydata-book（建议把代码下载下来之后，安装好Anaconda 3.6，在目录文件夹中用Ju">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-21T14:39:04.000Z">
+<meta property="article:modified_time" content="2021-09-21T15:14:03.116Z">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>利用python进行数据分析-时间序列 | Earyant的技术博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">83</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          利用python进行数据分析-时间序列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-21 22:39:04 / 修改时间：23:14:03" itemprop="dateCreated datePublished" datetime="2021-09-21T22:39:04+08:00">2021-09-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一、第14章 数据分析案例<br>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
+<p>下载本书代码：<a target="_blank" rel="noopener" href="https://github.com/wesm/pydata-book%EF%BC%88%E5%BB%BA%E8%AE%AE%E6%8A%8A%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD%E4%B8%8B%E6%9D%A5%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%AE%89%E8%A3%85%E5%A5%BDAnaconda">https://github.com/wesm/pydata-book（建议把代码下载下来之后，安装好Anaconda</a> 3.6，在目录文件夹中用Jupyter notebook打开）</p>
+<p>二、实例<br>2.6 1880-2010年间全美婴儿姓名<br>美国社会保障总署提供了一份从1880年到现在的婴儿名字频率数据。Hadley Wickham（许多流行R包的作者）经常用这份数据来演示R的数据处理功能。</p>
+<p>你可以用这个数据集做很多事，例如：</p>
+<p>· 计算指定名字（可以是你自己的，也可以是别人的）的年度比例。</p>
+<p>· 计算某个名字的相对排名。</p>
+<p>· 计算各年度最流行的名字，以及增长或减少最快的名字。</p>
+<p>· 分析名字趋势：元音、辅音、长度、总体多样性、拼写变化、首尾字母等。</p>
+<p>· 分析外源性趋势：圣经中的名字、名人、人口结构变化等。</p>
+<p>利用前面介绍过的那些工具，这些分析工作都能很轻松地完成，我会讲解其中的一些。</p>
+<p>到编写本书时为止，美国社会保障总署将该数据库按年度制成了多个数据文件，其中给出了每个性别/名字组合的出生总数。</p>
+<p>下载”National data”文件names.zip，解压后的目录中含有一组文件（如yob1880.txt）。其中一个文件的前10行：</p>
+<p>Mary,F,7065</p>
+<p>Anna,F,2604</p>
+<p>Emma,F,2003</p>
+<p>Elizabeth,F,1939</p>
+<p>Minnie,F,1746</p>
+<p>Margaret,F,1578</p>
+<p>Ida,F,1472</p>
+<p>Alice,F,1414</p>
+<p>Bertha,F,1320</p>
+<p>Sarah,F,1288</p>
+<p>由于这是一个非常标准的以逗号隔开的格式，所以可以用pandas.read_csv将其加载到DataFrame中：</p>
+<p>In [95]: import pandas as pd</p>
+<p>In [96]: names1880 =pd.read_csv(‘datasets/babynames/yob1880.txt’,names=[‘name’, ‘sex’, ‘births’])</p>
+<p>In [97]: names1880</p>
+<p>Out[97]:</p>
+<p>name sex births</p>
+<p>0 Mary F 7065</p>
+<p>1 Anna F 2604</p>
+<p>2 Emma F 2003</p>
+<p>… … .. …</p>
+<p>1997 Wright M 5</p>
+<p>1998 York M 5</p>
+<p>1999 Zachariah M 5</p>
+<p>[2000 rows x 3 columns]</p>
+<p>这些文件中仅含有当年出现超过5次的名字。为了简单起见，我们可以用births列的sex分组小计表示该年度的births总计：</p>
+<p>In [98]: names1880.groupby(‘sex’).births.sum()</p>
+<p>Out[98]:</p>
+<p>sex</p>
+<p>F 90993</p>
+<p>M 110493</p>
+<p>Name: births, dtype: int64</p>
+<p>由于该数据集按年度被分隔成了多个文件，所以第一件事情就是要将所有数据都组装到一个DataFrame里面，并加上一个year字段。使用pandas.concat即可达到这个目的：</p>
+<p>years = range(1880, 2011)</p>
+<p>pieces = []</p>
+<p>columns = [‘name’, ‘sex’, ‘births’]</p>
+<p>for year in years:</p>
+<p>path = ‘datasets/babynames/yob%d.txt’ % year</p>
+<p>frame = pd.read_csv(path, names=columns)</p>
+<p>frame[‘year’] = year</p>
+<p>pieces.append(frame)</p>
+<p>names = pd.concat(pieces, ignore_index=True)#合并表格</p>
+<p>这里需要注意几件事情。第一，concat默认是按行将多个DataFrame组合到一起的；第二，必须指定ignore_index=True，因为我们不希望保留read_csv所返回的原始行号。现在我们得到了一个非常大的DataFrame，它含有全部的名字数据：</p>
+<p>In [100]: names</p>
+<p>Out[100]:</p>
+<p>name sex births year</p>
+<p>0 Mary F 7065 1880</p>
+<p>1 Anna F 2604 1880</p>
+<p>2 Emma F 2003 1880</p>
+<p>3 Elizabeth F 1939 1880</p>
+<p>… … .. … …</p>
+<p>1690781 Zyquarius M 5 2010</p>
+<p>1690782 Zyran M 5 2010</p>
+<p>1690783 Zzyzx M 5 2010</p>
+<p>[1690784 rows x 4 columns]</p>
+<p>有了这些数据之后，我们就可以利用groupby或pivot_table在year和sex级别上对其进行聚合了，如图14-4所示：</p>
+<p>In [101]: total_births = names.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=sum)</p>
+<p>In [102]: total_births.tail()</p>
+<p>Out[102]:</p>
+<p>sex F M</p>
+<p>year</p>
+<p>2006 1896468 2050234</p>
+<p>2007 1916888 2069242</p>
+<p>2008 1883645 2032310</p>
+<p>2009 1827643 1973359</p>
+<p>2010 1759010 1898382</p>
+<p>In [103]: %matplotlib</p>
+<p>total_births.plot(title=’Total births by sex and year’)</p>
+<p>图14-4 按性别和年度统计的总出生数<br>下面我们来插入一个prop列，用于存放指定名字的婴儿数相对于总出生数的比例。prop值为0.02表示每100名婴儿中有2名取了当前这个名字。因此，我们先按year和sex分组，然后再将新列加到各个分组上：</p>
+<p>def add_prop(group):</p>
+<p>group[‘prop’] = group.births / group.births.sum()</p>
+<p>return group</p>
+<p>names = names.groupby([‘year’, ‘sex’]).apply(add_prop)</p>
+<p>现在，完整的数据集就有了下面这些列：</p>
+<p>In [105]: names</p>
+<p>Out[105]:</p>
+<p>name sex births year prop</p>
+<p>0 Mary F 7065 1880 0.077643</p>
+<p>1 Anna F 2604 1880 0.028618</p>
+<p>2 Emma F 2003 1880 0.022013</p>
+<p>… … .. … … …</p>
+<p>1690781 Zyquarius M 5 2010 0.000003</p>
+<p>1690782 Zyran M 5 2010 0.000003</p>
+<p>1690783 Zzyzx M 5 2010 0.000003</p>
+<p>[1690784 rows x 5 columns]</p>
+<p>在执行这样的分组处理时，一般都应该做一些有效性检查，比如验证所有分组的prop的总和是否为1：</p>
+<p>In [106]: names.groupby([‘year’, ‘sex’]).prop.sum()</p>
+<p>Out[106]:</p>
+<p>year sex</p>
+<p>1880 F 1.0</p>
+<p>M 1.0</p>
+<p>1881 F 1.0</p>
+<p>M 1.0</p>
+<p>1882 F 1.0</p>
+<p>M 1.0</p>
+<p>…</p>
+<p>2008 F 1.0</p>
+<p>M 1.0</p>
+<p>2009 F 1.0</p>
+<p>M 1.0</p>
+<p>2010 F 1.0</p>
+<p>M 1.0</p>
+<p>Name: prop, Length: 262, dtype: float64</p>
+<p>工作完成。为了便于实现更进一步的分析，我需要取出该数据的一个子集：每对sex/year组合的前1000个名字。这又是一个分组操作：</p>
+<p>def get_top1000(group):</p>
+<p>return group.sort_values(by=’births’, ascending=False)[:1000]</p>
+<p>grouped = names.groupby([‘year’, ‘sex’])</p>
+<p>top1000 = grouped.apply(get_top1000)</p>
+<p>top1000.reset_index(inplace=True, drop=True)</p>
+<p>如果你喜欢DIY的话，也可以这样：</p>
+<p>pieces = []</p>
+<p>for year, group in names.groupby([‘year’, ‘sex’]):</p>
+<p>pieces.append(group.sort_values(by=’births’, ascending=False)[:1000])</p>
+<p>top1000 = pd.concat(pieces, ignore_index=True)</p>
+<p>现在的结果数据集就小多了：</p>
+<p>In [108]: top1000</p>
+<p>Out[108]:</p>
+<p>name sex births year prop</p>
+<p>0 Mary F 7065 1880 0.077643</p>
+<p>1 Anna F 2604 1880 0.028618</p>
+<p>2 Emma F 2003 1880 0.022013</p>
+<p>3 Elizabeth F 1939 1880 0.021309</p>
+<p>… … .. … … …</p>
+<p>261874 Jaquan M 194 2010 0.000102</p>
+<p>261875 Jaydan M 194 2010 0.000102</p>
+<p>261876 Maxton M 193 2010 0.000102</p>
+<p>[261877 rows x 5 columns]</p>
+<p>接下来的数据分析工作就针对这个top1000数据集了。</p>
+<p>2.7分析命名趋势<br>有了完整的数据集和刚才生成的top1000数据集，我们就可以开始分析各种命名趋势了。首先将前1000个名字分为男女两个部分：</p>
+<p>In [109]: boys = top1000[top1000.sex == ‘M’]</p>
+<p>In [110]: girls = top1000[top1000.sex == ‘F’]</p>
+<p>这是两个简单的时间序列，只需稍作整理即可绘制出相应的图表（比如每年叫做John和Mary的婴儿数）。我们先生成一张按year和name统计的总出生数透视表：</p>
+<p>In [111]: total_births = top1000.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’name’,aggfunc=sum)</p>
+<p>现在，我们用DataFrame的plot方法绘制几个名字的曲线图（见图14-5）：</p>
+<p>In [112]: <a target="_blank" rel="noopener" href="http://total_births.info()/">http://total_births.info()</a></p>
+<p>&lt;class ‘pandas.core.frame.DataFrame’&gt;</p>
+<p>Int64Index: 131 entries, 1880 to 2010</p>
+<p>Columns: 6868 entries, Aaden to Zuri</p>
+<p>dtypes: float64(6868)</p>
+<p>memory usage: 6.9 MB</p>
+<p>In [113]: subset = total_births[[‘John’, ‘Harry’, ‘Mary’, ‘Marilyn’]]</p>
+<p>In [114]: subset.plot(subplots=True, figsize=(12, 10), grid=False,</p>
+<p>…..: title=”Number of births per year”)</p>
+<p>图14-5 几个男孩和女孩名字随时间变化的使用数量<br>从图中可以看出，这几个名字在美国人民的心目中已经风光不再了。但事实并非如此简单，我们在下一节中就能知道是怎么一回事了。</p>
+<p>2.8评估命名多样性的增长<br>一种解释是父母愿意给小孩起常见的名字越来越少。这个假设可以从数据中得到验证。一个办法是计算最流行的1000个名字所占的比例，我按year和sex进行聚合并绘图（见图14-6）：</p>
+<p>In [116]: table = top1000.pivot_table(‘prop’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=sum)</p>
+<p>In [117]: table.plot(title=’Sum of table1000.prop by year and sex’,</p>
+<p>…..: yticks=np.linspace(0, 1.2, 13), xticks=range(1880, 2020, 10))</p>
+<p>图14-6 分性别统计的前1000个名字在总出生人数中的比例<br>从图中可以看出，名字的多样性确实出现了增长（前1000项的比例降低）。另一个办法是计算占总出生人数前50%的不同名字的数量，这个数字不太好计算。我们只考虑2010年男孩的名字：</p>
+<p>In [118]: df = boys[boys.year == 2010]</p>
+<p>In [119]: df</p>
+<p>Out[119]:</p>
+<p>name sex births year prop</p>
+<p>260877 Jacob M 21875 2010 0.011523</p>
+<p>260878 Ethan M 17866 2010 0.009411</p>
+<p>260879 Michael M 17133 2010 0.009025</p>
+<p>… … .. … … …</p>
+<p>261874 Jaquan M 194 2010 0.000102</p>
+<p>261875 Jaydan M 194 2010 0.000102</p>
+<p>261876 Maxton M 193 2010 0.000102</p>
+<p>[1000 rows x 5 columns]</p>
+<p>在对prop降序排列之后，我们想知道前面多少个名字的人数加起来才够50%。虽然编写一个for循环确实也能达到目的，但NumPy有一种更聪明的矢量方式。先计算prop的累计和cumsum，然后再通过searchsorted方法找出0.5应该被插入在哪个位置才能保证不破坏顺序：</p>
+<p>In [120]: prop_cumsum = df.sort_values(by=’prop’, ascending=False).prop.cumsum()</p>
+<p>In [121]: prop_cumsum[:10]</p>
+<p>Out[121]:<br>260877 0.011523</p>
+<p>260878 0.020934</p>
+<p>260879 0.029959</p>
+<p>260880 0.038930</p>
+<p>260881 0.047817</p>
+<p>260882 0.056579</p>
+<p>260883 0.065155</p>
+<p>260884 0.073414</p>
+<p>260885 0.081528</p>
+<p>260886 0.089621</p>
+<p>Name: prop, dtype: float64</p>
+<p>In [122]: prop_cumsum.values.searchsorted(0.5)</p>
+<p>Out[122]: 116</p>
+<p>由于数组索引是从0开始的，因此我们要给这个结果加1，即最终结果为117。拿1900年的数据来做个比较，这个数字要小得多：</p>
+<p>In [123]: df = boys[boys.year == 1900]</p>
+<p>In [124]: in1900 = df.sort_values(by=’prop’, ascending=False).prop.cumsum()</p>
+<p>In [125]: in1900.values.searchsorted(0.5) + 1</p>
+<p>Out[125]: 25</p>
+<p>现在就可以对所有year/sex组合执行这个计算了。按这两个字段进行groupby处理，然后用一个函数计算各分组的这个值：</p>
+<p>def get_quantile_count(group, q=0.5):</p>
+<p>group = group.sort_values(by=’prop’, ascending=False)</p>
+<p>return group.prop.cumsum().values.searchsorted(q) + 1</p>
+<p>diversity = top1000.groupby([‘year’, ‘sex’]).apply(get_quantile_count)</p>
+<p>diversity = diversity.unstack(‘sex’)</p>
+<p>现在，diversity这个DataFrame拥有两个时间序列（每个性别各一个，按年度索引）。通过IPython，你可以查看其内容，还可以像之前那样绘制图表（如图14-7所示）：</p>
+<p>In [128]: diversity.head()</p>
+<p>Out[128]:</p>
+<p>sex F M</p>
+<p>year</p>
+<p>1880 38 14</p>
+<p>1881 38 14</p>
+<p>1882 38 15</p>
+<p>1883 39 15</p>
+<p>1884 39 16</p>
+<p>In [129]: diversity.plot(title=”Number of popular names in top 50%”)</p>
+<p>图14-7 按年度统计的密度表<br>从图中可以看出，女孩名字的多样性总是比男孩的高，而且还在变得越来越高。</p>
+<p>2.9 “最后一个字母”的变革<br>2007年，一名婴儿姓名研究人员Laura Wattenberg在她自己的网站上指出（<a href="http://www.babynamewizard.com）：近百年来，男孩名字在最后一个字母上的分布发生了显著的变化。为了了解具体的情况，我首先将全部出生数据在年度、性别以及末字母上进行了聚合：">http://www.babynamewizard.com）：近百年来，男孩名字在最后一个字母上的分布发生了显著的变化。为了了解具体的情况，我首先将全部出生数据在年度、性别以及末字母上进行了聚合：</a></p>
+<p>get_last_letter = lambda x: x[-1]# 提取尾字符</p>
+<p>last_letters = names.name.map(get_last_letter)</p>
+<p>last_letters.name = ‘last_letter’</p>
+<p>table = names.pivot_table(‘births’, index=last_letters,</p>
+<p>columns=[‘sex’, ‘year’], aggfunc=sum)</p>
+<p>然后选出具有一定代表性的三年，并输出前面几行：</p>
+<p>In [131]: subtable = table.reindex(columns=[1910, 1960, 2010], level=’year’)</p>
+<p>In [132]: subtable.head()</p>
+<p>Out[132]:</p>
+<p>sex F M</p>
+<p>year 1910 1960 2010 1910 1960 2010</p>
+<p>last_letter</p>
+<p>a 108376.0 691247.0 670605.0 977.0 5204.0 28438.0</p>
+<p>b NaN 694.0 450.0 411.0 3912.0 38859.0</p>
+<p>c 5.0 49.0 946.0 482.0 15476.0 23125.0</p>
+<p>d 6750.0 3729.0 2607.0 22111.0 262112.0 44398.0</p>
+<p>e 133569.0 435013.0 313833.0 28655.0 178823.0 129012.0</p>
+<p>接下来我们需要按总出生数对该表进行规范化处理，以便计算出各性别各末字母占总出生人数的比例：</p>
+<p>In [133]: subtable.sum()</p>
+<p>Out[133]:</p>
+<p>sex year</p>
+<p>F 1910 396416.0</p>
+<p>1960 2022062.0</p>
+<p>2010 1759010.0</p>
+<p>M 1910 194198.0</p>
+<p>1960 2132588.0</p>
+<p>2010 1898382.0</p>
+<p>dtype: float64</p>
+<p>In [134]: letter_prop = subtable / subtable.sum()</p>
+<p>In [135]: letter_prop</p>
+<p>Out[135]:</p>
+<p>sex F M</p>
+<p>year 1910 1960 2010 1910 1960 2010</p>
+<p>last_letter</p>
+<p>a 0.273390 0.341853 0.381240 0.005031 0.002440 0.014980</p>
+<p>b NaN 0.000343 0.000256 0.002116 0.001834 0.020470</p>
+<p>c 0.000013 0.000024 0.000538 0.002482 0.007257 0.012181</p>
+<p>d 0.017028 0.001844 0.001482 0.113858 0.122908 0.023387</p>
+<p>e 0.336941 0.215133 0.178415 0.147556 0.083853 0.067959</p>
+<p>f NaN 0.000010 0.000055 0.000783 0.004325 0.001188</p>
+<p>g 0.000144 0.000157 0.000374 0.002250 0.009488 0.001404</p>
+<p>h 0.051529 0.036224 0.075852 0.045562 0.037907 0.051670</p>
+<p>i 0.001526 0.039965 0.031734 0.000844 0.000603 0.022628</p>
+<p>j NaN NaN 0.000090 NaN NaN 0.000769</p>
+<p>k 0.000121 0.000156 0.000356 0.036581 0.049384 0.018541</p>
+<p>l 0.043189 0.033867 0.026356 0.065016 0.104904 0.070367</p>
+<p>m 0.001201 0.008613 0.002588 0.058044 0.033827 0.024657</p>
+<p>n 0.079240 0.130687 0.140210 0.143415 0.152522 0.362771</p>
+<p>o 0.001660 0.002439 0.001243 0.017065 0.012829 0.042681</p>
+<p>p 0.000018 0.000023 0.000020 0.003172 0.005675 0.001269</p>
+<p>q NaN NaN 0.000030 NaN NaN 0.000180</p>
+<p>r 0.013390 0.006764 0.018025 0.064481 0.031034 0.087477</p>
+<p>s 0.039042 0.012764 0.013332 0.130815 0.102730 0.065145</p>
+<p>t 0.027438 0.015201 0.007830 0.072879 0.065655 0.022861</p>
+<p>u 0.000684 0.000574 0.000417 0.000124 0.000057 0.001221</p>
+<p>v NaN 0.000060 0.000117 0.000113 0.000037 0.001434</p>
+<p>w 0.000020 0.000031 0.001182 0.006329 0.007711 0.016148</p>
+<p>x 0.000015 0.000037 0.000727 0.003965 0.001851 0.008614</p>
+<p>y 0.110972 0.152569 0.116828 0.077349 0.160987 0.058168</p>
+<p>z 0.002439 0.000659 0.000704 0.000170 0.000184 0.001831</p>
+<p>有了这个字母比例数据之后，就可以生成一张各年度各性别的条形图了，如图14-8所示：</p>
+<p>import matplotlib.pyplot as plt</p>
+<p>fig, axes = plt.subplots(2, 1, figsize=(10, 8))</p>
+<p>letter_prop[‘M’].plot(kind=’bar’, rot=0, ax=axes[0], title=’Male’)</p>
+<p>letter_prop[‘F’].plot(kind=’bar’, rot=0, ax=axes[1], title=’Female’,</p>
+<p>legend=False)</p>
+<p>图14-8 男孩女孩名字中各个末字母的比例<br>可以看出，从20世纪60年代开始，以字母”n”结尾的男孩名字出现了显著的增长。回到之前创建的那个完整表，按年度和性别对其进行规范化处理，并在男孩名字中选取几个字母，最后进行转置以便将各个列做成一个时间序列：</p>
+<p>In [138]: letter_prop = table / table.sum()</p>
+<p>In [139]: dny_ts = letter_prop.loc[[‘d’, ‘n’, ‘y’], ‘M’].T</p>
+<p>In [140]: dny_ts.head()</p>
+<p>Out[140]:</p>
+<p>last_letter d n y</p>
+<p>year</p>
+<p>1880 0.083055 0.153213 0.075760</p>
+<p>1881 0.083247 0.153214 0.077451</p>
+<p>1882 0.085340 0.149560 0.077537</p>
+<p>1883 0.084066 0.151646 0.079144</p>
+<p>1884 0.086120 0.149915 0.080405</p>
+<p>有了这个时间序列的DataFrame之后，就可以通过其plot方法绘制出一张趋势图了（如图14-9所示）：</p>
+<p>In [143]: dny_ts.plot()</p>
+<p>2.10变成女孩名字的男孩名字（以及相反的情况）<br>另一个有趣的趋势是，早年流行于男孩的名字近年来“变性了”，例如Lesley或Leslie。回到top1000数据集，找出其中以”lesl”开头的一组名字：</p>
+<p>In [144]: all_names = pd.Series(top1000.name.unique())</p>
+<p>In [145]: lesley_like = all_names[all_names.str.lower().str.contains(‘lesl’)]</p>
+<p>In [146]: lesley_like</p>
+<p>Out[146]:</p>
+<p>632 Leslie</p>
+<p>2294 Lesley</p>
+<p>4262 Leslee</p>
+<p>4728 Lesli</p>
+<p>6103 Lesly</p>
+<p>dtype: object</p>
+<p>然后利用这个结果过滤其他的名字，并按名字分组计算出生数以查看相对频率：</p>
+<p>In [147]: filtered = top1000[top1000.name.isin(lesley_like)]</p>
+<p>In [148]: filtered.groupby(‘name’).births.sum()</p>
+<p>Out[148]:</p>
+<p>name</p>
+<p>Leslee 1082</p>
+<p>Lesley 35022</p>
+<p>Lesli 929</p>
+<p>Leslie 370429</p>
+<p>Lesly 10067</p>
+<p>Name: births, dtype: int64</p>
+<p>接下来，我们按性别和年度进行聚合，并按年度进行规范化处理：</p>
+<p>In [149]: table = filtered.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=’sum’)</p>
+<p>In [150]: table = table.div(table.sum(1), axis=0)</p>
+<p>In [151]: table.tail()</p>
+<p>Out[151]:</p>
+<p>sex F M</p>
+<p>year</p>
+<p>2006 1.0 NaN</p>
+<p>2007 1.0 NaN</p>
+<p>2008 1.0 NaN</p>
+<p>2009 1.0 NaN</p>
+<p>2010 1.0 NaN</p>
+<p>最后，就可以轻松绘制一张分性别的年度曲线图了（如图2-10所示）：</p>
+<p>In [153]: table.plot(style={‘M’: ‘k-‘, ‘F’: ‘k–’})</p>
+<p>图14-10 各年度使用“Lesley型”名字的男女比例<br>三、小结</p>
+<p>names1880 =pd.read_csv(‘datasets/babynames/yob1880.txt’,names=[‘name’, ‘sex’, ‘births’])</p>
+<p>names1880.groupby(‘sex’).births.sum()</p>
+<p>for year in years:</p>
+<p>path = ‘datasets/babynames/yob%d.txt’ % year</p>
+<p>frame = pd.read_csv(path, names=columns)</p>
+<p>frame[‘year’] = year</p>
+<p>pieces.append(frame)</p>
+<p>names = pd.concat(pieces, ignore_index=True)#合并表格</p>
+<p>total_births = names.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=sum)</p>
+<p>def add_prop(group):</p>
+<p>group[‘prop’] = group.births / group.births.sum()</p>
+<p>return group</p>
+<p>names = names.groupby([‘year’, ‘sex’]).apply(add_prop)</p>
+<p>names.groupby([‘year’, ‘sex’]).prop.sum()</p>
+<p>def get_top1000(group):</p>
+<p>return group.sort_values(by=’births’, ascending=False)[:1000]</p>
+<p>grouped = names.groupby([‘year’, ‘sex’])</p>
+<p>top1000 = grouped.apply(get_top1000)</p>
+<p>top1000.reset_index(inplace=True, drop=True)</p>
+<p>for year, group in names.groupby([‘year’, ‘sex’]):</p>
+<p>pieces.append(group.sort_values(by=’births’, ascending=False)[:1000])</p>
+<p>top1000 = pd.concat(pieces, ignore_index=True)</p>
+<p>total_births = top1000.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’name’,aggfunc=sum)</p>
+<p>subset.plot(subplots=True, figsize=(12, 10), grid=False,</p>
+<p>…..: title=”Number of births per year”)</p>
+<p>table = top1000.pivot_table(‘prop’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=sum)</p>
+<p>table.plot(title=’Sum of table1000.prop by year and sex’,</p>
+<p>…..: yticks=np.linspace(0, 1.2, 13), xticks=range(1880, 2020, 10))</p>
+<p>prop_cumsum = df.sort_values(by=’prop’, ascending=False).prop.cumsum()</p>
+<p>prop_cumsum.values.searchsorted(0.5)</p>
+<p>in1900 = df.sort_values(by=’prop’, ascending=False).prop.cumsum()</p>
+<p>in1900.values.searchsorted(0.5) + 1</p>
+<p>def get_quantile_count(group, q=0.5):</p>
+<p>group = group.sort_values(by=’prop’, ascending=False)</p>
+<p>return group.prop.cumsum().values.searchsorted(q) + 1</p>
+<p>diversity = top1000.groupby([‘year’, ‘sex’]).apply(get_quantile_count)</p>
+<p>diversity = diversity.unstack(‘sex’)</p>
+<p>table = names.pivot_table(‘births’, index=last_letters,</p>
+<p>columns=[‘sex’, ‘year’], aggfunc=sum)</p>
+<p>subtable = table.reindex(columns=[1910, 1960, 2010], level=’year’)</p>
+<p>letter_prop = subtable / subtable.sum()</p>
+<p>fig, axes = plt.subplots(2, 1, figsize=(10, 8))</p>
+<p>letter_prop[‘M’].plot(kind=’bar’, rot=0, ax=axes[0], title=’Male’)</p>
+<p>dny_ts = letter_prop.loc[[‘d’, ‘n’, ‘y’], ‘M’].T</p>
+<p>all_names = pd.Series(top1000.name.unique())</p>
+<p>lesley_like = all_names[all_names.str.lower().str.contains(‘lesl’)]</p>
+<p>filtered = top1000[top1000.name.isin(lesley_like)]</p>
+<p>filtered.groupby(‘name’).births.sum()</p>
+<p>table = filtered.pivot_table(‘births’, index=’year’,</p>
+<p>…..: columns=’sex’, aggfunc=’sum’)</p>
+<p>table = table.div(table.sum(1), axis=0)</p>
+<p>table.plot(style={‘M’: ‘k-‘, ‘F’: ‘k–’})</p>
+<p>·后记<br>这一节涉及的统计学知识还是比较多的，对大数量的数据找特定维度展开分析给出了很多有用的实际案例。(下班撸一遍代码累成小番薯)</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68766758">参考</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38093168">参考二</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/" rel="prev" title="利用python进行数据分析-数据清洗">
+      <i class="fa fa-chevron-left"></i> 利用python进行数据分析-数据清洗
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E9%AB%98%E7%BA%A7pandas/" rel="next" title="利用python进行数据分析-高级pandas">
+      利用python进行数据分析-高级pandas <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
