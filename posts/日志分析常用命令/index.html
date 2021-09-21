@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="查看文件的内容 cat：正序查看  cat access.log   tac：倒序查看  tac access.log    ##分页显示文件  more  more access.log     Enter显示文件下一行   空格显示下一页   F显示下一屏内容   B显示上一屏内容  less  &#x2F;GET 查找GET字符串    显示文件尾 tail  tail  -f -n 500 acce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日志分析常用命令">
+<meta property="og:url" content="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="查看文件的内容 cat：正序查看  cat access.log   tac：倒序查看  tac access.log    ##分页显示文件  more  more access.log     Enter显示文件下一行   空格显示下一页   F显示下一屏内容   B显示上一屏内容  less  &#x2F;GET 查找GET字符串    显示文件尾 tail  tail  -f -n 500 acce">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-04T08:06:10.000Z">
+<meta property="article:modified_time" content="2021-09-18T07:57:49.242Z">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>日志分析常用命令 | Earyant的技术博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日志分析常用命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 16:06:10" itemprop="dateCreated datePublished" datetime="2018-05-04T16:06:10+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 15:57:49" itemprop="dateModified" datetime="2021-09-18T15:57:49+08:00">2021-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
+<li><p>cat：正序查看</p>
+<blockquote>
+<p>cat access.log</p>
+</blockquote>
+</li>
+<li><p>tac：倒序查看</p>
+<blockquote>
+<p>tac access.log</p>
+</blockquote>
+</li>
+</ul>
+<p>##分页显示文件</p>
+<ul>
+<li><p>more</p>
+<blockquote>
+<p>more access.log</p>
+</blockquote>
+<p>   Enter显示文件下一行<br>   空格显示下一页<br>   F显示下一屏内容<br>   B显示上一屏内容</p>
+</li>
+<li><p>less</p>
+<blockquote>
+<p>/GET 查找GET字符串</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
+<li><p>tail</p>
+<blockquote>
+<p>tail  -f -n 500 access.log</p>
+</blockquote>
+<p>   -f  持续查看<br>   -n 显示最后n行</p>
+</li>
+</ul>
+<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
+<li>head<blockquote>
+<p>head -n2 access.log</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
+<li><p>sort</p>
+<blockquote>
+<p>sort -n -r access.log</p>
+</blockquote>
+<p>   -n 按照数字排序<br>   -r 逆序排序</p>
+<blockquote>
+<p>sort -k 2 -t “ “ -n access.log</p>
+</blockquote>
+<p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
+</li>
+</ul>
+<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
+<li><p>wc</p>
+<blockquote>
+<p>  wc -l access.log</p>
+</blockquote>
+<pre><code>-l 统计文件中的行数
+</code></pre>
+<blockquote>
+<p>  wc -c access.log</p>
+</blockquote>
+<pre><code>-c 显示文件的字节数
+</code></pre>
+<blockquote>
+<p>  wc -L access.log</p>
+</blockquote>
+<pre><code>-L得出最长的行长度
+</code></pre>
+<blockquote>
+<p>  wc -w access.log</p>
+</blockquote>
+<pre><code>-w 查看文件包含多少单词
+</code></pre>
+</li>
+</ul>
+<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
+<li><p>uniq</p>
+<blockquote>
+<p> sort uniqfile| uniq -c</p>
+</blockquote>
+<pre><code>\-c 用来在每一行前面加上该行出现的次数
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -u</p>
+</blockquote>
+<pre><code>\-u 只会显示出现一次的行
+</code></pre>
+<blockquote>
+<p>  sort uniqfile | uniq -c -d</p>
+</blockquote>
+<pre><code>\-d 只会显示重复出现的行
+</code></pre>
+</li>
+</ul>
+<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
+<li><p>grep</p>
+<pre><code>  &gt;   grep earyant access.log
+
+    earyant 为指定的查找串
+
+  &gt; grep -c earyant access.log
+
+    -c 可以显示查找到的行数
+
+  &gt;   grep &#39;G.\*T&#39; access.log
+
+    支持正则表达式
+</code></pre>
+<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
+<li><p>find</p>
+<blockquote>
+<p>find /home/earyant -name access.log</p>
+</blockquote>
+<pre><code> 在/home/earyant 目录下查找文件名为access.log的文件
+</code></pre>
+<blockquote>
+<p>find /home/earyant -name “*.txt”</p>
+<p>find . -print</p>
+</blockquote>
+<pre><code> 打印当前目录所有文件
+</code></pre>
+</li>
+<li><p>whereis</p>
+<blockquote>
+<p>whereis java</p>
+</blockquote>
+</li>
+<li><p>which</p>
+<blockquote>
+<p>which java</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
+<li>expr<blockquote>
+<p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
+<li><p>tar</p>
+<blockquote>
+<p>tar -cf aaa.tar tmp1 tmp2</p>
+</blockquote>
+<pre><code>  将当前目录下的tmp1和tmp2目录打包成aaa.tar
+  -c 表示生成新包
+  -f 指定包名称
+</code></pre>
+<blockquote>
+<p>tar -tf aaa.tar</p>
+</blockquote>
+<pre><code>  -t 能够列出包中文件的名称
+</code></pre>
+<blockquote>
+<p>tar -xf aaa.tar</p>
+</blockquote>
+<pre><code>  -x 将打包文件解压
+</code></pre>
+</li>
+</ul>
+<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
+<li><p>curl</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>curl -i <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -i 返回带header的文档</p>
+<blockquote>
+<p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<p>  -I 只返回页面的header信息</p>
+<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
+</ul>
+<blockquote>
+<p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>访问量排名前10的ip地址</p>
+<blockquote>
+<p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
+</blockquote>
+<p>页面访问量排名前10的url</p>
+<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
+<p>cat access.log | sort -k 2 -n -r |head -10</p>
+</blockquote>
+<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" rel="prev" title="Guava 1.1基本工具">
+      <i class="fa fa-chevron-left"></i> Guava 1.1基本工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" rel="next" title="日志分析脚本">
+      日志分析脚本 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">查看文件的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%B0%BE"><span class="nav-number">2.</span> <span class="nav-text">显示文件尾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="nav-number">3.</span> <span class="nav-text">显示文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">内容排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BB%9F%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">字符统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE"><span class="nav-number">7.</span> <span class="nav-text">字符串查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE"><span class="nav-number">8.</span> <span class="nav-text">文件查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="nav-number">9.</span> <span class="nav-text">表达式求值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">10.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-%E8%AE%BF%E9%97%AE%E5%B7%A5%E5%85%B7"><span class="nav-number">11.</span> <span class="nav-text">url 访问工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E9%87%8F"><span class="nav-number">12.</span> <span class="nav-text">查看请求访问量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%80%E8%80%97%E6%97%B6%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="nav-number">13.</span> <span class="nav-text">查看最耗时的页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1404%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8D%A0%E6%AF%94"><span class="nav-number">14.</span> <span class="nav-text">统计404请求的占比</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
