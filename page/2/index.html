@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
@@ -275,7 +276,7 @@
 <li>jdk7、8和6有什么不同： 7以上将常量池从perm区移到了heap中</li>
 <li>jdk7、8第一个程序中为什么一个是false，一个是true，<strong>jdk7以后常量去不仅仅可以保存对象，也可以保存对象的引用</strong>，所以s3的引用被保存到常量区中，s4直接在常量区找到了对象的引用，所以为true。</li>
 </ul>
-<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#x61;&#x72;&#x79;&#x61;&#x6e;&#x74;&#76;&#x65;&#101;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#101;&#x61;&#x72;&#x79;&#x61;&#x6e;&#x74;&#76;&#x65;&#101;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a></p>
+<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#x61;&#114;&#121;&#x61;&#x6e;&#x74;&#76;&#101;&#101;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#101;&#x61;&#114;&#121;&#x61;&#x6e;&#x74;&#76;&#101;&#101;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
 <p><a target="_blank" rel="noopener" href="https://tech.meituan.com/in_depth_understanding_string_intern.html">参考一</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Kidezyq/p/8040338.html">参考二</a></p>
 
       
@@ -346,9 +347,9 @@
 <p>Jib 是 Google 开发的可以直接构建 Java 应用的 Docker 和 OCI 镜像的类库，以 Maven 和 Gradle 插件形式提供。<br>通过 Jib，Java 开发者可以使用他们熟悉的 Java 工具来构建容器。Jib 是一个快速而简单的容器镜像构建工具，它负责处理将应用程序打包到容器镜像中所需的所有步骤。它不需要你编写 Dockerfile 或安装 Docker，而且可以直接集成到 Maven 和 Gradle中 —— 只需要将插件添加到构建中，就可以立即将 Java 应用程序容器化。</p>
 </blockquote>
 <h2><span id="构建流程">构建流程</span></h2><ul>
-<li><p>Docker构建的复杂流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155927_vHQt_2720166.png"></p>
+<li><p>Docker构建的复杂流程<br><img data-src="https://static.oschina.net/uploads/space/2018/0710/155927_vHQt_2720166.png"></p>
 </li>
-<li><p>Jib构建流程<br><img src="https://static.oschina.net/uploads/space/2018/0710/155918_xYRX_2720166.png"></p>
+<li><p>Jib构建流程<br><img data-src="https://static.oschina.net/uploads/space/2018/0710/155918_xYRX_2720166.png"></p>
 </li>
 </ul>
 <p>从此可以告别繁琐的Dockerfile啦~~</p>
@@ -556,7 +557,7 @@
 
   - 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效
 </code></pre>
-<h2><span id="jvm系列二jvm内存结构"></span></h2><p>  <img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
+<h2><span id="jvm系列二jvm内存结构"></span></h2><p>  <img data-src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
 </li>
 </ul>
 <blockquote>
@@ -1545,6 +1546,10 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -1584,6 +1589,8 @@
   
 
   
+
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

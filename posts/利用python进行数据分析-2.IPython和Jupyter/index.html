@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="第2章 Python语法基础，IPython和Jupyter Notebooks当我在2011年和2012年写作本书的第一版时，可用的学习Python数据分析的资源很少。这部分上是一个鸡和蛋的问题：我们现在使用的库，比如pandas、scikit-learn和statsmodels，那时相对来说并不成熟。2017年，数据科学、数据分析和机器学习的资源已经很多，原来通用的科学计算拓展到了计算机科学家">
@@ -314,12 +315,12 @@
 <blockquote>
 <p>笔记：许多人使用Jupyter作为本地的计算环境，但它也可以部署到服务器上远程访问。这里不做介绍，如果需要的话，鼓励读者自行到网上学习。</p>
 </blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-c76c4f40777d3ef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-1 Jupyter notebook&#x542F;&#x52A8;&#x9875;&#x9762;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-c76c4f40777d3ef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-1 Jupyter notebook&#x542F;&#x52A8;&#x9875;&#x9762;"></p>
 <p>要新建一个notebook，点击按钮New，选择“Python3”或“conda[默认项]”。如果是第一次，点击空格，输入一行Python代码。然后按Shift-Enter执行。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-86a6813291ead445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-2 Jupyter&#x65B0;notebook&#x9875;&#x9762;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-86a6813291ead445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-2 Jupyter&#x65B0;notebook&#x9875;&#x9762;"></p>
 <p>当保存notebook时（File目录下的Save and Checkpoint），会创建一个后缀名为<code>.ipynb</code>的文件。这是一个自包含文件格式，包含当前笔记本中的所有内容（包括所有已评估的代码输出）。可以被其它Jupyter用户加载和编辑。要加载存在的notebook，把它放到启动notebook进程的相同目录内。你可以用本书的示例代码练习，见图2-3。</p>
 <p>虽然Jupyter notebook和IPython shell使用起来不同，本章中几乎所有的命令和工具都可以通用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-bc9a0b4c30363747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-3 Jupyter&#x67E5;&#x770B;&#x4E00;&#x4E2A;&#x5B58;&#x5728;&#x7684;notebook&#x7684;&#x9875;&#x9762;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-bc9a0b4c30363747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-3 Jupyter&#x67E5;&#x770B;&#x4E00;&#x4E2A;&#x5B58;&#x5728;&#x7684;notebook&#x7684;&#x9875;&#x9762;"></p>
 <h3><span id="tab补全">Tab补全</span></h3><p>从外观上，IPython shell和标准的Python解释器只是看起来不同。IPython shell的进步之一是具备其它IDE和交互计算分析环境都有的tab补全功能。在shell中输入表达式，按下Tab，会搜索已输入变量（对象、函数等等）的命名空间：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [1]: an_apple = 27</span><br><span class="line"></span><br><span class="line">In [2]: an_example = 42</span><br><span class="line"></span><br><span class="line">In [3]: an&lt;Tab&gt;</span><br><span class="line">an_apple    and         an_example  any</span><br></pre></td></tr></table></figure>
 
@@ -338,7 +339,7 @@
 
 <p>结合<code>%run</code>，tab补全可以节省许多键盘操作。</p>
 <p>另外，tab补全可以补全函数的关键词参数（包括等于号=）。见图2-4。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-8188b0386238c16a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-4 Jupyter notebook&#x4E2D;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x51FD;&#x6570;&#x5173;&#x952E;&#x8BCD;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-8188b0386238c16a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-4 Jupyter notebook&#x4E2D;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x51FD;&#x6570;&#x5173;&#x952E;&#x8BCD;"></p>
 <p>后面会仔细地学习函数。</p>
 <h3><span id="自省">自省</span></h3><p>在变量前后使用问号？，可以显示对象的信息：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">8</span>]: b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: b?</span><br><span class="line"><span class="type">Type</span>:       <span class="built_in">list</span></span><br><span class="line">String Form:[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">Length:     <span class="number">3</span></span><br><span class="line">Docstring:</span><br><span class="line"><span class="built_in">list</span>() -&gt; new empty <span class="built_in">list</span></span><br><span class="line"><span class="built_in">list</span>(iterable) -&gt; new <span class="built_in">list</span> initialized <span class="keyword">from</span> iterable<span class="string">&#x27;s items</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [10]: print?</span></span><br><span class="line"><span class="string">Docstring:</span></span><br><span class="line"><span class="string">print(value, ..., sep=&#x27;</span> <span class="string">&#x27;, end=&#x27;</span>\n<span class="string">&#x27;, file=sys.stdout, flush=False)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Prints the values to a stream, or to sys.stdout by default.</span></span><br><span class="line"><span class="string">Optional keyword arguments:</span></span><br><span class="line"><span class="string">file:  a file-like object (stream); defaults to the current sys.stdout.</span></span><br><span class="line"><span class="string">sep:   string inserted between values, default a space.</span></span><br><span class="line"><span class="string">end:   string appended after the last value, default a newline.</span></span><br><span class="line"><span class="string">flush: whether to forcibly flush the stream.</span></span><br><span class="line"><span class="string">Type:      builtin_function_or_method</span></span><br></pre></td></tr></table></figure>
@@ -386,8 +387,8 @@
 
 <p>使用<code>%cpaste</code>，你可以粘贴任意多的代码再运行。你可能想在运行前，先看看代码。如果粘贴了错误的代码，可以用Ctrl-C中断。</p>
 <h3><span id="键盘快捷键">键盘快捷键</span></h3><p>IPython有许多键盘快捷键进行导航提示（类似Emacs文本编辑器或UNIX bash Shell）和交互shell的历史命令。表2-1总结了常见的快捷键。图2-5展示了一部分，如移动光标。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-9ed3866ea25c11f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-5 IPython shell&#x4E2D;&#x4E00;&#x4E9B;&#x5FEB;&#x6377;&#x952E;&#x7684;&#x8BF4;&#x660E;"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-e179f5ea00e50691.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-1 IPython&#x7684;&#x6807;&#x51C6;&#x5FEB;&#x6377;&#x952E;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-9ed3866ea25c11f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-5 IPython shell&#x4E2D;&#x4E00;&#x4E9B;&#x5FEB;&#x6377;&#x952E;&#x7684;&#x8BF4;&#x660E;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-e179f5ea00e50691.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-1 IPython&#x7684;&#x6807;&#x51C6;&#x5FEB;&#x6377;&#x952E;"></p>
 <p>Jupyter notebooks有另外一套庞大的快捷键。因为它的快捷键比IPython的变化快，建议你参阅Jupyter notebook的帮助文档。</p>
 <h3><span id="魔术命令">魔术命令</span></h3><p>IPython中特殊的命令（Python中没有）被称作“魔术”命令。这些命令可以使普通任务更便捷，更容易控制IPython系统。魔术命令是在指令前添加百分号%前缀。例如，可以用<code>%timeit</code>（这个命令后面会详谈）测量任何Python语句，例如矩阵乘法，的执行时间：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">20</span>]: a = np.random.randn(<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: %timeit np.dot(a, a)</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">20.9</span> µs per loop</span><br></pre></td></tr></table></figure>
@@ -400,7 +401,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [22]: %pwd</span><br><span class="line">Out[22]: &#x27;/home/wesm/code/pydata-book</span><br><span class="line"></span><br><span class="line">In [23]: foo = %pwd</span><br><span class="line"></span><br><span class="line">In [24]: foo</span><br><span class="line">Out[24]: &#x27;/home/wesm/code/pydata-book&#x27;</span><br></pre></td></tr></table></figure>
 
 <p>IPython的文档可以在shell中打开，我建议你用<code>%quickref</code>或<code>%magic</code>学习下所有特殊命令。表2-2列出了一些可以提高生产率的交互计算和Python开发的IPython指令。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-c72b11add9b8ccf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-2 &#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;IPython&#x9B54;&#x672F;&#x547D;&#x4EE4;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-c72b11add9b8ccf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-2 &#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;IPython&#x9B54;&#x672F;&#x547D;&#x4EE4;"></p>
 <h3><span id="集成matplotlib">集成Matplotlib</span></h3><p>IPython在分析计算领域能够流行的原因之一是它非常好的集成了数据可视化和其它用户界面库，比如matplotlib。不用担心以前没用过matplotlib，本书后面会详细介绍。<code>%matplotlib</code>魔术函数配置了IPython shell和Jupyter notebook中的matplotlib。这点很重要，其它创建的图不会出现（notebook）或获取session的控制，直到结束（shell）。</p>
 <p>在IPython shell中，运行<code>%matplotlib</code>可以进行设置，可以创建多个绘图窗口，而不会干扰控制台session：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [26]: %matplotlib</span><br><span class="line">Using matplotlib backend: Qt4Agg</span><br></pre></td></tr></table></figure>
@@ -408,7 +409,7 @@
 <p>在JUpyter中，命令有所不同（图2-6）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In [26]: %matplotlib inline</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-3ab3738a92a15486.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-6 Jupyter&#x884C;&#x5185;matplotlib&#x4F5C;&#x56FE;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-3ab3738a92a15486.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-6 Jupyter&#x884C;&#x5185;matplotlib&#x4F5C;&#x56FE;"></p>
 <h2><span id="23-python语法基础">2.3 Python语法基础</span></h2><p>在本节中，我将概述基本的Python概念和语言机制。在下一章，我将详细介绍Python的数据结构、函数和其它内建工具。</p>
 <h3><span id="语言的语义">语言的语义</span></h3><p>Python的语言设计强调的是可读性、简洁和清晰。有些人称Python为“可执行的伪代码”。</p>
 <h3><span id="使用缩进而不是括号">使用缩进，而不是括号</span></h3><p>Python使用空白字符（tab和空格）来组织代码，而不是像其它语言，比如R、C++、JAVA和Perl那样使用括号。看一个排序算法的<code>for</code>循环：</p>
@@ -448,7 +449,7 @@
 <p>在有些方法中，这个赋值会将数据[1, 2, 3]也复制。在Python中，a和b实际上是同一个对象，即原有列表[1, 2, 3]（见图2-7）。你可以在a中添加一个元素，然后检查b：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: a.append(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: b</span><br><span class="line">Out[<span class="number">11</span>]: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-3e3a8c6b9c5040fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-7 &#x5BF9;&#x540C;&#x4E00;&#x5BF9;&#x8C61;&#x7684;&#x53CC;&#x91CD;&#x5F15;&#x7528;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-3e3a8c6b9c5040fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x56FE;2-7 &#x5BF9;&#x540C;&#x4E00;&#x5BF9;&#x8C61;&#x7684;&#x53CC;&#x91CD;&#x5F15;&#x7528;"></p>
 <p>理解Python的引用的含义，数据是何时、如何、为何复制的，是非常重要的。尤其是当你用Python处理大的数据集时。</p>
 <blockquote>
 <p>笔记：赋值也被称作绑定，我们是把一个名字绑定给一个对象。变量名有时可能被称为绑定变量。</p>
@@ -515,7 +516,7 @@
 <p><code>is</code>和<code>is not</code>常用来判断一个变量是否为<code>None</code>，因为只有一个<code>None</code>的实例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">41</span>]: a = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">42</span>]: a <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line">Out[<span class="number">42</span>]: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-9fb5f25b33166acf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-3 &#x4E8C;&#x5143;&#x8FD0;&#x7B97;&#x7B26;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-9fb5f25b33166acf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-3 &#x4E8C;&#x5143;&#x8FD0;&#x7B97;&#x7B26;"></p>
 <h3><span id="可变与不可变对象">可变与不可变对象</span></h3><p>Python中的大多数对象，比如列表、字典、NumPy数组，和用户定义的类型（类），都是可变的。意味着这些对象或包含的值可以被修改：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">43</span>]: a_list = [<span class="string">&#x27;foo&#x27;</span>, <span class="number">2</span>, [<span class="number">4</span>, <span class="number">5</span>]]</span><br><span class="line"></span><br><span class="line">In [<span class="number">44</span>]: a_list[<span class="number">2</span>] = (<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">45</span>]: a_list</span><br><span class="line">Out[<span class="number">45</span>]: [<span class="string">&#x27;foo&#x27;</span>, <span class="number">2</span>, (<span class="number">3</span>, <span class="number">4</span>)]</span><br></pre></td></tr></table></figure>
 
@@ -524,7 +525,7 @@
 
 <p>记住，可以修改一个对象并不意味就要修改它。这被称为副作用。例如，当写一个函数，任何副作用都要在文档或注释中写明。如果可能的话，我推荐避免副作用，采用不可变的方式，即使要用到可变对象。</p>
 <h3><span id="标量类型">标量类型</span></h3><p>Python的标准库中有一些内建的类型，用于处理数值数据、字符串、布尔值，和日期时间。这些单值类型被称为标量类型，本书中称其为标量。表2-4列出了主要的标量。日期和时间处理会另外讨论，因为它们是标准库的<code>datetime</code>模块提供的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-27a30ac3e7d262a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-4 Python&#x7684;&#x6807;&#x91CF;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-27a30ac3e7d262a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-4 Python&#x7684;&#x6807;&#x91CF;"></p>
 <h3><span id="数值类型">数值类型</span></h3><p>Python的主要数值类型是<code>int</code>和<code>float</code>。<code>int</code>可以存储任意大的数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">48</span>]: ival = <span class="number">17239871</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">49</span>]: ival ** <span class="number">6</span></span><br><span class="line">Out[<span class="number">49</span>]: <span class="number">26254519291092456596965462913230729701102721</span></span><br></pre></td></tr></table></figure>
 
@@ -627,7 +628,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">109</span>]: datetime.strptime(<span class="string">&#x27;20091031&#x27;</span>, <span class="string">&#x27;%Y%m%d&#x27;</span>)</span><br><span class="line">Out[<span class="number">109</span>]: datetime.datetime(<span class="number">2009</span>, <span class="number">10</span>, <span class="number">31</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
 <p>表2-5列出了所有的格式化命令。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7178691-100f9a20c1536553.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-5 Datetime&#x683C;&#x5F0F;&#x5316;&#x6307;&#x4EE4;&#xFF08;&#x4E0E;ISO C89&#x517C;&#x5BB9;&#xFF09;"></p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-100f9a20c1536553.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8868;2-5 Datetime&#x683C;&#x5F0F;&#x5316;&#x6307;&#x4EE4;&#xFF08;&#x4E0E;ISO C89&#x517C;&#x5BB9;&#xFF09;"></p>
 <p>当你聚类或对时间序列进行分组，替换datetimes的time字段有时会很有用。例如，用0替换分和秒：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">110</span>]: dt.replace(minute=<span class="number">0</span>, second=<span class="number">0</span>)</span><br><span class="line">Out[<span class="number">110</span>]: datetime.datetime(<span class="number">2011</span>, <span class="number">10</span>, <span class="number">29</span>, <span class="number">20</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
@@ -907,6 +908,10 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -946,6 +951,8 @@
   
 
   
+
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

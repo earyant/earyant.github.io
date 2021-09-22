@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
@@ -410,7 +411,7 @@
 </li>
 <li>JVM 执行引擎实例则对应了属于用户运行程序的线程它是线程级别的</li>
 </ol>
-<h2><span id="jvm模型">JVM模型</span></h2><p><img src="http://images.cnitblog.com/i/437053/201403/030952082544688.png" alt="image"></p>
+<h2><span id="jvm模型">JVM模型</span></h2><p><img data-src="http://images.cnitblog.com/i/437053/201403/030952082544688.png" alt="image"></p>
 <h2><span id="内存空间">内存空间：</span></h2><pre><code>1) 方法区： 指令计数器以及其他隐含寄存器
 2) Java堆： 
 3) Java栈：
@@ -526,7 +527,7 @@
 <li>有些厂商不允许有push service存在。</li>
 </ul>
 <p>##自主研发的推送架构</p>
-<h3><span id="架构方案类似">架构方案类似：</span></h3><p>   <img src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
+<h3><span id="架构方案类似">架构方案类似：</span></h3><p>   <img data-src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
 <ul>
 <li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
 </ul>
@@ -696,6 +697,10 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -735,6 +740,8 @@
   
 
   
+
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

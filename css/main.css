@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffff86;
+  background: #3b9f4a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2690,10 +2690,58 @@ ul.breadcrumb li + li:last-child {
     margin: 8px 0 0;
   }
 }
-.body {
-  background: url("/images/bg/backgroup7.png");
-  background-repeat: no-repeat;
+body {
+  background: url("/images/bg/backgroup7.png") no-repeat center;
+  background-size: cover;
   background-attachment: fixed;
-  background-position: 50% 50%;
-  background-size: 100% 100%;
+  background-size: 100%;
+}
+.ImageGrid {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+  column-count: 1;
+  column-gap: 0;
+}
+@media (min-width: 500px) {
+  .ImageGrid {
+    column-count: 2;
+  }
+  .card {
+    break-inside: avoid;
+    box-sizing: border-box;
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #ddd;
+  }
+}
+@media (min-width: 800px) {
+  .ImageGrid {
+    column-count: 3;
+  }
+  .card {
+    break-inside: avoid;
+    box-sizing: border-box;
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #ddd;
+  }
+}
+.card {
+  break-inside: avoid;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 8px;
+  background-color: #ddd;
+}
+.ImageInCard img {
+  padding: 0 0 0 0;
+  border-radius: 8px;
+}
+.TextInCard {
+  background-color: rgba(255,255,255,0.8);
+  font-size: 70%;
+  border-radius: 8px;
 }
