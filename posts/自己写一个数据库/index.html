@@ -254,10 +254,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="godb"><a href="#godb" class="headerlink" title="godb"></a>godb</h1><blockquote>
+        <h1><span id="godb">godb</span></h1><blockquote>
 <p>本项目中，数据库就是本地一个文件夹，表也是数据库下的目录，里面的数据就是表文件夹下的文件，<br>表目录下的scheme.json保存着表结构<br>表目录下data0.json data1.json分别存储着数据，每个文件里的数据不超过1000行。</p>
 </blockquote>
-<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><ul>
+<h2><span id="设计逻辑">设计逻辑</span></h2><ul>
 <li>  代码分为client端和server端</li>
 <li>  server端开启端口，接收指令，并执行指令</li>
 <li>  client端连接端口，发送指令</li>
@@ -268,17 +268,17 @@
 </ul>
 </li>
 </ul>
-<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><blockquote>
+<h2><span id="建库">建库</span></h2><blockquote>
 <p>暂时建表只支持这种格式，实际实现是在项目tmp目录下新建一个db1的文件夹</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database db1</span><br></pre></td></tr></table></figure>
 
-<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><blockquote>
+<h2><span id="建表">建表</span></h2><blockquote>
 <p>暂时只支持  ‘id’ 列名， varchar（255） 类型长度，以及默认值<br>以及主键<br>实际实现是在数据库目录下新建一个表名的文件夹，并有一个scheme.json文件记录各列属性</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  table1 (`id` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
 
-<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
+<h2><span id="插入数据">插入数据</span></h2><blockquote>
 <p>支持语句格式,value 只支持一个括号，values支持多个括号多行数据插入<br>实际实现是在表文件夹下，新建data(i).json文件，里面存储具体数据，i是预留数据量大的情况下的分文件存储，每个文件暂时最多支持存储1000行。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> feature_conf <span class="keyword">values</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
@@ -397,7 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#godb"><span class="nav-number">1.</span> <span class="nav-text">godb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91"><span class="nav-number">1.1.</span> <span class="nav-text">设计逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">插入数据</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">godb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">设计逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">插入数据</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

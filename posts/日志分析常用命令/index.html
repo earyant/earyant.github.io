@@ -254,7 +254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
+        <h2><span id="查看文件的内容">查看文件的内容</span></h2><ul>
 <li><p>cat：正序查看</p>
 <blockquote>
 <p>cat access.log</p>
@@ -280,7 +280,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
+<h2><span id="显示文件尾">显示文件尾</span></h2><ul>
 <li><p>tail</p>
 <blockquote>
 <p>tail  -f -n 500 access.log</p>
@@ -288,13 +288,13 @@
 <p>   -f  持续查看<br>   -n 显示最后n行</p>
 </li>
 </ul>
-<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
+<h2><span id="显示文件头">显示文件头</span></h2><ul>
 <li>head<blockquote>
 <p>head -n2 access.log</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
+<h2><span id="内容排序">内容排序</span></h2><ul>
 <li><p>sort</p>
 <blockquote>
 <p>sort -n -r access.log</p>
@@ -306,7 +306,7 @@
 <p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
 </li>
 </ul>
-<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
+<h2><span id="字符统计">字符统计</span></h2><ul>
 <li><p>wc</p>
 <blockquote>
 <p>  wc -l access.log</p>
@@ -330,7 +330,7 @@
 </code></pre>
 </li>
 </ul>
-<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
+<h2><span id="重复行">重复行</span></h2><ul>
 <li><p>uniq</p>
 <blockquote>
 <p> sort uniqfile| uniq -c</p>
@@ -349,7 +349,7 @@
 </code></pre>
 </li>
 </ul>
-<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
+<h2><span id="字符串查找">字符串查找</span></h2><ul>
 <li><p>grep</p>
 <pre><code>  &gt;   grep earyant access.log
 
@@ -363,7 +363,7 @@
 
     支持正则表达式
 </code></pre>
-<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
+<h2><span id="文件查找">文件查找</span></h2></li>
 <li><p>find</p>
 <blockquote>
 <p>find /home/earyant -name access.log</p>
@@ -388,13 +388,13 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
+<h2><span id="表达式求值">表达式求值</span></h2><ul>
 <li>expr<blockquote>
 <p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
+<h2><span id="压缩">压缩</span></h2><ul>
 <li><p>tar</p>
 <blockquote>
 <p>tar -cf aaa.tar tmp1 tmp2</p>
@@ -415,7 +415,7 @@
 </code></pre>
 </li>
 </ul>
-<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
+<h2><span id="url-访问工具">url 访问工具</span></h2><ul>
 <li><p>curl</p>
 <blockquote>
 <p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
@@ -426,7 +426,7 @@
 <p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
 </blockquote>
 <p>  -I 只返回页面的header信息</p>
-<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
+<h2><span id="查看请求访问量">查看请求访问量</span></h2></li>
 </ul>
 <blockquote>
 <p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
@@ -436,10 +436,10 @@
 <p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
 </blockquote>
 <p>页面访问量排名前10的url</p>
-<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
+<h2><span id="查看最耗时的页面">查看最耗时的页面</span></h2><blockquote>
 <p>cat access.log | sort -k 2 -n -r |head -10</p>
 </blockquote>
-<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
+<h2><span id="统计404请求的占比">统计404请求的占比</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -549,7 +549,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">查看文件的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%B0%BE"><span class="nav-number">2.</span> <span class="nav-text">显示文件尾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="nav-number">3.</span> <span class="nav-text">显示文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">内容排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BB%9F%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">字符统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE"><span class="nav-number">7.</span> <span class="nav-text">字符串查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE"><span class="nav-number">8.</span> <span class="nav-text">文件查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="nav-number">9.</span> <span class="nav-text">表达式求值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">10.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-%E8%AE%BF%E9%97%AE%E5%B7%A5%E5%85%B7"><span class="nav-number">11.</span> <span class="nav-text">url 访问工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E9%87%8F"><span class="nav-number">12.</span> <span class="nav-text">查看请求访问量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%80%E8%80%97%E6%97%B6%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="nav-number">13.</span> <span class="nav-text">查看最耗时的页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1404%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8D%A0%E6%AF%94"><span class="nav-number">14.</span> <span class="nav-text">统计404请求的占比</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">查看文件的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">显示文件尾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">显示文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">内容排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">字符统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">字符串查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">文件查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">表达式求值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">url 访问工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">12.</span> <span class="nav-text">查看请求访问量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">13.</span> <span class="nav-text">查看最耗时的页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">14.</span> <span class="nav-text">统计404请求的占比</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

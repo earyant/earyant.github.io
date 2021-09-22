@@ -252,7 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="RPC通俗解释"><a href="#RPC通俗解释" class="headerlink" title="RPC通俗解释"></a>RPC通俗解释</h1><h2 id="IPC和RPC"><a href="#IPC和RPC" class="headerlink" title="IPC和RPC"></a>IPC和RPC</h2><p>早些时间，一个电脑中多个线程互相独立，A线程和B线程都想用发送邮件功能，就需要开发两份代码，所以就有了一个协议是：IPC（Inter-process-communication）进行进程间通信，这样就可以在A中开发一个发送邮件的代码，B进程调用A进程代码就行了。<br>同比，现在的程序员们，为了方便调用其他电脑中的代码，研究出来RPC（Remote Procedure Call Protocol）；</p>
+          <h1><span id="rpc通俗解释">RPC通俗解释</span></h1><h2><span id="ipc和rpc">IPC和RPC</span></h2><p>早些时间，一个电脑中多个线程互相独立，A线程和B线程都想用发送邮件功能，就需要开发两份代码，所以就有了一个协议是：IPC（Inter-process-communication）进行进程间通信，这样就可以在A中开发一个发送邮件的代码，B进程调用A进程代码就行了。<br>同比，现在的程序员们，为了方便调用其他电脑中的代码，研究出来RPC（Remote Procedure Call Protocol）；</p>
 
       
     </div>
@@ -317,28 +317,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="JVM介绍"><a href="#JVM介绍" class="headerlink" title="JVM介绍"></a>JVM介绍</h1><h2 id="JVM包括："><a href="#JVM包括：" class="headerlink" title="JVM包括："></a>JVM包括：</h2><pre><code>* 1、 字节码指令集
+          <h1><span id="jvm介绍">JVM介绍</span></h1><h2><span id="jvm包括">JVM包括：</span></h2><pre><code>* 1、 字节码指令集
 * 2、 一组寄存器
 * 3、 一个栈
 * 4、 一个垃圾回收堆
 * 5、 存储方法区
 </code></pre>
-<h2 id="JVM-的生命周期"><a href="#JVM-的生命周期" class="headerlink" title="JVM 的生命周期"></a>JVM 的生命周期</h2><ol>
+<h2><span id="jvm-的生命周期">JVM 的生命周期</span></h2><ol>
 <li>JVM 实例对应了一个独立运行的 java 程序它是进程级别 <ol>
 <li>启动。启动一个 Java 程序时，一个 JVM 实例就产生了，任何一个拥有 public static void main(String[] args) 函数的 class 都可以作为 JVM 实例运行的起点 </li>
-<li>运行。main() 作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM 内部有两种线程：守护线程和非守护线程，main() 属于非守护线程，守护线程通常由 JVM 自己使用，<b> java 程序也可以表明自己创建的线程是守护线程 <b></li>
+<li>运行。main() 作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM 内部有两种线程：守护线程和非守护线程，main() 属于非守护线程，守护线程通常由 JVM 自己使用，<b> java 程序也可以表明自己创建的线程是守护线程 <b></b></b></li>
 <li>消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用 Runtime 类或者 System.exit() 来退出</li>
 </ol>
 </li>
 <li>JVM 执行引擎实例则对应了属于用户运行程序的线程它是线程级别的</li>
 </ol>
-<h2 id="JVM模型"><a href="#JVM模型" class="headerlink" title="JVM模型"></a>JVM模型</h2><p><img src="http://images.cnitblog.com/i/437053/201403/030952082544688.png" alt="image"></p>
-<h2 id="内存空间："><a href="#内存空间：" class="headerlink" title="内存空间："></a>内存空间：</h2><pre><code>1) 方法区： 指令计数器以及其他隐含寄存器
+<h2><span id="jvm模型">JVM模型</span></h2><p><img src="http://images.cnitblog.com/i/437053/201403/030952082544688.png" alt="image"></p>
+<h2><span id="内存空间">内存空间：</span></h2><pre><code>1) 方法区： 指令计数器以及其他隐含寄存器
 2) Java堆： 
 3) Java栈：
 4) 本地方法栈：
 </code></pre>
-<h2 id="共享不共享："><a href="#共享不共享：" class="headerlink" title="共享不共享："></a>共享不共享：</h2><pre><code>共享：
+<h2><span id="共享不共享">共享不共享：</span></h2><pre><code>共享：
     1) 方法区
     2) 栈（Heap）
 不共享：
@@ -356,7 +356,7 @@
 4）方法区：1）在Sun JDK中对应着为永久带、持久带 ！！！
            2）方法区存放了所加载类的信息（名称，修饰符等），类中的静态变量，类中定义为final类型的常量，类中的Field信息，类中的方法信息，当开发人员用Class对象的getname,isInterface等获取信息时，数据都来源于方法区，方法区也是**共享的**，在一定条件下，也会被GC，当方法区使用的内存超过其允许的大小，也会抛OutMemory异常。
 </code></pre>
-<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><pre><code>JVM每遇到一个线程，都会为其分配一个程序计数器，VM stack 和本地方法栈，当线程终止时三者所使用的空间也被回收掉。
+<h3><span id="原因">原因：</span></h3><pre><code>JVM每遇到一个线程，都会为其分配一个程序计数器，VM stack 和本地方法栈，当线程终止时三者所使用的空间也被回收掉。
 </code></pre>
 
       
@@ -422,33 +422,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="如何保证推送消息能够准确推送到客户端。"><a href="#如何保证推送消息能够准确推送到客户端。" class="headerlink" title="如何保证推送消息能够准确推送到客户端。"></a>如何保证推送消息能够准确推送到客户端。</h1><h2 id="手机端："><a href="#手机端：" class="headerlink" title="手机端："></a>手机端：</h2><ul>
+          <h1><span id="如何保证推送消息能够准确推送到客户端">如何保证推送消息能够准确推送到客户端。</span></h1><h2><span id="手机端">手机端：</span></h2><ul>
 <li>轮询方式获取消息。</li>
 <li>短信拦截模式。  发送短信通知消息，应用中的短信拦截模块拦截短信，并解析成数据。成本高。</li>
 <li>持久连接。</li>
 </ul>
 <p> 监听电量变化，网络变化，开关屏幕等等时候注册BroadCastReceiver来接收通知，接手后进行消息获取。<br> 有些ROM一旦用户kill掉主线程，就不会再投送广播消息给应用，导致应用无法启动，这是可以Fork一个进程,一旦发现主线程被杀，立即调用shell启动该Service（应用保活）</p>
-<h2 id="微服务间如何选择推送和拉取数据"><a href="#微服务间如何选择推送和拉取数据" class="headerlink" title="微服务间如何选择推送和拉取数据"></a>微服务间如何选择推送和拉取数据</h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
-<h4 id="数据是动态的，且实时性较强，宜采用生产端推送。"><a href="#数据是动态的，且实时性较强，宜采用生产端推送。" class="headerlink" title="数据是动态的，且实时性较强，宜采用生产端推送。"></a>数据是动态的，且实时性较强，宜采用生产端推送。</h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
-<h4 id="客户端长时间离线状态"><a href="#客户端长时间离线状态" class="headerlink" title="客户端长时间离线状态"></a>客户端长时间离线状态</h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
-<h4 id="推送的优点"><a href="#推送的优点" class="headerlink" title="推送的优点"></a>推送的优点</h4><ul>
+<h2><span id="微服务间如何选择推送和拉取数据">微服务间如何选择推送和拉取数据</span></h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
+<h4><span id="数据是动态的且实时性较强宜采用生产端推送">数据是动态的，且实时性较强，宜采用生产端推送。</span></h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
+<h4><span id="客户端长时间离线状态">客户端长时间离线状态</span></h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
+<h4><span id="推送的优点">推送的优点</span></h4><ul>
 <li>时效性高。</li>
 <li>服务器压力小。 相对比轮询拉取模式，每次推送都会有数据，有效避免了空轮询</li>
 <li>交互简单。 只需要提供推送接口就好了，不需要额外开销。</li>
 </ul>
-<h4 id="推送的缺点"><a href="#推送的缺点" class="headerlink" title="推送的缺点"></a>推送的缺点</h4><ul>
+<h4><span id="推送的缺点">推送的缺点</span></h4><ul>
 <li>不能保证一定能推送成功。</li>
 <li>缺乏数据多样性，推送的消息一般都有固定的模板<br>####极光推送</li>
 <li>活跃用户的到达率在90%以上。轮询获取99%以上。</li>
 <li>并发情况下第三方服务的实时性不太理想。</li>
 </ul>
-<h4 id="自主研发的推送系统"><a href="#自主研发的推送系统" class="headerlink" title="自主研发的推送系统"></a>自主研发的推送系统</h4><ul>
+<h4><span id="自主研发的推送系统">自主研发的推送系统</span></h4><ul>
 <li>对客户端的海量长连接的维护管理消耗太大。</li>
 <li>App端Service稳定性，保活。</li>
 <li>有些厂商不允许有push service存在。</li>
 </ul>
 <p>##自主研发的推送架构</p>
-<h3 id="架构方案类似："><a href="#架构方案类似：" class="headerlink" title="架构方案类似："></a>架构方案类似：</h3><p>   <img src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
+<h3><span id="架构方案类似">架构方案类似：</span></h3><p>   <img src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
 <ul>
 <li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
 </ul>

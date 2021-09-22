@@ -255,17 +255,17 @@
 
       
         <p><a target="_blank" rel="noopener" href="http://blog.jobbole.com/111757/">看这篇文章讲的很好</a></p>
-<h2 id="B-树（Balance-Tree）"><a href="#B-树（Balance-Tree）" class="headerlink" title="B - 树（Balance Tree）"></a>B - 树（Balance Tree）</h2><pre><code>二叉查找树的时间复杂度是O(log(n)) 已经够快了，但是二叉查找树的查找速度取决于树的高度。
+<h2><span id="b-树balance-tree">B - 树（Balance Tree）</span></h2><pre><code>二叉查找树的时间复杂度是O(log(n)) 已经够快了，但是二叉查找树的查找速度取决于树的高度。
 B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决于磁盘页的大小。
 </code></pre>
-<h3 id="一个-m-阶的-B-树具有如下几个特征"><a href="#一个-m-阶的-B-树具有如下几个特征" class="headerlink" title="一个 m 阶的 B 树具有如下几个特征"></a>一个 m 阶的 B 树具有如下几个特征</h3><ul>
+<h3><span id="一个-m-阶的-b-树具有如下几个特征">一个 m 阶的 B 树具有如下几个特征</span></h3><ul>
 <li>根节点至少有两个子女。 </li>
 <li>每个中间节点包含k-1个元素和k个孩子，其中m/2 &lt;= k &lt;= m</li>
 <li>每个叶子节点都包含k-1个元素，其中 m/2 &lt;= k &lt;=m</li>
 <li>所有叶子节点都位于同一层</li>
 <li>每个节点中的元素从小到大排列，节点当中 k-1 个元素正好是 k 个孩子包含的元素的值域分划。</li>
 </ul>
-<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>   在b-树基础上进行改造，将索引全部建在叶子节点上，非叶子节点指向叶子节点的大小。</p>
+<h2><span id="b树">B+树</span></h2><p>   在b-树基础上进行改造，将索引全部建在叶子节点上，非叶子节点指向叶子节点的大小。</p>
 <p>   <a target="_blank" rel="noopener" href="http://blog.jobbole.com/105644/">看这篇文章</a></p>
 
     </div>
@@ -376,7 +376,7 @@ B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%EF%BC%88Balance-Tree%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">B - 树（Balance Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA-m-%E9%98%B6%E7%9A%84-B-%E6%A0%91%E5%85%B7%E6%9C%89%E5%A6%82%E4%B8%8B%E5%87%A0%E4%B8%AA%E7%89%B9%E5%BE%81"><span class="nav-number">1.1.</span> <span class="nav-text">一个 m 阶的 B 树具有如下几个特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">B+树</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">B - 树（Balance Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">一个 m 阶的 B 树具有如下几个特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">B+树</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

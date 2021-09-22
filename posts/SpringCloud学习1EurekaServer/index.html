@@ -254,13 +254,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="创建EurekaServer"><a href="#创建EurekaServer" class="headerlink" title="创建EurekaServer"></a>创建EurekaServer</h2><h3 id="Idea初始化项目"><a href="#Idea初始化项目" class="headerlink" title="Idea初始化项目"></a>Idea初始化项目</h3><ul>
+        <h2><span id="创建eurekaserver">创建EurekaServer</span></h2><h3><span id="idea初始化项目">Idea初始化项目</span></h3><ul>
 <li>选择cloud discovery-&gt;eureka server 。</li>
 </ul>
-<h3 id="创建启动类"><a href="#创建启动类" class="headerlink" title="创建启动类"></a>创建启动类</h3><ul>
+<h3><span id="创建启动类">创建启动类</span></h3><ul>
 <li>@EnableEurekaServer</li>
 </ul>
-<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code>server:
+<h3><span id="配置参数">配置参数</span></h3><pre><code>server:
   port: 8761
 
 eureka:
@@ -275,13 +275,13 @@ eureka:
       
       
 </code></pre>
-<h2 id="创建EurekaClient"><a href="#创建EurekaClient" class="headerlink" title="创建EurekaClient"></a>创建EurekaClient</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><ul>
+<h2><span id="创建eurekaclient">创建EurekaClient</span></h2><h3><span id="初始化项目">初始化项目</span></h3><ul>
 <li>通server</li>
 </ul>
-<h3 id="创阿金启动类"><a href="#创阿金启动类" class="headerlink" title="创阿金启动类"></a>创阿金启动类</h3><ul>
+<h3><span id="创阿金启动类">创阿金启动类</span></h3><ul>
 <li>@EnableEurekaClient</li>
 </ul>
-<h3 id="配置参数-1"><a href="#配置参数-1" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code> eureka:
+<h3><span id="配置参数">配置参数</span></h3><pre><code> eureka:
    client:
      serviceUrl:
        defaultZone: http://localhost:8761/eureka/
@@ -289,7 +289,7 @@ eureka:
    port: 8762
  spring:
    application:
-     name: service-hi    
+     name: service-hi
 </code></pre>
 
     </div>
@@ -400,7 +400,7 @@ eureka:
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAEurekaServer"><span class="nav-number">1.</span> <span class="nav-text">创建EurekaServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Idea%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">Idea初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">创建启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">配置参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAEurekaClient"><span class="nav-number">2.</span> <span class="nav-text">创建EurekaClient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E9%98%BF%E9%87%91%E5%90%AF%E5%8A%A8%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">创阿金启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0-1"><span class="nav-number">2.3.</span> <span class="nav-text">配置参数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">创建EurekaServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">Idea初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">创建启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">配置参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">创建EurekaClient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">创阿金启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">配置参数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

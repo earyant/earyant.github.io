@@ -254,15 +254,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h2><ul>
+        <h2><span id="基本特征">基本特征</span></h2><ul>
 <li>原子性</li>
 <li>一致性</li>
 <li>隔离性</li>
-<li>持久性<h2 id="事务的分类"><a href="#事务的分类" class="headerlink" title="事务的分类"></a>事务的分类</h2></li>
+<li>持久性<h2><span id="事务的分类">事务的分类</span></h2></li>
 <li>声明式事务</li>
 <li>编程式事务</li>
 </ul>
-<h2 id="数据错误类型"><a href="#数据错误类型" class="headerlink" title="数据错误类型"></a>数据错误类型</h2><ul>
+<h2><span id="数据错误类型">数据错误类型</span></h2><ul>
 <li><p>脏读(dirty read)</p>
 <blockquote>
 <p>当前有两个事务A和B，当A事务对数据进行更改，但是还没提交（会有缓存），此时被事务B读取，然后事务A因其他原因导致失败数据回滚，此时的事务A的操作都是失败的，对数据的操作也是失败的，但是B事务已经读取了A没提交的数据，导致B读到了错误的数据。</p>
@@ -279,14 +279,14 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><ul>
+<h2><span id="事务的隔离级别">事务的隔离级别</span></h2><ul>
 <li>ISOLATION_DEFAULT 默认级别</li>
 <li>ISOLATION_READ_UNCOMMIT   事务最低级别，允许其他事务看到此事务中未提交的数据。   <strong>这种级别会导致脏读、幻读、不可重复读</strong></li>
 <li>ISOLATION_READ_COMMIT   保证数据提交后才能被另外一个事务看到。  <strong>这种级别可以防止脏读，但是不能防止不可重复读和幻读</strong></li>
 <li>ISOLATION_REPEATABLE_READ       <strong>这种级别可以防止脏读、不可重复读，但是不能防止幻读</strong></li>
 <li>ISOLATION_SERALIZABLE     <strong>最强级别，可以防止脏读、不可重复读、幻读</strong></li>
 </ul>
-<h2 id="事务的传播行为"><a href="#事务的传播行为" class="headerlink" title="事务的传播行为"></a>事务的传播行为</h2><ul>
+<h2><span id="事务的传播行为">事务的传播行为</span></h2><ul>
 <li><p>PROPAGATION_REQUIRED 如果存在一个事务，就是用这个事务，如果没有事务，就开启一个新的事务</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    methodB();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>PROPAGATION_SUPPORTS 如果存在一个事务，就用这个事务，如果没有事务，就非事务执行，但是对于事务同步管理器，PROPAGATION_SUPPORTS和不使用事务有少许区别。</p>
@@ -427,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">1.</span> <span class="nav-text">基本特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">事务的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">数据错误类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA"><span class="nav-number">5.</span> <span class="nav-text">事务的传播行为</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基本特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">事务的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">数据错误类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">事务的传播行为</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

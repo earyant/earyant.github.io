@@ -254,10 +254,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="使用feign"><a href="#使用feign" class="headerlink" title="使用feign"></a>使用feign</h3><p>spring-cloud-starter-eureka<br>spring-cloud-starter-feign<br>spring-boot-starter-web<br>spring-boot-starter-test</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>eureka:<br>  client:<br>    serviceUrl:<br>      defaultZone: <a target="_blank" rel="noopener" href="http://localhost:8761/eureka/">http://localhost:8761/eureka/</a><br>server:<br>  port: 8765<br>spring:<br>  application:<br>    name: service-feign</p>
-<h3 id="开启feign"><a href="#开启feign" class="headerlink" title="开启feign"></a>开启feign</h3><ul>
-<li>在程序的入口类，需要通过注解 @EnableFeignClients 来开启 feign:<h3 id="调用服务"><a href="#调用服务" class="headerlink" title="调用服务"></a>调用服务</h3></li>
+        <h3><span id="使用feign">使用feign</span></h3><p>spring-cloud-starter-eureka<br>spring-cloud-starter-feign<br>spring-boot-starter-web<br>spring-boot-starter-test</p>
+<h3><span id="配置文件">配置文件</span></h3><p>eureka:<br>  client:<br>    serviceUrl:<br>      defaultZone: <a target="_blank" rel="noopener" href="http://localhost:8761/eureka/">http://localhost:8761/eureka/</a><br>server:<br>  port: 8765<br>spring:<br>  application:<br>    name: service-feign</p>
+<h3><span id="开启feign">开启feign</span></h3><ul>
+<li>在程序的入口类，需要通过注解 @EnableFeignClients 来开启 feign:<h3><span id="调用服务">调用服务</span></h3></li>
 <li>定义一个 feign 接口类, 通过 @ FeignClient（“服务名”），来指定调用哪个服务：</li>
 </ul>
 
@@ -369,7 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8feign"><span class="nav-number">1.</span> <span class="nav-text">使用feign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFfeign"><span class="nav-number">3.</span> <span class="nav-text">开启feign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">调用服务</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">使用feign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">开启feign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">调用服务</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

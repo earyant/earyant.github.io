@@ -254,8 +254,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="初步设想"><a href="#初步设想" class="headerlink" title="初步设想"></a>初步设想</h2><p>  最简单的方法，就是for循环一下。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">     result *= m;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>  这种方法结果肯定正确，但是时间复杂度上，需要O(n)。很是不理想。于是我想着改进一下。</p>
-<h2 id="探求乘法原理"><a href="#探求乘法原理" class="headerlink" title="探求乘法原理"></a>探求乘法原理</h2><p>  乘法原理就是n个m相乘，例如m=10，n=5， 那么表达式为 10<em>10</em>10<em>10</em>10,有人说这不是废话嘛，当然不是，之所以展开，是因为可以改写法，如：(10<em>10)</em> (10<em>10)</em> 10,又有人说了，这不是还是废话嘛，别急往下看，你会发现(10*10)重复了。</p>
+        <h2><span id="初步设想">初步设想</span></h2><p>  最简单的方法，就是for循环一下。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">     result *= m;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>  这种方法结果肯定正确，但是时间复杂度上，需要O(n)。很是不理想。于是我想着改进一下。</p>
+<h2><span id="探求乘法原理">探求乘法原理</span></h2><p>  乘法原理就是n个m相乘，例如m=10，n=5， 那么表达式为 10<em>10</em>10<em>10</em>10,有人说这不是废话嘛，当然不是，之所以展开，是因为可以改写法，如：(10<em>10)</em> (10<em>10)</em> 10,又有人说了，这不是还是废话嘛，别急往下看，你会发现(10*10)重复了。</p>
 <p>  什么意思？</p>
 <p>  如果单纯用for循环10的4次幂，需要 <em>循环4次运算</em>，现在我先用10<em>10,<em>第1次运算</em>，再用得出的结果乘以得出的结果，也就是(10</em>10)* (10*10),<em>第2次运算</em>。就这么简单，此次运算节省了2次，节省了百分之50啊，重大发现啊。</p>
 <p>  如果是10的8次幂呢？单纯for循环需要8次，新的方法需要几次？<em>3次</em>。怎么算的？(10<em>10)</em> (10<em>10)</em> (10<em>10)</em> (10<em>10)。发现就是算10</em>10的4次方，算出10*10需要 <em>第一次</em>，4次方刚刚算了是2次，一共是3次，这么神奇啊，节省了5次运算啊。这是节省了百分之。。。ummmm，管他百分之多少呢，反正很多。</p>
@@ -272,7 +272,7 @@
 <blockquote>
 <p>for循环版，结果为 ： 4.591774807899563E93<br>    for循环版，总耗时： 1<br>    叠乘法，结果为 ： 4.591774807899562E93<br>    叠乘法，总耗时： 0</p>
 </blockquote>
-<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>  如果m是2的话，只需要返回2&lt;&lt;n就行了。自行判断是否越界。</p>
+<h2><span id="彩蛋">彩蛋</span></h2><p>  如果m是2的话，只需要返回2&lt;&lt;n就行了。自行判断是否越界。</p>
 
     </div>
 
@@ -382,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E6%AD%A5%E8%AE%BE%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">初步设想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A2%E6%B1%82%E4%B9%98%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">探求乘法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A9%E8%9B%8B"><span class="nav-number">3.</span> <span class="nav-text">彩蛋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">初步设想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">探求乘法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">彩蛋</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
