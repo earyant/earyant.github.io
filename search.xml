@@ -5514,6 +5514,7 @@ PSPermGen       total 4096K, used 3039K
       <tags>
         <tag>数据分析</tag>
         <tag>利用python进行数据分析</tag>
+        <tag>pandas</tag>
       </tags>
   </entry>
   <entry>
@@ -5949,6 +5950,7 @@ PSPermGen       total 4096K, used 3039K
 <h1><span id="48-结论">4.8 结论</span></h1><p>虽然本书剩下的章节大部分是用pandas规整数据，我们还是会用到相似的基于数组的计算。在附录A中，我们会深入挖掘NumPy的特点，进一步学习数组的技巧。</p>
 ]]></content>
       <tags>
+        <tag>numpy</tag>
         <tag>数据分析</tag>
         <tag>利用python进行数据分析</tag>
       </tags>
