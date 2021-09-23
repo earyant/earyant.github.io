@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。 输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。 6.1 读写文本格式的数据pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。表6-1对它们进行了总结，其中read_csv和">
+  <meta name="description" content="6.1 读写文本格式的数据 逐块读取文本文件 将数据写出到文本格式 处理分隔符格式 JSON数据 XML和HTML：Web信息收集 利用lxml.objectify解析XML   6.2 二进制数据格式 使用HDF5格式 读取Microsoft Excel文件   6.3 Web APIs交互 6.4 数据库交互 6.5 总结    访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用python进行数据分析-6.数据加载">
 <meta property="og:url" content="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
-<meta property="og:description" content="访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。 输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。 6.1 读写文本格式的数据pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。表6-1对它们进行了总结，其中read_csv和">
+<meta property="og:description" content="6.1 读写文本格式的数据 逐块读取文本文件 将数据写出到文本格式 处理分隔符格式 JSON数据 XML和HTML：Web信息收集 利用lxml.objectify解析XML   6.2 二进制数据格式 使用HDF5格式 读取Microsoft Excel文件   6.3 Web APIs交互 6.4 数据库交互 6.5 总结    访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍p">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-958f849e6067b19b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-082daf4a00ed9494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-597327ade3e94c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-7a1cee622459072b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2021-09-22T13:51:10.000Z">
-<meta property="article:modified_time" content="2021-09-23T03:14:56.472Z">
+<meta property="article:modified_time" content="2021-09-23T06:19:11.475Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="利用python进行数据分析">
 <meta property="article:tag" content="数据分析">
@@ -137,17 +137,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">89</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -255,8 +255,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-23 11:14:56" itemprop="dateModified" datetime="2021-09-23T11:14:56+08:00">2021-09-23</time>
+                <time title="修改时间：2021-09-23 14:19:11" itemprop="dateModified" datetime="2021-09-23T14:19:11+08:00">2021-09-23</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                </span>
+            </span>
 
           
 
@@ -269,7 +278,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
+        <!-- toc -->
+
+<ul>
+<li><a href="#61-%E8%AF%BB%E5%86%99%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE">6.1 读写文本格式的数据</a><ul>
+<li><a href="#%E9%80%90%E5%9D%97%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6">逐块读取文本文件</a></li>
+<li><a href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E5%86%99%E5%87%BA%E5%88%B0%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F">将数据写出到文本格式</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%88%86%E9%9A%94%E7%AC%A6%E6%A0%BC%E5%BC%8F">处理分隔符格式</a></li>
+<li><a href="#json%E6%95%B0%E6%8D%AE">JSON数据</a></li>
+<li><a href="#xml%E5%92%8Chtmlweb%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">XML和HTML：Web信息收集</a></li>
+<li><a href="#%E5%88%A9%E7%94%A8lxmlobjectify%E8%A7%A3%E6%9E%90xml">利用lxml.objectify解析XML</a></li>
+</ul>
+</li>
+<li><a href="#62-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F">6.2 二进制数据格式</a><ul>
+<li><a href="#%E4%BD%BF%E7%94%A8hdf5%E6%A0%BC%E5%BC%8F">使用HDF5格式</a></li>
+<li><a href="#%E8%AF%BB%E5%8F%96microsoft-excel%E6%96%87%E4%BB%B6">读取Microsoft Excel文件</a></li>
+</ul>
+</li>
+<li><a href="#63-web-apis%E4%BA%A4%E4%BA%92">6.3 Web APIs交互</a></li>
+<li><a href="#64-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92">6.4 数据库交互</a></li>
+<li><a href="#65-%E6%80%BB%E7%BB%93">6.5 总结</a></li>
+</ul>
+<!-- tocstop -->
+
+<p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
 <p>输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。</p>
 <h1><span id="61-读写文本格式的数据">6.1 读写文本格式的数据</span></h1><p>pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。表6-1对它们进行了总结，其中read_csv和read_table可能会是你今后用得最多的。</p>
 <p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-958f849e6067b19b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表6-1 pandas中的解析函数"></p>
@@ -663,20 +695,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

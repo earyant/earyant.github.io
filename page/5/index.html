@@ -126,17 +126,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">89</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -209,6 +209,285 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java%E5%8D%95%E4%BE%8B%E7%9A%84%E4%B8%83%E7%A7%8D%E5%86%99%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java%E5%8D%95%E4%BE%8B%E7%9A%84%E4%B8%83%E7%A7%8D%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">java单例的七种写法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-27 14:06:24" itemprop="dateCreated datePublished" datetime="2017-09-27T14:06:24+08:00">2017-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="懒汉">懒汉</span></h1><h2><span id="线程不安全">线程不安全</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">       <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">           instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">       &#125;  </span><br><span class="line">     <span class="keyword">return</span> instance;  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2><span id="线程安全">线程安全</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">      instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> instance;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h1><span id="饿汉">饿汉</span></h1>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line"> <span class="keyword">return</span> instance;  </span><br><span class="line"> &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="饿汉变种">饿汉变种</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;  </span><br><span class="line">  <span class="keyword">static</span> &#123;  </span><br><span class="line">  instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.instance;  </span><br><span class="line">  &#125;  </span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2><span id="静态内部类">静态内部类</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">      &#125;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">          <span class="keyword">return</span> SingletonHolder.INSTANCE;  </span><br><span class="line">      &#125;  </span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2><span id="枚举">枚举</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     INSTANCE;  </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+
+<h2><span id="双重校验锁">双重校验锁</span></h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">          <span class="keyword">synchronized</span> (Singleton.class) &#123;  </span><br><span class="line">          <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">              singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">          &#125;  </span><br><span class="line">         &#125;  </span><br><span class="line">     &#125;  </span><br><span class="line">     <span class="keyword">return</span> singleton;  </span><br><span class="line">     &#125;  </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">java线程详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-27 11:49:38" itemprop="dateCreated datePublished" datetime="2017-09-27T11:49:38+08:00">2017-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="线程状态">线程状态</span></h2><ul>
+<li>新建状态(New) : <blockquote>
+<p>线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。</p>
+</blockquote>
+</li>
+<li>就绪状态(Runnable): <blockquote>
+<p>也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如，thread.start()。处于就绪状态的线程，随时可能被CPU调度执行。</p>
+</blockquote>
+</li>
+<li>运行状态(Running) : <blockquote>
+<p>线程获取CPU权限进行执行。需要注意的是，线程只能从就绪状态进入到运行状态。</p>
+</blockquote>
+</li>
+<li>阻塞状态(Blocked) : <blockquote>
+<p>阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种：</p>
+</blockquote>
+<ul>
+<li>等待阻塞 – 通过调用线程的wait()方法，让线程等待某工作的完成。</li>
+<li>同步阻塞 – 线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态。</li>
+<li>其他阻塞 – 通过调用线程的sleep()或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。</li>
+<li>死亡状态(Dead) : 线程执行完了或者因异常退出了run()方法，该线程结束生命周期。<blockquote>
+<p>这5种状态涉及到的内容包括Object类, Thread和synchronized关键字。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Object类，定义了wait(), notify(), notifyAll()等休眠/唤醒函数。</li>
+<li>Thread类，定义了一些列的线程操作函数。例如，sleep()休眠函数, interrupt()中断函数, getName()获取线程名称等。</li>
+<li>synchronized，是关键字；它区分为synchronized代码块和synchronized方法。synchronized的作用是让线程获取对象的同步锁。</li>
+</ul>
+<h2><span id="实现多线程的两种方式thread和runnable">实现多线程的两种方式：Thread和Runnable</span></h2><ul>
+<li>Runnable 是一个接口，该接口中只包含了一个run()方法。它的定义如下：<br>public interface Runnable {<br> public abstract void run();<br>}<br>Runnable的作用，实现多线程。我们可以定义一个类A实现Runnable接口；然后，通过new Thread(new A())等方式新建线程。<br>Thread 是一个类。Thread本身就实现了Runnable接口。它的声明如下：<br>public class Thread implements Runnable {}<br>Thread的作用，实现多线程。</li>
+</ul>
+<h3><span id="thread和runnable的异同点">Thread和Runnable的异同点：</span></h3><ul>
+<li>Thread 和 Runnable 的相同点：<blockquote>
+<p>都是“多线程的实现方式”。</p>
+</blockquote>
+</li>
+<li>Thread 和 Runnable 的不同点：<blockquote>
+<p>Thread 是类，而Runnable是接口；Thread本身是实现了Runnable接口的类。我们知道“一个类只能有一个父类，但是却能实现多个接口”，因此Runnable具有更好的扩展性。<br>此外，Runnable还可以用于“资源的共享”。即，多个线程都是基于某一个Runnable对象建立的，它们会共享Runnable对象上的资源。<br>通常，建议通过“Runnable”实现多线程！</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java%E5%B9%B6%E5%8F%91%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java%E5%B9%B6%E5%8F%91%E9%94%81/" class="post-title-link" itemprop="url">java并发锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-27 11:37:55" itemprop="dateCreated datePublished" datetime="2017-09-27T11:37:55+08:00">2017-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="实现方式">实现方式</span></h2><ul>
+<li>锁<br>   -[ ] 公平锁<br>   -[ ] 非公平锁<ul>
+<li>隐式锁Synchronized</li>
+<li>显式锁Lock<ul>
+<li>ReentrantLock</li>
+<li>ReadWriteLock</li>
+<li>ReentrantReadWriteLock</li>
+<li>StampedLock </li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li>无锁<ul>
+<li>atomic</li>
+<li>concurrent</li>
+<li>blocking</li>
+<li>threadLocal</li>
+<li>volatile</li>
+<li>CAS</li>
+</ul>
+</li>
+</ul>
+<h2><span id="锁">锁</span></h2><ul>
+<li>Synchronized<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> ++count;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Lock<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Lock lock = <span class="keyword">new</span> Lock();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.lock();</span><br><span class="line">		<span class="keyword">int</span> newCount = ++count;</span><br><span class="line">		lock.unlock();</span><br><span class="line">		<span class="keyword">return</span> newCount;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+不可重入自旋锁的简单实现<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> isLocked = <span class="keyword">false</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		<span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(isLocked)&#123;</span><br><span class="line">			wait();</span><br><span class="line">		&#125;</span><br><span class="line">		isLocked = <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123;</span><br><span class="line">		isLocked = <span class="keyword">false</span>;</span><br><span class="line">		notify();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2><span id="threadlocal">threadLocal</span></h2><p>   如果想知道为什么使用ThreadLocal，就得先了解局部变量和全局变量对线程安全的影响。<br>   局部变量存储在线程自己的栈中。也就是说，局部变量永远也不会被多个线程共享。所以，基础类型的局部变量是线程安全的。<br>   当多个线程引用同一个对象时，因为对象引用是放在栈上的，但是对象实例存储在堆中，所以不是线程安全的。</p>
+<p>   ThreadLocal就是拷贝一份到线程缓存中，Thread正是操作这个对象，就不会出现安全问题。</p>
+<ul>
+<li>InheritableThreadLocal</li>
+</ul>
+<p>   InheritableThreadLocal类是ThreadLocal的子类。为了解决ThreadLocal实例内部每个线程都只能看到自己的私有值，所以InheritableThreadLocal允许一个线程创建的所有子线程访问其父线程的值。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -827,336 +1106,6 @@ PSPermGen       total 4096K, used 3039K
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/ArrayList%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ArrayList%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">ArrayList原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-23 14:36:39" itemprop="dateCreated datePublished" datetime="2017-09-23T14:36:39+08:00">2017-09-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="实现方式">实现方式</span></h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
-<ul>
-<li>是否允许空：<br>允许</li>
-<li>是否允许重复数据：<br>允许</li>
-<li>是否有序：<br>是</li>
-<li>是否线程安全：<br>不是</li>
-</ul>
-<h2><span id="默认大小-10">默认大小 : 10</span></h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2><span id="扩容">扩容</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2><span id="删除元素">删除元素</span></h2><ul>
-<li>根据下标删除。</li>
-<li>根据元素删除。<blockquote>
-<p>删除跟元素匹配的 <em>第一个</em> 元素</p>
-</blockquote>
-</li>
-</ul>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line"></span><br><span class="line">         numMoved);</span><br><span class="line"></span><br><span class="line">elementData[--size] = <span class="keyword">null</span>; <span class="comment">// Let gc do its work</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>1、把指定元素后面位置的所有元素，利用System.arraycopy方法整体向前移动一个位置</li>
-<li>2、最后一个位置的元素指定为null，这样让gc可以去回收它<blockquote>
-<p>因为删除的时候，需要将后面所有元素向前移动一个位置，所以删除的时候，很消耗性能。</p>
-</blockquote>
-</li>
-</ul>
-<h2><span id="插入元素">插入元素</span></h2><ul>
-<li>add(T t)</li>
-<li>add(int position,T t)<blockquote>
-<p>插入时候会将所有后面的元素向后移动一个位置，很消耗性能。</p>
-</blockquote>
-</li>
-</ul>
-<h2><span id="arraylist的优缺点">ArrayList的优缺点</span></h2><ul>
-<li>底层以数组方式存储，是一种随机访问方式，并且实现了RandomAccess接口，因此查找十分快速。</li>
-<li>添加很方便，往数组的最后添加一个就行了。</li>
-<li>删除和添加的时候涉及到移动后面所有数据，性能消耗比较大。    </li>
-</ul>
-<h2><span id="线程安全">线程安全</span></h2><blockquote>
-<p>不是线程安全的，所有方法都没有Synchronized修饰，在并发情况下会出现安全问题。可以使用Collections.synchronizedList方式</p>
-</blockquote>
-<h2><span id="为什么arraylist的elementdata是用transient修饰的">为什么ArrayList的elementData是用transient修饰的？</span></h2><blockquote>
-<p>private transient Object[] elementData;</p>
-</blockquote>
-<blockquote>
-<p>ArrayList 实现了Serializable接口，所以是可以序列化的。但是elementData不一定是满的，没必要全部序列化。所以ArrayList重写了writeObject方法实现，增快了序列化的速度，见笑了序列化后的大小：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line"><span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line"><span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">s.defaultWriteObject();</span><br><span class="line">        <span class="comment">// Write out array length</span></span><br><span class="line">       s.writeInt(elementData.length);</span><br><span class="line">    <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++)</span><br><span class="line">           s.writeObject(elementData[i]);</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">java8新增功能</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-18 21:34:40" itemprop="dateCreated datePublished" datetime="2017-09-18T21:34:40+08:00">2017-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p>
-<h1><span id="接口中default关键字修饰方法可以增加默认实现">接口中default关键字修饰方法可以增加默认实现。</span></h1>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a )</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1><span id="lambda表达式">Lambda表达式</span></h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(names,(a,b)-&gt;b.compareTo(a));</span><br></pre></td></tr></table></figure>
-
-<h1><span id="函数式接口">函数式接口</span></h1> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Coverter</span>&lt;<span class="title">F</span>,<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Convert&lt;String,Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1><span id="方法和构造函数引用">方法和构造函数引用</span></h1><ul>
-<li>静态方法引用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Convert&lt;String,Integer&gt; converter = Integer::valueOf;</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>通过:: 关键字获取方法或者构造函数的引用</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span></span>&#123;</span><br><span class="line">  <span class="function">String <span class="title">startsWith</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Something something = <span class="keyword">new</span> Something();</span><br><span class="line">Converter&lt;String,String&gt; converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(<span class="string">&quot;java&quot;</span>);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>引用构造函数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  String firstName；</span><br><span class="line">  String lastName；</span><br><span class="line">  Person()&#123;&#125;;</span><br><span class="line">  Person(String firstName,String lastName)&#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName=firstName;</span><br><span class="line">    <span class="keyword">this</span>.lastName=lastName;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新建工厂类</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function">P <span class="title">create</span><span class="params">(String firstName,String lastName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过构造函数引用将所有东西拼到一起，通过手动实现。</span></span><br><span class="line"></span><br><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">&quot;earyant&quot;</span>,<span class="string">&quot;Lee&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1><span id="类库示例">类库示例</span></h1><h2><span id="predicates断言">Predicates(断言)</span></h2><blockquote>
-<p>是一个布尔类型的函数，该函数只有一个输入函数，它实现了多种默认方法，用于处理复杂的逻辑动词。(and ,or,negate(否定))</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate = (s)-&gt;s.length()&gt;<span class="number">0</span>;</span><br><span class="line">predicate.test(<span class="string">&quot;earyant&quot;</span>)  <span class="comment">// true</span></span><br><span class="line">predicate.negate().test(<span class="string">&quot;earyant&quot;</span>); <span class="comment">//false  </span></span><br><span class="line"></span><br><span class="line">Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;</span><br><span class="line">Predicate&lt;Boolean&gt; isNull = Objects::isNull;</span><br><span class="line"></span><br><span class="line">Predicate&lt;String&gt; isEmpty = String::isEmpty;</span><br><span class="line">Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();</span><br></pre></td></tr></table></figure>
-
-<h2><span id="functions">Functions</span></h2><blockquote>
-<p>接收一个参数，并返回单一的结果，默认方法可以将多个函数穿在一起(compose，andThen)：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String,Integer&gt; toInteger = Integer:valueOf;</span><br><span class="line">Function&lt;String,String&gt; backToString = toInteger.andThen(String::valueOf);</span><br><span class="line">backToString.apply(<span class="string">&quot;123&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2><span id="suppliers">Suppliers</span></h2><blockquote>
-<p>Supplier 接口产生一个给定类型的结果，与Function不同的是，Supplier没有输入参数。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;Person&gt; personSupplier = Person:<span class="keyword">new</span>;</span><br><span class="line">personSupplier.get();</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Spring中的事务管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 17:40:06" itemprop="dateCreated datePublished" datetime="2017-09-17T17:40:06+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="基本特征">基本特征</span></h2><ul>
-<li>原子性</li>
-<li>一致性</li>
-<li>隔离性</li>
-<li>持久性<h2><span id="事务的分类">事务的分类</span></h2></li>
-<li>声明式事务</li>
-<li>编程式事务</li>
-</ul>
-<h2><span id="数据错误类型">数据错误类型</span></h2><ul>
-<li><p>脏读(dirty read)</p>
-<blockquote>
-<p>当前有两个事务A和B，当A事务对数据进行更改，但是还没提交（会有缓存），此时被事务B读取，然后事务A因其他原因导致失败数据回滚，此时的事务A的操作都是失败的，对数据的操作也是失败的，但是B事务已经读取了A没提交的数据，导致B读到了错误的数据。</p>
-</blockquote>
-</li>
-<li><p>不可重复读(no-repeatable-read)</p>
-<blockquote>
-<p>当前有两个事务A和B，A事务将会对数据进行两次操作，当A事务操作一次成功后，B事务此时对数据操作更改了值并提交，随后A事务再进行读取数据，发现数据已经被更改，造成A事务的数据混乱。</p>
-</blockquote>
-</li>
-<li><p>幻读(phantom read)</p>
-<blockquote>
-<p>与不可重复读同样都是多次读数据不一致的问题，但是no-repeatable-read强调的是本身需要的数据集改变了， phantom read强调多次查询得出的条件数据集改变了。</p>
-</blockquote>
-</li>
-</ul>
-<h2><span id="事务的隔离级别">事务的隔离级别</span></h2><ul>
-<li>ISOLATION_DEFAULT 默认级别</li>
-<li>ISOLATION_READ_UNCOMMIT   事务最低级别，允许其他事务看到此事务中未提交的数据。   <strong>这种级别会导致脏读、幻读、不可重复读</strong></li>
-<li>ISOLATION_READ_COMMIT   保证数据提交后才能被另外一个事务看到。  <strong>这种级别可以防止脏读，但是不能防止不可重复读和幻读</strong></li>
-<li>ISOLATION_REPEATABLE_READ       <strong>这种级别可以防止脏读、不可重复读，但是不能防止幻读</strong></li>
-<li>ISOLATION_SERALIZABLE     <strong>最强级别，可以防止脏读、不可重复读、幻读</strong></li>
-</ul>
-<h2><span id="事务的传播行为">事务的传播行为</span></h2><ul>
-<li><p>PROPAGATION_REQUIRED 如果存在一个事务，就是用这个事务，如果没有事务，就开启一个新的事务</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    methodB();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>PROPAGATION_SUPPORTS 如果存在一个事务，就用这个事务，如果没有事务，就非事务执行，但是对于事务同步管理器，PROPAGATION_SUPPORTS和不使用事务有少许区别。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    methodB();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_SUPPORTS</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当通过methodA调用methodB时，methodB就是用methodA的事务，如果单独调用methodB的时候，methodB就非事务执行。</p>
-</li>
-<li><p>PROPAGATION_MANDATORY 如果存在一个事务，就是用当前事务，如果不存在事务，就抛出一个异常。</p>
-</li>
-<li><p>PROPAGATION_REQUIRED_NEW 开启一个新的事务，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">  doSomeThingA();</span><br><span class="line">  methodB();</span><br><span class="line">  doSomeThingB();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRES_NEW</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>相当于：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">TransactionManager tm = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="comment">//获得一个JTA事务管理器</span></span><br><span class="line">  tm = getTransactionManager();</span><br><span class="line">  tm.begin();<span class="comment">//开启一个新的事务</span></span><br><span class="line">  Transaction ts1 = tm.getTransaction();</span><br><span class="line">  doSomeThing();</span><br><span class="line">  tm.suspend();<span class="comment">//挂起当前事务</span></span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    tm.begin();<span class="comment">//重新开启第二个事务</span></span><br><span class="line">    Transaction ts2 = tm.getTransaction();</span><br><span class="line">    methodB();</span><br><span class="line">    ts2.commit();<span class="comment">//提交第二个事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  Catch(RunTimeException ex)&#123;</span><br><span class="line">    ts2.rollback();<span class="comment">//回滚第二个事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span>&#123;</span><br><span class="line">   <span class="comment">//释放资源</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methodB执行完后，复恢第一个事务</span></span><br><span class="line">  tm.resume(ts1);</span><br><span class="line">  doSomeThingB();</span><br><span class="line">  ts1.commit();<span class="comment">//提交第一个事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(RunTimeException ex)&#123;</span><br><span class="line">  ts1.rollback();<span class="comment">//回滚第一个事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line"><span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在这里，我把ts1称为外层事务，ts2称为内层事务。从上面的代码可以看出，ts2与ts1是两个独立的事务，互不相干。Ts2是否成功并不依赖于ts1。如果methodA方法在调用methodB方法后的doSomeThingB方法失败了，而methodB方法所做的结果依然被提交。而除了methodB之外的其它代码导致的结果却被回滚了。使用PROPAGATION_REQUIRES_NEW,需要使用JtaTransactionManager作为事务管理器。</p>
-</blockquote>
-</li>
-<li><p>PROPAGATION_NOT_SUPPORTED 总是非事务执行，并挂起任何事务，也需要JTATransctionManager作为事务管理器</p>
-</li>
-<li><p>PROPAGATION_NEVER  总是非事务执行，如果存在一个事务，则抛出异常。</p>
-</li>
-<li><p>PROPAGATION_NESTED 如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行。这是一个嵌套事务,使用JDBC 3.0驱动时,仅仅支持DataSourceTransactionManager作为事务管理器。需要JDBC 驱动的java.sql.Savepoint类。有一些JTA的事务管理器实现可能也提供了同样的功能。使用PROPAGATION_NESTED，还需要把PlatformTransactionManager的nestedTransactionAllowed属性设为true;而nestedTransactionAllowed属性值默认为false;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line">methodA()&#123;</span><br><span class="line">doSomeThingA();</span><br><span class="line">methodB();</span><br><span class="line">doSomeThingB();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_NESTED</span></span><br><span class="line">methodB()&#123;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果单独调用methodB方法，则按REQUIRED属性执行。如果调用methodA方法，相当于下面的效果：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  Connection con = <span class="keyword">null</span>;</span><br><span class="line">Savepoint savepoint = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"> con = getConnection();</span><br><span class="line"> con.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line"> doSomeThingA();</span><br><span class="line"> savepoint = con2.setSavepoint();</span><br><span class="line"> <span class="keyword">try</span>&#123;</span><br><span class="line">     methodB();</span><br><span class="line"> &#125;<span class="keyword">catch</span>(RuntimeException ex)&#123;</span><br><span class="line">    con.rollback(savepoint);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">finally</span>&#123;</span><br><span class="line">   <span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br><span class="line">  doSomeThingB();</span><br><span class="line">  con.commit();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(RuntimeException ex)&#123;</span><br><span class="line">  con.rollback();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line"> <span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>PROPAGATION_NESTED 与PROPAGATION_REQUIRES_NEW的区别:它们非常类似,都像一个嵌套事务，如果不存在一个活动的事务，都会开启一个新的事务。使用PROPAGATION_REQUIRES_NEW时，内层事务与外层事务就像两个独立的事务一样，一旦内层事务进行了提交后，外层事务不能对其进行回滚。两个事务互不影响。两个事务不是一个真正的嵌套事务。同时它需要JTA事务管理器的支持。<br>  使用PROPAGATION_NESTED时，外层事务的回滚可以引起内层事务的回滚。而内层事务的异常并不会导致外层事务的回滚，它是一个真正的嵌套事务。DataSourceTransactionManager使用savepoint支持PROPAGATION_NESTED时，需要JDBC 3.0以上驱动及1.4以上的JDK版本支持。其它的JTA TrasactionManager实现可能有不同的支持方式。<br>  PROPAGATION_REQUIRES_NEW 启动一个新的, 不依赖于环境的 “内部” 事务. 这个事务将被完全 commited 或 rolled back 而不依赖于外部事务, 它拥有自己的隔离范围, 自己的锁, 等等. 当内部事务开始执行时, 外部事务将被挂起, 内务事务结束时, 外部事务将继续执行。<br>  另一方面, PROPAGATION_NESTED 开始一个 “嵌套的” 事务,  它是已经存在事务的一个真正的子事务. 潜套事务开始执行时,  它将取得一个 savepoint. 如果这个嵌套事务失败, 我们将回滚到此 savepoint. 潜套事务是外部事务的一部分, 只有外部事务结束后它才会被提交。<br>  由此可见, PROPAGATION_REQUIRES_NEW 和 PROPAGATION_NESTED 的最大区别在于, PROPAGATION_REQUIRES_NEW 完全是一个新的事务, 而 PROPAGATION_NESTED 则是外部事务的子事务, 如果外部事务 commit, 潜套事务也会被 commit, 这个规则同样适用于 roll back.<br>  PROPAGATION_REQUIRED应该是我们首先的事务传播行为。它能够满足我们大多数的事务需求。</p>
-</blockquote>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1226,20 +1175,20 @@ PSPermGen       total 4096K, used 3039K
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

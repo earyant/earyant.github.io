@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。 我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。 3.1 数据结构和序列Python的数据结构">
+  <meta name="description" content="3.1 数据结构和序列 元组 拆分元组 tuple方法 列表 添加和删除元素 串联和组合列表 排序 二分搜索和维护已排序的列表 切片 序列函数 enumerate函数 sorted函数 zip函数 reversed函数 字典 用序列创建字典 默认值 有效的键类型 集合 列表、集合和字典推导式 嵌套列表推导式   3.2 函数 命名空间、作用域，和局部函数 返回多个值 函数也是对象 匿名（la">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用python进行数据分析-3.Python高级语法">
 <meta property="og:url" content="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
-<meta property="og:description" content="本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。 我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。 3.1 数据结构和序列Python的数据结构">
+<meta property="og:description" content="3.1 数据结构和序列 元组 拆分元组 tuple方法 列表 添加和删除元素 串联和组合列表 排序 二分搜索和维护已排序的列表 切片 序列函数 enumerate函数 sorted函数 zip函数 reversed函数 字典 用序列创建字典 默认值 有效的键类型 集合 列表、集合和字典推导式 嵌套列表推导式   3.2 函数 命名空间、作用域，和局部函数 返回多个值 函数也是对象 匿名（la">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-522e2b688b755ff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-980efe5d98ecc4d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-28274484129f0ea7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-d25bd6e730afeb39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2021-09-21T14:38:35.000Z">
-<meta property="article:modified_time" content="2021-09-23T03:26:30.889Z">
+<meta property="article:modified_time" content="2021-09-23T06:18:56.047Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="利用python进行数据分析">
 <meta property="article:tag" content="数据分析">
@@ -136,17 +136,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">89</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -254,8 +254,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-23 11:26:30" itemprop="dateModified" datetime="2021-09-23T11:26:30+08:00">2021-09-23</time>
+                <time title="修改时间：2021-09-23 14:18:56" itemprop="dateModified" datetime="2021-09-23T14:18:56+08:00">2021-09-23</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                </span>
+            </span>
 
           
 
@@ -268,7 +277,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。</p>
+        <!-- toc -->
+
+<ul>
+<li><a href="#31-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E5%BA%8F%E5%88%97">3.1 数据结构和序列</a><ul>
+<li><a href="#%E5%85%83%E7%BB%84">元组</a></li>
+<li><a href="#%E6%8B%86%E5%88%86%E5%85%83%E7%BB%84">拆分元组</a></li>
+<li><a href="#tuple%E6%96%B9%E6%B3%95">tuple方法</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0">添加和删除元素</a></li>
+<li><a href="#%E4%B8%B2%E8%81%94%E5%92%8C%E7%BB%84%E5%90%88%E5%88%97%E8%A1%A8">串联和组合列表</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F">排序</a></li>
+<li><a href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%88%97%E8%A1%A8">二分搜索和维护已排序的列表</a></li>
+<li><a href="#%E5%88%87%E7%89%87">切片</a></li>
+<li><a href="#%E5%BA%8F%E5%88%97%E5%87%BD%E6%95%B0">序列函数</a></li>
+<li><a href="#enumerate%E5%87%BD%E6%95%B0">enumerate函数</a></li>
+<li><a href="#sorted%E5%87%BD%E6%95%B0">sorted函数</a></li>
+<li><a href="#zip%E5%87%BD%E6%95%B0">zip函数</a></li>
+<li><a href="#reversed%E5%87%BD%E6%95%B0">reversed函数</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8">字典</a></li>
+<li><a href="#%E7%94%A8%E5%BA%8F%E5%88%97%E5%88%9B%E5%BB%BA%E5%AD%97%E5%85%B8">用序列创建字典</a></li>
+<li><a href="#%E9%BB%98%E8%AE%A4%E5%80%BC">默认值</a></li>
+<li><a href="#%E6%9C%89%E6%95%88%E7%9A%84%E9%94%AE%E7%B1%BB%E5%9E%8B">有效的键类型</a></li>
+<li><a href="#%E9%9B%86%E5%90%88">集合</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8-%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F">列表、集合和字典推导式</a></li>
+<li><a href="#%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F">嵌套列表推导式</a></li>
+</ul>
+</li>
+<li><a href="#32-%E5%87%BD%E6%95%B0">3.2 函数</a><ul>
+<li><a href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%B1%80%E9%83%A8%E5%87%BD%E6%95%B0">命名空间、作用域，和局部函数</a></li>
+<li><a href="#%E8%BF%94%E5%9B%9E%E5%A4%9A%E4%B8%AA%E5%80%BC">返回多个值</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E4%B9%9F%E6%98%AF%E5%AF%B9%E8%B1%A1">函数也是对象</a></li>
+<li><a href="#%E5%8C%BF%E5%90%8Dlambda%E5%87%BD%E6%95%B0">匿名（lambda）函数</a></li>
+<li><a href="#%E6%9F%AF%E9%87%8C%E5%8C%96%E9%83%A8%E5%88%86%E5%8F%82%E6%95%B0%E5%BA%94%E7%94%A8">柯里化：部分参数应用</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8">生成器</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F">生成器表达式</a></li>
+<li><a href="#itertools%E6%A8%A1%E5%9D%97">itertools模块</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">错误和异常处理</a></li>
+<li><a href="#ipython%E7%9A%84%E5%BC%82%E5%B8%B8">IPython的异常</a></li>
+</ul>
+</li>
+<li><a href="#33-%E6%96%87%E4%BB%B6%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">3.3 文件和操作系统</a><ul>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E5%92%8Cunicode">文件的字节和Unicode</a></li>
+</ul>
+</li>
+<li><a href="#34-%E7%BB%93%E8%AE%BA">3.4 结论</a></li>
+</ul>
+<!-- tocstop -->
+
+<p>本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。</p>
 <p>我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。</p>
 <h1><span id="31-数据结构和序列">3.1 数据结构和序列</span></h1><p>Python的数据结构简单而强大。通晓它们才能成为熟练的Python程序员。</p>
 <h2><span id="元组">元组</span></h2><p>元组是一个固定长度，不可改变的Python序列对象。创建元组的最简单方式，是用逗号分隔一列值：</p>
@@ -870,20 +927,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
