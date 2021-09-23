@@ -131,12 +131,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">85</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -209,6 +209,83 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/aop%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/aop%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">aop原理及实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-17 15:48:32" itemprop="dateCreated datePublished" datetime="2017-09-17T15:48:32+08:00">2017-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="静态代理-动态代理">静态代理、动态代理</span></h2><p>1、AspectJ 使用静态代理，生成class文件时，会侵入到代码中。<br>2、Spring AOP 使用动态代理，不会侵入代码，而是在内存中临时为代码生成一个AOP对象，这个AOP对象包含目标对象的全部方法，并且在特定切点进行增强处理，并且调原对象的方法。</p>
+<ul>
+<li>Jvm动态代理： 通过反射接收代理的类，并要求被代理的类必须实现一个接口。JVM代理的核心是InvocationHandler接口和proxy类。</li>
+<li>CGLib(Code Generation Library)： 如果目标没有实现接口，那么Spring会使用CGLib动态代理目标类。它是一个代码生成的类库，可以在运行时动态生成某个类的子类。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意： CGLib是通过继承方式实现的，如果某个类被标记为final，是不能通过CGLib实现动态代理的。</span><br></pre></td></tr></table></figure>
+<h2><span id="示例使用了cglib">示例(使用了CGLib)：</span></h2>定义Person类，其中sayHello方法是切点，切点被Timer注解修饰。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="meta">@Timer</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;sayHello&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+配置切点：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdviceTest</span></span>&#123;</span><br><span class="line">  <span class="meta">@Pointcut(&quot;@annotation(com.earyant.aop.Timer)&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pointcut</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="meta">@Before(&quot;pointcut()&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;before&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在Mail类中调用。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> Person person;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    person.sayHello();</span><br><span class="line">    System.out.println(person.getClass().getName());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出结果：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before</span><br><span class="line">sayHello</span><br><span class="line">com.earyant.aop.Person$$EnhancerBySpringCGLIB$$56b89168</span><br></pre></td></tr></table></figure>
+<h2><span id="示例jvm代理">示例(JVM代理)</span></h2>定义一个接口：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Chinese</span></span>&#123;</span><br><span class="line">  sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+令Person类继承自Chinese类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Chinese</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="meta">@Timer</span></span><br><span class="line">  sayHello()&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;sayHello&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+此代码运行的结果是：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before</span><br><span class="line">sayHello</span><br><span class="line">com.sun.proxy.$Proxy53</span><br></pre></td></tr></table></figure>
+证明使用了JVM代理。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -2123,97 +2200,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/Mysql%E5%BC%95%E6%93%8Emyisam%E5%92%8Cinnodb%E7%9A%84%E5%BC%82%E5%90%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/Mysql%E5%BC%95%E6%93%8Emyisam%E5%92%8Cinnodb%E7%9A%84%E5%BC%82%E5%90%8C/" class="post-title-link" itemprop="url">Mysql引擎myisam和innodb的异同</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-16 09:35:37" itemprop="dateCreated datePublished" datetime="2017-08-16T09:35:37+08:00">2017-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="myisam和innodb不同之处">myisam和innodb不同之处</span></h2><ul>
-<li>1事务的支持不同：<ul>
-<li>innodb支持事务；</li>
-<li>myisam不支持事务；</li>
-</ul>
-</li>
-<li>2锁粒度<ul>
-<li>indodb行锁应用</li>
-<li>myisam表锁</li>
-</ul>
-</li>
-<li>3存储空间<ul>
-<li>innodb既缓存索引文件又缓存数据文件；</li>
-<li>myisam只缓存索引文件。</li>
-</ul>
-</li>
-<li>4存储结构<ul>
-<li>myisam数据文件的扩展名为.myd myData，索引文件的扩展名是.myi myIndex</li>
-<li>innodb所有的表都保存在同一个数据文件里面 即为 .ibd</li>
-</ul>
-</li>
-<li>统计记录行数<ul>
-<li>myisam保存表的总行数，select count(*) from table 会直接取出该值</li>
-<li>innodb没有保存表的中行书，select count(*) from table 就会遍历整个表，消耗相当大。</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2283,14 +2269,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
