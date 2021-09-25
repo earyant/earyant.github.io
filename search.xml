@@ -3211,52 +3211,8 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-1.简介</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
-
-<ul>
-<li><a href="#%E7%AC%AC1%E7%AB%A0-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">第1章 准备工作</a><ul>
-<li><a href="#11-%E6%9C%AC%E4%B9%A6%E7%9A%84%E5%86%85%E5%AE%B9">1.1 本书的内容</a><ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%95%B0%E6%8D%AE">什么样的数据？</a></li>
-</ul>
-</li>
-<li><a href="#12-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90">1.2 为什么要使用Python进行数据分析</a><ul>
-<li><a href="#python%E4%BD%9C%E4%B8%BA%E8%83%B6%E6%B0%B4%E8%AF%AD%E8%A8%80">Python作为胶水语言</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E4%B8%A4%E7%A7%8D%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98">解决“两种语言”问题</a></li>
-<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E9%80%89python">为什么不选Python</a></li>
-</ul>
-</li>
-<li><a href="#13-%E9%87%8D%E8%A6%81%E7%9A%84python%E5%BA%93">1.3 重要的Python库</a><ul>
-<li><a href="#numpy">NumPy</a></li>
-<li><a href="#pandas">pandas</a></li>
-<li><a href="#matplotlib">matplotlib</a></li>
-<li><a href="#ipython%E5%92%8Cjupyter">IPython和Jupyter</a></li>
-<li><a href="#scipy">SciPy</a></li>
-<li><a href="#scikit-learn">scikit-learn</a></li>
-<li><a href="#statsmodels">statsmodels</a></li>
-</ul>
-</li>
-<li><a href="#14-%E5%AE%89%E8%A3%85%E5%92%8C%E8%AE%BE%E7%BD%AE">1.4 安装和设置</a><ul>
-<li><a href="#windows">Windows</a></li>
-<li><a href="#apple-os-x-macos">Apple (OS X, macOS)</a></li>
-<li><a href="#gnulinux">GNU/Linux</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85%E6%88%96%E5%8D%87%E7%BA%A7python%E5%8C%85">安装或升级Python包</a></li>
-<li><a href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83ides%E5%92%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8">集成开发环境（IDEs）和文本编辑器</a></li>
-</ul>
-</li>
-<li><a href="#15-%E7%A4%BE%E5%8C%BA%E5%92%8C%E4%BC%9A%E8%AE%AE">1.5 社区和会议</a></li>
-<li><a href="#16-%E6%9C%AC%E4%B9%A6%E5%AF%BC%E8%88%AA">1.6 本书导航</a><ul>
-<li><a href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B">代码示例</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE">示例数据</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5%E6%83%AF%E4%BE%8B">引入惯例</a></li>
-<li><a href="#%E8%A1%8C%E8%AF%9D">行话</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<h1><span id="第1章-准备工作">第1章 准备工作</span></h1><h2><span id="11-本书的内容">1.1 本书的内容</span></h2><p>本书讲的是利用Python进行数据控制、处理、整理、分析等方面的具体细节和基本要点。我的目标是介绍Python编程和用于数据处理的库和工具环境，掌握这些，可以让你成为一个数据分析专家。虽然本书的标题是“数据分析”，重点却是Python编程、库，以及用于数据分析的工具。这就是数据分析要用到的Python编程。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1><span id="第1章-准备工作">第1章 准备工作</span></h1><h2><span id="11-本书的内容">1.1 本书的内容</span></h2><p>本书讲的是利用Python进行数据控制、处理、整理、分析等方面的具体细节和基本要点。我的目标是介绍Python编程和用于数据处理的库和工具环境，掌握这些，可以让你成为一个数据分析专家。虽然本书的标题是“数据分析”，重点却是Python编程、库，以及用于数据分析的工具。这就是数据分析要用到的Python编程。</p>
+<span id="more"></span>
 <h3><span id="什么样的数据">什么样的数据？</span></h3><p>当书中出现“数据”时，究竟指的是什么呢？主要指的是结构化数据（structured data），这个故意含糊其辞的术语代指了所有通用格式的数据，例如：</p>
 <ul>
 <li>表格型数据，其中各列可能是不同的类型（字符串、数值、日期等）。比如保存在关系型数据库中或以制表符/逗号为分隔符的文本文件中的那些数据。</li>
@@ -3399,7 +3355,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <ul>
 <li>pydata：一个Google群组列表，用以回答Python数据分析和pandas的问题；</li>
 <li>pystatsmodels： statsmodels或pandas相关的问题；</li>
-<li>scikit-learn和Python机器学习邮件列表，<a href="mailto:&#x73;&#x63;&#x69;&#x6b;&#x69;&#x74;&#x2d;&#108;&#101;&#97;&#x72;&#x6e;&#x40;&#x70;&#121;&#x74;&#104;&#x6f;&#x6e;&#x2e;&#111;&#x72;&#103;">&#x73;&#x63;&#x69;&#x6b;&#x69;&#x74;&#x2d;&#108;&#101;&#97;&#x72;&#x6e;&#x40;&#x70;&#121;&#x74;&#104;&#x6f;&#x6e;&#x2e;&#111;&#x72;&#103;</a>；</li>
+<li>scikit-learn和Python机器学习邮件列表，<a href="mailto:&#115;&#99;&#105;&#107;&#x69;&#116;&#x2d;&#108;&#101;&#97;&#114;&#x6e;&#64;&#x70;&#121;&#116;&#x68;&#x6f;&#x6e;&#46;&#x6f;&#114;&#103;">&#115;&#99;&#105;&#107;&#x69;&#116;&#x2d;&#108;&#101;&#97;&#114;&#x6e;&#64;&#x70;&#121;&#116;&#x68;&#x6f;&#x6e;&#46;&#x6f;&#114;&#103;</a>；</li>
 <li>numpy-discussion：和NumPy相关的问题；</li>
 <li>scipy-user：SciPy和科学计算的问题；</li>
 </ul>
@@ -3436,7 +3392,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 
 <p>但你看到类似的示例代码，就是让你在<code>in</code>的部分输入代码，按Enter键执行（Jupyter中是按Shift-Enter）。然后就可以在<code>out</code>看到输出。</p>
 <h3><span id="示例数据">示例数据</span></h3><p>各章的示例数据都存放在GitHub上：<a href="http://github.com/pydata/pydata-book%E3%80%82">http://github.com/pydata/pydata-book。</a> 下载这些数据的方法有二：使用git版本控制命令行程序；直接从网站上下载该GitHub库的zip文件。如果遇到了问题，可以到我的个人主页，<a href="http://wesmckinney.com/%EF%BC%8C">http://wesmckinney.com/，</a> 获取最新的指导。</p>
-<p>为了让所有示例都能重现，我已经尽我所能使其包含所有必需的东西，但仍然可能会有一些错误或遗漏。如果出现这种情况的话，请给我发邮件：<a href="mailto:&#119;&#x65;&#x73;&#109;&#x63;&#107;&#x69;&#x6e;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#119;&#x65;&#x73;&#109;&#x63;&#107;&#x69;&#x6e;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>。报告本书错误的最好方法是O’Reilly的errata页面，<a href="http://www.bit.ly/pyDataAnalysis_errata%E3%80%82">http://www.bit.ly/pyDataAnalysis_errata。</a></p>
+<p>为了让所有示例都能重现，我已经尽我所能使其包含所有必需的东西，但仍然可能会有一些错误或遗漏。如果出现这种情况的话，请给我发邮件：<a href="mailto:&#x77;&#101;&#115;&#x6d;&#x63;&#107;&#x69;&#x6e;&#x6e;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;">&#x77;&#101;&#115;&#x6d;&#x63;&#107;&#x69;&#x6e;&#x6e;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;</a>。报告本书错误的最好方法是O’Reilly的errata页面，<a href="http://www.bit.ly/pyDataAnalysis_errata%E3%80%82">http://www.bit.ly/pyDataAnalysis_errata。</a></p>
 <h3><span id="引入惯例">引入惯例</span></h3><p>Python社区已经广泛采取了一些常用模块的命名惯例：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> statsmodels <span class="keyword">as</span> sm</span><br></pre></td></tr></table></figure>
 
@@ -3458,38 +3414,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-10.数据聚合和分组计算</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>对数据集进行分组并对各组应用一个函数（无论是聚合还是转换），通常是数据分析工作中的重要环节。在将数据集加载、融合、准备好之后，通常就是计算分组统计或生成透视表。pandas提供了一个灵活高效的gruopby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#101-groupby%E6%9C%BA%E5%88%B6">10.1 GroupBy机制</a><ul>
-<li><a href="#%E5%AF%B9%E5%88%86%E7%BB%84%E8%BF%9B%E8%A1%8C%E8%BF%AD%E4%BB%A3">对分组进行迭代</a></li>
-<li><a href="#%E9%80%89%E5%8F%96%E4%B8%80%E5%88%97%E6%88%96%E5%88%97%E7%9A%84%E5%AD%90%E9%9B%86">选取一列或列的子集</a></li>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E7%B4%A2%E5%BC%95%E7%BA%A7%E5%88%AB%E5%88%86%E7%BB%84">根据索引级别分组</a></li>
-</ul>
-</li>
-<li><a href="#102-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88">10.2 数据聚合</a><ul>
-<li><a href="#%E9%9D%A2%E5%90%91%E5%88%97%E7%9A%84%E5%A4%9A%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8">面向列的多函数应用</a></li>
-<li><a href="#%E4%BB%A5%E6%B2%A1%E6%9C%89%E8%A1%8C%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BD%A2%E5%BC%8F%E8%BF%94%E5%9B%9E%E8%81%9A%E5%90%88%E6%95%B0%E6%8D%AE">以“没有行索引”的形式返回聚合数据</a></li>
-</ul>
-</li>
-<li><a href="#103-apply%E4%B8%80%E8%88%AC%E6%80%A7%E7%9A%84%E6%8B%86%E5%88%86-%E5%BA%94%E7%94%A8-%E5%90%88%E5%B9%B6">10.3 apply：一般性的“拆分－应用－合并”</a><ul>
-<li><a href="#%E7%A6%81%E6%AD%A2%E5%88%86%E7%BB%84%E9%94%AE">禁止分组键</a></li>
-<li><a href="#%E5%88%86%E4%BD%8D%E6%95%B0%E5%92%8C%E6%A1%B6%E5%88%86%E6%9E%90">分位数和桶分析</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E7%89%B9%E5%AE%9A%E4%BA%8E%E5%88%86%E7%BB%84%E7%9A%84%E5%80%BC%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC">示例：用特定于分组的值填充缺失值</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7%E5%92%8C%E6%8E%92%E5%88%97">示例：随机采样和排列</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E5%88%86%E7%BB%84%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E6%95%B0%E5%92%8C%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0">示例：分组加权平均数和相关系数</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E7%BB%84%E7%BA%A7%E5%88%AB%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">示例：组级别的线性回归</a></li>
-</ul>
-</li>
-<li><a href="#104-%E9%80%8F%E8%A7%86%E8%A1%A8%E5%92%8C%E4%BA%A4%E5%8F%89%E8%A1%A8">10.4 透视表和交叉表</a><ul>
-<li><a href="#%E4%BA%A4%E5%8F%89%E8%A1%A8crosstab">交叉表：crosstab</a></li>
-</ul>
-</li>
-<li><a href="#105-%E6%80%BB%E7%BB%93">10.5 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>对数据集进行分组并对各组应用一个函数（无论是聚合还是转换），通常是数据分析工作中的重要环节。在将数据集加载、融合、准备好之后，通常就是计算分组统计或生成透视表。pandas提供了一个灵活高效的gruopby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。</p>
 <p>关系型数据库和SQL（Structured Query Language，结构化查询语言）能够如此流行的原因之一就是其能够方便地对数据进行连接、过滤、转换和聚合。但是，像SQL这样的查询语言所能执行的分组运算的种类很有限。在本章中你将会看到，由于Python和pandas强大的表达能力，我们可以执行复杂得多的分组运算（利用任何可以接受pandas对象或NumPy数组的函数）。在本章中，你将会学到：</p>
 <ul>
 <li>使用一个或多个键（形式可以是函数、数组或DataFrame列名）分割pandas对象。</li>
@@ -3772,55 +3700,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-11.时间序列</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>时间序列（time series）数据是一种重要的结构化数据形式，应用于多个领域，包括金融学、经济学、生态学、神经科学、物理学等。在多个时间点观察或测量到的任何事物都可以形成一段时间序列。很多时间序列是固定频率的，也就是说，数据点是根据某种规律定期出现的（比如每15秒、每5分钟、每月出现一次）。时间序列也可以是不定期的，没有固定的时间单位或单位之间的偏移量。时间序列数据的意义取决于具体的应用场景，主要有以下几种：</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#111-%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%B7%A5%E5%85%B7">11.1 日期和时间数据类型及工具</a><ul>
-<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8Cdatetime%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2">字符串和datetime的相互转换</a></li>
-</ul>
-</li>
-<li><a href="#112-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%9F%BA%E7%A1%80">11.2 时间序列基础</a><ul>
-<li><a href="#%E7%B4%A2%E5%BC%95-%E9%80%89%E5%8F%96-%E5%AD%90%E9%9B%86%E6%9E%84%E9%80%A0">索引、选取、子集构造</a></li>
-<li><a href="#%E5%B8%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%B4%A2%E5%BC%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97">带有重复索引的时间序列</a></li>
-</ul>
-</li>
-<li><a href="#113-%E6%97%A5%E6%9C%9F%E7%9A%84%E8%8C%83%E5%9B%B4-%E9%A2%91%E7%8E%87%E4%BB%A5%E5%8F%8A%E7%A7%BB%E5%8A%A8">11.3 日期的范围、频率以及移动</a><ul>
-<li><a href="#%E7%94%9F%E6%88%90%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4">生成日期范围</a></li>
-<li><a href="#%E9%A2%91%E7%8E%87%E5%92%8C%E6%97%A5%E6%9C%9F%E5%81%8F%E7%A7%BB%E9%87%8F">频率和日期偏移量</a></li>
-<li><a href="#wom%E6%97%A5%E6%9C%9F">WOM日期</a></li>
-<li><a href="#%E7%A7%BB%E5%8A%A8%E8%B6%85%E5%89%8D%E5%92%8C%E6%BB%9E%E5%90%8E%E6%95%B0%E6%8D%AE">移动（超前和滞后）数据</a></li>
-<li><a href="#%E9%80%9A%E8%BF%87%E5%81%8F%E7%A7%BB%E9%87%8F%E5%AF%B9%E6%97%A5%E6%9C%9F%E8%BF%9B%E8%A1%8C%E4%BD%8D%E7%A7%BB">通过偏移量对日期进行位移</a></li>
-</ul>
-</li>
-<li><a href="#114-%E6%97%B6%E5%8C%BA%E5%A4%84%E7%90%86">11.4 时区处理</a></li>
-<li><a href="#%E6%97%B6%E5%8C%BA%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8C%E8%BD%AC%E6%8D%A2">时区本地化和转换</a><ul>
-<li><a href="#%E6%93%8D%E4%BD%9C%E6%97%B6%E5%8C%BA%E6%84%8F%E8%AF%86%E5%9E%8Btimestamp%E5%AF%B9%E8%B1%A1">操作时区意识型Timestamp对象</a></li>
-<li><a href="#%E4%B8%8D%E5%90%8C%E6%97%B6%E5%8C%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97">不同时区之间的运算</a></li>
-</ul>
-</li>
-<li><a href="#115-%E6%97%B6%E6%9C%9F%E5%8F%8A%E5%85%B6%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97">11.5 时期及其算术运算</a><ul>
-<li><a href="#%E6%97%B6%E6%9C%9F%E7%9A%84%E9%A2%91%E7%8E%87%E8%BD%AC%E6%8D%A2">时期的频率转换</a></li>
-<li><a href="#%E6%8C%89%E5%AD%A3%E5%BA%A6%E8%AE%A1%E7%AE%97%E7%9A%84%E6%97%B6%E6%9C%9F%E9%A2%91%E7%8E%87">按季度计算的时期频率</a></li>
-<li><a href="#%E5%B0%86timestamp%E8%BD%AC%E6%8D%A2%E4%B8%BAperiod%E5%8F%8A%E5%85%B6%E5%8F%8D%E5%90%91%E8%BF%87%E7%A8%8B">将Timestamp转换为Period（及其反向过程）</a></li>
-<li><a href="#%E9%80%9A%E8%BF%87%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BAperiodindex">通过数组创建PeriodIndex</a></li>
-</ul>
-</li>
-<li><a href="#116-%E9%87%8D%E9%87%87%E6%A0%B7%E5%8F%8A%E9%A2%91%E7%8E%87%E8%BD%AC%E6%8D%A2">11.6 重采样及频率转换</a><ul>
-<li><a href="#%E9%99%8D%E9%87%87%E6%A0%B7">降采样</a></li>
-<li><a href="#%E9%80%9A%E8%BF%87%E6%97%B6%E6%9C%9F%E8%BF%9B%E8%A1%8C%E9%87%8D%E9%87%87%E6%A0%B7">通过时期进行重采样</a></li>
-</ul>
-</li>
-<li><a href="#117-%E7%A7%BB%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0">11.7 移动窗口函数</a><ul>
-<li><a href="#%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%87%BD%E6%95%B0">指数加权函数</a></li>
-<li><a href="#%E4%BA%8C%E5%85%83%E7%A7%BB%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0">二元移动窗口函数</a></li>
-<li><a href="#%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0">用户定义的移动窗口函数</a></li>
-</ul>
-</li>
-<li><a href="#118-%E6%80%BB%E7%BB%93">11.8 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>时间序列（time series）数据是一种重要的结构化数据形式，应用于多个领域，包括金融学、经济学、生态学、神经科学、物理学等。在多个时间点观察或测量到的任何事物都可以形成一段时间序列。很多时间序列是固定频率的，也就是说，数据点是根据某种规律定期出现的（比如每15秒、每5分钟、每月出现一次）。时间序列也可以是不定期的，没有固定的时间单位或单位之间的偏移量。时间序列数据的意义取决于具体的应用场景，主要有以下几种：</p>
 <ul>
 <li>时间戳（timestamp），特定的时刻。</li>
 <li>固定时期（period），如2007年1月或2010年全年。</li>
@@ -4256,26 +4139,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-13.建模库</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>本书中，我已经介绍了Python数据分析的编程基础。因为数据分析师和科学家总是在数据规整和准备上花费大量时间，这本书的重点在于掌握这些功能。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#131-pandas%E4%B8%8E%E6%A8%A1%E5%9E%8B%E4%BB%A3%E7%A0%81%E7%9A%84%E6%8E%A5%E5%8F%A3">13.1 pandas与模型代码的接口</a></li>
-<li><a href="#132-%E7%94%A8patsy%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B%E6%8F%8F%E8%BF%B0">13.2 用Patsy创建模型描述</a><ul>
-<li><a href="#%E7%94%A8patsy%E5%85%AC%E5%BC%8F%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">用Patsy公式进行数据转换</a></li>
-<li><a href="#%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE%E5%92%8Cpatsy">分类数据和Patsy</a></li>
-</ul>
-</li>
-<li><a href="#133-statsmodels%E4%BB%8B%E7%BB%8D">13.3 statsmodels介绍</a><ul>
-<li><a href="#%E4%BC%B0%E8%AE%A1%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">估计线性模型</a></li>
-<li><a href="#%E4%BC%B0%E8%AE%A1%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E8%BF%87%E7%A8%8B">估计时间序列过程</a></li>
-</ul>
-</li>
-<li><a href="#134-scikit-learn%E4%BB%8B%E7%BB%8D">13.4 scikit-learn介绍</a></li>
-<li><a href="#135-%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0">13.5 继续学习</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>本书中，我已经介绍了Python数据分析的编程基础。因为数据分析师和科学家总是在数据规整和准备上花费大量时间，这本书的重点在于掌握这些功能。</p>
 <p>开发模型选用什么库取决于应用本身。许多统计问题可以用简单方法解决，比如普通的最小二乘回归，其它问题可能需要复杂的机器学习方法。幸运的是，Python已经成为了运用这些分析方法的语言之一，因此读完此书，你可以探索许多工具。</p>
 <p>本章中，我会回顾一些pandas的特点，在你胶着于pandas数据规整和模型拟合和评分时，它们可能派上用场。然后我会简短介绍两个流行的建模工具，statsmodels和scikit-learn。这二者每个都值得再写一本书，我就不做全面的介绍，而是建议你学习两个项目的线上文档和其它基于Python的数据科学、统计和机器学习的书籍。</p>
 <h1><span id="131-pandas与模型代码的接口">13.1 pandas与模型代码的接口</span></h1><p>模型开发的通常工作流是使用pandas进行数据加载和清洗，然后切换到建模库进行建模。开发模型的重要一环是机器学习中的“特征工程”。它可以描述从原始数据集中提取信息的任何数据转换或分析，这些数据集可能在建模中有用。本书中学习的数据聚合和GroupBy工具常用于特征工程中。</p>
@@ -4468,34 +4335,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-14.数据分析案例</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#%E7%94%A8pandas%E5%AF%B9%E6%97%B6%E5%8C%BA%E8%BF%9B%E8%A1%8C%E8%AE%A1%E6%95%B0">用pandas对时区进行计数</a></li>
-</ul>
-<ul>
-<li><a href="#142-movielens-1m%E6%95%B0%E6%8D%AE%E9%9B%86">14.2 MovieLens 1M数据集</a><ul>
-<li><a href="#%E8%AE%A1%E7%AE%97%E8%AF%84%E5%88%86%E5%88%86%E6%AD%A7">计算评分分歧</a></li>
-</ul>
-</li>
-<li><a href="#143-1880-2010%E5%B9%B4%E9%97%B4%E5%85%A8%E7%BE%8E%E5%A9%B4%E5%84%BF%E5%A7%93%E5%90%8D">14.3 1880-2010年间全美婴儿姓名</a><ul>
-<li><a href="#%E5%88%86%E6%9E%90%E5%91%BD%E5%90%8D%E8%B6%8B%E5%8A%BF">分析命名趋势</a></li>
-<li><a href="#%E8%AF%84%E4%BC%B0%E5%91%BD%E5%90%8D%E5%A4%9A%E6%A0%B7%E6%80%A7%E7%9A%84%E5%A2%9E%E9%95%BF">评估命名多样性的增长</a></li>
-<li><a href="#%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AF%8D%E7%9A%84%E5%8F%98%E9%9D%A9">“最后一个字母”的变革</a></li>
-<li><a href="#%E5%8F%98%E6%88%90%E5%A5%B3%E5%AD%A9%E5%90%8D%E5%AD%97%E7%9A%84%E7%94%B7%E5%AD%A9%E5%90%8D%E5%AD%97%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%8F%8D%E7%9A%84%E6%83%85%E5%86%B5">变成女孩名字的男孩名字（以及相反的情况）</a></li>
-</ul>
-</li>
-<li><a href="#144-usda%E9%A3%9F%E5%93%81%E6%95%B0%E6%8D%AE%E5%BA%93">14.4 USDA食品数据库</a></li>
-<li><a href="#145-2012%E8%81%94%E9%82%A6%E9%80%89%E4%B8%BE%E5%A7%94%E5%91%98%E4%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93">14.5 2012联邦选举委员会数据库</a><ul>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E8%81%8C%E4%B8%9A%E5%92%8C%E9%9B%87%E4%B8%BB%E7%BB%9F%E8%AE%A1%E8%B5%9E%E5%8A%A9%E4%BF%A1%E6%81%AF">根据职业和雇主统计赞助信息</a></li>
-<li><a href="#%E5%AF%B9%E5%87%BA%E8%B5%84%E9%A2%9D%E5%88%86%E7%BB%84">对出资额分组</a></li>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E5%B7%9E%E7%BB%9F%E8%AE%A1%E8%B5%9E%E5%8A%A9%E4%BF%A1%E6%81%AF">根据州统计赞助信息</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
 
-<p>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
 <p>案例数据集可以在Github仓库找到，见第一章。</p>
 <p>#14.1 来自Bitly的USA.gov数据</p>
 <p>2011年，URL缩短服务Bitly跟美国政府网站USA.gov合作，提供了一份从生成.gov或.mil短链接的用户那里收集来的匿名数据。在2011年，除实时数据之外，还可以下载文本文件形式的每小时快照。写作此书时（2017年），这项服务已经关闭，但我们保存一份数据用于本书的案例。</p>
@@ -4859,58 +4702,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-15.numpy高级应用</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在这篇附录中，我会深入NumPy库的数组计算。这会包括ndarray更内部的细节，和更高级的数组操作和算法。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#a1-ndarray%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E7%90%86">A.1 ndarray对象的内部机理</a><ul>
-<li><a href="#numpy%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB">NumPy数据类型体系</a></li>
-</ul>
-</li>
-<li><a href="#a2-%E9%AB%98%E7%BA%A7%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C">A.2 高级数组操作</a><ul>
-<li><a href="#%E6%95%B0%E7%BB%84%E9%87%8D%E5%A1%91">数组重塑</a></li>
-<li><a href="#c%E5%92%8Cfortran%E9%A1%BA%E5%BA%8F">C和Fortran顺序</a></li>
-<li><a href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%90%88%E5%B9%B6%E5%92%8C%E6%8B%86%E5%88%86">数组的合并和拆分</a></li>
-<li><a href="#%E5%A0%86%E5%8F%A0%E8%BE%85%E5%8A%A9%E7%B1%BBr_%E5%92%8Cc_">堆叠辅助类：r_和c_</a></li>
-<li><a href="#%E5%85%83%E7%B4%A0%E7%9A%84%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9Ctile%E5%92%8Crepeat">元素的重复操作：tile和repeat</a></li>
-<li><a href="#%E8%8A%B1%E5%BC%8F%E7%B4%A2%E5%BC%95%E7%9A%84%E7%AD%89%E4%BB%B7%E5%87%BD%E6%95%B0take%E5%92%8Cput">花式索引的等价函数：take和put</a></li>
-</ul>
-</li>
-<li><a href="#a3-%E5%B9%BF%E6%92%AD">A.3 广播</a><ul>
-<li><a href="#%E6%B2%BF%E5%85%B6%E5%AE%83%E8%BD%B4%E5%90%91%E5%B9%BF%E6%92%AD">沿其它轴向广播</a></li>
-<li><a href="#%E9%80%9A%E8%BF%87%E5%B9%BF%E6%92%AD%E8%AE%BE%E7%BD%AE%E6%95%B0%E7%BB%84%E7%9A%84%E5%80%BC">通过广播设置数组的值</a></li>
-</ul>
-</li>
-<li><a href="#a4-ufunc%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8">A.4 ufunc高级应用</a><ul>
-<li><a href="#ufunc%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95">ufunc实例方法</a></li>
-<li><a href="#%E7%BC%96%E5%86%99%E6%96%B0%E7%9A%84ufunc">编写新的ufunc</a></li>
-</ul>
-</li>
-<li><a href="#a5-%E7%BB%93%E6%9E%84%E5%8C%96%E5%92%8C%E8%AE%B0%E5%BD%95%E5%BC%8F%E6%95%B0%E7%BB%84">A.5 结构化和记录式数组</a><ul>
-<li><a href="#%E5%B5%8C%E5%A5%97dtype%E5%92%8C%E5%A4%9A%E7%BB%B4%E5%AD%97%E6%AE%B5">嵌套dtype和多维字段</a></li>
-<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E7%BB%84">为什么要用结构化数组</a></li>
-</ul>
-</li>
-<li><a href="#a6-%E6%9B%B4%E5%A4%9A%E6%9C%89%E5%85%B3%E6%8E%92%E5%BA%8F%E7%9A%84%E8%AF%9D%E9%A2%98">A.6 更多有关排序的话题</a><ul>
-<li><a href="#%E9%97%B4%E6%8E%A5%E6%8E%92%E5%BA%8Fargsort%E5%92%8Clexsort">间接排序：argsort和lexsort</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">其他排序算法</a></li>
-<li><a href="#%E9%83%A8%E5%88%86%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84">部分排序数组</a></li>
-<li><a href="#numpysearchsorted%E5%9C%A8%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0">numpy.searchsorted：在有序数组中查找元素</a></li>
-<li><a href="#%E7%94%A8numba%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89numpyufunc%E5%AF%B9%E8%B1%A1">用Numba创建自定义numpy.ufunc对象</a></li>
-</ul>
-</li>
-<li><a href="#a8-%E9%AB%98%E7%BA%A7%E6%95%B0%E7%BB%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA">A.8 高级数组输入输出</a><ul>
-<li><a href="#%E5%86%85%E5%AD%98%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6">内存映像文件</a></li>
-<li><a href="#hdf5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F">HDF5及其他数组存储方式</a></li>
-</ul>
-</li>
-<li><a href="#a9-%E6%80%A7%E8%83%BD%E5%BB%BA%E8%AE%AE">A.9 性能建议</a><ul>
-<li><a href="#%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7">连续内存的重要性</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
 
-<p>在这篇附录中，我会深入NumPy库的数组计算。这会包括ndarray更内部的细节，和更高级的数组操作和算法。</p>
 <p>本章包括了一些杂乱的章节，不需要仔细研究。</p>
 <h1><span id="a1-ndarray对象的内部机理">A.1 ndarray对象的内部机理</span></h1><p>NumPy的ndarray提供了一种将同质数据块（可以是连续或跨越）解释为多维数组对象的方式。正如你之前所看到的那样，数据类型（dtype）决定了数据的解释方式，比如浮点数、整数、布尔值等。</p>
 <p>ndarray如此强大的部分原因是所有数组对象都是数据块的一个跨度视图（strided view）。你可能想知道数组视图arr[::2,::-1]不复制任何数据的原因是什么。简单地说，ndarray不只是一块内存和一个dtype，它还有跨度信息，这使得数组能以各种步幅（step size）在内存中移动。更准确地讲，ndarray内部由以下内容组成：</p>
@@ -5257,45 +5052,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-16.ipython高级应用</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-16-ipython%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>第2章中，我们学习了IPython shell和Jupyter notebook的基础。本章中，我们会探索IPython更深层次的功能，可以从控制台或在jupyter使用。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#b1-%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8E%86%E5%8F%B2">B.1 使用命令历史</a><ul>
-<li><a href="#%E6%90%9C%E7%B4%A2%E5%92%8C%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8E%86%E5%8F%B2">搜索和重复使用命令历史</a></li>
-<li><a href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%8F%98%E9%87%8F">输入和输出变量</a></li>
-</ul>
-</li>
-<li><a href="#b2-%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BA%A4%E4%BA%92">B.2 与操作系统交互</a><ul>
-<li><a href="#shell%E5%91%BD%E4%BB%A4%E5%92%8C%E5%88%AB%E5%90%8D">Shell命令和别名</a></li>
-<li><a href="#%E7%9B%AE%E5%BD%95%E4%B9%A6%E7%AD%BE%E7%B3%BB%E7%BB%9F">目录书签系统</a></li>
-</ul>
-</li>
-<li><a href="#b3-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7">B.3 软件开发工具</a><ul>
-<li><a href="#%E4%BA%A4%E4%BA%92%E8%B0%83%E8%AF%95%E5%99%A8">交互调试器</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E5%85%B6%E5%AE%83%E6%96%B9%E5%BC%8F">使用调试器的其它方式</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E8%AE%A1%E6%97%B6time-%E5%92%8C-timeit">代码计时：%time 和 %timeit</a></li>
-<li><a href="#%E5%9F%BA%E7%A1%80%E5%88%86%E6%9E%90prun%E5%92%8Crun-p">基础分析：%prun和%run -p</a></li>
-<li><a href="#%E9%80%90%E8%A1%8C%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0">逐行分析函数</a></li>
-</ul>
-</li>
-<li><a href="#b4-%E4%BD%BF%E7%94%A8ipython%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E7%9A%84%E6%8A%80%E5%B7%A7">B.4 使用IPython高效开发的技巧</a><ul>
-<li><a href="#%E9%87%8D%E8%BD%BD%E6%A8%A1%E5%9D%97%E4%BE%9D%E8%B5%96">重载模块依赖</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7">代码设计技巧</a></li>
-<li><a href="#%E4%BF%9D%E6%8C%81%E7%9B%B8%E5%85%B3%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B4%BB%E8%B7%83">保持相关对象和数据活跃</a></li>
-<li><a href="#%E6%89%81%E5%B9%B3%E4%BC%98%E4%BA%8E%E5%B5%8C%E5%A5%97">扁平优于嵌套</a></li>
-<li><a href="#%E5%85%8B%E6%9C%8D%E5%AF%B9%E5%A4%A7%E6%96%87%E4%BB%B6%E7%9A%84%E6%81%90%E6%83%A7">克服对大文件的恐惧</a></li>
-</ul>
-</li>
-<li><a href="#b5-ipython%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD">B.5 IPython高级功能</a><ul>
-<li><a href="#%E8%AE%A9%E7%B1%BB%E6%98%AF%E5%AF%B9ipython%E5%8F%8B%E5%A5%BD%E7%9A%84">让类是对IPython友好的</a></li>
-<li><a href="#%E6%96%87%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE">文件和配置</a></li>
-</ul>
-</li>
-<li><a href="#b6-%E6%80%BB%E7%BB%93">B.6 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>第2章中，我们学习了IPython shell和Jupyter notebook的基础。本章中，我们会探索IPython更深层次的功能，可以从控制台或在jupyter使用。</p>
 <h1><span id="b1-使用命令历史">B.1 使用命令历史</span></h1><p>Ipython维护了一个位于磁盘的小型数据库，用于保存执行的每条指令。它的用途有：</p>
 <ul>
 <li>只用最少的输入，就能搜索、补全和执行先前运行过的指令；</li>
@@ -5527,32 +5287,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-12.pandas高级应用</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-12-pandas%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>前面的章节关注于不同类型的数据规整流程和NumPy、pandas与其它库的特点。随着时间的发展，pandas发展出了更多适合高级用户的功能。本章就要深入学习pandas的高级功能。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#121-%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE">12.1 分类数据</a><ul>
-<li><a href="#%E8%83%8C%E6%99%AF%E5%92%8C%E7%9B%AE%E7%9A%84">背景和目的</a></li>
-<li><a href="#pandas%E7%9A%84%E5%88%86%E7%B1%BB%E7%B1%BB%E5%9E%8B">pandas的分类类型</a></li>
-<li><a href="#%E7%94%A8%E5%88%86%E7%B1%BB%E8%BF%9B%E8%A1%8C%E8%AE%A1%E7%AE%97">用分类进行计算</a></li>
-<li><a href="#%E7%94%A8%E5%88%86%E7%B1%BB%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD">用分类提高性能</a></li>
-<li><a href="#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95">分类方法</a></li>
-<li><a href="#%E4%B8%BA%E5%BB%BA%E6%A8%A1%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E5%8F%98%E9%87%8F">为建模创建虚拟变量</a></li>
-</ul>
-</li>
-<li><a href="#122-groupby%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8">12.2 GroupBy高级应用</a><ul>
-<li><a href="#%E5%88%86%E7%BB%84%E8%BD%AC%E6%8D%A2%E5%92%8C%E8%A7%A3%E5%B0%81groupby">分组转换和“解封”GroupBy</a></li>
-<li><a href="#%E5%88%86%E7%BB%84%E7%9A%84%E6%97%B6%E9%97%B4%E9%87%8D%E9%87%87%E6%A0%B7">分组的时间重采样</a></li>
-</ul>
-</li>
-<li><a href="#123-%E9%93%BE%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF">12.3 链式编程技术</a><ul>
-<li><a href="#%E7%AE%A1%E9%81%93%E6%96%B9%E6%B3%95">管道方法</a></li>
-</ul>
-</li>
-<li><a href="#124-%E6%80%BB%E7%BB%93">12.4 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>前面的章节关注于不同类型的数据规整流程和NumPy、pandas与其它库的特点。随着时间的发展，pandas发展出了更多适合高级用户的功能。本章就要深入学习pandas的高级功能。</p>
 <h1><span id="121-分类数据">12.1 分类数据</span></h1><p>这一节介绍的是pandas的分类类型。我会向你展示通过使用它，提高性能和内存的使用率。我还会介绍一些在统计和机器学习中使用分类数据的工具。</p>
 <h2><span id="背景和目的">背景和目的</span></h2><p>表中的一列通常会有重复的包含不同值的小集合的情况。我们已经学过了unique和value_counts，它们可以从数组提取出不同的值，并分别计算频率：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">10</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np; <span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: values = pd.Series([<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>,</span><br><span class="line">   ....:                     <span class="string">&#x27;apple&#x27;</span>] * <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: values</span><br><span class="line">Out[<span class="number">12</span>]: </span><br><span class="line"><span class="number">0</span>     apple</span><br><span class="line"><span class="number">1</span>    orange</span><br><span class="line"><span class="number">2</span>     apple</span><br><span class="line"><span class="number">3</span>     apple</span><br><span class="line"><span class="number">4</span>     apple</span><br><span class="line"><span class="number">5</span>    orange</span><br><span class="line"><span class="number">6</span>     apple</span><br><span class="line"><span class="number">7</span>     apple</span><br><span class="line">dtype: <span class="built_in">object</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: pd.unique(values)</span><br><span class="line">Out[<span class="number">13</span>]: array([<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>], dtype=<span class="built_in">object</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: pd.value_counts(values)</span><br><span class="line">Out[<span class="number">14</span>]: </span><br><span class="line">apple     <span class="number">6</span></span><br><span class="line">orange    <span class="number">2</span></span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
@@ -5754,60 +5492,9 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-2.Python语法基础，IPython和Jupyter</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-2-IPython%E5%92%8CJupyter/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1><span id="第2章-python语法基础ipython和jupyter-notebooks">第2章 Python语法基础，IPython和Jupyter Notebooks</span></h1><p>当我在2011年和2012年写作本书的第一版时，可用的学习Python数据分析的资源很少。这部分上是一个鸡和蛋的问题：我们现在使用的库，比如pandas、scikit-learn和statsmodels，那时相对来说并不成熟。2017年，数据科学、数据分析和机器学习的资源已经很多，原来通用的科学计算拓展到了计算机科学家、物理学家和其它研究领域的工作人员。学习Python和成为软件工程师的优秀书籍也有了。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#%E7%AC%AC2%E7%AB%A0-python%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80ipython%E5%92%8Cjupyter-notebooks">第2章 Python语法基础，IPython和Jupyter Notebooks</a><ul>
-<li><a href="#21-python%E8%A7%A3%E9%87%8A%E5%99%A8">2.1 Python解释器</a></li>
-<li><a href="#22-ipython%E5%9F%BA%E7%A1%80">2.2 IPython基础</a><ul>
-<li><a href="#%E8%BF%90%E8%A1%8Cipython-shell">运行IPython Shell</a></li>
-<li><a href="#%E8%BF%90%E8%A1%8Cjupyter-notebook">运行Jupyter Notebook</a></li>
-<li><a href="#tab%E8%A1%A5%E5%85%A8">Tab补全</a></li>
-<li><a href="#%E8%87%AA%E7%9C%81">自省</a></li>
-<li><a href="#run%E5%91%BD%E4%BB%A4">%run命令</a></li>
-<li><a href="#%E4%B8%AD%E6%96%AD%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81">中断运行的代码</a></li>
-<li><a href="#%E4%BB%8E%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F">从剪贴板执行程序</a></li>
-<li><a href="#%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E9%94%AE">键盘快捷键</a></li>
-<li><a href="#%E9%AD%94%E6%9C%AF%E5%91%BD%E4%BB%A4">魔术命令</a></li>
-<li><a href="#%E9%9B%86%E6%88%90matplotlib">集成Matplotlib</a></li>
-</ul>
-</li>
-<li><a href="#23-python%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80">2.3 Python语法基础</a><ul>
-<li><a href="#%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AF%AD%E4%B9%89">语言的语义</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E7%BC%A9%E8%BF%9B%E8%80%8C%E4%B8%8D%E6%98%AF%E6%8B%AC%E5%8F%B7">使用缩进，而不是括号</a></li>
-<li><a href="#%E4%B8%87%E7%89%A9%E7%9A%86%E5%AF%B9%E8%B1%A1">万物皆对象</a></li>
-<li><a href="#%E6%B3%A8%E9%87%8A">注释</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8">函数和对象方法调用</a></li>
-<li><a href="#%E5%8F%98%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">变量和参数传递</a></li>
-<li><a href="#%E5%8A%A8%E6%80%81%E5%BC%95%E7%94%A8%E5%BC%BA%E7%B1%BB%E5%9E%8B">动态引用，强类型</a></li>
-<li><a href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95">属性和方法</a></li>
-<li><a href="#%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B">鸭子类型</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
-<li><a href="#%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6">二元运算符和比较运算符</a></li>
-<li><a href="#%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1">可变与不可变对象</a></li>
-<li><a href="#%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B">标量类型</a></li>
-<li><a href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B">数值类型</a></li>
-<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a></li>
-<li><a href="#%E5%AD%97%E8%8A%82%E5%92%8Cunicode">字节和Unicode</a></li>
-<li><a href="#%E5%B8%83%E5%B0%94%E5%80%BC">布尔值</a></li>
-<li><a href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">类型转换</a></li>
-<li><a href="#none">None</a></li>
-<li><a href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4">日期和时间</a></li>
-<li><a href="#%E6%8E%A7%E5%88%B6%E6%B5%81">控制流</a></li>
-<li><a href="#if-elif%E5%92%8Celse">if、elif和else</a></li>
-<li><a href="#for%E5%BE%AA%E7%8E%AF">for循环</a></li>
-<li><a href="#while%E5%BE%AA%E7%8E%AF">While循环</a></li>
-<li><a href="#pass">pass</a></li>
-<li><a href="#range">range</a></li>
-<li><a href="#%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F">三元表达式</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<h1><span id="第2章-python语法基础ipython和jupyter-notebooks">第2章 Python语法基础，IPython和Jupyter Notebooks</span></h1><p>当我在2011年和2012年写作本书的第一版时，可用的学习Python数据分析的资源很少。这部分上是一个鸡和蛋的问题：我们现在使用的库，比如pandas、scikit-learn和statsmodels，那时相对来说并不成熟。2017年，数据科学、数据分析和机器学习的资源已经很多，原来通用的科学计算拓展到了计算机科学家、物理学家和其它研究领域的工作人员。学习Python和成为软件工程师的优秀书籍也有了。</p>
 <p>因为这本书是专注于Python数据处理的，对于一些Python的数据结构和库的特性难免不足。因此，本章和第3章的内容只够你能学习本书后面的内容。</p>
 <p>在我来看，没有必要为了数据分析而去精通Python。我鼓励你使用IPython shell和Jupyter试验示例代码，并学习不同类型、函数和方法的文档。虽然我已尽力让本书内容循序渐进，但读者偶尔仍会碰到没有之前介绍过的内容。</p>
 <p>本书大部分内容关注的是基于表格的分析和处理大规模数据集的数据准备工具。为了使用这些工具，必须首先将混乱的数据规整为整洁的表格（或结构化）形式。幸好，Python是一个理想的语言，可以快速整理数据。Python使用得越熟练，越容易准备新数据集以进行分析。</p>
@@ -6245,41 +5932,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-4.numpy</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-4-numpy/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
-
-<ul>
-<li><a href="#41-numpy%E7%9A%84ndarray%E4%B8%80%E7%A7%8D%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1">4.1 NumPy的ndarray：一种多维数组对象</a><ul>
-<li><a href="#%E5%88%9B%E5%BB%BAndarray">创建ndarray</a></li>
-<li><a href="#ndarray%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">ndarray的数据类型</a></li>
-<li><a href="#numpy%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97">NumPy数组的运算</a></li>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87">基本的索引和切片</a></li>
-<li><a href="#%E5%88%87%E7%89%87%E7%B4%A2%E5%BC%95">切片索引</a></li>
-<li><a href="#%E5%B8%83%E5%B0%94%E5%9E%8B%E7%B4%A2%E5%BC%95">布尔型索引</a></li>
-<li><a href="#%E8%8A%B1%E5%BC%8F%E7%B4%A2%E5%BC%95">花式索引</a></li>
-<li><a href="#%E6%95%B0%E7%BB%84%E8%BD%AC%E7%BD%AE%E5%92%8C%E8%BD%B4%E5%AF%B9%E6%8D%A2">数组转置和轴对换</a></li>
-</ul>
-</li>
-<li><a href="#42-%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0%E5%BF%AB%E9%80%9F%E7%9A%84%E5%85%83%E7%B4%A0%E7%BA%A7%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0">4.2 通用函数：快速的元素级数组函数</a></li>
-<li><a href="#43-%E5%88%A9%E7%94%A8%E6%95%B0%E7%BB%84%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">4.3 利用数组进行数据处理</a><ul>
-<li><a href="#%E5%B0%86%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91%E8%A1%A8%E8%BF%B0%E4%B8%BA%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97">将条件逻辑表述为数组运算</a></li>
-<li><a href="#%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95">数学和统计方法</a></li>
-<li><a href="#%E7%94%A8%E4%BA%8E%E5%B8%83%E5%B0%94%E5%9E%8B%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95">用于布尔型数组的方法</a></li>
-<li><a href="#%E6%8E%92%E5%BA%8F">排序</a></li>
-<li><a href="#%E5%94%AF%E4%B8%80%E5%8C%96%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AE%83%E7%9A%84%E9%9B%86%E5%90%88%E9%80%BB%E8%BE%91">唯一化以及其它的集合逻辑</a></li>
-</ul>
-</li>
-<li><a href="#44-%E7%94%A8%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA">4.4 用于数组的文件输入输出</a></li>
-<li><a href="#45-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0">4.5 线性代数</a></li>
-<li><a href="#46-%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90">4.6 伪随机数生成</a></li>
-<li><a href="#47-%E7%A4%BA%E4%BE%8B%E9%9A%8F%E6%9C%BA%E6%BC%AB%E6%AD%A5">4.7 示例：随机漫步</a><ul>
-<li><a href="#%E4%B8%80%E6%AC%A1%E6%A8%A1%E6%8B%9F%E5%A4%9A%E4%B8%AA%E9%9A%8F%E6%9C%BA%E6%BC%AB%E6%AD%A5">一次模拟多个随机漫步</a></li>
-</ul>
-</li>
-<li><a href="#48-%E7%BB%93%E8%AE%BA">4.8 结论</a></li>
-</ul>
-<!-- tocstop -->
-
-<p>NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。</p>
 <p>NumPy的部分功能如下：</p>
 <ul>
 <li>ndarray，一个具有矢量算术运算和复杂广播能力的快速且节省空间的多维数组。</li>
@@ -6288,6 +5941,8 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <li>线性代数、随机数生成以及傅里叶变换功能。</li>
 <li>用于集成由C、C++、Fortran等语言编写的代码的A C API。</li>
 </ul>
+<span id="more"></span>
+
 <p>由于NumPy提供了一个简单易用的C API，因此很容易将数据传递给由低级语言编写的外部库，外部库也能以NumPy数组的形式将数据返回给Python。这个功能使Python成为一种包装C/C++/Fortran历史代码库的选择，并使被包装库拥有一个动态的、易用的接口。</p>
 <p>NumPy本身并没有提供多么高级的数据分析功能，理解NumPy数组以及面向数组的计算将有助于你更加高效地使用诸如pandas之类的工具。因为NumPy是一个很大的题目，我会在附录A中介绍更多NumPy高级功能，比如广播。</p>
 <p>对于大部分数据分析应用而言，我最关注的功能主要集中在：</p>
@@ -6720,56 +6375,9 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-3.Python高级语法</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
-
-<ul>
-<li><a href="#31-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E5%BA%8F%E5%88%97">3.1 数据结构和序列</a><ul>
-<li><a href="#%E5%85%83%E7%BB%84">元组</a></li>
-<li><a href="#%E6%8B%86%E5%88%86%E5%85%83%E7%BB%84">拆分元组</a></li>
-<li><a href="#tuple%E6%96%B9%E6%B3%95">tuple方法</a></li>
-<li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0">添加和删除元素</a></li>
-<li><a href="#%E4%B8%B2%E8%81%94%E5%92%8C%E7%BB%84%E5%90%88%E5%88%97%E8%A1%A8">串联和组合列表</a></li>
-<li><a href="#%E6%8E%92%E5%BA%8F">排序</a></li>
-<li><a href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%88%97%E8%A1%A8">二分搜索和维护已排序的列表</a></li>
-<li><a href="#%E5%88%87%E7%89%87">切片</a></li>
-<li><a href="#%E5%BA%8F%E5%88%97%E5%87%BD%E6%95%B0">序列函数</a></li>
-<li><a href="#enumerate%E5%87%BD%E6%95%B0">enumerate函数</a></li>
-<li><a href="#sorted%E5%87%BD%E6%95%B0">sorted函数</a></li>
-<li><a href="#zip%E5%87%BD%E6%95%B0">zip函数</a></li>
-<li><a href="#reversed%E5%87%BD%E6%95%B0">reversed函数</a></li>
-<li><a href="#%E5%AD%97%E5%85%B8">字典</a></li>
-<li><a href="#%E7%94%A8%E5%BA%8F%E5%88%97%E5%88%9B%E5%BB%BA%E5%AD%97%E5%85%B8">用序列创建字典</a></li>
-<li><a href="#%E9%BB%98%E8%AE%A4%E5%80%BC">默认值</a></li>
-<li><a href="#%E6%9C%89%E6%95%88%E7%9A%84%E9%94%AE%E7%B1%BB%E5%9E%8B">有效的键类型</a></li>
-<li><a href="#%E9%9B%86%E5%90%88">集合</a></li>
-<li><a href="#%E5%88%97%E8%A1%A8-%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F">列表、集合和字典推导式</a></li>
-<li><a href="#%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F">嵌套列表推导式</a></li>
-</ul>
-</li>
-<li><a href="#32-%E5%87%BD%E6%95%B0">3.2 函数</a><ul>
-<li><a href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%B1%80%E9%83%A8%E5%87%BD%E6%95%B0">命名空间、作用域，和局部函数</a></li>
-<li><a href="#%E8%BF%94%E5%9B%9E%E5%A4%9A%E4%B8%AA%E5%80%BC">返回多个值</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E4%B9%9F%E6%98%AF%E5%AF%B9%E8%B1%A1">函数也是对象</a></li>
-<li><a href="#%E5%8C%BF%E5%90%8Dlambda%E5%87%BD%E6%95%B0">匿名（lambda）函数</a></li>
-<li><a href="#%E6%9F%AF%E9%87%8C%E5%8C%96%E9%83%A8%E5%88%86%E5%8F%82%E6%95%B0%E5%BA%94%E7%94%A8">柯里化：部分参数应用</a></li>
-<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8">生成器</a></li>
-<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F">生成器表达式</a></li>
-<li><a href="#itertools%E6%A8%A1%E5%9D%97">itertools模块</a></li>
-<li><a href="#%E9%94%99%E8%AF%AF%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">错误和异常处理</a></li>
-<li><a href="#ipython%E7%9A%84%E5%BC%82%E5%B8%B8">IPython的异常</a></li>
-</ul>
-</li>
-<li><a href="#33-%E6%96%87%E4%BB%B6%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">3.3 文件和操作系统</a><ul>
-<li><a href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E5%92%8Cunicode">文件的字节和Unicode</a></li>
-</ul>
-</li>
-<li><a href="#34-%E7%BB%93%E8%AE%BA">3.4 结论</a></li>
-</ul>
-<!-- tocstop -->
-
-<p>本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。</p>
 <p>我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。</p>
+<span id="more"></span>
 <h1><span id="31-数据结构和序列">3.1 数据结构和序列</span></h1><p>Python的数据结构简单而强大。通晓它们才能成为熟练的Python程序员。</p>
 <h2><span id="元组">元组</span></h2><p>元组是一个固定长度，不可改变的Python序列对象。创建元组的最简单方式，是用逗号分隔一列值：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">1</span>]: tup = <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: tup</span><br><span class="line">Out[<span class="number">2</span>]: (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
@@ -7255,31 +6863,11 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-6.数据加载</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
-
-<ul>
-<li><a href="#61-%E8%AF%BB%E5%86%99%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE">6.1 读写文本格式的数据</a><ul>
-<li><a href="#%E9%80%90%E5%9D%97%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6">逐块读取文本文件</a></li>
-<li><a href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E5%86%99%E5%87%BA%E5%88%B0%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F">将数据写出到文本格式</a></li>
-<li><a href="#%E5%A4%84%E7%90%86%E5%88%86%E9%9A%94%E7%AC%A6%E6%A0%BC%E5%BC%8F">处理分隔符格式</a></li>
-<li><a href="#json%E6%95%B0%E6%8D%AE">JSON数据</a></li>
-<li><a href="#xml%E5%92%8Chtmlweb%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">XML和HTML：Web信息收集</a></li>
-<li><a href="#%E5%88%A9%E7%94%A8lxmlobjectify%E8%A7%A3%E6%9E%90xml">利用lxml.objectify解析XML</a></li>
-</ul>
-</li>
-<li><a href="#62-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F">6.2 二进制数据格式</a><ul>
-<li><a href="#%E4%BD%BF%E7%94%A8hdf5%E6%A0%BC%E5%BC%8F">使用HDF5格式</a></li>
-<li><a href="#%E8%AF%BB%E5%8F%96microsoft-excel%E6%96%87%E4%BB%B6">读取Microsoft Excel文件</a></li>
-</ul>
-</li>
-<li><a href="#63-web-apis%E4%BA%A4%E4%BA%92">6.3 Web APIs交互</a></li>
-<li><a href="#64-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92">6.4 数据库交互</a></li>
-<li><a href="#65-%E6%80%BB%E7%BB%93">6.5 总结</a></li>
-</ul>
-<!-- tocstop -->
-
-<p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
 <p>输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。</p>
+<span id="more"></span>
+
+
 <h1><span id="61-读写文本格式的数据">6.1 读写文本格式的数据</span></h1><p>pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。表6-1对它们进行了总结，其中read_csv和read_table可能会是你今后用得最多的。</p>
 <p><img data-src="http://upload-images.jianshu.io/upload_images/7178691-958f849e6067b19b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表6-1 pandas中的解析函数"></p>
 <p>我将大致介绍一下这些函数在将文本数据转换为DataFrame时所用到的一些技术。这些函数的选项可以划分为以下几个大类：</p>
@@ -7557,39 +7145,9 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-5.pandas</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>pandas是本书后续内容的首选库。它含有使数据清洗和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基于数组的函数和不使用for循环的数据处理。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#51-pandas%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D">5.1 pandas的数据结构介绍</a><ul>
-<li><a href="#series">Series</a></li>
-<li><a href="#dataframe">DataFrame</a></li>
-<li><a href="#%E7%B4%A2%E5%BC%95%E5%AF%B9%E8%B1%A1">索引对象</a></li>
-</ul>
-</li>
-<li><a href="#52-%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD">5.2 基本功能</a><ul>
-<li><a href="#%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95">重新索引</a></li>
-<li><a href="#%E4%B8%A2%E5%BC%83%E6%8C%87%E5%AE%9A%E8%BD%B4%E4%B8%8A%E7%9A%84%E9%A1%B9">丢弃指定轴上的项</a></li>
-<li><a href="#%E7%B4%A2%E5%BC%95-%E9%80%89%E5%8F%96%E5%92%8C%E8%BF%87%E6%BB%A4">索引、选取和过滤</a></li>
-<li><a href="#%E7%94%A8loc%E5%92%8Ciloc%E8%BF%9B%E8%A1%8C%E9%80%89%E5%8F%96">用loc和iloc进行选取</a></li>
-<li><a href="#%E6%95%B4%E6%95%B0%E7%B4%A2%E5%BC%95">整数索引</a></li>
-<li><a href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90">算术运算和数据对齐</a></li>
-<li><a href="#%E5%9C%A8%E7%AE%97%E6%9C%AF%E6%96%B9%E6%B3%95%E4%B8%AD%E5%A1%AB%E5%85%85%E5%80%BC">在算术方法中填充值</a></li>
-<li><a href="#dataframe%E5%92%8Cseries%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97">DataFrame和Series之间的运算</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%92%8C%E6%98%A0%E5%B0%84">函数应用和映射</a></li>
-<li><a href="#%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D">排序和排名</a></li>
-<li><a href="#%E5%B8%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E6%A0%87%E7%AD%BE%E7%9A%84%E8%BD%B4%E7%B4%A2%E5%BC%95">带有重复标签的轴索引</a></li>
-</ul>
-</li>
-<li><a href="#53-%E6%B1%87%E6%80%BB%E5%92%8C%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1">5.3 汇总和计算描述统计</a><ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E4%B8%8E%E5%8D%8F%E6%96%B9%E5%B7%AE">相关系数与协方差</a></li>
-<li><a href="#%E5%94%AF%E4%B8%80%E5%80%BC-%E5%80%BC%E8%AE%A1%E6%95%B0%E4%BB%A5%E5%8F%8A%E6%88%90%E5%91%98%E8%B5%84%E6%A0%BC">唯一值、值计数以及成员资格</a></li>
-</ul>
-</li>
-<li><a href="#54-%E6%80%BB%E7%BB%93">5.4 总结</a></li>
-</ul>
-<!-- tocstop -->
-
-<p>pandas是本书后续内容的首选库。它含有使数据清洗和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基于数组的函数和不使用for循环的数据处理。</p>
 <p>虽然pandas采用了大量的NumPy编码风格，但二者最大的不同是pandas是专门为处理表格和混杂数据设计的。而NumPy更适合处理统一的数值数组数据。</p>
 <p>自从2010年pandas开源以来，pandas逐渐成长为一个非常大的库，应用于许多真实案例。开发者社区已经有了800个独立的贡献者，他们在解决日常数据问题的同时为这个项目提供贡献。</p>
 <p>在本书后续部分中，我将使用下面这样的pandas引入约定：</p>
@@ -8045,32 +7603,11 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-8.数据整合</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-8-%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
-
-<ul>
-<li><a href="#81-%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95">8.1 层次化索引</a><ul>
-<li><a href="#%E9%87%8D%E6%8E%92%E4%B8%8E%E5%88%86%E7%BA%A7%E6%8E%92%E5%BA%8F">重排与分级排序</a></li>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E7%BA%A7%E5%88%AB%E6%B1%87%E6%80%BB%E7%BB%9F%E8%AE%A1">根据级别汇总统计</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8dataframe%E7%9A%84%E5%88%97%E8%BF%9B%E8%A1%8C%E7%B4%A2%E5%BC%95">使用DataFrame的列进行索引</a></li>
-</ul>
-</li>
-<li><a href="#82-%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86">8.2 合并数据集</a><ul>
-<li><a href="#%E7%B4%A2%E5%BC%95%E4%B8%8A%E7%9A%84%E5%90%88%E5%B9%B6">索引上的合并</a></li>
-<li><a href="#%E8%BD%B4%E5%90%91%E8%BF%9E%E6%8E%A5">轴向连接</a></li>
-<li><a href="#%E5%90%88%E5%B9%B6%E9%87%8D%E5%8F%A0%E6%95%B0%E6%8D%AE">合并重叠数据</a></li>
-</ul>
-</li>
-<li><a href="#83-%E9%87%8D%E5%A1%91%E5%92%8C%E8%BD%B4%E5%90%91%E6%97%8B%E8%BD%AC">8.3 重塑和轴向旋转</a><ul>
-<li><a href="#%E9%87%8D%E5%A1%91%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95">重塑层次化索引</a></li>
-<li><a href="#%E5%B0%86%E9%95%BF%E6%A0%BC%E5%BC%8F%E6%97%8B%E8%BD%AC%E4%B8%BA%E5%AE%BD%E6%A0%BC%E5%BC%8F">将“长格式”旋转为“宽格式”</a></li>
-<li><a href="#%E5%B0%86%E5%AE%BD%E6%A0%BC%E5%BC%8F%E6%97%8B%E8%BD%AC%E4%B8%BA%E9%95%BF%E6%A0%BC%E5%BC%8F">将“宽格式”旋转为“长格式”</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<p>在许多应用中，数据可能分散在许多文件或数据库中，存储的形式也不利于分析。本章关注可以聚合、合并、重塑数据的方法。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在许多应用中，数据可能分散在许多文件或数据库中，存储的形式也不利于分析。本章关注可以聚合、合并、重塑数据的方法。</p>
 <p>首先，我会介绍pandas的层次化索引，它广泛用于以上操作。然后，我深入介绍了一些特殊的数据操作。在第14章，你可以看到这些工具的多种应用。</p>
+<span id="more"></span>
+
+
 <h1><span id="81-层次化索引">8.1 层次化索引</span></h1><p>层次化索引（hierarchical indexing）是pandas的一项重要功能，它使你能在一个轴上拥有多个（两个以上）索引级别。抽象点说，它使你能以低维度形式处理高维度数据。我们先来看一个简单的例子：创建一个Series，并用一个由列表或数组组成的列表作为索引：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">9</span>]: data = pd.Series(np.random.randn(<span class="number">9</span>),</span><br><span class="line">   ...:                  index=[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;d&#x27;</span>],</span><br><span class="line">   ...:                         [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">10</span>]: data</span><br><span class="line">Out[<span class="number">10</span>]: </span><br><span class="line">a  <span class="number">1</span>   -<span class="number">0.204708</span></span><br><span class="line">   <span class="number">2</span>    <span class="number">0.478943</span></span><br><span class="line">   <span class="number">3</span>   -<span class="number">0.519439</span></span><br><span class="line">b  <span class="number">1</span>   -<span class="number">0.555730</span></span><br><span class="line">   <span class="number">3</span>    <span class="number">1.965781</span></span><br><span class="line">c  <span class="number">1</span>    <span class="number">1.393406</span></span><br><span class="line">   <span class="number">2</span>    <span class="number">0.092908</span></span><br><span class="line">d  <span class="number">2</span>    <span class="number">0.281746</span></span><br><span class="line">   <span class="number">3</span>    <span class="number">0.769023</span></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
 
@@ -8333,34 +7870,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-9.可视化</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-9-%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（<a href="http://matplotlib.org/%EF%BC%89%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%AE%83%E7%9A%84%E5%BA%93%E3%80%82">http://matplotlib.org/）和基于它的库。</a></p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#91-matplotlib-api%E5%85%A5%E9%97%A8">9.1 matplotlib API入门</a><ul>
-<li><a href="#figure%E5%92%8Csubplot">Figure和Subplot</a></li>
-<li><a href="#%E8%B0%83%E6%95%B4subplot%E5%91%A8%E5%9B%B4%E7%9A%84%E9%97%B4%E8%B7%9D">调整subplot周围的间距</a></li>
-<li><a href="#%E9%A2%9C%E8%89%B2-%E6%A0%87%E8%AE%B0%E5%92%8C%E7%BA%BF%E5%9E%8B">颜色、标记和线型</a></li>
-<li><a href="#%E5%88%BB%E5%BA%A6-%E6%A0%87%E7%AD%BE%E5%92%8C%E5%9B%BE%E4%BE%8B">刻度、标签和图例</a></li>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E6%A0%87%E9%A2%98-%E8%BD%B4%E6%A0%87%E7%AD%BE-%E5%88%BB%E5%BA%A6%E4%BB%A5%E5%8F%8A%E5%88%BB%E5%BA%A6%E6%A0%87%E7%AD%BE">设置标题、轴标签、刻度以及刻度标签</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E5%9B%BE%E4%BE%8B">添加图例</a></li>
-<li><a href="#%E6%B3%A8%E8%A7%A3%E4%BB%A5%E5%8F%8A%E5%9C%A8subplot%E4%B8%8A%E7%BB%98%E5%9B%BE">注解以及在Subplot上绘图</a></li>
-<li><a href="#%E5%B0%86%E5%9B%BE%E8%A1%A8%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4%BB%B6">将图表保存到文件</a></li>
-<li><a href="#matplotlib%E9%85%8D%E7%BD%AE">matplotlib配置</a></li>
-</ul>
-</li>
-<li><a href="#92-%E4%BD%BF%E7%94%A8pandas%E5%92%8Cseaborn%E7%BB%98%E5%9B%BE">9.2 使用pandas和seaborn绘图</a><ul>
-<li><a href="#%E7%BA%BF%E5%9E%8B%E5%9B%BE">线型图</a></li>
-<li><a href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE">柱状图</a></li>
-<li><a href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E5%AF%86%E5%BA%A6%E5%9B%BE">直方图和密度图</a></li>
-<li><a href="#%E6%95%A3%E5%B8%83%E5%9B%BE%E6%88%96%E7%82%B9%E5%9B%BE">散布图或点图</a></li>
-</ul>
-</li>
-<li><a href="#93-%E5%85%B6%E5%AE%83%E7%9A%84python%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7">9.3 其它的Python可视化工具</a></li>
-<li><a href="#94-%E6%80%BB%E7%BB%93">9.4 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（<a href="http://matplotlib.org/%EF%BC%89%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%AE%83%E7%9A%84%E5%BA%93%E3%80%82">http://matplotlib.org/）和基于它的库。</a></p>
 <p>matplotlib是一个用于创建出版质量图表的桌面绘图包（主要是2D方面）。该项目是由John Hunter于2002年启动的，其目的是为Python构建一个MATLAB式的绘图接口。matplotlib和IPython社区进行合作，简化了从IPython shell（包括现在的Jupyter notebook）进行交互式绘图。matplotlib支持各种操作系统上许多不同的GUI后端，而且还能将图片导出为各种常见的矢量（vector）和光栅（raster）图：PDF、SVG、JPG、PNG、BMP、GIF等。除了几张，本书中的大部分图都是用它生成的。</p>
 <p>随着时间的发展，matplotlib衍生出了多个数据可视化的工具集，它们使用matplotlib作为底层。其中之一是seaborn（<a href="http://seaborn.pydata.org/%EF%BC%89%EF%BC%8C%E6%9C%AC%E7%AB%A0%E5%90%8E%E9%9D%A2%E4%BC%9A%E5%AD%A6%E4%B9%A0%E5%AE%83%E3%80%82">http://seaborn.pydata.org/），本章后面会学习它。</a></p>
 <p>学习本章代码案例的最简单方法是在Jupyter notebook进行交互式绘图。在Jupyter notebook中执行下面的语句：</p>
@@ -8708,7 +8221,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <li>机器学习（周志华）</li>
 <li>统计学习方法（李航）</li>
 <li>优达学城-机器学习入门</li>
-<li>Cousera-机器学习-吴恩达</li>
+<li>coursera-机器学习-吴恩达</li>
 <li>Python机器学习实践指南</li>
 <li>Python机器学习——预测分析核心算法</li>
 <li>实用机器学习</li>
@@ -8738,6 +8251,9 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
 <li>智能风控：原理、算法与工程实践</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>书单</category>
+      </categories>
       <tags>
         <tag>机器学习</tag>
         <tag>书单</tag>
@@ -8746,36 +8262,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   <entry>
     <title>利用python进行数据分析-7.数据清洗</title>
     <url>/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-7-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><!-- toc -->
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在数据分析和建模的过程中，相当多的时间要用在数据准备上：加载、清理、转换以及重塑。这些工作会占到分析师时间的80%或更多。有时，存储在文件和数据库中的数据的格式不适合某个特定的任务。许多研究者都选择使用通用编程语言（如Python、Perl、R或Java）或UNIX文本处理工具（如sed或awk）对数据格式进行专门处理。幸运的是，pandas和内置的Python标准库提供了一组高级的、灵活的、快速的工具，可以让你轻松地将数据规整为想要的格式。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#71-%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE">7.1 处理缺失数据</a><ul>
-<li><a href="#%E6%BB%A4%E9%99%A4%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE">滤除缺失数据</a></li>
-<li><a href="#%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE">填充缺失数据</a></li>
-</ul>
-</li>
-<li><a href="#72-%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">7.2 数据转换</a><ul>
-<li><a href="#%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE">移除重复数据</a></li>
-<li><a href="#%E5%88%A9%E7%94%A8%E5%87%BD%E6%95%B0%E6%88%96%E6%98%A0%E5%B0%84%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">利用函数或映射进行数据转换</a></li>
-<li><a href="#%E6%9B%BF%E6%8D%A2%E5%80%BC">替换值</a></li>
-<li><a href="#%E9%87%8D%E5%91%BD%E5%90%8D%E8%BD%B4%E7%B4%A2%E5%BC%95">重命名轴索引</a></li>
-<li><a href="#%E7%A6%BB%E6%95%A3%E5%8C%96%E5%92%8C%E9%9D%A2%E5%85%83%E5%88%92%E5%88%86">离散化和面元划分</a></li>
-<li><a href="#%E6%A3%80%E6%B5%8B%E5%92%8C%E8%BF%87%E6%BB%A4%E5%BC%82%E5%B8%B8%E5%80%BC">检测和过滤异常值</a></li>
-<li><a href="#%E6%8E%92%E5%88%97%E5%92%8C%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7">排列和随机采样</a></li>
-<li><a href="#%E8%AE%A1%E7%AE%97%E6%8C%87%E6%A0%87%E5%93%91%E5%8F%98%E9%87%8F">计算指标/哑变量</a></li>
-</ul>
-</li>
-<li><a href="#73-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C">7.3 字符串操作</a><ul>
-<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95">字符串对象方法</a></li>
-<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a></li>
-<li><a href="#pandas%E7%9A%84%E7%9F%A2%E9%87%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0">pandas的矢量化字符串函数</a></li>
-</ul>
-</li>
-<li><a href="#74-%E6%80%BB%E7%BB%93">7.4 总结</a></li>
-</ul>
-<!-- tocstop -->
 
-<p>在数据分析和建模的过程中，相当多的时间要用在数据准备上：加载、清理、转换以及重塑。这些工作会占到分析师时间的80%或更多。有时，存储在文件和数据库中的数据的格式不适合某个特定的任务。许多研究者都选择使用通用编程语言（如Python、Perl、R或Java）或UNIX文本处理工具（如sed或awk）对数据格式进行专门处理。幸运的是，pandas和内置的Python标准库提供了一组高级的、灵活的、快速的工具，可以让你轻松地将数据规整为想要的格式。</p>
 <p>如果你发现了一种本书或pandas库中没有的数据操作方式，请在邮件列表或GitHub网站上提出。实际上，pandas的许多设计和实现都是由真实应用的需求所驱动的。</p>
 <p>在本章中，我会讨论处理缺失数据、重复数据、字符串操作和其它分析数据转换的工具。下一章，我会关注于用多种方法合并、重塑数据集。</p>
 <h1><span id="71-处理缺失数据">7.1 处理缺失数据</span></h1><p>在许多数据分析工作中，缺失数据是经常发生的。pandas的目标之一就是尽量轻松地处理缺失数据。例如，pandas对象的所有描述性统计默认都不包括缺失数据。</p>

@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-23T06:19:58.844Z</updated>
+  <updated>2021-09-25T08:00:00.463Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -17,145 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>利用python进行数据分析-10.数据聚合和分组计算</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T06:19:58.844Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="matplotlib" scheme="http://earyant.github.io/tags/matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-11.时间序列</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T06:31:19.290Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="时间序列" scheme="http://earyant.github.io/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-13.建模库</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T06:54:32.133Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="python库" scheme="http://earyant.github.io/tags/python%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-14.数据分析案例</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T08:52:25.707Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-15.numpy高级应用</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T08:53:45.967Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="numpy" scheme="http://earyant.github.io/tags/numpy/"/>
-    
-  </entry>
-  
-  <entry>
     <title>利用python进行数据分析-16.ipython高级应用</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-16-ipython%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-16-ipython%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T08:56:26.771Z</updated>
+    <published>2021-09-23T15:22:31.000Z</published>
+    <updated>2021-09-25T08:00:00.463Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;第2章中，我们学习了IPython shell和Jupyter notebook的基础。本章中，我们会探索IPython更深层次的功能，可以从控制台或在jupyter使用。&lt;/p&gt;</summary>
     
     
     
@@ -171,17 +40,81 @@
   </entry>
   
   <entry>
+    <title>利用python进行数据分析-15.numpy高级应用</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</id>
+    <published>2021-09-23T15:21:31.000Z</published>
+    <updated>2021-09-25T07:59:58.113Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在这篇附录中，我会深入NumPy库的数组计算。这会包括ndarray更内部的细节，和更高级的数组操作和算法。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="numpy" scheme="http://earyant.github.io/tags/numpy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-14.数据分析案例</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/</id>
+    <published>2021-09-23T15:20:31.000Z</published>
+    <updated>2021-09-25T07:59:54.659Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-13.建模库</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/</id>
+    <published>2021-09-23T15:19:31.000Z</published>
+    <updated>2021-09-25T07:59:51.733Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本书中，我已经介绍了Python数据分析的编程基础。因为数据分析师和科学家总是在数据规整和准备上花费大量时间，这本书的重点在于掌握这些功能。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="python库" scheme="http://earyant.github.io/tags/python%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>利用python进行数据分析-12.pandas高级应用</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-12-pandas%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-12-pandas%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-23T06:48:45.424Z</updated>
+    <published>2021-09-23T15:18:31.000Z</published>
+    <updated>2021-09-25T07:59:48.863Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;前面的章节关注于不同类型的数据规整流程和NumPy、pandas与其它库的特点。随着时间的发展，pandas发展出了更多适合高级用户的功能。本章就要深入学习pandas的高级功能。&lt;/p&gt;</summary>
     
     
     
@@ -197,17 +130,60 @@
   </entry>
   
   <entry>
+    <title>利用python进行数据分析-11.时间序列</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/</id>
+    <published>2021-09-23T15:17:36.000Z</published>
+    <updated>2021-09-25T08:00:34.623Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;时间序列（time series）数据是一种重要的结构化数据形式，应用于多个领域，包括金融学、经济学、生态学、神经科学、物理学等。在多个时间点观察或测量到的任何事物都可以形成一段时间序列。很多时间序列是固定频率的，也就是说，数据点是根据某种规律定期出现的（比如每15秒、每5分钟、每月出现一次）。时间序列也可以是不定期的，没有固定的时间单位或单位之间的偏移量。时间序列数据的意义取决于具体的应用场景，主要有以下几种：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="时间序列" scheme="http://earyant.github.io/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-10.数据聚合和分组计算</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/</id>
+    <published>2021-09-23T15:17:31.000Z</published>
+    <updated>2021-09-25T07:58:34.311Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;对数据集进行分组并对各组应用一个函数（无论是聚合还是转换），通常是数据分析工作中的重要环节。在将数据集加载、融合、准备好之后，通常就是计算分组统计或生成透视表。pandas提供了一个灵活高效的gruopby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="matplotlib" scheme="http://earyant.github.io/tags/matplotlib/"/>
+    
+  </entry>
+  
+  <entry>
     <title>利用python进行数据分析-9.可视化</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-9-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-9-%E5%8F%AF%E8%A7%86%E5%8C%96/</id>
     <published>2021-09-23T15:16:24.000Z</published>
-    <updated>2021-09-23T06:19:26.832Z</updated>
+    <updated>2021-09-25T07:58:32.033Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（&lt;a href=&quot;http://matplotlib.org/%EF%BC%89%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%AE%83%E7%9A%84%E5%BA%93%E3%80%82&quot;&gt;http://matplotlib.org/）和基于它的库。&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
@@ -227,13 +203,11 @@
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-8-%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-8-%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88/</id>
     <published>2021-09-23T15:08:16.000Z</published>
-    <updated>2021-09-23T06:19:15.866Z</updated>
+    <updated>2021-09-25T07:58:30.139Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;在许多应用中，数据可能分散在许多文件或数据库中，存储的形式也不利于分析。本章关注可以聚合、合并、重塑数据的方法。&lt;/p&gt;
+&lt;p&gt;首先，我会介绍pandas的层次化索引，它广泛用于以上操作。然后，我深入介绍了一些特殊的数据操作。在第14章，你可以看到这些工具的多种应用。&lt;/p&gt;</summary>
     
     
     
@@ -252,40 +226,11 @@
     <title>利用python进行数据分析-7.数据清洗</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-7-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-7-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</id>
-    <published>2021-09-23T13:26:12.000Z</published>
-    <updated>2021-09-23T06:19:13.784Z</updated>
+    <published>2021-09-23T14:26:12.000Z</published>
+    <updated>2021-09-25T07:59:32.416Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-5.pandas</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/</id>
-    <published>2021-09-22T13:58:54.000Z</published>
-    <updated>2021-09-23T06:19:01.331Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;在数据分析和建模的过程中，相当多的时间要用在数据准备上：加载、清理、转换以及重塑。这些工作会占到分析师时间的80%或更多。有时，存储在文件和数据库中的数据的格式不适合某个特定的任务。许多研究者都选择使用通用编程语言（如Python、Perl、R或Java）或UNIX文本处理工具（如sed或awk）对数据格式进行专门处理。幸运的是，pandas和内置的Python标准库提供了一组高级的、灵活的、快速的工具，可以让你轻松地将数据规整为想要的格式。&lt;/p&gt;</summary>
     
     
     
@@ -304,14 +249,12 @@
     <title>利用python进行数据分析-6.数据加载</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/</id>
-    <published>2021-09-22T13:51:10.000Z</published>
-    <updated>2021-09-23T06:19:11.475Z</updated>
+    <published>2021-09-23T13:51:10.000Z</published>
+    <updated>2021-09-25T07:59:21.289Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;p&gt;访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。&lt;/p&gt;
+&lt;p&gt;输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。&lt;/p&gt;</summary>
     
     
     
@@ -327,17 +270,90 @@
   </entry>
   
   <entry>
+    <title>利用python进行数据分析-5.pandas</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/</id>
+    <published>2021-09-22T15:58:54.000Z</published>
+    <updated>2021-09-25T07:59:18.096Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;pandas是本书后续内容的首选库。它含有使数据清洗和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基于数组的函数和不使用for循环的数据处理。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-4.numpy</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-4-numpy/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-4-numpy/</id>
+    <published>2021-09-22T14:39:04.000Z</published>
+    <updated>2021-09-25T07:59:08.700Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。&lt;/p&gt;
+&lt;p&gt;NumPy的部分功能如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ndarray，一个具有矢量算术运算和复杂广播能力的快速且节省空间的多维数组。&lt;/li&gt;
+&lt;li&gt;用于对整组数据进行快速运算的标准数学函数（无需编写循环）。&lt;/li&gt;
+&lt;li&gt;用于读写磁盘数据的工具以及用于操作内存映射文件的工具。&lt;/li&gt;
+&lt;li&gt;线性代数、随机数生成以及傅里叶变换功能。&lt;/li&gt;
+&lt;li&gt;用于集成由C、C++、Fortran等语言编写的代码的A C API。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="numpy" scheme="http://earyant.github.io/tags/numpy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用python进行数据分析-3.Python高级语法</title>
+    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/"/>
+    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/</id>
+    <published>2021-09-22T14:38:35.000Z</published>
+    <updated>2021-09-25T07:59:05.328Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。&lt;/p&gt;
+&lt;p&gt;我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>利用python进行数据分析-2.Python语法基础，IPython和Jupyter</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-2-IPython%E5%92%8CJupyter/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-2-IPython%E5%92%8CJupyter/</id>
     <published>2021-09-22T07:51:17.000Z</published>
-    <updated>2021-09-23T09:33:10.515Z</updated>
+    <updated>2021-09-25T07:58:18.261Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;第2章-Python语法基础，IPython和Jupyter-Notebooks&quot;&gt;&lt;a href=&quot;#第2章-Python语法基础，IPython和Jupyter-Notebooks&quot; class=&quot;headerlink&quot; title=&quot;第2章 Python语法基础，IPython和Jupyter Notebooks&quot;&gt;&lt;/a&gt;第2章 Python语法基础，IPython和Jupyter Notebooks&lt;/h1&gt;&lt;p&gt;当我在2011年和2012年写作本书的第一版时，可用的学习Python数据分析的资源很少。这部分上是一个鸡和蛋的问题：我们现在使用的库，比如pandas、scikit-learn和statsmodels，那时相对来说并不成熟。2017年，数据科学、数据分析和机器学习的资源已经很多，原来通用的科学计算拓展到了计算机科学家、物理学家和其它研究领域的工作人员。学习Python和成为软件工程师的优秀书籍也有了。&lt;/p&gt;</summary>
     
     
     
@@ -369,67 +385,14 @@
   </entry>
   
   <entry>
-    <title>利用python进行数据分析-4.numpy</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-4-numpy/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-4-numpy/</id>
-    <published>2021-09-21T14:39:04.000Z</published>
-    <updated>2021-09-23T06:18:59.369Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="numpy" scheme="http://earyant.github.io/tags/numpy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-3.Python高级语法</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-3-Python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95/</id>
-    <published>2021-09-21T14:38:35.000Z</published>
-    <updated>2021-09-23T06:18:56.047Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
     <title>利用python进行数据分析-1.简介</title>
     <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/"/>
     <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/</id>
     <published>2021-09-21T14:29:02.000Z</published>
-    <updated>2021-09-23T09:33:42.362Z</updated>
+    <updated>2021-09-25T07:58:15.996Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;第1章-准备工作&quot;&gt;&lt;a href=&quot;#第1章-准备工作&quot; class=&quot;headerlink&quot; title=&quot;第1章 准备工作&quot;&gt;&lt;/a&gt;第1章 准备工作&lt;/h1&gt;&lt;h2 id=&quot;1-1-本书的内容&quot;&gt;&lt;a href=&quot;#1-1-本书的内容&quot; class=&quot;headerlink&quot; title=&quot;1.1 本书的内容&quot;&gt;&lt;/a&gt;1.1 本书的内容&lt;/h2&gt;&lt;p&gt;本书讲的是利用Python进行数据控制、处理、整理、分析等方面的具体细节和基本要点。我的目标是介绍Python编程和用于数据处理的库和工具环境，掌握这些，可以让你成为一个数据分析专家。虽然本书的标题是“数据分析”，重点却是Python编程、库，以及用于数据分析的工具。这就是数据分析要用到的Python编程。&lt;/p&gt;</summary>
     
     
     
@@ -447,7 +410,7 @@
     <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/"/>
     <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</id>
     <published>2021-09-18T03:11:47.000Z</published>
-    <updated>2021-09-22T06:14:45.000Z</updated>
+    <updated>2021-09-25T07:30:46.214Z</updated>
     
     
       
@@ -456,6 +419,8 @@
       
     
     
+    
+    <category term="书单" scheme="http://earyant.github.io/categories/%E4%B9%A6%E5%8D%95/"/>
     
     
     <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>

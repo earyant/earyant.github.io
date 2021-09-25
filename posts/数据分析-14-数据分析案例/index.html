@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="用pandas对时区进行计数   14.2 MovieLens 1M数据集 计算评分分歧   14.3 1880-2010年间全美婴儿姓名 分析命名趋势 评估命名多样性的增长 “最后一个字母”的变革 变成女孩名字的男孩名字（以及相反的情况）   14.4 USDA食品数据库 14.5 2012联邦选举委员会数据库 根据职业和雇主统计赞助信息 对出资额分组 根据州统计赞助信息      本书正">
+  <meta name="description" content="本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用python进行数据分析-14.数据分析案例">
 <meta property="og:url" content="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-14-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
-<meta property="og:description" content="用pandas对时区进行计数   14.2 MovieLens 1M数据集 计算评分分歧   14.3 1880-2010年间全美婴儿姓名 分析命名趋势 评估命名多样性的增长 “最后一个字母”的变革 变成女孩名字的男孩名字（以及相反的情况）   14.4 USDA食品数据库 14.5 2012联邦选举委员会数据库 根据职业和雇主统计赞助信息 对出资额分组 根据州统计赞助信息      本书正">
+<meta property="og:description" content="本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-aa267c1d399a78f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-053612a5655b68d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -42,8 +42,8 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-99b176d022a444c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-d2254e547c6ce537.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7178691-77e8c8d3c784692b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="article:published_time" content="2021-09-23T15:17:31.000Z">
-<meta property="article:modified_time" content="2021-09-23T08:52:25.707Z">
+<meta property="article:published_time" content="2021-09-23T15:20:31.000Z">
+<meta property="article:modified_time" content="2021-09-25T07:59:54.659Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="利用python进行数据分析">
 <meta property="article:tag" content="数据分析">
@@ -150,7 +150,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -245,10 +245,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-23 23:17:31 / 修改时间：16:52:25" itemprop="dateCreated datePublished" datetime="2021-09-23T23:17:31+08:00">2021-09-23</time>
+              <time title="创建时间：2021-09-23 23:20:31" itemprop="dateCreated datePublished" datetime="2021-09-23T23:20:31+08:00">2021-09-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-25 15:59:54" itemprop="dateModified" datetime="2021-09-25T15:59:54+08:00">2021-09-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -279,7 +285,7 @@
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>43 分钟</span>
+              <span>42 分钟</span>
             </span>
 
         </div>
@@ -291,34 +297,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <!-- toc -->
+        <p>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
+<span id="more"></span>
 
-<ul>
-<li><a href="#%E7%94%A8pandas%E5%AF%B9%E6%97%B6%E5%8C%BA%E8%BF%9B%E8%A1%8C%E8%AE%A1%E6%95%B0">用pandas对时区进行计数</a></li>
-</ul>
-<ul>
-<li><a href="#142-movielens-1m%E6%95%B0%E6%8D%AE%E9%9B%86">14.2 MovieLens 1M数据集</a><ul>
-<li><a href="#%E8%AE%A1%E7%AE%97%E8%AF%84%E5%88%86%E5%88%86%E6%AD%A7">计算评分分歧</a></li>
-</ul>
-</li>
-<li><a href="#143-1880-2010%E5%B9%B4%E9%97%B4%E5%85%A8%E7%BE%8E%E5%A9%B4%E5%84%BF%E5%A7%93%E5%90%8D">14.3 1880-2010年间全美婴儿姓名</a><ul>
-<li><a href="#%E5%88%86%E6%9E%90%E5%91%BD%E5%90%8D%E8%B6%8B%E5%8A%BF">分析命名趋势</a></li>
-<li><a href="#%E8%AF%84%E4%BC%B0%E5%91%BD%E5%90%8D%E5%A4%9A%E6%A0%B7%E6%80%A7%E7%9A%84%E5%A2%9E%E9%95%BF">评估命名多样性的增长</a></li>
-<li><a href="#%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AF%8D%E7%9A%84%E5%8F%98%E9%9D%A9">“最后一个字母”的变革</a></li>
-<li><a href="#%E5%8F%98%E6%88%90%E5%A5%B3%E5%AD%A9%E5%90%8D%E5%AD%97%E7%9A%84%E7%94%B7%E5%AD%A9%E5%90%8D%E5%AD%97%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%8F%8D%E7%9A%84%E6%83%85%E5%86%B5">变成女孩名字的男孩名字（以及相反的情况）</a></li>
-</ul>
-</li>
-<li><a href="#144-usda%E9%A3%9F%E5%93%81%E6%95%B0%E6%8D%AE%E5%BA%93">14.4 USDA食品数据库</a></li>
-<li><a href="#145-2012%E8%81%94%E9%82%A6%E9%80%89%E4%B8%BE%E5%A7%94%E5%91%98%E4%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93">14.5 2012联邦选举委员会数据库</a><ul>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E8%81%8C%E4%B8%9A%E5%92%8C%E9%9B%87%E4%B8%BB%E7%BB%9F%E8%AE%A1%E8%B5%9E%E5%8A%A9%E4%BF%A1%E6%81%AF">根据职业和雇主统计赞助信息</a></li>
-<li><a href="#%E5%AF%B9%E5%87%BA%E8%B5%84%E9%A2%9D%E5%88%86%E7%BB%84">对出资额分组</a></li>
-<li><a href="#%E6%A0%B9%E6%8D%AE%E5%B7%9E%E7%BB%9F%E8%AE%A1%E8%B5%9E%E5%8A%A9%E4%BF%A1%E6%81%AF">根据州统计赞助信息</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
 
-<p>本书正文的最后一章，我们来看一些真实世界的数据集。对于每个数据集，我们会用之前介绍的方法，从原始数据中提取有意义的内容。展示的方法适用于其它数据集，也包括你的。本章包含了一些各种各样的案例数据集，可以用来练习。</p>
 <p>案例数据集可以在Github仓库找到，见第一章。</p>
 <p>#14.1 来自Bitly的USA.gov数据</p>
 <p>2011年，URL缩短服务Bitly跟美国政府网站USA.gov合作，提供了一份从生成.gov或.mil短链接的用户那里收集来的匿名数据。在2011年，除实时数据之外，还可以下载文本文件形式的每小时快照。写作此书时（2017年），这项服务已经关闭，但我们保存一份数据用于本书的案例。</p>
@@ -718,12 +700,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/" rel="prev" title="利用python进行数据分析-15.numpy高级应用">
-      <i class="fa fa-chevron-left"></i> 利用python进行数据分析-15.numpy高级应用
+    <a href="/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/" rel="prev" title="利用python进行数据分析-13.建模库">
+      <i class="fa fa-chevron-left"></i> 利用python进行数据分析-13.建模库
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-13-%E5%BB%BA%E6%A8%A1%E5%BA%93/" rel="next" title="利用python进行数据分析-13.建模库">
-      利用python进行数据分析-13.建模库 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-15-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/" rel="next" title="利用python进行数据分析-15.numpy高级应用">
+      利用python进行数据分析-15.numpy高级应用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -807,7 +789,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -883,12 +865,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">523k</span>
+    <span title="站点总字数">520k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7:56</span>
+    <span title="站点阅读时长">7:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
