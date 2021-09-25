@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-25T08:00:00.463Z</updated>
+  <updated>2021-09-25T08:36:56.321Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>机器学习-吴恩达笔记1</title>
+    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/"/>
+    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/</id>
+    <published>2021-09-25T08:13:07.000Z</published>
+    <updated>2021-09-25T08:36:56.321Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="机器学习" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>利用python进行数据分析-16.ipython高级应用</title>
@@ -446,24 +468,6 @@
     
     
     <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自己写一个数据库</title>
-    <link href="http://earyant.github.io/posts/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>http://earyant.github.io/posts/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
-    <published>2019-01-01T09:12:09.000Z</published>
-    <updated>2021-09-22T06:14:45.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
     
   </entry>
   

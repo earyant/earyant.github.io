@@ -22,20 +22,18 @@
     var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文记录docker搭建elk，并简单结合logstash日志输出filebeat docker pull docker.elastic.co&#x2F;beats&#x2F;filebeat:6.2.1   filebeat.yml  enabled要改为true，filebeat默认为false 12345678filebeat.prospectors:- type: log  enabled: true  pa">
-<meta property="og:type" content="article">
-<meta property="og:title" content="docker简单结合elk、logstash">
-<meta property="og:url" content="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-吴恩达笔记1">
+<meta property="og:url" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
-<meta property="og:description" content="本文记录docker搭建elk，并简单结合logstash日志输出filebeat docker pull docker.elastic.co&#x2F;beats&#x2F;filebeat:6.2.1   filebeat.yml  enabled要改为true，filebeat默认为false 12345678filebeat.prospectors:- type: log  enabled: true  pa">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2018-02-13T02:40:28.000Z">
-<meta property="article:modified_time" content="2021-09-22T06:14:45.000Z">
+<meta property="article:published_time" content="2021-09-25T08:13:07.000Z">
+<meta property="article:modified_time" content="2021-09-25T08:36:56.321Z">
 <meta property="article:author" content="Earyant">
-<meta property="article:tag" content="logstash">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">
+<link rel="canonical" href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>docker简单结合elk、logstash | Earyant的技术博客</title>
+  <title>机器学习-吴恩达笔记1 | Earyant的技术博客</title>
   
 
 
@@ -208,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">
@@ -221,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          docker简单结合elk、logstash
+          机器学习-吴恩达笔记1
         </h1>
 
         <div class="post-meta">
@@ -230,16 +228,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2018-02-13 10:40:28" itemprop="dateCreated datePublished" datetime="2018-02-13T10:40:28+08:00">2018-02-13</time>
+              <time title="创建时间：2021-09-25 16:13:07 / 修改时间：16:36:56" itemprop="dateCreated datePublished" datetime="2021-09-25T16:13:07+08:00">2021-09-25</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -254,7 +255,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>729</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -273,23 +274,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="本文记录docker搭建elk并简单结合logstash日志输出">本文记录docker搭建elk，并简单结合logstash日志输出</span></h2><h3><span id="filebeat">filebeat</span></h3><blockquote>
-<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
-</blockquote>
-<ul>
-<li>filebeat.yml</li>
-</ul>
-<p><strong>enabled要改为true，filebeat默认为false</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>docker run -it –name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
-</blockquote>
-<h3><span id="logstash">logstash</span></h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
-<ul>
-<li>logstash.yml</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        
     </div>
 
     
@@ -327,7 +312,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/logstash/" rel="tag"># logstash</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
           </div>
 
         
@@ -336,13 +321,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/docker%E7%AE%80%E5%8D%95%E9%83%A8%E7%BD%B2elk%E6%9C%8D%E5%8A%A1/" rel="prev" title="docker简单部署elk服务">
-      <i class="fa fa-chevron-left"></i> docker简单部署elk服务
+    <a href="/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-16-ipython%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/" rel="prev" title="利用python进行数据分析-16.ipython高级应用">
+      <i class="fa fa-chevron-left"></i> 利用python进行数据分析-16.ipython高级应用
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/%E7%88%B1%E5%90%83%E8%A5%BF%E7%93%9C/" rel="next" title="爱吃西瓜">
-      爱吃西瓜 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -402,7 +384,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">本文记录docker搭建elk，并简单结合logstash日志输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">filebeat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">logstash</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -603,7 +584,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'earyant.github.io-comment',
       owner       : 'earyantLe',
       admin       : ['earyantLe'],
-      id          : 'bf0be128c3a9a9c1cd0d9eaeecbba55b',
+      id          : 'dcd6453513202e50e55c0d3246914feb',
         language: '',
       distractionFreeMode: true
     });
