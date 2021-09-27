@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-09-25T08:36:56.321Z</updated>
+  <updated>2021-09-27T09:13:27.105Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>机器学习-吴恩达笔记1</title>
-    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/"/>
-    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%90%B4%E6%81%A9%E8%BE%BE%E7%AC%94%E8%AE%B01/</id>
-    <published>2021-09-25T08:13:07.000Z</published>
-    <updated>2021-09-25T08:36:56.321Z</updated>
+    <title>机器学习基石-4</title>
+    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-4/"/>
+    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-4/</id>
+    <published>2021-09-27T13:30:37.000Z</published>
+    <updated>2021-09-27T09:13:27.105Z</updated>
     
     
       
@@ -31,7 +31,92 @@
     
     
     
-    <category term="机器学习" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习基石" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/"/>
+    
+    
+    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>天涯神贴-房价思考</title>
+    <link href="http://earyant.github.io/posts/%E5%A4%A9%E6%B6%AF%E7%A5%9E%E8%B4%B4-%E6%88%BF%E4%BB%B7%E6%80%9D%E8%80%83/"/>
+    <id>http://earyant.github.io/posts/%E5%A4%A9%E6%B6%AF%E7%A5%9E%E8%B4%B4-%E6%88%BF%E4%BB%B7%E6%80%9D%E8%80%83/</id>
+    <published>2021-09-27T09:40:56.000Z</published>
+    <updated>2021-09-27T09:40:56.000Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;kkndme-tianya（持续更新中…）&quot;&gt;&lt;a href=&quot;#kkndme-tianya（持续更新中…）&quot; class=&quot;headerlink&quot; title=&quot;kkndme_tianya（持续更新中…）&quot;&gt;&lt;/a&gt;kkndme_tianya（持续更新中…）&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;天涯神贴&lt;a href=&quot;http://bbs.tianya.cn/post-house-252774-1.shtml&quot;&gt;「2010年的房地产调控，我们收获了什么？写在房价暴涨前」&lt;/a&gt;脱水版，内容时间顺序和原贴一致，原贴中的优质非楼主写的内容，添加了引用格式便于区分。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习基石-3</title>
+    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-3/"/>
+    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-3/</id>
+    <published>2021-09-26T13:30:37.000Z</published>
+    <updated>2021-09-27T09:12:40.646Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;3-–-Types-of-Learning&quot;&gt;&lt;a href=&quot;#3-–-Types-of-Learning&quot; class=&quot;headerlink&quot; title=&quot;3 – Types of Learning&quot;&gt;&lt;/a&gt;3 – Types of Learning&lt;/h1&gt;&lt;p&gt;上节课我们主要介绍了解决线性分类问题的一个简单的方法：PLA。PLA能够在平面中选择一条直线将样本数据完全正确分类。而对于线性不可分的情况，可以使用Pocket Algorithm来处理。本节课将主要介绍一下机器学习有哪些种类，并进行归纳。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="机器学习基石" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/"/>
+    
+    
+    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习基石-2</title>
+    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-2/"/>
+    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-2/</id>
+    <published>2021-09-26T13:20:37.000Z</published>
+    <updated>2021-09-27T09:12:36.354Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2-–-Learning-to-Answer-Yes-No&quot;&gt;&lt;a href=&quot;#2-–-Learning-to-Answer-Yes-No&quot; class=&quot;headerlink&quot; title=&quot;2 – Learning to Answer Yes/No&quot;&gt;&lt;/a&gt;2 – Learning to Answer Yes/No&lt;/h1&gt;&lt;p&gt;上节课，我们主要简述了机器学习的定义及其重要性，并用流程图的形式介绍了机器学习的整个过程：根据模型H，使用演算法A，在训练样本D上进行训练，得到最好的h，其对应的g就是我们最后需要的机器学习的模型函数，一般g接近于目标函数f。本节课将继续深入探讨机器学习问题，介绍感知机Perceptron模型，并推导课程的第一个机器学习算法：Perceptron Learning Algorithm（PLA）。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="机器学习基石" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/"/>
+    
+    
+    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习基石-1</title>
+    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-1/"/>
+    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-1/</id>
+    <published>2021-09-26T13:17:37.000Z</published>
+    <updated>2021-09-27T09:12:29.780Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-–-The-Learning-Problem&quot;&gt;&lt;a href=&quot;#1-–-The-Learning-Problem&quot; class=&quot;headerlink&quot; title=&quot;1 – The Learning Problem&quot;&gt;&lt;/a&gt;1 – The Learning Problem&lt;/h1&gt;&lt;p&gt;最近在看NTU林轩田的《机器学习基石》课程，个人感觉讲的非常好。整个基石课程分成四个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;  When Can Machine Learn?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;  Why Can Machine Learn?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;  How Can Machine Learn?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;  How Can Machine Learn Better?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每个部分由四节课组成，总共有16节课。那么，从这篇开始，我们将连续对这门课做课程笔记，共16篇，希望能对正在看这们课的童鞋有所帮助。下面开始第一节课的笔记：The Learning Problem。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="机器学习基石" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/"/>
     
     
     <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
@@ -385,89 +470,6 @@
     <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scikit-Learn与TensorFlow机器学习实用指南-1</title>
-    <link href="http://earyant.github.io/posts/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/"/>
-    <id>http://earyant.github.io/posts/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/</id>
-    <published>2021-09-21T15:10:25.000Z</published>
-    <updated>2021-09-22T06:14:45.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-1.简介</title>
-    <link href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/"/>
-    <id>http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/</id>
-    <published>2021-09-21T14:29:02.000Z</published>
-    <updated>2021-09-25T07:58:15.996Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;第1章-准备工作&quot;&gt;&lt;a href=&quot;#第1章-准备工作&quot; class=&quot;headerlink&quot; title=&quot;第1章 准备工作&quot;&gt;&lt;/a&gt;第1章 准备工作&lt;/h1&gt;&lt;h2 id=&quot;1-1-本书的内容&quot;&gt;&lt;a href=&quot;#1-1-本书的内容&quot; class=&quot;headerlink&quot; title=&quot;1.1 本书的内容&quot;&gt;&lt;/a&gt;1.1 本书的内容&lt;/h2&gt;&lt;p&gt;本书讲的是利用Python进行数据控制、处理、整理、分析等方面的具体细节和基本要点。我的目标是介绍Python编程和用于数据处理的库和工具环境，掌握这些，可以让你成为一个数据分析专家。虽然本书的标题是“数据分析”，重点却是Python编程、库，以及用于数据分析的工具。这就是数据分析要用到的Python编程。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习书单</title>
-    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/"/>
-    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95/</id>
-    <published>2021-09-18T03:11:47.000Z</published>
-    <updated>2021-09-25T07:30:46.214Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="书单" scheme="http://earyant.github.io/categories/%E4%B9%A6%E5%8D%95/"/>
-    
-    
-    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="书单" scheme="http://earyant.github.io/tags/%E4%B9%A6%E5%8D%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习路线</title>
-    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
-    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</id>
-    <published>2021-09-17T09:20:02.000Z</published>
-    <updated>2021-09-22T06:14:45.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
