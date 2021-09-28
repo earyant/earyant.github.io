@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"earyant.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="6 – Theory of Generalization上一节课，我们主要探讨了当M的数值大小对机器学习的影响。如果M很大，那么就不能保证机器学习有很好的泛化能力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石-6">
+<meta property="og:url" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="6 – Theory of Generalization上一节课，我们主要探讨了当M的数值大小对机器学习的影响。如果M很大，那么就不能保证机器学习有很好的泛化能力">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/04f493664b201b8df9c53b61298cab13.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/7cd97d730040fe395178281c9bcd2896.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/e35fe0cc5f978367608fbe0832b89876.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/d93b83928aca7ad49c974a734e903c75.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/8b0d2ebec1dc8e39584706453f0e95ea.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/458d09662b917b59905548a3993e96cc.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/7cd97d730040fe395178281c9bcd2896.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/458d09662b917b59905548a3993e96cc.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/3b23bef628d9fbafbf28bc252d02cb09.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/2c425af1bda39d5d4fdb515dba5f683c.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/a28d9ac1bc94143c369fa4385a0c8606.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/19eb420f01ddee8a442203359e539f63.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/26491f4fd30de6f0330fd2bd7e364b44.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/19eb420f01ddee8a442203359e539f63.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/0f72079b59b2c590934d6fbc97f49b86.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/4b816d9a6c9d8dc65312017e305289d0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/62b7e9853cf1e2c93e36e734684ffedc.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b70c0e4f3f5acaff10bb2ed9b63af571.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/16f8ad8a2b62816f059ac3bf3ed190a5.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/ae00d20e35b7b5ba26fda3c392c3be6d.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/ff23be6e6b260123571f2b06d03610d1.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b274867af01a89518824fc6395aa4e50.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/e8576a0230698c0e77c5527cd1727568.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/775a32097a04956d0512e64ffb9c0fb4.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/56bdd9b5ca1eb9619f4b4bed3a1be4e0.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/2335ae24f94e920920f39ab0664a756d.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/e0333ab9074c1b4afadfd11d448a5f53.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/7b8f0bee962842fa8de95a3990251150.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/862f46fc4f65abf0ef3e91350620320d.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b119518687af4f52fd05706b858d5b4e.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/bfe096b23bc59dc545bade37df21c182.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/1737a139505385980c969238ed819727.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/8bc76a1f5706eb9d7282ce1655f95eb4.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="og:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+<meta property="article:published_time" content="2021-09-28T13:35:37.000Z">
+<meta property="article:modified_time" content="2021-09-28T08:56:02.958Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/b5dfc1d72d3bc59070321b6dc617fce2.jpg">
+
+<link rel="canonical" href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机器学习基石-6 | Earyant的技术博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">101</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习基石-6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-28 21:35:37 / 修改时间：16:56:02" itemprop="dateCreated datePublished" datetime="2021-09-28T21:35:37+08:00">2021-09-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/" itemprop="url" rel="index"><span itemprop="name">机器学习基石</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1><span id="6-theory-of-generalization">6 – Theory of Generalization</span></h1><p>上一节课，我们主要探讨了当M的数值大小对机器学习的影响。如果M很大，那么就不能保证机器学习有很好的泛化能力</p>
+<span id="more"></span>
+
+<p>所以问题转换为验证M有限，即最好是按照多项式成长。然后通过引入了成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">和dichotomy以及break point的概念，提出2D perceptrons的成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">是多项式级别的猜想。这就是本节课将要深入探讨和证明的内容。</p>
+<h3><span id="一-restriction-of-break-point"><strong>一、Restriction of Break Point</strong></span></h3><p>我们先回顾一下上节课的内容，四种成长函数与break point的关系：</p>
+<p><img data-src="./04f493664b201b8df9c53b61298cab13.jpg"></p>
+<p>下面引入一个例子，如果k=2，那么当N取不同值的时候，计算其成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">是多少。很明显，当N=1时，<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">=2,；当N=2时，由break point为2可知，任意两点都不能被shattered（shatter的意思是对N个点，能够分解为<img data-src="./7cd97d730040fe395178281c9bcd2896.jpg">种dichotomies）；<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">最大值只能是3；当N=3时，简单绘图分析可得其<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">，即最多只有4种dichotomies。</p>
+<p><img data-src="./e35fe0cc5f978367608fbe0832b89876.jpg"></p>
+<p>所以，我们发现当N&gt;k时，break point限制了<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">值的大小，也就是说影响成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的因素主要有两个：</p>
+<ul>
+<li><p>  抽样数据集N</p>
+</li>
+<li><p>  break point k（这个变量确定了假设的类型）</p>
+</li>
+</ul>
+<p>那么，如果给定N和k，能够证明其<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的最大值的上界是多项式的，则根据霍夫丁不等式，就能用<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">代替M，得到机器学习是可行的。所以，证明<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界是poly(N)，是我们的目标。</p>
+<p><img data-src="./d93b83928aca7ad49c974a734e903c75.jpg"></p>
+<h3><span id="二-bounding-function-basic-cases"><strong>二、Bounding Function: Basic Cases</strong></span></h3><p>现在，我们引入一个新的函数：bounding function，B(N,k)。Bound Function指的是当break point为k的时候，成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">可能的最大值。也就是说B(N,k)是<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界，对应<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">最多有多少种dichotomy。那么，我们新的目标就是证明：</p>
+<p>这里值得一提的是，B(N,k)的引入不考虑是1D postive intrervals问题还是2D perceptrons问题，而只关心成长函数的上界是多少，从而简化了问题的复杂度。</p>
+<p><img data-src="./8b0d2ebec1dc8e39584706453f0e95ea.jpg"></p>
+<p>求解B(N,k)的过程十分巧妙：</p>
+<ul>
+<li><p>  当k=1时，B(N,1)恒为1。</p>
+</li>
+<li><p>  当N &lt; k时，根据break point的定义，很容易得到<img data-src="./458d09662b917b59905548a3993e96cc.jpg">。</p>
+</li>
+<li><p>  当N = k时，此时N是第一次出现不能被shatter的值，所以最多只能有<img data-src="./7cd97d730040fe395178281c9bcd2896.jpg">个dichotomies，则<img data-src="./458d09662b917b59905548a3993e96cc.jpg">。</p>
+</li>
+</ul>
+<p><img data-src="./3b23bef628d9fbafbf28bc252d02cb09.jpg"></p>
+<p>到此，bounding function的表格已经填了一半了，对于最常见的N&gt;k的情况比较复杂，推导过程下一小节再详细介绍。</p>
+<h3><span id="三-bounding-function-inductive-cases"><strong>三、Bounding Function: Inductive Cases</strong></span></h3><p>N &gt; k的情况较为复杂，下面给出推导过程：</p>
+<p>以B(4,3)为例，首先想着能否构建B(4,3)与B(3,x)之间的关系。</p>
+<p>首先，把B(4,3)所有情况写下来，共有11组。也就是说再加一种dichotomy，任意三点都能被shattered，11是极限。</p>
+<p><img data-src="./2c425af1bda39d5d4fdb515dba5f683c.jpg"></p>
+<p>对这11种dichotomy分组，目前分成两组，分别是orange和purple，orange的特点是，x1,x2和x3是一致的，x4不同并成对，例如1和5，2和8等，purple则是单一的，x1,x2,x3都不同，如6,7,9三组。</p>
+<p><img data-src="./a28d9ac1bc94143c369fa4385a0c8606.jpg"></p>
+<p>将Orange去掉x4后去重得到4个不同的vector并成为<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">，相应的purple为<img data-src="./19eb420f01ddee8a442203359e539f63.jpg">。那么<img data-src="./26491f4fd30de6f0330fd2bd7e364b44.jpg">，这个是直接转化。紧接着，由定义，B(4,3)是不能允许任意三点shatter的，所以由<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">和<img data-src="./19eb420f01ddee8a442203359e539f63.jpg">构成的所有三点组合也不能shatter（alpha经过去重），即<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">。</p>
+<p><img data-src="./0f72079b59b2c590934d6fbc97f49b86.jpg"></p>
+<p>另一方面，由于<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">中x4是成对存在的，且<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">是不能被任意三点shatter的，则能推导出<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">是不能被任意两点shatter的。这是因为，如果<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">是不能被任意两点shatter，而x4又是成对存在的，那么x1、x2、x3、x4组成的<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg">必然能被三个点shatter。这就违背了条件的设定。这个地方的推导非常巧妙，也解释了为什么会这样分组。此处得到的结论是<img data-src="./4b816d9a6c9d8dc65312017e305289d0.jpg"></p>
+<p><img data-src="./62b7e9853cf1e2c93e36e734684ffedc.jpg"></p>
+<p>由此得出B(4,3)与B(3,x)的关系为：</p>
+<p><img data-src="./b70c0e4f3f5acaff10bb2ed9b63af571.jpg"></p>
+<p>最后，推导出一般公式为：</p>
+<p><img data-src="./16f8ad8a2b62816f059ac3bf3ed190a5.jpg"></p>
+<p>根据推导公式，下表给出B(N,K)值</p>
+<p><img data-src="./ae00d20e35b7b5ba26fda3c392c3be6d.jpg"></p>
+<p>根据递推公式，推导出B(N,K)满足下列不等式：</p>
+<p><img data-src="./ff23be6e6b260123571f2b06d03610d1.jpg"></p>
+<p>上述不等式的右边是最高阶为k-1的N多项式，也就是说成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界B(N,K)的上界满足多项式分布poly(N)，这就是我们想要得到的结果。</p>
+<p>得到了<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界B(N,K)的上界满足多项式分布poly(N)后，我们回过头来看看之前介绍的几种类型它们的<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">与break point的关系：</p>
+<p><img data-src="./b274867af01a89518824fc6395aa4e50.jpg"></p>
+<p>我们得到的结论是，对于2D perceptrons，break point为k=4，<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界是<img data-src="./e8576a0230698c0e77c5527cd1727568.jpg">。推广一下，也就是说，如果能找到一个模型的break point，且是有限大的，那么就能推断出其成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">有界。</p>
+<h3><span id="四-a-pictorial-proof"><strong>四、A Pictorial Proof</strong></span></h3><p>我们已经知道了成长函数的上界是poly(N)的，下一步，如果能将<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">代替M，代入到Hoffding不等式中，就能得到<img data-src="./775a32097a04956d0512e64ffb9c0fb4.jpg">的结论：</p>
+<p><img data-src="./56bdd9b5ca1eb9619f4b4bed3a1be4e0.jpg"></p>
+<p>实际上并不是简单的替换就可以了，正确的表达式为：</p>
+<p><img data-src="./2335ae24f94e920920f39ab0664a756d.jpg"></p>
+<p>该推导的证明比较复杂，我们可以简单概括为三个步骤来证明：</p>
+<p><img data-src="./e0333ab9074c1b4afadfd11d448a5f53.jpg"></p>
+<p><img data-src="./7b8f0bee962842fa8de95a3990251150.jpg"></p>
+<p><img data-src="./862f46fc4f65abf0ef3e91350620320d.jpg"></p>
+<p>这部分内容，我也只能听个大概内容，对具体的证明过程有兴趣的童鞋可以自行研究一下，研究的结果记得告诉一下我哦。</p>
+<p>最终，我们通过引入成长函数<img data-src="./b119518687af4f52fd05706b858d5b4e.jpg">，得到了一个新的不等式，称为Vapnik-Chervonenkis(VC) bound：</p>
+<p><img data-src="./bfe096b23bc59dc545bade37df21c182.jpg"></p>
+<p>对于2D perceptrons，它的break point是4，那么成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">。所以，我们可以说2D perceptrons是可以进行机器学习的，只要找到hypothesis能让<img data-src="./1737a139505385980c969238ed819727.jpg">，就能保证<img data-src="./8bc76a1f5706eb9d7282ce1655f95eb4.jpg">。</p>
+<h3><span id="五-总结"><strong>五、总结</strong></span></h3><p>本节课我们主要介绍了只要存在break point，那么其成长函数<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">就满足poly(N)。推导过程是先引入<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界B(N,k)，B(N,k)的上界是N的k-1阶多项式，从而得到<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">的上界就是N的k-1阶多项式。然后，我们通过简单的三步证明，将<img data-src="./b5dfc1d72d3bc59070321b6dc617fce2.jpg">代入了Hoffding不等式中，推导出了Vapnik-Chervonenkis(VC) bound，最终证明了只要break point存在，那么机器学习就是可行的。</p>
+<p><strong><em>注明：</em></strong></p>
+<p>文章中所有的图片均来自台湾大学林轩田《机器学习基石》课程。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-5/" rel="prev" title="机器学习基石-5">
+      <i class="fa fa-chevron-left"></i> 机器学习基石-5
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">6 – Theory of Generalization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、Restriction of Break Point</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Bounding Function: Basic Cases</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、Bounding Function: Inductive Cases</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、A Pictorial Proof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : '2958a2993f765005264fa36756e790fa',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

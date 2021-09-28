@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">99</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">101</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,348 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-20 09:47:36" itemprop="dateCreated datePublished" datetime="2018-01-20T09:47:36+08:00">2018-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="java8新特性">java8新特性</span></h1><h2><span id="lambda表达式">lambda表达式</span></h2><blockquote>
+<p>java8接受一个函数作为另一个函数的参数传入进去</p>
+</blockquote>
+<p>Arrays.asList( “a”, “b”, “d” ).forEach( e -&gt; System.out.println( e ) ); 参数的类型是编译器推断出来的</p>
+<blockquote>
+<p>Lambda可以引用类的成员变量与局部变量（如果这些变量不是final的话，它们会被隐含的转为final，这样效率更高）。</p>
+</blockquote>
+<h2><span id="默认方法和静态方法">默认方法和静态方法</span></h2><blockquote>
+<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到java.util.Collection接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
+</blockquote>
+<h2><span id="重复注解">重复注解</span></h2><h2><span id="java编译器的新特性">Java编译器的新特性</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterNames</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Method method = ParameterNames.class.getMethod( <span class="string">&quot;main&quot;</span>, String[].class );</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">final</span> Parameter parameter: method.getParameters() ) &#123;</span><br><span class="line">            System.out.println( <span class="string">&quot;Parameter: &quot;</span> + parameter.getName() );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Parameter: args</p>
+</blockquote>
+<p>对于有经验的Maven用户，通过maven-compiler-plugin的配置可以将-parameters参数添加到编译器中去。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">compilerArgument</span>&gt;</span>-parameters<span class="tag">&lt;/<span class="name">compilerArgument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="java-类库的新特性">Java 类库的新特性</span></h2><h3><span id="optional">Optional</span></h3><p>平时用的判空：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (name == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改成Optional：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  Optional&lt;String &gt; names = Opntional.of(name);</span><br><span class="line">  <span class="keyword">if</span> (names.isPresent())&#123;</span><br><span class="line">      <span class="keyword">return</span> names.get();</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果单纯改成这样，还不如直接写成 ==null，看起来更加繁琐。 应该改成这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Opntional.of(name).get().orElse(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="stream">Stream</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> totalPointsOfOpenTasks = tasks</span><br><span class="line">    .stream()</span><br><span class="line">    .filter( task -&gt; task.getStatus() == Status.OPEN )</span><br><span class="line">    .mapToInt( Task::getPoints )</span><br><span class="line">    .sum();</span><br></pre></td></tr></table></figure>
+
+<h4><span id="filter">filter</span></h4><blockquote>
+<p>对于Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素；</p>
+</blockquote>
+<h4><span id="map">map</span></h4><blockquote>
+<p>映射转换</p>
+</blockquote>
+<h4><span id="mapto">mapTo*</span></h4><blockquote>
+<p>映射转换成 <em>的类型，</em> 包括Integer、Double、Long</p>
+</blockquote>
+<h4><span id="flatmap">flatMap</span></h4><blockquote>
+<p>合并集合,和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;1,2&#125;，&#123;3,4&#125;，&#123;5,6&#125;&#125; - &gt; flatMap - &gt; &#123;1,2,3,4,5,6&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#x27;a&#x27;，&#x27;b&#x27;&#125;，&#123;&#x27;c&#x27;，&#x27;d&#x27;&#125;，&#123;&#x27;e&#x27;，&#x27;f&#x27;&#125;&#125; - &gt; flatMap - &gt; &#123;&#x27;a&#x27;，&#x27;b&#x27;，&#x27;c&#x27; D&quot;， &#x27;E&#x27;， &#x27;F&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="flatmapto">flatMapTo*</span></h4><h4><span id="distinct">distinct</span></h4><blockquote>
+<p>对于Stream中包含的元素进行去重操作（去重逻辑依赖元素的equals方法），新生成的Stream中没有重复的元素；</p>
+</blockquote>
+<blockquote>
+<h4><span id="sorted">sorted</span></h4></blockquote>
+<h4><span id="peek">peek</span></h4><blockquote>
+<p>监控器</p>
+</blockquote>
+<p>提供一个Consumer消费函数，返回一个新的Stream，如果只写 Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)) 是不会打印结果的 新Stream每个元素被<strong>消费</strong>的时候都会执行给定的消费函数； Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)).collect(Collectors.toList());</p>
+<h4><span id="limit">limit</span></h4><p>对一个Stream进行截断操作，获取其前N个元素，如果原Stream中包含的元素个数小于N，那就获取其所有的元素；</p>
+<h4><span id="skip">skip</span></h4><p>返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；</p>
+<h4><span id="foreach">forEach</span></h4><blockquote>
+<p>遍历</p>
+</blockquote>
+<h4><span id="foreachordered">forEachOrdered</span></h4><blockquote>
+<p>与forEach一样，只不过每次遍历结果都是相同的，forEach不是固定的序列</p>
+</blockquote>
+<h4><span id="generate">generate</span></h4><p>给定一个生成函数，生成一个无限的队列 Stream.generate(Math::random);</p>
+<h4><span id="iterate">iterate</span></h4><p>也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环</p>
+<p>Stream.iterate(1, item -&gt; item + 1).limit(10).forEach(System.out::println);</p>
+<h4><span id="collect">collect</span></h4><blockquote>
+<p>汇聚函数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>方法参数</th>
+<th>返回类型</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toList</td>
+<td>List<code>&lt;T &gt;</code></td>
+<td>把流中的参数汇聚成List集合</td>
+<td>示例:List<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>Set<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到Set中,删除重复项</td>
+<td>Set<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>Collection<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到给定的供应源创建的集合中</td>
+<td><code>ArrayList&lt;Menu&gt; menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</code></td>
+</tr>
+<tr>
+<td>Counting</td>
+<td>Long</td>
+<td>计算流中元素个数</td>
+<td>Long count=Menu.getMenus.stream().collect(Collectors.counting());</td>
+</tr>
+<tr>
+<td>SummingInt</td>
+<td>Integer</td>
+<td>对流中元素的一个整数属性求和</td>
+<td>Integer count=Menu.getMenus.stream().collect(Collectors.summingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>Double</td>
+<td>计算流中元素integer属性的平均值</td>
+<td>Double averaging=Menu.getMenus.stream().collect((Collectors.averagingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Joining</td>
+<td>String</td>
+<td>连接流中每个元素的toString方法生成的字符串</td>
+<td>String name=Menu.getMenus.stream().map(Menu::getName).collect(Collectors.joining(“, “))</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> fattest=Menu.getMenus.stream().collectCollectors.maxBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Reducing</td>
+<td>归约操作产生的类型</td>
+<td>从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
+<td>int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>转换函数返回的类型</td>
+<td>包裹另一个转换器,对其结果应用转换函数</td>
+<td>Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>Map<code>&lt;K,List&lt;T&gt;&gt;</code></td>
+<td>根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
+<td>Map<code>&lt;Type,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>Map<code>&lt;Boolean,List&lt;T&gt;&gt;</code></td>
+<td>根据流中每个元素应用谓语的结果来对项目进行分区</td>
+<td>Map<code>&lt;Boolean,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
+</tr>
+</tbody></table>
+<h4><span id="reduce">reduce</span></h4><ul>
+<li><code>Optional&lt;t&gt; reduce(BinaryOperator&lt;t&gt; accumulator);</code></li>
+</ul>
+<p>List <code>&lt;integer&gt;</code> ints = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10); System.out.println(“ints sum is:” + ints.stream().reduce((sum, item) -&gt; sum + item).get());</p>
+<p>可以看到reduce方法接受一个函数，这个函数有两个参数，第一个参数是上次函数执行的返回值（也称为中间结果），第二个参数是stream中的元素，这个函数把这两个值相加，得到的和会被赋值给下次执行这个函数的第一个参数。要注意的是：<strong>第一次执行的时候第一个参数的值是Stream的第一个元素，第二个参数是Stream的第二个元素</strong>。这个方法返回值类型是Optional，这是Java8防止出现NPE的一种可行方法，后面的文章会详细介绍，这里就简单的认为是一个容器，其中可能会包含0个或者1个对象。</p>
+<ul>
+<li>T reduce(T identity, BinaryOperator<code>&lt;t&gt;</code> accumulator);<br>这个定义上上面已经介绍过的基本一致，不同的是：它允许用户提供一个循环计算的初始值，如果Stream为空，就直接返回该值。而且这个方法不会返回Optional，因为其不会出现null值。</li>
+</ul>
+<h4><span id="count">count</span></h4><blockquote>
+<p>个数</p>
+</blockquote>
+<h4><span id="allmatch">allMatch</span></h4><p>是不是所有都满足给定的条件</p>
+<h4><span id="anymatch">anyMatch</span></h4><p>是不是存在某一个元素满足给定的条件</p>
+<h4><span id="findfirst">findFirst</span></h4><p>返回第一个，返回的是Optional值</p>
+<h4><span id="nonematch">noneMatch</span></h4><p>是否没有一个元素满足给定的条件</p>
+<h4><span id="max和min">max和min</span></h4><p>给定的比较条件，返回最大最小值</p>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/stream/">参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dm_vincent/article/category/2268127">好文收藏</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>注册中心不自动上线下线</li>
+<li>异步返回值</li>
+<li>bean参数传值</li>
+<li></li>
+</ul>
+<h3><span id="eureka-不自动下线">eureka 不自动下线</span></h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
+<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
+<p>解决方法：设置enableSelfPreservation:false</p>
+<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
+<h3><span id="负载均衡在服务下掉后的重试策略"></span></h3><p>默认没有开启：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="断路器配置重试"></span></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1065,183 +1407,10 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B7%A8%E5%BA%93%E5%88%86%E9%A1%B5%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%BD%AC%E5%8F%91%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B7%A8%E5%BA%93%E5%88%86%E9%A1%B5%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%BD%AC%E5%8F%91%EF%BC%89/" class="post-title-link" itemprop="url">数据库跨库分页实践（转发）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-12 18:18:07" itemprop="dateCreated datePublished" datetime="2017-10-12T18:18:07+08:00">2017-10-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://gitbook.cn/books/58a98f512bd83c246b6b8866/index.html">转载链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%B7%AE%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%B7%AE%E5%88%AB/" class="post-title-link" itemprop="url">基本类型和包装类型差别</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-03 14:39:22" itemprop="dateCreated datePublished" datetime="2017-10-03T14:39:22+08:00">2017-10-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="基本类型以及包装类型">基本类型以及包装类型</span></h2><p>   java中定义了基本类型：<br>        * 整形： byte、short、int、long<br>        * 浮点型：float、double<br>        * 逻辑型： boolean<br>        * 字符型： char<br>   以及对应的包装类型：<br>        * 整形： Byte、Short、Integer、Long<br>        * 浮点型： Float、Double<br>        * 逻辑型： Boolean<br>        * 字符型： Char </p>
-<h2><span id="自动装箱-拆箱">自动装箱、拆箱</span></h2><p>   java为满足程序员基本类型和包装类型混合使用，按需自动装箱拆箱。<br>   自动装箱拆箱使基本类型和包装类型之间的区别逐渐模糊，但是语义上有些许差别，性能上也有明显差别。</p>
-<h2><span id="基本类型和包装类型差别">基本类型和包装类型差别</span></h2><ul>
-<li>基本类型有默认值，例如int值默认为0 ，而Integer没有默认引用，默认为null。<br>  所以在写数据库实体类或者网络请求接收字段的时候要使用包装类型，防止接受参数为null的情况。</li>
-<li>包装类的频繁更改并不是在原来的基础上更改，而是产生新的对象，所以包装类的频繁更改性能很差.<blockquote>
-<p>使用Long情况</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        Long sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using Long total time = &quot;</span> + (end - now));</span><br></pre></td></tr></table></figure>
-<p> 耗费时间为</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">8832</span></span><br></pre></td></tr></table></figure>
-<p>使用long情况</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testlongAutoBoxing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;using long ,sum =&quot;</span> + sum);</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;using long total time = &quot;</span> + (end - now));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p> 总耗费时间为</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2305843005992468481</span></span><br><span class="line">all time = <span class="number">787</span></span><br></pre></td></tr></table></figure>
-</blockquote>
- 在使用Long的时间比long增加10倍，原因是Long的操作过程中会构造大概2^31个实例。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1309,7 +1478,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1392,12 +1561,12 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">672k</span>
+    <span title="站点总字数">678k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:11</span>
+    <span title="站点阅读时长">10:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

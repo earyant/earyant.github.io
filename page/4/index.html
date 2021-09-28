@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">99</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">101</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,374 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/jvm%E7%B3%BB%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/jvm%E7%B3%BB%E5%88%97/" class="post-title-link" itemprop="url">jvm系列</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-12 15:42:13" itemprop="dateCreated datePublished" datetime="2018-05-12T15:42:13+08:00">2018-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="jvm系列一java类的加载机制"></span></h2><ul>
+<li><p>什么是类的加载</p>
+<blockquote>
+<p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+</blockquote>
+</li>
+<li><p>类的生命周期</p>
+<ul>
+<li>  加载，查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象</li>
+<li>  连接，连接又包含三块内容：验证、准备、初始化。1）验证，文件格式、元数据、字节码、符号引用验证；2）准备，为类的静态变量分配内存，并将其初始化为默认值；3）解析，把类中的符号引用转换为直接引用</li>
+<li>  初始化，为类的静态变量赋予正确的初始值</li>
+<li>  使用，new出对象程序中使用</li>
+<li>  卸载，执行垃圾回收</li>
+</ul>
+</li>
+<li><p>类加载器</p>
+<ul>
+<li><p>  启动类加载器：Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库</p>
+</li>
+<li><p>  扩展类加载器：Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载DK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
+</li>
+<li><p>  应用程序类加载器：Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器</p>
+</li>
+</ul>
+</li>
+<li><p>双亲委派模型</p>
+<pre><code>  \-  全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入
+
+  - 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类
+
+  - 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效
+</code></pre>
+<h2><span id="jvm系列二jvm内存结构"></span></h2><p>  <img data-src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
+</li>
+</ul>
+<blockquote>
+<p>方法区和堆是所有线程共享的内存区域；而java栈、本地方法栈和程序计数器是运行是线程私有的内存区域。</p>
+</blockquote>
+<ul>
+<li><p>  Java堆（Heap）,是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。</p>
+</li>
+<li><p>  方法区（Method Area）,方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+</li>
+<li><p>  程序计数器（Program Counter Register）,程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。</p>
+</li>
+<li><p>  JVM栈（JVM Stacks）,与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
+</li>
+<li><p>  本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
+</li>
+</ul>
+<h3><span id="对象分配规则">对象分配规则</span></h3><ul>
+<li><p>  对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。</p>
+</li>
+<li><p>  大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。</p>
+</li>
+<li><p>  长期存活的对象进入老年代。虚拟机为每个对象定义了一个年龄计数器，如果对象经过了1次Minor GC那么对象会进入Survivor区，之后每经过一次Minor GC那么对象的年龄加1，知道达到阀值对象进入老年区。</p>
+</li>
+<li><p>  动态判断对象的年龄。如果Survivor区中相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。</p>
+</li>
+<li><p>  空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。</p>
+</li>
+</ul>
+<h2><span id="jvm系列三gc算法-垃圾收集器"></span></h2><h3><span id="对象存活判断">对象存活判断</span></h3><blockquote>
+<p>判断对象是否存活一般有两种方式：</p>
+</blockquote>
+<ul>
+<li><p>  引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。</p>
+</li>
+<li><p>  可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，不可达对象。</p>
+</li>
+</ul>
+<h3><span id="gc算法">GC算法</span></h3><ul>
+<li><p>  GC最基础的算法有三种：标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。</p>
+</li>
+<li><p>  标记 -清除算法，“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。</p>
+</li>
+<li><p>  复制算法，“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
+</li>
+<li><p>  标记-压缩算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
+</li>
+<li><p>  分代收集算法，“分代收集”（Generational Collection）算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
+</li>
+</ul>
+<h3><span id="垃圾回收器">垃圾回收器</span></h3><ul>
+<li><p>  Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。</p>
+</li>
+<li><p>  ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。</p>
+</li>
+<li><p>  Parallel收集器，Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。</p>
+</li>
+<li><p>  Parallel Old 收集器，Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法</p>
+</li>
+<li><p>  CMS收集器，CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。</p>
+</li>
+<li><p>  G1收集器，G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征</p>
+</li>
+</ul>
+<p>在Java语言中，GC Roots包括：</p>
+<ul>
+<li>  虚拟机栈中引用的对象。</li>
+<li>  方法区中类静态属性实体引用的对象。</li>
+<li>  方法区中常量引用的对象。</li>
+<li>  本地方法栈中JNI引用的对象。</li>
+</ul>
+<h2><span id="jvm系列四jvm调优-命令篇"></span></h2><h3><span id="调优命令">调优命令</span></h3><blockquote>
+<p>  Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
+</blockquote>
+<ul>
+<li>  jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。</li>
+<li>  jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</li>
+<li>  jmap，JVM Memory Map命令用于生成heap dump文件</li>
+<li>  jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看</li>
+<li>  jstack，用于生成java虚拟机当前时刻的线程快照。</li>
+<li>  jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</li>
+</ul>
+<h2><span id="jvm系列五java-gc-分析"></span></h2><h3><span id="主要关注点">主要关注点：</span></h3><ul>
+<li><p>  GC日志分析</p>
+</li>
+<li><p>  调优命令</p>
+</li>
+<li><p>  调优工具</p>
+</li>
+</ul>
+<p><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">参考</a><br><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">参考</a></p>
+<h2><span id="jvm系列六java服务gc参数调优案例"></span></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484023&idx=1&sn=39be119fdf3132240adc84a85bf8a054&chksm=ebf6da08dc81531e3719389555150f2d0237554b6b6c07a123efdea7c78c0ae2f064cc577bd4&scene=21#wechat_redirect">jvm系列(七):jvm调优-工具篇</a></p>
+<blockquote>
+<p>调优工具</p>
+</blockquote>
+<ul>
+<li>  常用调优工具分为两类,jdk自带监控工具：jconsole和jvisualvm，第三方有：MAT(Memory Analyzer Tool)、GChisto。</li>
+<li>  jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控</li>
+<li>  jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。</li>
+<li>  MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</li>
+<li>  GChisto，一款专业分析gc日志的工具</li>
+</ul>
+<h2><span id="jvm系列八jvm知识点总览"></span></h2><h2><span id="jvm系列九如何优化java-gc译"></span></h2><h2><span id="jvm系列十教你如何成为java的oom-killer"></span></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484074&idx=1&sn=826318867783afaf99f62b38b2f5c268&chksm=ebf6dad5dc8153c32a6ce0201afe310b47135b07c8bb028a8fd9df7ecaf6e60950a7847c7df5&scene=21#wechat_redirect">jvm系列(十一):Java 8-从持久代到metaspace</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">日志分析脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 22:06:22" itemprop="dateCreated datePublished" datetime="2018-05-04T22:06:22+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="sed编辑器">sed编辑器</span></h2><p>不修改原内容的行级别流编辑器</p>
+<ul>
+<li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
+<blockquote>
+<p>将日志文件中的baidu替换成earyant输出<br>s表示执行的事文本替换命令</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘2,6p’ access.log</p>
+<blockquote>
+<p>-n表示只输出指定的行，’2,6p’表示选择的事第二行到第六行</p>
+</blockquote>
+</li>
+<li><p>sed ‘/earyant/d’ access.log</p>
+<blockquote>
+<p>d表示执行文本删除命令，将包含earyant的行删除</p>
+</blockquote>
+</li>
+<li><p>sed ‘=’ access.log</p>
+<blockquote>
+<p>显示文本行号</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘i\head’ access.log | head -10</p>
+<blockquote>
+<p>在行首插入文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘a\end’ access.log | head -10</p>
+<blockquote>
+<p> 在文末追加文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘/baidu/c\hello’ access.log | head -10</p>
+<blockquote>
+<p>c命令对文本进行替换，查找/baidu/匹配的行，用hello对匹配的行进行替换，与s不同的是，这个替换行，s是替换单词</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘1,5p;1,5=’ access.log</p>
+<blockquote>
+<p>多条命令，分号隔开</p>
+</blockquote>
+</li>
+</ul>
+<h2><span id="awk">awk</span></h2><ul>
+<li><p>awk ‘{print $1}’ access.log | head -10</p>
+<blockquote>
+<p>打印指定的列</p>
+</blockquote>
+</li>
+<li><p>awk ‘/baidu/{print $5,%6}’ access.log | head -10</p>
+<blockquote>
+<p>筛选指定的行，并且打印出其中一部分列</p>
+</blockquote>
+</li>
+<li><p>awk ‘length{$0} &gt; 40 {print $3}’ access.log | head  -10</p>
+<blockquote>
+<p>$0 表示当前的行，length($0)获取当前行的长度，print $3 打印出第三列</p>
+</blockquote>
+</li>
+<li><p>awk ‘{line = sprintf (“method:%s,response:%s”,$3,$7); print line}’ access.log | head -10</p>
+<blockquote>
+<p>定义line接收sprintf输出，sprintf用户格式化输出第三行的请求式和第七行的响应时间</p>
+</blockquote>
+</li>
+</ul>
+<h2><span id="shell">shell</span></h2><ul>
+<li>  系统load超过2或者磁盘利用率超过85%报警：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>读取日志文件，对字段切割，插入到sql。<br>  db:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create table access_log(</span><br><span class="line">  ip varchar(20),# ip地址</span><br><span class="line">  rt bigint,# 响应时间</span><br><span class="line">  method varchar(10), #请求方式</span><br><span class="line">  url varchar (400), # 请求地址</span><br><span class="line">  refer varchar(400),# 请求来源</span><br><span class="line">  return_code int,# 返回码</span><br><span class="line">  response_size bigint # 响应大小</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>shell:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"><span class="comment"># 日志路径</span></span><br><span class="line">ACCESS_FILE=<span class="string">&quot;D:\\0\\nginx-1.11.13\\logs\\access2.log&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> LINE</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 系统数组分隔符</span></span><br><span class="line">  OLD_IFS=<span class="string">&quot;<span class="variable">$IFS</span>&quot;</span></span><br><span class="line">  IFS=<span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="comment"># 每行分割成数组</span></span><br><span class="line">  field_arr=(<span class="variable">$LINE</span>)</span><br><span class="line">  IFS=<span class="string">&quot;<span class="variable">$OLD_IFS</span>&quot;</span></span><br><span class="line">  <span class="comment"># 生成插入语句，各列的值对应什么，懒得改了。</span></span><br><span class="line">  STATEMENT=<span class="string">&quot;insert into access_log values(&#x27;<span class="variable">$&#123;field_arr[0]&#125;</span>&#x27; , &#x27;<span class="variable">$&#123;field_arr[1]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[2]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[3]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[4]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[5]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[6]&#125;</span>&#x27;);&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$STATEMENT</span></span><br><span class="line">  mysql earyant -u root -p123456 -e <span class="string">&quot;<span class="variable">$&#123;STATEMENT&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$ACCESS_FILE</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1182,352 +1550,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-20 09:47:36" itemprop="dateCreated datePublished" datetime="2018-01-20T09:47:36+08:00">2018-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1><span id="java8新特性">java8新特性</span></h1><h2><span id="lambda表达式">lambda表达式</span></h2><blockquote>
-<p>java8接受一个函数作为另一个函数的参数传入进去</p>
-</blockquote>
-<p>Arrays.asList( “a”, “b”, “d” ).forEach( e -&gt; System.out.println( e ) ); 参数的类型是编译器推断出来的</p>
-<blockquote>
-<p>Lambda可以引用类的成员变量与局部变量（如果这些变量不是final的话，它们会被隐含的转为final，这样效率更高）。</p>
-</blockquote>
-<h2><span id="默认方法和静态方法">默认方法和静态方法</span></h2><blockquote>
-<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到java.util.Collection接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
-</blockquote>
-<h2><span id="重复注解">重复注解</span></h2><h2><span id="java编译器的新特性">Java编译器的新特性</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterNames</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Method method = ParameterNames.class.getMethod( <span class="string">&quot;main&quot;</span>, String[].class );</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">final</span> Parameter parameter: method.getParameters() ) &#123;</span><br><span class="line">            System.out.println( <span class="string">&quot;Parameter: &quot;</span> + parameter.getName() );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Parameter: args</p>
-</blockquote>
-<p>对于有经验的Maven用户，通过maven-compiler-plugin的配置可以将-parameters参数添加到编译器中去。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">compilerArgument</span>&gt;</span>-parameters<span class="tag">&lt;/<span class="name">compilerArgument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2><span id="java-类库的新特性">Java 类库的新特性</span></h2><h3><span id="optional">Optional</span></h3><p>平时用的判空：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (name == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>改成Optional：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  Optional&lt;String &gt; names = Opntional.of(name);</span><br><span class="line">  <span class="keyword">if</span> (names.isPresent())&#123;</span><br><span class="line">      <span class="keyword">return</span> names.get();</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果单纯改成这样，还不如直接写成 ==null，看起来更加繁琐。 应该改成这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Opntional.of(name).get().orElse(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3><span id="stream">Stream</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> totalPointsOfOpenTasks = tasks</span><br><span class="line">    .stream()</span><br><span class="line">    .filter( task -&gt; task.getStatus() == Status.OPEN )</span><br><span class="line">    .mapToInt( Task::getPoints )</span><br><span class="line">    .sum();</span><br></pre></td></tr></table></figure>
-
-<h4><span id="filter">filter</span></h4><blockquote>
-<p>对于Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素；</p>
-</blockquote>
-<h4><span id="map">map</span></h4><blockquote>
-<p>映射转换</p>
-</blockquote>
-<h4><span id="mapto">mapTo*</span></h4><blockquote>
-<p>映射转换成 <em>的类型，</em> 包括Integer、Double、Long</p>
-</blockquote>
-<h4><span id="flatmap">flatMap</span></h4><blockquote>
-<p>合并集合,和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;1,2&#125;，&#123;3,4&#125;，&#123;5,6&#125;&#125; - &gt; flatMap - &gt; &#123;1,2,3,4,5,6&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#x27;a&#x27;，&#x27;b&#x27;&#125;，&#123;&#x27;c&#x27;，&#x27;d&#x27;&#125;，&#123;&#x27;e&#x27;，&#x27;f&#x27;&#125;&#125; - &gt; flatMap - &gt; &#123;&#x27;a&#x27;，&#x27;b&#x27;，&#x27;c&#x27; D&quot;， &#x27;E&#x27;， &#x27;F&#x27;&#125;</span><br></pre></td></tr></table></figure>
-
-<h4><span id="flatmapto">flatMapTo*</span></h4><h4><span id="distinct">distinct</span></h4><blockquote>
-<p>对于Stream中包含的元素进行去重操作（去重逻辑依赖元素的equals方法），新生成的Stream中没有重复的元素；</p>
-</blockquote>
-<blockquote>
-<h4><span id="sorted">sorted</span></h4></blockquote>
-<h4><span id="peek">peek</span></h4><blockquote>
-<p>监控器</p>
-</blockquote>
-<p>提供一个Consumer消费函数，返回一个新的Stream，如果只写 Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)) 是不会打印结果的 新Stream每个元素被<strong>消费</strong>的时候都会执行给定的消费函数； Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)).collect(Collectors.toList());</p>
-<h4><span id="limit">limit</span></h4><p>对一个Stream进行截断操作，获取其前N个元素，如果原Stream中包含的元素个数小于N，那就获取其所有的元素；</p>
-<h4><span id="skip">skip</span></h4><p>返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；</p>
-<h4><span id="foreach">forEach</span></h4><blockquote>
-<p>遍历</p>
-</blockquote>
-<h4><span id="foreachordered">forEachOrdered</span></h4><blockquote>
-<p>与forEach一样，只不过每次遍历结果都是相同的，forEach不是固定的序列</p>
-</blockquote>
-<h4><span id="generate">generate</span></h4><p>给定一个生成函数，生成一个无限的队列 Stream.generate(Math::random);</p>
-<h4><span id="iterate">iterate</span></h4><p>也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环</p>
-<p>Stream.iterate(1, item -&gt; item + 1).limit(10).forEach(System.out::println);</p>
-<h4><span id="collect">collect</span></h4><blockquote>
-<p>汇聚函数</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>方法参数</th>
-<th>返回类型</th>
-<th>作用</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>toList</td>
-<td>List<code>&lt;T &gt;</code></td>
-<td>把流中的参数汇聚成List集合</td>
-<td>示例:List<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
-</tr>
-<tr>
-<td>toSet</td>
-<td>Set<code>&lt;T&gt;</code></td>
-<td>把流中所有元素收集到Set中,删除重复项</td>
-<td>Set<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
-</tr>
-<tr>
-<td>toCollection</td>
-<td>Collection<code>&lt;T&gt;</code></td>
-<td>把流中所有元素收集到给定的供应源创建的集合中</td>
-<td><code>ArrayList&lt;Menu&gt; menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</code></td>
-</tr>
-<tr>
-<td>Counting</td>
-<td>Long</td>
-<td>计算流中元素个数</td>
-<td>Long count=Menu.getMenus.stream().collect(Collectors.counting());</td>
-</tr>
-<tr>
-<td>SummingInt</td>
-<td>Integer</td>
-<td>对流中元素的一个整数属性求和</td>
-<td>Integer count=Menu.getMenus.stream().collect(Collectors.summingInt(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>averagingInt</td>
-<td>Double</td>
-<td>计算流中元素integer属性的平均值</td>
-<td>Double averaging=Menu.getMenus.stream().collect((Collectors.averagingInt(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>Joining</td>
-<td>String</td>
-<td>连接流中每个元素的toString方法生成的字符串</td>
-<td>String name=Menu.getMenus.stream().map(Menu::getName).collect(Collectors.joining(“, “))</td>
-</tr>
-<tr>
-<td>maxBy</td>
-<td>Optional<code>&lt;T&gt;</code></td>
-<td>一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
-<td>Optional<code>&lt;Menu&gt;</code> fattest=Menu.getMenus.stream().collectCollectors.maxBy(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>minBy</td>
-<td>Optional<code>&lt;T&gt;</code></td>
-<td>一个包裹了流中按照给定比较器选出的最大元素的optional如果为空返回的是Optional.empty()</td>
-<td>Optional<code>&lt;Menu&gt;</code> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
-</tr>
-<tr>
-<td>Reducing</td>
-<td>归约操作产生的类型</td>
-<td>从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
-<td>int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
-</tr>
-<tr>
-<td>collectingAndThen</td>
-<td>转换函数返回的类型</td>
-<td>包裹另一个转换器,对其结果应用转换函数</td>
-<td>Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
-</tr>
-<tr>
-<td>groupingBy</td>
-<td>Map<code>&lt;K,List&lt;T&gt;&gt;</code></td>
-<td>根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
-<td>Map<code>&lt;Type,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
-</tr>
-<tr>
-<td>partitioningBy</td>
-<td>Map<code>&lt;Boolean,List&lt;T&gt;&gt;</code></td>
-<td>根据流中每个元素应用谓语的结果来对项目进行分区</td>
-<td>Map<code>&lt;Boolean,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
-</tr>
-</tbody></table>
-<h4><span id="reduce">reduce</span></h4><ul>
-<li><code>Optional&lt;t&gt; reduce(BinaryOperator&lt;t&gt; accumulator);</code></li>
-</ul>
-<p>List <code>&lt;integer&gt;</code> ints = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10); System.out.println(“ints sum is:” + ints.stream().reduce((sum, item) -&gt; sum + item).get());</p>
-<p>可以看到reduce方法接受一个函数，这个函数有两个参数，第一个参数是上次函数执行的返回值（也称为中间结果），第二个参数是stream中的元素，这个函数把这两个值相加，得到的和会被赋值给下次执行这个函数的第一个参数。要注意的是：<strong>第一次执行的时候第一个参数的值是Stream的第一个元素，第二个参数是Stream的第二个元素</strong>。这个方法返回值类型是Optional，这是Java8防止出现NPE的一种可行方法，后面的文章会详细介绍，这里就简单的认为是一个容器，其中可能会包含0个或者1个对象。</p>
-<ul>
-<li>T reduce(T identity, BinaryOperator<code>&lt;t&gt;</code> accumulator);<br>这个定义上上面已经介绍过的基本一致，不同的是：它允许用户提供一个循环计算的初始值，如果Stream为空，就直接返回该值。而且这个方法不会返回Optional，因为其不会出现null值。</li>
-</ul>
-<h4><span id="count">count</span></h4><blockquote>
-<p>个数</p>
-</blockquote>
-<h4><span id="allmatch">allMatch</span></h4><p>是不是所有都满足给定的条件</p>
-<h4><span id="anymatch">anyMatch</span></h4><p>是不是存在某一个元素满足给定的条件</p>
-<h4><span id="findfirst">findFirst</span></h4><p>返回第一个，返回的是Optional值</p>
-<h4><span id="nonematch">noneMatch</span></h4><p>是否没有一个元素满足给定的条件</p>
-<h4><span id="max和min">max和min</span></h4><p>给定的比较条件，返回最大最小值</p>
-<p><a target="_blank" rel="noopener" href="http://ifeve.com/stream/">参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dm_vincent/article/category/2268127">好文收藏</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 14:14:45" itemprop="dateModified" datetime="2021-09-22T14:14:45+08:00">2021-09-22</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>注册中心不自动上线下线</li>
-<li>异步返回值</li>
-<li>bean参数传值</li>
-<li></li>
-</ul>
-<h3><span id="eureka-不自动下线">eureka 不自动下线</span></h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
-<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
-<p>解决方法：设置enableSelfPreservation:false</p>
-<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
-<h3><span id="负载均衡在服务下掉后的重试策略"></span></h3><p>默认没有开启：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3><span id="断路器配置重试"></span></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1595,7 +1621,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1678,12 +1704,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">672k</span>
+    <span title="站点总字数">678k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:11</span>
+    <span title="站点阅读时长">10:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
