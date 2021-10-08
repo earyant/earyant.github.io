@@ -127,7 +127,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">30</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">100</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">101</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,121 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/" class="post-title-link" itemprop="url">SpringCloud学习1EurekaServer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-20 18:23:14" itemprop="dateCreated datePublished" datetime="2017-07-20T18:23:14+08:00">2017-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:16:23" itemprop="dateModified" datetime="2021-09-28T17:16:23+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>456</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="创建eurekaserver">创建EurekaServer</span></h2><h3><span id="idea初始化项目">Idea初始化项目</span></h3><ul>
+<li>选择cloud discovery-&gt;eureka server 。</li>
+</ul>
+<h3><span id="创建启动类">创建启动类</span></h3><ul>
+<li>@EnableEurekaServer</li>
+</ul>
+<h3><span id="配置参数">配置参数</span></h3><pre><code>server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
+      
+      
+      
+</code></pre>
+<h2><span id="创建eurekaclient">创建EurekaClient</span></h2><h3><span id="初始化项目">初始化项目</span></h3><ul>
+<li>通server</li>
+</ul>
+<h3><span id="创阿金启动类">创阿金启动类</span></h3><ul>
+<li>@EnableEurekaClient</li>
+</ul>
+<h3><span id="配置参数">配置参数</span></h3><pre><code> eureka:
+   client:
+     serviceUrl:
+       defaultZone: http://localhost:8761/eureka/
+ server:
+   port: 8762
+ spring:
+   application:
+     name: service-hi
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1108,118 +1223,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/" class="post-title-link" itemprop="url">如何保证推送消息能够准确推送到客户端</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-18 09:52:39" itemprop="dateCreated datePublished" datetime="2017-07-18T09:52:39+08:00">2017-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:19:47" itemprop="dateModified" datetime="2021-09-28T17:19:47+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1><span id="如何保证推送消息能够准确推送到客户端">如何保证推送消息能够准确推送到客户端。</span></h1><h2><span id="手机端">手机端：</span></h2><ul>
-<li>轮询方式获取消息。</li>
-<li>短信拦截模式。  发送短信通知消息，应用中的短信拦截模块拦截短信，并解析成数据。成本高。</li>
-<li>持久连接。</li>
-</ul>
-<p> 监听电量变化，网络变化，开关屏幕等等时候注册BroadCastReceiver来接收通知，接手后进行消息获取。<br> 有些ROM一旦用户kill掉主线程，就不会再投送广播消息给应用，导致应用无法启动，这是可以Fork一个进程,一旦发现主线程被杀，立即调用shell启动该Service（应用保活）</p>
-<h2><span id="微服务间如何选择推送和拉取数据">微服务间如何选择推送和拉取数据</span></h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
-<h4><span id="数据是动态的且实时性较强宜采用生产端推送">数据是动态的，且实时性较强，宜采用生产端推送。</span></h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
-<h4><span id="客户端长时间离线状态">客户端长时间离线状态</span></h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
-<h4><span id="推送的优点">推送的优点</span></h4><ul>
-<li>时效性高。</li>
-<li>服务器压力小。 相对比轮询拉取模式，每次推送都会有数据，有效避免了空轮询</li>
-<li>交互简单。 只需要提供推送接口就好了，不需要额外开销。</li>
-</ul>
-<h4><span id="推送的缺点">推送的缺点</span></h4><ul>
-<li>不能保证一定能推送成功。</li>
-<li>缺乏数据多样性，推送的消息一般都有固定的模板<br>####极光推送</li>
-<li>活跃用户的到达率在90%以上。轮询获取99%以上。</li>
-<li>并发情况下第三方服务的实时性不太理想。</li>
-</ul>
-<h4><span id="自主研发的推送系统">自主研发的推送系统</span></h4><ul>
-<li>对客户端的海量长连接的维护管理消耗太大。</li>
-<li>App端Service稳定性，保活。</li>
-<li>有些厂商不允许有push service存在。</li>
-</ul>
-<p>##自主研发的推送架构</p>
-<h3><span id="架构方案类似">架构方案类似：</span></h3><p>   <img data-src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
-<ul>
-<li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1287,7 +1294,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1300,7 +1307,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1370,12 +1377,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">678k</span>
+    <span title="站点总字数">681k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:17</span>
+    <span title="站点阅读时长">10:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
