@@ -34,6 +34,26 @@
   </entry>
   
   <entry>
+    <title>创业团队该如何管理，创始人该如何管理团队？</title>
+    <link href="http://earyant.github.io/posts/%E7%AE%A1%E7%90%86/%E5%88%9B%E4%B8%9A%E5%9B%A2%E9%98%9F%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86-%E5%88%9B%E5%A7%8B%E4%BA%BA%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%9B%A2%E9%98%9F/"/>
+    <id>http://earyant.github.io/posts/%E7%AE%A1%E7%90%86/%E5%88%9B%E4%B8%9A%E5%9B%A2%E9%98%9F%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86-%E5%88%9B%E5%A7%8B%E4%BA%BA%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%9B%A2%E9%98%9F/</id>
+    <published>2021-10-08T13:03:47.000Z</published>
+    <updated>2021-10-08T11:06:46.695Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="-[管理, 创业]" scheme="http://earyant.github.io/tags/%E7%AE%A1%E7%90%86-%E5%88%9B%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
     <title>机器学习基石-6</title>
     <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/"/>
     <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-6/</id>
@@ -414,29 +434,6 @@
     
     <summary type="html">&lt;p&gt;访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。&lt;/p&gt;
 &lt;p&gt;输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-5.pandas</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-5-pandas/</id>
-    <published>2021-09-22T15:58:54.000Z</published>
-    <updated>2021-09-28T09:12:59.361Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;pandas是本书后续内容的首选库。它含有使数据清洗和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基于数组的函数和不使用for循环的数据处理。&lt;/p&gt;</summary>
     
     
     
