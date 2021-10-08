@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-10-08T11:11:26.802Z</updated>
+  <updated>2021-10-08T11:24:15.070Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://earyant.github.io/posts/%E9%87%91%E8%9E%8D%E7%BB%8F%E6%B5%8E/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F_%E7%9B%88%E5%88%A9%E6%A8%A1%E5%BC%8F/"/>
     <id>http://earyant.github.io/posts/%E9%87%91%E8%9E%8D%E7%BB%8F%E6%B5%8E/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F_%E7%9B%88%E5%88%A9%E6%A8%A1%E5%BC%8F/</id>
     <published>2021-10-08T15:10:25.000Z</published>
-    <updated>2021-10-08T11:11:26.802Z</updated>
+    <updated>2021-10-08T11:24:15.070Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;六大商业模式&quot;&gt;&lt;a href=&quot;#六大商业模式&quot; class=&quot;headerlink&quot; title=&quot;六大商业模式&quot;&gt;&lt;/a&gt;六大商业模式&lt;/h1&gt;&lt;p&gt;现代商业受互联网经济的影响，经营模式也在不断的创新，商业模式在持续变化。企业在经营过程中，需要为销售方式选择适宜的商业模式，来适应市场的需求。&lt;br&gt;当前市场上存在的商业模式较为经典的模式有六种，下面来进行详细的特点介绍。&lt;/p&gt;</summary>
@@ -30,10 +30,34 @@
     
     <category term="商业" scheme="http://earyant.github.io/categories/%E5%95%86%E4%B8%9A/"/>
     
-    <category term="经济" scheme="http://earyant.github.io/categories/%E5%95%86%E4%B8%9A/%E7%BB%8F%E6%B5%8E/"/>
+    <category term="经济" scheme="http://earyant.github.io/categories/%E7%BB%8F%E6%B5%8E/"/>
     
     
-    <category term="商业,经济" scheme="http://earyant.github.io/tags/%E5%95%86%E4%B8%9A-%E7%BB%8F%E6%B5%8E/"/>
+    <category term="商业" scheme="http://earyant.github.io/tags/%E5%95%86%E4%B8%9A/"/>
+    
+    <category term="经济" scheme="http://earyant.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>21-10-01</title>
+    <link href="http://earyant.github.io/posts/%E6%97%A5%E8%AE%B0/21/Q3/21-10-01/"/>
+    <id>http://earyant.github.io/posts/%E6%97%A5%E8%AE%B0/21/Q3/21-10-01/</id>
+    <published>2021-10-08T13:15:13.000Z</published>
+    <updated>2021-10-08T13:15:13.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="日记" scheme="http://earyant.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="日记" scheme="http://earyant.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
     
   </entry>
   
@@ -42,7 +66,7 @@
     <link href="http://earyant.github.io/posts/%E7%AE%A1%E7%90%86/%E5%88%9B%E4%B8%9A%E5%9B%A2%E9%98%9F%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86/"/>
     <id>http://earyant.github.io/posts/%E7%AE%A1%E7%90%86/%E5%88%9B%E4%B8%9A%E5%9B%A2%E9%98%9F%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86/</id>
     <published>2021-10-08T13:03:47.000Z</published>
-    <updated>2021-10-08T11:12:41.957Z</updated>
+    <updated>2021-10-08T11:24:26.426Z</updated>
     
     
     <summary type="html">&lt;p&gt;老丁我之前说过，创业这件事&lt;strong&gt;要看路，别看墙。&lt;/strong&gt;&lt;/p&gt;
@@ -50,10 +74,14 @@
     
     
     
-    <category term="-[管理, 创业]" scheme="http://earyant.github.io/categories/%E7%AE%A1%E7%90%86-%E5%88%9B%E4%B8%9A/"/>
+    <category term="管理" scheme="http://earyant.github.io/categories/%E7%AE%A1%E7%90%86/"/>
+    
+    <category term="创业" scheme="http://earyant.github.io/categories/%E5%88%9B%E4%B8%9A/"/>
     
     
-    <category term="-[管理, 创业]" scheme="http://earyant.github.io/tags/%E7%AE%A1%E7%90%86-%E5%88%9B%E4%B8%9A/"/>
+    <category term="管理" scheme="http://earyant.github.io/tags/%E7%AE%A1%E7%90%86/"/>
+    
+    <category term="创业" scheme="http://earyant.github.io/tags/%E5%88%9B%E4%B8%9A/"/>
     
   </entry>
   
@@ -414,30 +442,6 @@
     
     
     <summary type="html">&lt;p&gt;在数据分析和建模的过程中，相当多的时间要用在数据准备上：加载、清理、转换以及重塑。这些工作会占到分析师时间的80%或更多。有时，存储在文件和数据库中的数据的格式不适合某个特定的任务。许多研究者都选择使用通用编程语言（如Python、Perl、R或Java）或UNIX文本处理工具（如sed或awk）对数据格式进行专门处理。幸运的是，pandas和内置的Python标准库提供了一组高级的、灵活的、快速的工具，可以让你轻松地将数据规整为想要的格式。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-6.数据加载</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-6-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/</id>
-    <published>2021-09-23T13:51:10.000Z</published>
-    <updated>2021-09-28T09:12:59.386Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。&lt;/p&gt;
-&lt;p&gt;输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。&lt;/p&gt;</summary>
     
     
     
