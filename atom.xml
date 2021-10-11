@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-10-10T16:28:44.000Z</updated>
+  <updated>2021-10-11T05:29:53.000Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>到底什么是知行合一</title>
+    <link href="http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%A1%8C%E5%90%88%E4%B8%80/"/>
+    <id>http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%A1%8C%E5%90%88%E4%B8%80/</id>
+    <published>2021-10-11T05:29:53.000Z</published>
+    <updated>2021-10-11T05:29:53.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>世界尽头的咖啡馆</title>
@@ -425,30 +443,6 @@
     <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     <category term="matplotlib" scheme="http://earyant.github.io/tags/matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-8.数据整合</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-8-%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-8-%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88/</id>
-    <published>2021-09-23T15:08:16.000Z</published>
-    <updated>2021-09-28T09:12:59.427Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;在许多应用中，数据可能分散在许多文件或数据库中，存储的形式也不利于分析。本章关注可以聚合、合并、重塑数据的方法。&lt;/p&gt;
-&lt;p&gt;首先，我会介绍pandas的层次化索引，它广泛用于以上操作。然后，我深入介绍了一些特殊的数据操作。在第14章，你可以看到这些工具的多种应用。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
     
   </entry>
   
