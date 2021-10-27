@@ -272,7 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="线程状态">线程状态</span></h2><ul>
+        <h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><ul>
 <li>新建状态(New) : <blockquote>
 <p>线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。</p>
 </blockquote>
@@ -302,10 +302,10 @@
 <li>Thread类，定义了一些列的线程操作函数。例如，sleep()休眠函数, interrupt()中断函数, getName()获取线程名称等。</li>
 <li>synchronized，是关键字；它区分为synchronized代码块和synchronized方法。synchronized的作用是让线程获取对象的同步锁。</li>
 </ul>
-<h2><span id="实现多线程的两种方式thread和runnable">实现多线程的两种方式：Thread和Runnable</span></h2><ul>
+<h2 id="实现多线程的两种方式thread和runnable"><a href="#实现多线程的两种方式：Thread和Runnable" class="headerlink" title="实现多线程的两种方式：Thread和Runnable"></a>实现多线程的两种方式：Thread和Runnable</h2><ul>
 <li>Runnable 是一个接口，该接口中只包含了一个run()方法。它的定义如下：<br>public interface Runnable {<br> public abstract void run();<br>}<br>Runnable的作用，实现多线程。我们可以定义一个类A实现Runnable接口；然后，通过new Thread(new A())等方式新建线程。<br>Thread 是一个类。Thread本身就实现了Runnable接口。它的声明如下：<br>public class Thread implements Runnable {}<br>Thread的作用，实现多线程。</li>
 </ul>
-<h3><span id="thread和runnable的异同点">Thread和Runnable的异同点：</span></h3><ul>
+<h3 id="thread和runnable的异同点"><a href="#Thread和Runnable的异同点：" class="headerlink" title="Thread和Runnable的异同点："></a>Thread和Runnable的异同点：</h3><ul>
 <li>Thread 和 Runnable 的相同点：<blockquote>
 <p>都是“多线程的实现方式”。</p>
 </blockquote>
@@ -425,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">实现多线程的两种方式：Thread和Runnable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Thread和Runnable的异同点：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8Fthread%E5%92%8Crunnable"><span class="nav-number">2.</span> <span class="nav-text">实现多线程的两种方式：Thread和Runnable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thread%E5%92%8Crunnable%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">Thread和Runnable的异同点：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

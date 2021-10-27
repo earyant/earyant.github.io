@@ -272,7 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="springmvc核心流程主要在dodispatch方法中">SpringMVC核心流程,主要在doDispatch方法中</span></h2><ul>
+        <h2 id="springmvc核心流程主要在dodispatch方法中"><a href="#SpringMVC核心流程-主要在doDispatch方法中" class="headerlink" title="SpringMVC核心流程,主要在doDispatch方法中"></a>SpringMVC核心流程,主要在doDispatch方法中</h2><ul>
 <li> 1、用户发送请求，被SpringMvc的DispatcherServlet捕获到</li>
 <li> 2、DispatcherServlet对获取到的URL进行解析，得到统一定位符URI，然后根据URI调用HandlerMapping获得Handler对象以及跟handler相关的拦截器，最后以HandlerExecutionChain对象形式返回。</li>
 <li> 3、DispatcherServlet根据返回的Handler选择合适的HandlerAdapter，如果找到了HandlerAdapter,在之前就会执行preHandler方法</li>
@@ -291,7 +291,7 @@
 <li> 7、ViewResolveModel和View来渲染视图</li>
 <li> 8、将渲染结果返回给客户端</li>
 </ul>
-<h2><span id="处理关键">处理关键</span></h2><ul>
+<h2 id="处理关键"><a href="#处理关键" class="headerlink" title="处理关键"></a>处理关键</h2><ul>
 <li>DispatcherServlet的HandlerMapping集合中根据请求的URL匹配每一个handlerMapping对象中的某个handler,匹配成功后将会返回这个handler的处理连接handlerExecutorChain对象，而这个对象中包括多个handlerInterceptor。</li>
 <li>HandlerInterceptor中包含三个方法<ul>
 <li>preHandler，在Handler执行之前调用。</li>
@@ -301,7 +301,7 @@
 </li>
 <li>当preHandler返回false时，请求将在执行afterComplete后直接返回，不会执行handler。    </li>
 </ul>
-<h2><span id="首先有几个类需要声明modelandview-handlerexecutionchain-handlermapping-handlermethod-handleradapter">首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</span></h2><ul>
+<h2 id="首先有几个类需要声明modelandview-handlerexecutionchain-handlermapping-handlermethod-handleradapter"><a href="#首先有几个类需要声明-ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。" class="headerlink" title="首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。"></a>首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</h2><ul>
 <li>1、HandlerMethod(org.springframework.web.method.HandlerMethod)，这个类为中存放了某个bean对象和该bean对象的某个要处理的Method对象。</li>
 <li>2、HandlerMapping,作用为通过request对象，获取对应的HandlerMethod对象。</li>
 <li>3、HandlerExecutionChain作用为通过加入Interceptor拦截器包装HandlerMapping返回的HandlerMethod对象。让待处理的方法对象与拦截器称为一个整体,即执行链。</li>
@@ -418,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC核心流程,主要在doDispatch方法中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">处理关键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#springmvc%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E4%B8%BB%E8%A6%81%E5%9C%A8dodispatch%E6%96%B9%E6%B3%95%E4%B8%AD"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC核心流程,主要在doDispatch方法中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%85%B3%E9%94%AE"><span class="nav-number">2.</span> <span class="nav-text">处理关键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E6%9C%89%E5%87%A0%E4%B8%AA%E7%B1%BB%E9%9C%80%E8%A6%81%E5%A3%B0%E6%98%8Emodelandview-handlerexecutionchain-handlermapping-handlermethod-handleradapter"><span class="nav-number">3.</span> <span class="nav-text">首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

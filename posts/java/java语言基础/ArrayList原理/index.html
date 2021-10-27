@@ -273,17 +273,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="实现方式">实现方式</span></h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
+        <h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>  存储数据是通过数组： transient Objectp[] elementData<br>  size字段： 存储整个数组的大小，<br>    &gt; 注意的是： size是每次add和remove都会自增和自减的，所以增加null也会size+1.</p>
 <ul>
 <li>是否允许空：<br>允许</li>
 <li>是否允许重复数据：<br>允许</li>
 <li>是否有序：<br>是</li>
 <li>是否线程安全：<br>不是</li>
 </ul>
-<h2><span id="默认大小-10">默认大小 : 10</span></h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="默认大小-10"><a href="#默认大小-10" class="headerlink" title="默认大小 : 10"></a>默认大小 : 10</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2><span id="扩容">扩容</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2><span id="删除元素">删除元素</span></h2><ul>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">( <span class="keyword">int</span> minCapacity)</span></span>&#123;</span><br><span class="line">  modCount++;</span><br><span class="line">  <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">  <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">      Object oldData[] = elementData;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line">             <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">             elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><ul>
 <li>根据下标删除。</li>
 <li>根据元素删除。<blockquote>
 <p>删除跟元素匹配的 <em>第一个</em> 元素</p>
@@ -298,22 +298,22 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="插入元素">插入元素</span></h2><ul>
+<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><ul>
 <li>add(T t)</li>
 <li>add(int position,T t)<blockquote>
 <p>插入时候会将所有后面的元素向后移动一个位置，很消耗性能。</p>
 </blockquote>
 </li>
 </ul>
-<h2><span id="arraylist的优缺点">ArrayList的优缺点</span></h2><ul>
+<h2 id="arraylist的优缺点"><a href="#ArrayList的优缺点" class="headerlink" title="ArrayList的优缺点"></a>ArrayList的优缺点</h2><ul>
 <li>底层以数组方式存储，是一种随机访问方式，并且实现了RandomAccess接口，因此查找十分快速。</li>
 <li>添加很方便，往数组的最后添加一个就行了。</li>
 <li>删除和添加的时候涉及到移动后面所有数据，性能消耗比较大。    </li>
 </ul>
-<h2><span id="线程安全">线程安全</span></h2><blockquote>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
 <p>不是线程安全的，所有方法都没有Synchronized修饰，在并发情况下会出现安全问题。可以使用Collections.synchronizedList方式</p>
 </blockquote>
-<h2><span id="为什么arraylist的elementdata是用transient修饰的">为什么ArrayList的elementData是用transient修饰的？</span></h2><blockquote>
+<h2 id="为什么arraylist的elementdata是用transient修饰的"><a href="#为什么ArrayList的elementData是用transient修饰的？" class="headerlink" title="为什么ArrayList的elementData是用transient修饰的？"></a>为什么ArrayList的elementData是用transient修饰的？</h2><blockquote>
 <p>private transient Object[] elementData;</p>
 </blockquote>
 <blockquote>
@@ -432,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">默认大小 : 10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">ArrayList的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">为什么ArrayList的elementData是用transient修饰的？</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%A4%A7%E5%B0%8F-10"><span class="nav-number">2.</span> <span class="nav-text">默认大小 : 10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">4.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0"><span class="nav-number">5.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arraylist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">ArrayList的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">7.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88arraylist%E7%9A%84elementdata%E6%98%AF%E7%94%A8transient%E4%BF%AE%E9%A5%B0%E7%9A%84"><span class="nav-number">8.</span> <span class="nav-text">为什么ArrayList的elementData是用transient修饰的？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -344,15 +344,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="静态代理-动态代理">静态代理、动态代理</span></h2><p>1、AspectJ 使用静态代理，生成class文件时，会侵入到代码中。<br>2、Spring AOP 使用动态代理，不会侵入代码，而是在内存中临时为代码生成一个AOP对象，这个AOP对象包含目标对象的全部方法，并且在特定切点进行增强处理，并且调原对象的方法。</p>
+          <h2 id="静态代理-动态代理"><a href="#静态代理、动态代理" class="headerlink" title="静态代理、动态代理"></a>静态代理、动态代理</h2><p>1、AspectJ 使用静态代理，生成class文件时，会侵入到代码中。<br>2、Spring AOP 使用动态代理，不会侵入代码，而是在内存中临时为代码生成一个AOP对象，这个AOP对象包含目标对象的全部方法，并且在特定切点进行增强处理，并且调原对象的方法。</p>
 <ul>
 <li>Jvm动态代理： 通过反射接收代理的类，并要求被代理的类必须实现一个接口。JVM代理的核心是InvocationHandler接口和proxy类。</li>
 <li>CGLib(Code Generation Library)： 如果目标没有实现接口，那么Spring会使用CGLib动态代理目标类。它是一个代码生成的类库，可以在运行时动态生成某个类的子类。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意： CGLib是通过继承方式实现的，如果某个类被标记为final，是不能通过CGLib实现动态代理的。</span><br></pre></td></tr></table></figure>
-<h2><span id="示例使用了cglib">示例(使用了CGLib)：</span></h2>定义Person类，其中sayHello方法是切点，切点被Timer注解修饰。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="meta">@Timer</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;sayHello&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="示例使用了cglib"><a href="#示例-使用了CGLib-：" class="headerlink" title="示例(使用了CGLib)："></a>示例(使用了CGLib)：</h2>定义Person类，其中sayHello方法是切点，切点被Timer注解修饰。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="meta">@Timer</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;sayHello&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 配置切点：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdviceTest</span></span>&#123;</span><br><span class="line">  <span class="meta">@Pointcut(&quot;@annotation(com.earyant.aop.Timer)&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pointcut</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="meta">@Before(&quot;pointcut()&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;before&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 在Mail类中调用。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> Person person;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    person.sayHello();</span><br><span class="line">    System.out.println(person.getClass().getName());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 输出结果：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before</span><br><span class="line">sayHello</span><br><span class="line">com.earyant.aop.Person$$EnhancerBySpringCGLIB$$56b89168</span><br></pre></td></tr></table></figure>
-<h2><span id="示例jvm代理">示例(JVM代理)</span></h2>定义一个接口：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Chinese</span></span>&#123;</span><br><span class="line">  sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="示例jvm代理"><a href="#示例-JVM代理" class="headerlink" title="示例(JVM代理)"></a>示例(JVM代理)</h2>定义一个接口：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Chinese</span></span>&#123;</span><br><span class="line">  sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 令Person类继承自Chinese类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Chinese</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="meta">@Timer</span></span><br><span class="line">  sayHello()&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;sayHello&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 此代码运行的结果是：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before</span><br><span class="line">sayHello</span><br><span class="line">com.sun.proxy.$Proxy53</span><br></pre></td></tr></table></figure>
 证明使用了JVM代理。</li>
@@ -513,33 +513,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="名词定义">名词定义</span></h1><h2><span id="url">URL</span></h2><pre><code>URL（Uniform Resource Locator），统一资源定位符，实际就是网站网址，又称域名。在茫茫网络世界中，浏览器就是靠URL来查找资源位置。URL包含协议部分，是浏览器和www万维网之间的沟通方式，它会告诉浏览器正确在网路上找到资源位置。常见的协议有http、https、ftp、file、telnet等。其中http是最常见的网络传输协议，而https则是进行加密的网络传输。
+          <h1 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h1><h2 id="url"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><pre><code>URL（Uniform Resource Locator），统一资源定位符，实际就是网站网址，又称域名。在茫茫网络世界中，浏览器就是靠URL来查找资源位置。URL包含协议部分，是浏览器和www万维网之间的沟通方式，它会告诉浏览器正确在网路上找到资源位置。常见的协议有http、https、ftp、file、telnet等。其中http是最常见的网络传输协议，而https则是进行加密的网络传输。
 </code></pre>
-<h2><span id="ip">IP</span></h2><pre><code>为了便于记忆或辨识，人们使用域名来登录网站，每个域名背后有对应的IP地址。每个网站就是靠IP来定位的。IP是因特网中的每台连接到网络的计算机为实现相互通信而遵循的规则协议。IP分为局域网IP和全网IP。办公中常用的飞秋工具，就是使用办公室局域网IP进行通信的典型表现。每台计算机的本机IP都是127.0.0.1（即localhost）。浏览器并不能识别URL是什么，因此从输入URL开始，浏览器就要做域名解析，也就是IP寻址的工作。
+<h2 id="ip"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><pre><code>为了便于记忆或辨识，人们使用域名来登录网站，每个域名背后有对应的IP地址。每个网站就是靠IP来定位的。IP是因特网中的每台连接到网络的计算机为实现相互通信而遵循的规则协议。IP分为局域网IP和全网IP。办公中常用的飞秋工具，就是使用办公室局域网IP进行通信的典型表现。每台计算机的本机IP都是127.0.0.1（即localhost）。浏览器并不能识别URL是什么，因此从输入URL开始，浏览器就要做域名解析，也就是IP寻址的工作。
 </code></pre>
-<h2><span id="dns">DNS</span></h2><pre><code>DNS（Domain Name System，域名系统）——记录域名和IP地址相互映射的信息，人们可以免于记住IP数串。全国DNS信息可在网上查找到，各省都有对应分配不同的IP网段。大型企业会有自己的DNS服务器，专门存储域名和IP的映射关系，例如为大多数人熟知的谷歌DNS服务器，地址8.8.8.8。
+<h2 id="dns"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><pre><code>DNS（Domain Name System，域名系统）——记录域名和IP地址相互映射的信息，人们可以免于记住IP数串。全国DNS信息可在网上查找到，各省都有对应分配不同的IP网段。大型企业会有自己的DNS服务器，专门存储域名和IP的映射关系，例如为大多数人熟知的谷歌DNS服务器，地址8.8.8.8。
 </code></pre>
-<h1><span id="查找">查找</span></h1><h2><span id="域名解析">域名解析</span></h2><p>  当用户在浏览器中输入url后,你使用的电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动,DNS请求到达本地DNS服务器之后会有以下几个步骤：</p>
-<h3><span id="1-浏览器缓存">1. 浏览器缓存</span></h3><p>  浏览器对本地缓存进行查找，查看是否有该域名历史记录，如果有首先直接对缓存地址访问。<br>  Chrome浏览器看本身的DNS缓存时间比较方便，在地址栏输入chrome://net-internals/#dns，就可以看到了</p>
-<h3><span id="2-本地hosts文件查找ip地址">2. 本地hosts文件查找ip地址</span></h3><p>  浏览器若无缓存或者缓存地址访问无效，则首先对hosts文件查找对应域名对应ip地址。</p>
-<h3><span id="3-查找路由器缓存">3. 查找路由器缓存</span></h3><p>  如果系统缓存中也找不到，那么查询请求就会发向路由器，路由器一般会有自己的DNS缓存。</p>
-<h3><span id="4-查找ispinternet-service-provider-dns-缓存">4. 查找ISP(Internet Service Provider) DNS 缓存</span></h3><p>如果路由器缓存中也找不到，那么就查询ISP DNS 缓存服务器了。<br>我们都知道在我们的网络配置中都会有”DNS服务器地址”这一项，操作系统会把这个域名发送给这里设置的DNS，比如114.114.114.114,也就是本地区的域名服务器，通常是提供给你接入互联网的应用提供商。而114.114.114.114是国内移动、电信和联通通用的DNS。</p>
-<h3><span id="5-迭代查询">5. 迭代查询</span></h3><p>  如果前面都找不到DNS缓存的话，会有以下几个步骤：</p>
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>  当用户在浏览器中输入url后,你使用的电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动,DNS请求到达本地DNS服务器之后会有以下几个步骤：</p>
+<h3 id="1-浏览器缓存"><a href="#1-浏览器缓存" class="headerlink" title="1. 浏览器缓存"></a>1. 浏览器缓存</h3><p>  浏览器对本地缓存进行查找，查看是否有该域名历史记录，如果有首先直接对缓存地址访问。<br>  Chrome浏览器看本身的DNS缓存时间比较方便，在地址栏输入chrome://net-internals/#dns，就可以看到了</p>
+<h3 id="2-本地hosts文件查找ip地址"><a href="#2-本地hosts文件查找ip地址" class="headerlink" title="2. 本地hosts文件查找ip地址"></a>2. 本地hosts文件查找ip地址</h3><p>  浏览器若无缓存或者缓存地址访问无效，则首先对hosts文件查找对应域名对应ip地址。</p>
+<h3 id="3-查找路由器缓存"><a href="#3-查找路由器缓存" class="headerlink" title="3. 查找路由器缓存"></a>3. 查找路由器缓存</h3><p>  如果系统缓存中也找不到，那么查询请求就会发向路由器，路由器一般会有自己的DNS缓存。</p>
+<h3 id="4-查找ispinternet-service-provider-dns-缓存"><a href="#4-查找ISP-Internet-Service-Provider-DNS-缓存" class="headerlink" title="4. 查找ISP(Internet Service Provider) DNS 缓存"></a>4. 查找ISP(Internet Service Provider) DNS 缓存</h3><p>如果路由器缓存中也找不到，那么就查询ISP DNS 缓存服务器了。<br>我们都知道在我们的网络配置中都会有”DNS服务器地址”这一项，操作系统会把这个域名发送给这里设置的DNS，比如114.114.114.114,也就是本地区的域名服务器，通常是提供给你接入互联网的应用提供商。而114.114.114.114是国内移动、电信和联通通用的DNS。</p>
+<h3 id="5-迭代查询"><a href="#5-迭代查询" class="headerlink" title="5. 迭代查询"></a>5. 迭代查询</h3><p>  如果前面都找不到DNS缓存的话，会有以下几个步骤：</p>
 <ol>
 <li>本地 DNS服务器将该请求转发到互联网上的根域（根域没有名字，在DNS系统中就用一个空字符串来表示。例如<a target="_blank" rel="noopener" href="http://www.baidu.com.现在的dns系统都不会要求域名以.来结束,即www.baidu.com就可以解析了,但是现在很多dns解析服务商还是会要求在填写dns记录的时候以.来结尾域名.)/">www.baidu.com.现在的DNS系统都不会要求域名以.来结束，即www.baidu.com就可以解析了，但是现在很多DNS解析服务商还是会要求在填写DNS记录的时候以.来结尾域名。）</a></li>
 <li>根域将所要查询域名中的顶级域（比如要查询<a target="_blank" rel="noopener" href="http://www.baidu.com,该域名的顶级域就是com)的服务器ip地址返回到本地dns./">www.baidu.com，该域名的顶级域就是com）的服务器IP地址返回到本地DNS。</a></li>
 <li>本地DNS根据返回的IP地址，再向顶级域（就是com域）发送请求， com域服务器再将域名中的二级域（即<a target="_blank" rel="noopener" href="http://www.baidu.com中的baidu.com)的ip地址返回给本地dns./">www.baidu.com中的baidu.com）的IP地址返回给本地DNS。</a></li>
 <li>本地DNS再向二级域发送请求进行查询。</li>
-<li>之后不断重复这样的过程，直到本地DNS服务器得到最终的查询结果，并返回到主机。这时候主机才能通过域名访问该网站。<br>下图能很好的说明这个迭代查询:<br><img data-src="./dns%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B.gif"><br>当查找到对应的IP地址之后，通过IP地址查找到对应的服务器，浏览器将用户发起的http请求发送给服务器。例如：GET <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a> HTTP/1.1<h3><span id="6-cdn">6. CDN</span></h3>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。<h1><span id="服务器处理用户请求">服务器处理用户请求</span></h1><h2><span id="代理">代理</span></h2><h3><span id="正向代理">正向代理</span></h3>正向代理是一种最终用户知道并主动使用的代理方式，比如三台支付服务服务器在微服务SpringCloud中的服务注册中心中注册了三个地址（1.1.1.1,2.2.2.2,3.3.3.3），用户服务服务器访问服务注册中心请求地址正向代理返回某一个地址（1.1.1.1），支付服务缓存到本地，在缓存有效期时间内，直接访问1.1.1.1服务器就可以了。<h3><span id="反向代理">反向代理</span></h3>在计算机世界里，由于单个服务器的处理客户端（用户）请求能力有一个极限，当用户的接入请求蜂拥而入时，会造成服务器忙不过来的局面，可以使用多个服务器来共同分担成千上万的用户请求，这些服务器提供相同的服务，对于用户来说，根本感觉不到任何差别。比如你只需要敲下<a target="_blank" rel="noopener" href="http://www.baidu.com这一个域名,其实背后有很多服务器支持着,每个人的请求会被分发到不同的服务器中./">www.baidu.com这一个域名，其实背后有很多服务器支持着，每个人的请求会被分发到不同的服务器中。</a></li>
+<li>之后不断重复这样的过程，直到本地DNS服务器得到最终的查询结果，并返回到主机。这时候主机才能通过域名访问该网站。<br>下图能很好的说明这个迭代查询:<br><img data-src="./dns%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B.gif"><br>当查找到对应的IP地址之后，通过IP地址查找到对应的服务器，浏览器将用户发起的http请求发送给服务器。例如：GET <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a> HTTP/1.1<h3 id="6-cdn"><a href="#6-CDN" class="headerlink" title="6. CDN"></a>6. CDN</h3>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。<h1 id="服务器处理用户请求"><a href="#服务器处理用户请求" class="headerlink" title="服务器处理用户请求"></a>服务器处理用户请求</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3>正向代理是一种最终用户知道并主动使用的代理方式，比如三台支付服务服务器在微服务SpringCloud中的服务注册中心中注册了三个地址（1.1.1.1,2.2.2.2,3.3.3.3），用户服务服务器访问服务注册中心请求地址正向代理返回某一个地址（1.1.1.1），支付服务缓存到本地，在缓存有效期时间内，直接访问1.1.1.1服务器就可以了。<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3>在计算机世界里，由于单个服务器的处理客户端（用户）请求能力有一个极限，当用户的接入请求蜂拥而入时，会造成服务器忙不过来的局面，可以使用多个服务器来共同分担成千上万的用户请求，这些服务器提供相同的服务，对于用户来说，根本感觉不到任何差别。比如你只需要敲下<a target="_blank" rel="noopener" href="http://www.baidu.com这一个域名,其实背后有很多服务器支持着,每个人的请求会被分发到不同的服务器中./">www.baidu.com这一个域名，其实背后有很多服务器支持着，每个人的请求会被分发到不同的服务器中。</a></li>
 </ol>
 <p>  反向代理需要有一个负载均衡设备来分发用户请求，将用户请求分发到空闲的服务器上，负载均衡设备本身也可以有多个。</p>
 <p>  <strong>好处</strong>：<br>  用户服务做域名解析时，解析到的ip地址是负载均衡设备的ip地址，不会暴露服务器地址。当需要增加、减少服务器数量时，用户一点都察觉不到。</p>
-<h2><span id="负载均衡反向代理的实现">负载均衡（反向代理的实现）</span></h2><h3><span id="硬件负载均衡">硬件负载均衡</span></h3><p>  F5</p>
-<h3><span id="软件负载均衡">软件负载均衡</span></h3><ul>
+<h2 id="负载均衡反向代理的实现"><a href="#负载均衡（反向代理的实现）" class="headerlink" title="负载均衡（反向代理的实现）"></a>负载均衡（反向代理的实现）</h2><h3 id="硬件负载均衡"><a href="#硬件负载均衡" class="headerlink" title="硬件负载均衡"></a>硬件负载均衡</h3><p>  F5</p>
+<h3 id="软件负载均衡"><a href="#软件负载均衡" class="headerlink" title="软件负载均衡"></a>软件负载均衡</h3><ul>
 <li>LVS(七层协议第四层)<br>  LVS是Linux Virtual Server。lvs工作在4层，所以它可以对几乎所有应用做负载均衡，包括http、数据库、聊天室等等。同时，若跟硬件负载均衡相比它的缺点也不容忽视，LVS要求技术水平很高，操作上也比较复杂，配置也很繁琐，没有赖以保障的服务支持，稳定性来说也相对较低（人为和网络环境因素更多一些）。</li>
 <li>nginx(七层协议第七层)<br>  Nginx是工作在第七层，对于网络的依赖性就小的多。与LVS相比，Nginx的安装和配置也相对简单一些，另外测试方面也更简单，主要还是因为对网络依赖性小的缘故。Nginx有一点不好的就是应用要比LVS少。一般我们做软件负载均衡的时候，通常会先考虑LVS，但是遇到比较复杂的网络环境时，用LVS可能会遇到很多麻烦，不妨就考虑尝试一下Nginx。</li>
 </ul>
-<h3><span id="容器处理">容器处理</span></h3><ul>
+<h3 id="容器处理"><a href="#容器处理" class="headerlink" title="容器处理"></a>容器处理</h3><ul>
 <li>常用Java EE容器<ul>
 <li>tomcat</li>
 <li>jetty</li>
@@ -549,7 +549,7 @@
 </li>
 </ul>
 <p>  tomcat容器在启动后，context对应的项目在初始化的时候，要加载相应的servlet，加载的顺序为：<br>  $CATALINA_HOME/conf/web.xml里定义的servlet（对应于上面第5步的JSPServlet）；<br>  context对应的项目WEB-INF下的web.xml中定义的servlet；</p>
-<h3><span id="应用处理">应用处理</span></h3><ol>
+<h3 id="应用处理"><a href="#应用处理" class="headerlink" title="应用处理"></a>应用处理</h3><ol>
 <li>Controller接收到请求，转发给service；</li>
 <li>service进行逻辑处理，如果有redis、ehcache等缓存则优先查询缓存；</li>
 <li>如果是dubbo或者springcloud分布式，则通过dubbo服务或者restful请求调用其他服务模块请求信息；</li>
@@ -557,11 +557,11 @@
 <li>返回数据给service再给controller，controller再组装数据以及view返回；</li>
 <li>view层jsp或者velocity等模板引擎解析数据</li>
 </ol>
-<h3><span id="mysql架构">Mysql架构</span></h3><ol>
+<h3 id="mysql架构"><a href="#Mysql架构" class="headerlink" title="Mysql架构"></a>Mysql架构</h3><ol>
 <li>服务器先会检查查询缓存，如果命中了缓存，则立即返回存储在缓存中的结果。</li>
 <li>服务器端进行SQL解析、预处理，再由优化器生成对应的执行计划；</li>
 <li>MySQL根据优化器生成的执行计划，调用存储引擎的API来执行查询；</li>
-<li>将结果返回给客户端。<h4><span id="mysql能够处理的优化类型">MySQL能够处理的优化类型：</span></h4></li>
+<li>将结果返回给客户端。<h4 id="mysql能够处理的优化类型"><a href="#MySQL能够处理的优化类型：" class="headerlink" title="MySQL能够处理的优化类型："></a>MySQL能够处理的优化类型：</h4></li>
 <li>重新定义关联表的顺序<br>数据表的关联并不总是按照在查询中指定的顺序进行，决定关联的顺序是优化器很重要的一部分功能。</li>
 <li>将外连接转化成内连接<br>并不是所有的outer join语句都必须以外连接的方式执行。诸多因素，例如where条件、库表结构都可能会让外连接等价于一个内连接。MySQL能够识别这点并重写查询，让其可以调整关联顺序。</li>
 <li>使用等价变换规则<br>MySQL可以使用一些等价变换来简化并规范表达式。它可以合并和减少一些比较，还可以移除一些恒成立和一些恒不成立的判断。例如：（5=5 and a&gt;5）将被改写为a&gt;5。类似的，如果有（a<b and b="c）and" a="5，则会被改写为">5 and b=c and a=5。</b></li>
@@ -573,7 +573,7 @@
 <li>等值传播</li>
 <li>列表in()的比较<br>在很多数据库系统中，in()完全等同于多个or条件的字句，因为这两者是完全等价的。在MySQL中这点是不成立的，MySQL将in()列表中的数据先进行排序，然后通过二分查找的方式来确定列表中的值是否满足条件，这是一个o(log n)复杂度的操作，等价转换成or的查询的复杂度为o(n)，对于in()列表中有大量取值的时候，MySQL的处理速度会更快。</li>
 </ol>
-<h1><span id="浏览器渲染">浏览器渲染</span></h1>
+<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1>
       
     </div>
 
@@ -651,7 +651,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="springmvc核心流程主要在dodispatch方法中">SpringMVC核心流程,主要在doDispatch方法中</span></h2><ul>
+          <h2 id="springmvc核心流程主要在dodispatch方法中"><a href="#SpringMVC核心流程-主要在doDispatch方法中" class="headerlink" title="SpringMVC核心流程,主要在doDispatch方法中"></a>SpringMVC核心流程,主要在doDispatch方法中</h2><ul>
 <li> 1、用户发送请求，被SpringMvc的DispatcherServlet捕获到</li>
 <li> 2、DispatcherServlet对获取到的URL进行解析，得到统一定位符URI，然后根据URI调用HandlerMapping获得Handler对象以及跟handler相关的拦截器，最后以HandlerExecutionChain对象形式返回。</li>
 <li> 3、DispatcherServlet根据返回的Handler选择合适的HandlerAdapter，如果找到了HandlerAdapter,在之前就会执行preHandler方法</li>
@@ -670,7 +670,7 @@
 <li> 7、ViewResolveModel和View来渲染视图</li>
 <li> 8、将渲染结果返回给客户端</li>
 </ul>
-<h2><span id="处理关键">处理关键</span></h2><ul>
+<h2 id="处理关键"><a href="#处理关键" class="headerlink" title="处理关键"></a>处理关键</h2><ul>
 <li>DispatcherServlet的HandlerMapping集合中根据请求的URL匹配每一个handlerMapping对象中的某个handler,匹配成功后将会返回这个handler的处理连接handlerExecutorChain对象，而这个对象中包括多个handlerInterceptor。</li>
 <li>HandlerInterceptor中包含三个方法<ul>
 <li>preHandler，在Handler执行之前调用。</li>
@@ -680,7 +680,7 @@
 </li>
 <li>当preHandler返回false时，请求将在执行afterComplete后直接返回，不会执行handler。    </li>
 </ul>
-<h2><span id="首先有几个类需要声明modelandview-handlerexecutionchain-handlermapping-handlermethod-handleradapter">首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</span></h2><ul>
+<h2 id="首先有几个类需要声明modelandview-handlerexecutionchain-handlermapping-handlermethod-handleradapter"><a href="#首先有几个类需要声明-ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。" class="headerlink" title="首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。"></a>首先有几个类需要声明,ModelAndView、HandlerExecutionChain、HandlerMapping、HandlerMethod、HandlerAdapter。</h2><ul>
 <li>1、HandlerMethod(org.springframework.web.method.HandlerMethod)，这个类为中存放了某个bean对象和该bean对象的某个要处理的Method对象。</li>
 <li>2、HandlerMapping,作用为通过request对象，获取对应的HandlerMethod对象。</li>
 <li>3、HandlerExecutionChain作用为通过加入Interceptor拦截器包装HandlerMapping返回的HandlerMethod对象。让待处理的方法对象与拦截器称为一个整体,即执行链。</li>
@@ -765,15 +765,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="接口">接口</span></h2><ul>
+          <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
 <li>ArrayList ： 继承自List接口</li>
 <li>LinkedList ： 继承自List和Deque接口</li>
 </ul>
-<h2><span id="存储结构">存储结构</span></h2><ul>
+<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><ul>
 <li>ArrayList ：底层用数组进行存储</li>
 <li>LinkedList ： 底层用双链表进行存储 </li>
 </ul>
-<h2><span id="优点">优点</span></h2><ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
 <li>ArrayList ： 访问速度快，插入和删除比较慢 ，需要移动元素</li>
 <li>LinkedList ： 访问比较慢，插入和删除比较快 ， 需要链式查询</li>
 </ul>
@@ -855,14 +855,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="顶级接口">顶级接口：</span></h2><ul>
+          <h2 id="顶级接口"><a href="#顶级接口：" class="headerlink" title="顶级接口："></a>顶级接口：</h2><ul>
 <li>Collection<br>  <img data-src="img/Collection%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
 <li>Map<br>  <img data-src="img/Map%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
 </ul>
-<h2><span id="顶级类">顶级类：</span></h2><ul>
+<h2 id="顶级类"><a href="#顶级类：" class="headerlink" title="顶级类："></a>顶级类：</h2><ul>
 <li>Collections</li>
 </ul>
-<h3><span id="接口描述">接口描述</span></h3><ul>
+<h3 id="接口描述"><a href="#接口描述" class="headerlink" title="接口描述"></a>接口描述</h3><ul>
 <li>Collection ：  不提供直接子类继承，只提供继承的子接口（List和Set）<ul>
 <li><p>List : 有序的Collection，控制元素的插入位置，和通过索引访问List数据，允许相同的Key。</p>
 <ul>
@@ -1000,7 +1000,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="算法和数据结构性能场景">算法和数据结构（性能，场景）：</span></h2><h3><span id="数据结构">数据结构：</span></h3><ul>
+          <h2 id="算法和数据结构性能场景"><a href="#算法和数据结构（性能，场景）：" class="headerlink" title="算法和数据结构（性能，场景）："></a>算法和数据结构（性能，场景）：</h2><h3 id="数据结构"><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h3><ul>
 <li><p>  数组</p>
 </li>
 <li><p>  链表</p>
@@ -1073,7 +1073,7 @@
        \- 有向图：
           有向图的邻接矩阵是非对称的，即如果存在从u到v的表并不意味着存在v到u的边。
 </code></pre>
-<h3><span id="算法">：</span></h3></li>
+<h3 id="算法"><a href="#算法：" class="headerlink" title="算法："></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/gane-cheng/article/details/52652705">算法</a>：</h3></li>
 <li><p>查找：</p>
 <ul>
 <li>  二分查找，以及变种二分查找。</li>
@@ -1132,7 +1132,7 @@
   -   时间、空间复杂度（理解并分析）
   -   动态规划、贪心算法
 </code></pre>
-<h3><span id="计算机网络">计算机网络</span></h3></li>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3></li>
 </ul>
 </li>
 <li><p>OSI7层协议（TCP四层）</p>
@@ -1166,7 +1166,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="数据库mysql">数据库(mysql)</span></h3><ul>
+<h3 id="数据库mysql"><a href="#数据库-mysql" class="headerlink" title="数据库(mysql)"></a>数据库(mysql)</h3><ul>
 <li>索引<ul>
 <li>分类<ul>
 <li>  全文索引</li>
@@ -1220,7 +1220,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="nosql">NoSql</span></h3><ul>
+<h3 id="nosql"><a href="#NoSql" class="headerlink" title="NoSql"></a>NoSql</h3><ul>
 <li>  redis</li>
 <li>  memcached</li>
 <li>  mongdb</li>
@@ -1231,7 +1231,7 @@
 <li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/liu251890347/article/details/37690045">《memcache 中 add 、 set 、replace 的区别》</a></li>
 <li>  <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1qX00Lti?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=">《memcached全面剖析》</a></li>
 </ul>
-<h3><span id="设计模式">设计模式</span></h3><ul>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/q291611265/article/details/48465113">设计模式的六大原则</a></p>
 <ul>
 <li>  开闭原则：对扩展开放,对修改关闭，多使用抽象类和接口。</li>
@@ -1287,7 +1287,7 @@
 <li><p>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012387062/article/details/54719114">《Mybatis使用的设计模式》</a></p>
 </li>
 </ul>
-<h3><span id="操作系统">操作系统</span></h3><ul>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ul>
 <li><p>  进程通信IPC，与线程区别</p>
 </li>
 <li><p>  OS集中策略、进程调度</p>
@@ -1299,7 +1299,7 @@
 <li>  cpu命令</li>
 <li>  内存</li>
 <li>  部署</li>
-<li>vim<h3><span id="java">java</span></h3></li>
+<li>vim<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3></li>
 </ul>
 </li>
 <li><p>  面向对象</p>
@@ -1738,11 +1738,11 @@
 <li><p>  Guava</p>
 </li>
 </ul>
-<h3><span id="脚本语言">脚本语言</span></h3><ul>
+<h3 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h3><ul>
 <li>  python</li>
 <li>  shell</li>
 </ul>
-<h2><span id="架构">架构</span></h2><h3><span id="微服务">微服务</span></h3><ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><ul>
 <li><p>微框架</p>
 <ul>
 <li>  与微服务之间的关系</li>
@@ -1787,7 +1787,7 @@
   \- 如何设计微服务及设计原则
   \- 全局分析Spring Cloud各个组件所能解决的问题
 </code></pre>
-<h3><span id="分布式">分布式</span></h3></li>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3></li>
 <li><p>分布式架构原理</p>
 <ul>
 <li>  分布式架构严谨过程</li>
@@ -1875,7 +1875,7 @@
 </ul>
 </li>
 <li><p>分布式锁</p>
-<h3><span id="大数据">大数据</span></h3></li>
+<h3 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h3></li>
 <li><p>hadoop生态圈</p>
 <ul>
 <li>  hive</li>
@@ -1895,7 +1895,7 @@
 <li><p>  人工智能</p>
 </li>
 </ul>
-<h3><span id="运维-amp-统计-amp-技术支持">运维 &amp; 统计 &amp; 技术支持</span></h3><ul>
+<h3 id="运维-amp-统计-amp-技术支持"><a href="#运维-amp-统计-amp-技术支持" class="headerlink" title="运维 &amp; 统计 &amp; 技术支持"></a>运维 &amp; 统计 &amp; 技术支持</h3><ul>
 <li><p>常规监控</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/enweitech/article/details/77849205">《腾讯业务系统监控的修炼之路》</a></p>
@@ -1953,7 +1953,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="测试">测试</span></h3><ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
 <li>TDD 理论<ul>
 <li>-<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/62f16cd4fef3">《深度解读 - TDD（测试驱动开发）》</a><ul>
 <li>  基于测试用例编码功能代码，XP（Extreme Programming）的核心实践.</li>
@@ -1990,7 +1990,7 @@
 </ul>
 </li>
 </ul>
-<h2><span id="书单">书单</span></h2><ul>
+<h2 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h2><ul>
 <li>算法与数据结构<ul>
 <li>  数据结构（严蔚敏）/大话数据结构              * 剑指Offer/程序员面试金典/编程珠玑/编程之美/牛客网+leetcode</li>
 <li>  程序员笔试面试最优解（左程云）/不如直接看左神的笔试面试指南视频</li>
@@ -2061,7 +2061,7 @@
 <li>  docker</li>
 <li>  springcloud</li>
 </ul>
-<h2><span id="实战">实战</span></h2><h3><span id="实践一个双十一电商项目">实践一个双十一电商项目</span></h3><ul>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="实践一个双十一电商项目"><a href="#实践一个双十一电商项目" class="headerlink" title="实践一个双十一电商项目"></a>实践一个双十一电商项目</h3><ul>
 <li>用户认证<ul>
 <li>  用户注册</li>
 <li>  SSO单点登录</li>
@@ -2261,7 +2261,7 @@
 
       
           <p>[TOC]</p>
-<h2><span id="获取uuid和二维码">获取uuid和二维码：</span></h2><ul>
+<h2 id="获取uuid和二维码"><a href="#获取uuid和二维码：" class="headerlink" title="获取uuid和二维码："></a>获取uuid和二维码：</h2><ul>
 <li>在公众号输入8，即可返回二维码图片；<ul>
 <li>生成uuid；</li>
 <li>生成二维码；</li>
@@ -2270,7 +2270,7 @@
 </ul>
 </li>
 </ul>
-<h2><span id="后台守护进程">后台守护进程：</span></h2><ul>
+<h2 id="后台守护进程"><a href="#后台守护进程：" class="headerlink" title="后台守护进程："></a>后台守护进程：</h2><ul>
 <li>开启一个守护线程：<ul>
 <li>获取redis中保存的用户信息；</li>
 <li>判断如果未登陆则继续执行以下操作，如果已经登陆了，返回，不做任何操作。</li>
@@ -2315,8 +2315,8 @@
 </ul>
 </li>
 </ul>
-<h2><span id="20170904">2017.09.04</span></h2><p>  做好微信机器人，在微信公众平台界面发送8将返回一个二维码，扫码登陆后即可开启机器人。<br>  机器人功能： //TODO<br>    * 集成聊天机器人功能。<br>    * 备份聊天记录。<br>    * 爬取所有用户，并分析用户联系人的男女比例，整合头像。<br>    * 爬取公众号文章。<br>    * 撤回消息备份<br>    * 关键词监听<br>    * 消息搜索<br>    * 信息分析<br>    * 查看/删除文件[文件名] e.g. 查看文件[123345234.mp3]<br>    * 撤回附件列表 (查看都有哪些保存在电脑中的已撤回附件)<br>    * 清空附件列表 (清空已经保存在电脑中的附件)<br>    * 添加关键词[关键词] e.g. 设置关键词[在不在]<br>    * 删除关键词[关键词] e.g. 删除关键词[在不在]<br>    * 清空关键词 清空已经设置的所有关键词<br>    * 查看关键词 查看目前设置的关键词<br>    * 添加签到口令#公众号:签到口令# e.g. 添加签到口令#招商银行信用卡:签到#<br>    * 删除签到口令#公众号# e.g. 删除签到口令#招商银行信用卡#<br>    * 查看签到口令 查看已经存在的公众和和对应的签到口令<br>    * 清空签到口令 清空所有签到口令<br>    * 截图 截取当前屏幕发送到文件助手<br>    * 添加自动回复#针对的关键词:回复内容# e.g.添加自动回复#在不在:我现在有事情，待会儿回复你#<br>    * 删除自动回复#针对的关键词# e.g.删除自动回复#在不在#<br>    * 清空自动回复 清空所有的自定义回复规则<br>    * 关闭自动回复<br>    * 打开自动回复<br>    * 退出程序</p>
-<h2><span id="备份聊天功能">备份聊天功能：</span></h2><pre><code>* 发送 “开启**回复” 即可回复 ** 信息
+<h2 id="20170904"><a href="#2017-09-04" class="headerlink" title="2017.09.04"></a>2017.09.04</h2><p>  做好微信机器人，在微信公众平台界面发送8将返回一个二维码，扫码登陆后即可开启机器人。<br>  机器人功能： //TODO<br>    * 集成聊天机器人功能。<br>    * 备份聊天记录。<br>    * 爬取所有用户，并分析用户联系人的男女比例，整合头像。<br>    * 爬取公众号文章。<br>    * 撤回消息备份<br>    * 关键词监听<br>    * 消息搜索<br>    * 信息分析<br>    * 查看/删除文件[文件名] e.g. 查看文件[123345234.mp3]<br>    * 撤回附件列表 (查看都有哪些保存在电脑中的已撤回附件)<br>    * 清空附件列表 (清空已经保存在电脑中的附件)<br>    * 添加关键词[关键词] e.g. 设置关键词[在不在]<br>    * 删除关键词[关键词] e.g. 删除关键词[在不在]<br>    * 清空关键词 清空已经设置的所有关键词<br>    * 查看关键词 查看目前设置的关键词<br>    * 添加签到口令#公众号:签到口令# e.g. 添加签到口令#招商银行信用卡:签到#<br>    * 删除签到口令#公众号# e.g. 删除签到口令#招商银行信用卡#<br>    * 查看签到口令 查看已经存在的公众和和对应的签到口令<br>    * 清空签到口令 清空所有签到口令<br>    * 截图 截取当前屏幕发送到文件助手<br>    * 添加自动回复#针对的关键词:回复内容# e.g.添加自动回复#在不在:我现在有事情，待会儿回复你#<br>    * 删除自动回复#针对的关键词# e.g.删除自动回复#在不在#<br>    * 清空自动回复 清空所有的自定义回复规则<br>    * 关闭自动回复<br>    * 打开自动回复<br>    * 退出程序</p>
+<h2 id="备份聊天功能"><a href="#备份聊天功能：" class="headerlink" title="备份聊天功能："></a>备份聊天功能：</h2><pre><code>* 发送 “开启**回复” 即可回复 ** 信息
   后台将配置记录到sql中，并缓存到redis中。
 </code></pre>
 

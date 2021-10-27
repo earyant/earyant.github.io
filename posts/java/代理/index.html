@@ -274,26 +274,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1><span id="代理分类">代理分类</span></h1><h2><span id="正向代理">正向代理</span></h2><pre><code>&gt;服务器ip地址不变，用户ip地址变。例如用户(1.1.1.1)使用正向代理(2.2.2.2)访问服务器(3.3.3.3),那么服务器收到的消息来自2.2.2.2.服务器不知道用户真正的地址。
+        <h1 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><pre><code>&gt;服务器ip地址不变，用户ip地址变。例如用户(1.1.1.1)使用正向代理(2.2.2.2)访问服务器(3.3.3.3),那么服务器收到的消息来自2.2.2.2.服务器不知道用户真正的地址。
 </code></pre>
-<h2><span id="反向代理">反向代理</span></h2><pre><code>&gt; 反之，用户不知道服务器的地址。
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><pre><code>&gt; 反之，用户不知道服务器的地址。
 </code></pre>
-<h3><span id="场景">场景</span></h3><pre><code>对用户屏蔽高可用、屏蔽web-server扩展、内网等一些细节。
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><pre><code>对用户屏蔽高可用、屏蔽web-server扩展、内网等一些细节。
 由于web-server有多台，需要进行负载均衡。
 </code></pre>
-<h1><span id="负载均衡">[负载均衡]{}</span></h1><h2><span id="软件">软件</span></h2><ul>
+<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="[负载均衡]{}"></a>[负载均衡]{}</h1><h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
 <li>nginx/apache</li>
 <li>F5</li>
 <li>lvs</li>
 </ul>
-<h2><span id="什么是四层转发交换什么是七层转发交换">什么是四层（转发/交换），什么是七层（转发/交换）？</span></h2><p>   <img data-src="img/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE7%E5%B1%82%E4%B8%8E5%E5%B1%82%E5%8D%8F%E8%AE%AE.png" alt="这个是来源于OSI七层模型"><br>   由图可见，4层指传输层，7层指应用层<br>   更具体的，对应到nginx反向代理hash：</p>
+<h2 id="什么是四层转发交换什么是七层转发交换"><a href="#什么是四层（转发-交换），什么是七层（转发-交换）？" class="headerlink" title="什么是四层（转发/交换），什么是七层（转发/交换）？"></a>什么是四层（转发/交换），什么是七层（转发/交换）？</h2><p>   <img data-src="img/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE7%E5%B1%82%E4%B8%8E5%E5%B1%82%E5%8D%8F%E8%AE%AE.png" alt="这个是来源于OSI七层模型"><br>   由图可见，4层指传输层，7层指应用层<br>   更具体的，对应到nginx反向代理hash：</p>
 <ul>
 <li>四层：根据用户ip+port来做hash</li>
 <li>七层：根据http协议中的某些属性来做hash</li>
 </ul>
-<h2><span id="为什么中间少了几层">为什么中间少了几层？</span></h2><pre><code>OSI应用层、表示层、会话层合并到TCP/IP的应用层啦。
+<h2 id="为什么中间少了几层"><a href="#为什么中间少了几层？" class="headerlink" title="为什么中间少了几层？"></a>为什么中间少了几层？</h2><pre><code>OSI应用层、表示层、会话层合并到TCP/IP的应用层啦。
 </code></pre>
-<h2><span id="上面有四层七层那有没有二层三层呢">上面有四层，七层，那有没有二层，三层呢？</span></h2><ul>
+<h2 id="上面有四层七层那有没有二层三层呢"><a href="#上面有四层，七层，那有没有二层，三层呢？" class="headerlink" title="上面有四层，七层，那有没有二层，三层呢？"></a>上面有四层，七层，那有没有二层，三层呢？</h2><ul>
 <li>二层：根据数据链路层MAC地址完成数据交换</li>
 <li>三层：根据网络层IP地址完成数据交换</li>
 </ul>
@@ -407,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">代理分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">[负载均衡]{}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">什么是四层（转发&#x2F;交换），什么是七层（转发&#x2F;交换）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">为什么中间少了几层？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">上面有四层，七层，那有没有二层，三层呢？</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">代理分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.</span> <span class="nav-text">[负载均衡]{}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9B%E5%B1%82%E8%BD%AC%E5%8F%91%E4%BA%A4%E6%8D%A2%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%83%E5%B1%82%E8%BD%AC%E5%8F%91%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">什么是四层（转发&#x2F;交换），什么是七层（转发&#x2F;交换）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%AD%E9%97%B4%E5%B0%91%E4%BA%86%E5%87%A0%E5%B1%82"><span class="nav-number">2.3.</span> <span class="nav-text">为什么中间少了几层？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%9B%9B%E5%B1%82%E4%B8%83%E5%B1%82%E9%82%A3%E6%9C%89%E6%B2%A1%E6%9C%89%E4%BA%8C%E5%B1%82%E4%B8%89%E5%B1%82%E5%91%A2"><span class="nav-number">2.4.</span> <span class="nav-text">上面有四层，七层，那有没有二层，三层呢？</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

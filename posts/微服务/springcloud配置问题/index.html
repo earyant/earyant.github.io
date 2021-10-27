@@ -278,14 +278,14 @@
 <li>bean参数传值</li>
 <li></li>
 </ul>
-<h3><span id="eureka-不自动下线">eureka 不自动下线</span></h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
+<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
 <p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
 <p>解决方法：设置enableSelfPreservation:false</p>
 <p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
-<h3><span id="负载均衡在服务下掉后的重试策略"></span></h3><p>默认没有开启：</p>
+<h3 id="负载均衡在服务下掉后的重试策略"><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3><span id="断路器配置重试"></span></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
+<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
@@ -397,7 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">eureka 不自动下线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-%E4%B8%8D%E8%87%AA%E5%8A%A8%E4%B8%8B%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">eureka 不自动下线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%9C%A8%E6%9C%8D%E5%8A%A1%E4%B8%8B%E6%8E%89%E5%90%8E%E7%9A%84%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">负载均衡在服务下掉后的重试策略：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E8%B7%AF%E5%99%A8%E9%85%8D%E7%BD%AE%E9%87%8D%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">断路器配置重试:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

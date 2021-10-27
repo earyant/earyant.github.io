@@ -275,7 +275,7 @@
 
       
         <p><a target="_blank" rel="noopener" href="http://zhuanlan.51cto.com/art/201709/550451.htm">http://zhuanlan.51cto.com/art/201709/550451.htm</a></p>
-<h2><span id="jvm内存模型">JVM内存模型</span></h2><p>   <img data-src="img/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.jpg"></p>
+<h2 id="jvm内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>   <img data-src="img/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.jpg"></p>
 <p>   打印出来的信息：</p>
 <pre><code>PSYoungGen      total 3072K, used 128K 
     eden space 2560K, 5% used  
@@ -290,7 +290,7 @@ PSPermGen       total 4096K, used 3039K
     object space 4096K, 74% used  
     
 </code></pre>
-<h2><span id="gc过程">GC过程</span></h2><ul>
+<h2 id="gc过程"><a href="#GC过程" class="headerlink" title="GC过程"></a>GC过程</h2><ul>
 <li>年轻代：<br>  存放对象的特点： 生命周期短，多为临时变量。<blockquote>
 <p>新实例化的对象都会在eden中new出来，经过手动System.gc()（本质上也是调用Runtime的gc）、Runtime.getRuntime().gc()（本地方法）或者一段时间后系统自动触发gc，年轻代使用 <em>复制清除</em>算法 ，从Root对象开始标记为存活，存活的对象引用的对象也会标记为存活，扫描整个eden区后，将存活的对象存放到其中一个survivor区，清除eden区和另外一个eden区。下次再产生新的对象仍然是放到eden区内，再gc时将eden区和有对象存储的survivor存活的对象复制到另外一个survivor区内，清除这两个区，反复如此，清除一定次数后（之前看过介绍15次，不太确定）将仍然存活的放到年老代。</p>
 </blockquote>
@@ -300,12 +300,12 @@ PSPermGen       total 4096K, used 3039K
 </blockquote>
 </li>
 </ul>
-<h2><span id="示例">示例</span></h2><h3><span id="栈内存溢出javalangstackoverflowerror">栈内存溢出(java.lang.StackOverflowError)</span></h3><pre><code> &gt; -Xmx10m
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="栈内存溢出javalangstackoverflowerror"><a href="#栈内存溢出-java-lang-StackOverflowError" class="headerlink" title="栈内存溢出(java.lang.StackOverflowError)"></a>栈内存溢出(java.lang.StackOverflowError)</h3><pre><code> &gt; -Xmx10m
    -XX:MaxPermSize=5m
    -XX:MaxDirectMemorySize=5m
    -XX:+PrintGCDetails
 </code></pre>
-<h3><span id="永久代溢出javalangoutofmemoryerror-gc-overhead-limit-exceeded">永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</span></h3>
+<h3 id="永久代溢出javalangoutofmemoryerror-gc-overhead-limit-exceeded"><a href="#永久代溢出-java-lang-OutOfMemoryError-GC-overhead-limit-exceeded" class="headerlink" title="永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)"></a>永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</h3>
     </div>
 
     
@@ -415,7 +415,7 @@ PSPermGen       total 4096K, used 3039K
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">GC过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">栈内存溢出(java.lang.StackOverflowError)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">GC过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BAjavalangstackoverflowerror"><span class="nav-number">3.1.</span> <span class="nav-text">栈内存溢出(java.lang.StackOverflowError)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E4%BB%A3%E6%BA%A2%E5%87%BAjavalangoutofmemoryerror-gc-overhead-limit-exceeded"><span class="nav-number">3.2.</span> <span class="nav-text">永久代溢出(java.lang.OutOfMemoryError: GC overhead limit exceeded)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

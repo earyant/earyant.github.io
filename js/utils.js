@@ -234,6 +234,7 @@ NexT.utils = {
   registerSidebarTOC: function() {
     const navItems = document.querySelectorAll('.post-toc li');
     const sections = [...navItems].map(element => {
+      // alert(element)
       var link = element.querySelector('a.nav-link');
       var target = document.getElementById(decodeURI(link.getAttribute('href')).replace('#', ''));
       // TOC item animation navigate.

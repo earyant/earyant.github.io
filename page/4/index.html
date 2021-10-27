@@ -263,7 +263,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="机器学习路线图">机器学习路线图</span></h1><h2><span id="入门课程">入门课程</span></h2><ol>
+          <h1 id="机器学习路线图"><a href="#机器学习路线图" class="headerlink" title="机器学习路线图"></a>机器学习路线图</h1><h2 id="入门课程"><a href="#入门课程" class="headerlink" title="入门课程"></a>入门课程</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">Machine Learning | Coursera</a><br>入门首选，推荐只认识“机器学习”四个字但还不知道它是什么的学习这些年机器学习的大多数年轻人靠这个入门。具体提纲我就不列了，免得增加篇幅。建议是直接按顺序一课课学，不要着急。在学完这个课程前，不要学后面的。<br>关于这门课的官方介绍是：本课程将广泛介绍机器学习、数据挖掘和统计模式识别。相关主题包括：(i) 监督式学习（参数和非参数算法、支持向量机、核函数和神经网络）。(ii) 无监督学习（集群、降维、推荐系统和深度学习）。(iii) 机器学习实例（偏见/方差理论；机器学习和AI领域的创新）。课程将引用很多案例和应用，您还需要学习如何在不同领域应用学习算法，例如智能机器人（感知和控制）、文本理解（网络搜索和垃圾邮件过滤）、计算机视觉、医学信息学、音频、数据库挖掘等领域。这门课基本涵盖了机器学习的主要知识点，例如：线性回归、逻辑回归、支持向量机、神经网络、K-Means、异常检测等等。而且课程中没有复杂的公式推导和理论分析。Ng 的目的是让机器学习初学者能够快速对整个机器学习知识点有比较整体的认识，便于快速入门。</li>
 </ol>
 <p><img data-src="https://pic1.zhimg.com/v2-2b979310ac6c053b9a96a1e594824934_b.jpg" alt="img"></p>
@@ -274,7 +274,7 @@
 <p><img data-src="https://img-blog.csdnimg.cn/20190425205801254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2MDYzMDc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 </li>
 </ol>
-<h1><span id="引用链接">引用链接</span></h1><p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>
+<h1 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h1><p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/95/3cefbe4d0e914256b1271fe3417dded8">面试技巧</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/experience?tagId=645">面经</a><br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/ta/review-ml">面试题</a></p>
 
       
     </div>
@@ -353,10 +353,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="godb">godb</span></h1><blockquote>
+          <h1 id="godb"><a href="#godb" class="headerlink" title="godb"></a>godb</h1><blockquote>
 <p>本项目中，数据库就是本地一个文件夹，表也是数据库下的目录，里面的数据就是表文件夹下的文件，<br>表目录下的scheme.json保存着表结构<br>表目录下data0.json data1.json分别存储着数据，每个文件里的数据不超过1000行。</p>
 </blockquote>
-<h2><span id="设计逻辑">设计逻辑</span></h2><ul>
+<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><ul>
 <li>  代码分为client端和server端</li>
 <li>  server端开启端口，接收指令，并执行指令</li>
 <li>  client端连接端口，发送指令</li>
@@ -367,17 +367,17 @@
 </ul>
 </li>
 </ul>
-<h2><span id="建库">建库</span></h2><blockquote>
+<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><blockquote>
 <p>暂时建表只支持这种格式，实际实现是在项目tmp目录下新建一个db1的文件夹</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database db1</span><br></pre></td></tr></table></figure>
 
-<h2><span id="建表">建表</span></h2><blockquote>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><blockquote>
 <p>暂时只支持  ‘id’ 列名， varchar（255） 类型长度，以及默认值<br>以及主键<br>实际实现是在数据库目录下新建一个表名的文件夹，并有一个scheme.json文件记录各列属性</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  table1 (`id` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
 
-<h2><span id="插入数据">插入数据</span></h2><blockquote>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
 <p>支持语句格式,value 只支持一个括号，values支持多个括号多行数据插入<br>实际实现是在表文件夹下，新建data(i).json文件，里面存储具体数据，i是预留数据量大的情况下的分文件存储，每个文件暂时最多支持存储1000行。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> feature_conf <span class="keyword">values</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
@@ -465,7 +465,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="intern作用">intern作用</span></h2><blockquote>
+          <h2 id="intern作用"><a href="#intern作用" class="headerlink" title="intern作用"></a>intern作用</h2><blockquote>
 <p>如果常量池中存在当前字符串, 就会直接返回当前字符串. 如果常量池中没有此字符串, 会将此字符串放入常量池中后, 再返回</p>
 </blockquote>
 <p>先明白含义是什么，再看一道题，copy美团的文章，详见参考一</p>
@@ -483,7 +483,7 @@
 <li>jdk7、8和6有什么不同： 7以上将常量池从perm区移到了heap中</li>
 <li>jdk7、8第一个程序中为什么一个是false，一个是true，<strong>jdk7以后常量去不仅仅可以保存对象，也可以保存对象的引用</strong>，所以s3的引用被保存到常量区中，s4直接在常量区找到了对象的引用，所以为true。</li>
 </ul>
-<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#x65;&#97;&#114;&#x79;&#97;&#110;&#116;&#x4c;&#101;&#101;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;">&#x65;&#97;&#114;&#x79;&#97;&#110;&#116;&#x4c;&#101;&#101;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;</a></p>
+<p>有兴趣研究的同学，可以联系我，微信 ryry89，邮箱<a href="mailto:&#101;&#97;&#x72;&#x79;&#x61;&#110;&#x74;&#x4c;&#x65;&#x65;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;">&#101;&#97;&#x72;&#x79;&#x61;&#110;&#x74;&#x4c;&#x65;&#x65;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a></p>
 <p><a target="_blank" rel="noopener" href="https://tech.meituan.com/in_depth_understanding_string_intern.html">参考一</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Kidezyq/p/8040338.html">参考二</a></p>
 
       
@@ -563,18 +563,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="jib">Jib</span></h1><p>好久没写blog了，最近看到google新开源的工具心痒痒，试着玩下~<br>首先什么是Jib，：</p>
+          <h1 id="jib"><a href="#Jib" class="headerlink" title="Jib"></a>Jib</h1><p>好久没写blog了，最近看到google新开源的工具心痒痒，试着玩下~<br>首先什么是Jib，：</p>
 <blockquote>
 <p>Jib 是 Google 开发的可以直接构建 Java 应用的 Docker 和 OCI 镜像的类库，以 Maven 和 Gradle 插件形式提供。<br>通过 Jib，Java 开发者可以使用他们熟悉的 Java 工具来构建容器。Jib 是一个快速而简单的容器镜像构建工具，它负责处理将应用程序打包到容器镜像中所需的所有步骤。它不需要你编写 Dockerfile 或安装 Docker，而且可以直接集成到 Maven 和 Gradle中 —— 只需要将插件添加到构建中，就可以立即将 Java 应用程序容器化。</p>
 </blockquote>
-<h2><span id="构建流程">构建流程</span></h2><ul>
+<h2 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h2><ul>
 <li><p>Docker构建的复杂流程<br><img data-src="https://static.oschina.net/uploads/space/2018/0710/155927_vHQt_2720166.png"></p>
 </li>
 <li><p>Jib构建流程<br><img data-src="https://static.oschina.net/uploads/space/2018/0710/155918_xYRX_2720166.png"></p>
 </li>
 </ul>
 <p>从此可以告别繁琐的Dockerfile啦~~</p>
-<h2><span id="上手">上手</span></h2><ol>
+<h2 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h2><ol>
 <li><p>首先配置jib插件<br> maven:</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.cloud.tools<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jib-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">from</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">                        registry.hub.docker.com/adoptopenjdk/openjdk8</span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span>&gt;</span>registry.hub.docker.com/earyant/earyant<span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -774,7 +774,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="jvm系列一java类的加载机制"></span></h2><ul>
+          <h2 id="jvm系列一java类的加载机制"><a href="#jvm系列-一-java类的加载机制" class="headerlink" title="jvm系列(一):java类的加载机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483934&idx=1&sn=41c46eceb2add54b7cde9eeb01412a90&chksm=ebf6da61dc81537721d36aadb5d20613b0449762842f9128753e716ce5fefe2b659d8654c4e8&scene=21#wechat_redirect">jvm系列(一):java类的加载机制</a></h2><ul>
 <li><p>什么是类的加载</p>
 <blockquote>
 <p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
@@ -806,7 +806,7 @@
 
   - 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效
 </code></pre>
-<h2><span id="jvm系列二jvm内存结构"></span></h2><p>  <img data-src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
+<h2 id="jvm系列二jvm内存结构"><a href="#jvm系列-二-JVM内存结构" class="headerlink" title="jvm系列(二):JVM内存结构"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483949&idx=1&sn=8b69d833bbc805e63d5b2fa7c73655f5&chksm=ebf6da52dc815344add64af6fb78fee439c8c27b539b3c0e87d8f6861c8422144d516ae0a837&scene=21#wechat_redirect">jvm系列(二):JVM内存结构</a></h2><p>  <img data-src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnprm5p8TE8Ogn2WfVM3YUA5R55vvKcRJC1UXBVrjuEJuLOxD6woyWpicufMicSZbZTpLrGrNrr0cmAQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1"></p>
 </li>
 </ul>
 <blockquote>
@@ -824,7 +824,7 @@
 <li><p>  本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
 </li>
 </ul>
-<h3><span id="对象分配规则">对象分配规则</span></h3><ul>
+<h3 id="对象分配规则"><a href="#对象分配规则" class="headerlink" title="对象分配规则"></a>对象分配规则</h3><ul>
 <li><p>  对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。</p>
 </li>
 <li><p>  大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。</p>
@@ -836,7 +836,7 @@
 <li><p>  空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。</p>
 </li>
 </ul>
-<h2><span id="jvm系列三gc算法-垃圾收集器"></span></h2><h3><span id="对象存活判断">对象存活判断</span></h3><blockquote>
+<h2 id="jvm系列三gc算法-垃圾收集器"><a href="#jvm系列-三-GC算法-垃圾收集器" class="headerlink" title="jvm系列(三):GC算法 垃圾收集器"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483952&idx=1&sn=ea12792a9b7c67baddfaf425d8272d33&chksm=ebf6da4fdc815359869107a4acd15538b3596ba006b4005b216688b69372650dbd18c0184643&scene=21#wechat_redirect">jvm系列(三):GC算法 垃圾收集器</a></h2><h3 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h3><blockquote>
 <p>判断对象是否存活一般有两种方式：</p>
 </blockquote>
 <ul>
@@ -845,7 +845,7 @@
 <li><p>  可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，不可达对象。</p>
 </li>
 </ul>
-<h3><span id="gc算法">GC算法</span></h3><ul>
+<h3 id="gc算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h3><ul>
 <li><p>  GC最基础的算法有三种：标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。</p>
 </li>
 <li><p>  标记 -清除算法，“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。</p>
@@ -857,7 +857,7 @@
 <li><p>  分代收集算法，“分代收集”（Generational Collection）算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
 </li>
 </ul>
-<h3><span id="垃圾回收器">垃圾回收器</span></h3><ul>
+<h3 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h3><ul>
 <li><p>  Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。</p>
 </li>
 <li><p>  ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。</p>
@@ -878,7 +878,7 @@
 <li>  方法区中常量引用的对象。</li>
 <li>  本地方法栈中JNI引用的对象。</li>
 </ul>
-<h2><span id="jvm系列四jvm调优-命令篇"></span></h2><h3><span id="调优命令">调优命令</span></h3><blockquote>
+<h2 id="jvm系列四jvm调优-命令篇"><a href="#jvm系列-四-jvm调优-命令篇" class="headerlink" title="jvm系列(四):jvm调优-命令篇"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483966&idx=1&sn=dfa3375d36aa2c0c25a775522e381e62&chksm=ebf6da41dc815357e0d53c73865a23f41219e75bac5a4d510bfa31cc51594b59a20e2e4f6cb8&scene=21#wechat_redirect">jvm系列(四):jvm调优-命令篇</a></h2><h3 id="调优命令"><a href="#调优命令" class="headerlink" title="调优命令"></a>调优命令</h3><blockquote>
 <p>  Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
 </blockquote>
 <ul>
@@ -889,7 +889,7 @@
 <li>  jstack，用于生成java虚拟机当前时刻的线程快照。</li>
 <li>  jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</li>
 </ul>
-<h2><span id="jvm系列五java-gc-分析"></span></h2><h3><span id="主要关注点">主要关注点：</span></h3><ul>
+<h2 id="jvm系列五java-gc-分析"><a href="#jvm系列-五-Java-GC-分析" class="headerlink" title="jvm系列(五):Java GC 分析"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247483986&idx=1&sn=a2d7c9f2e73dfcc938a3ec934b3ad3a4&chksm=ebf6da2ddc81533beb5e6fb54c872b5f79524d0780c484718a57ca0712916cd67bda7dee4073&scene=21#wechat_redirect">jvm系列(五):Java GC 分析</a></h2><h3 id="主要关注点"><a href="#主要关注点：" class="headerlink" title="主要关注点："></a>主要关注点：</h3><ul>
 <li><p>  GC日志分析</p>
 </li>
 <li><p>  调优命令</p>
@@ -898,7 +898,7 @@
 </li>
 </ul>
 <p><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">参考</a><br><a href="https://earyant.github.io/2018/05/04/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">参考</a></p>
-<h2><span id="jvm系列六java服务gc参数调优案例"></span></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484023&idx=1&sn=39be119fdf3132240adc84a85bf8a054&chksm=ebf6da08dc81531e3719389555150f2d0237554b6b6c07a123efdea7c78c0ae2f064cc577bd4&scene=21#wechat_redirect">jvm系列(七):jvm调优-工具篇</a></p>
+<h2 id="jvm系列六java服务gc参数调优案例"><a href="#jvm系列-六-Java服务GC参数调优案例" class="headerlink" title="jvm系列(六):Java服务GC参数调优案例"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484007&idx=1&sn=e8d150bb760d0a92aad594152fc47a9d&chksm=ebf6da18dc81530eedeaff89d746cf48e7b2bdec602239faaeb4e8e490e0a4387e2a8890c327&scene=21#wechat_redirect">jvm系列(六):Java服务GC参数调优案例</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484023&idx=1&sn=39be119fdf3132240adc84a85bf8a054&chksm=ebf6da08dc81531e3719389555150f2d0237554b6b6c07a123efdea7c78c0ae2f064cc577bd4&scene=21#wechat_redirect">jvm系列(七):jvm调优-工具篇</a></p>
 <blockquote>
 <p>调优工具</p>
 </blockquote>
@@ -909,7 +909,7 @@
 <li>  MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</li>
 <li>  GChisto，一款专业分析gc日志的工具</li>
 </ul>
-<h2><span id="jvm系列八jvm知识点总览"></span></h2><h2><span id="jvm系列九如何优化java-gc译"></span></h2><h2><span id="jvm系列十教你如何成为java的oom-killer"></span></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484074&idx=1&sn=826318867783afaf99f62b38b2f5c268&chksm=ebf6dad5dc8153c32a6ce0201afe310b47135b07c8bb028a8fd9df7ecaf6e60950a7847c7df5&scene=21#wechat_redirect">jvm系列(十一):Java 8-从持久代到metaspace</a></p>
+<h2 id="jvm系列八jvm知识点总览"><a href="#jvm系列-八-jvm知识点总览" class="headerlink" title="jvm系列(八):jvm知识点总览"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484038&idx=1&sn=e083cc8b248461c8916a819119b059c3&chksm=ebf6daf9dc8153ef27ecd857e6cc85372735e84042679c133892d0993074371a46dd2c28b8b3&scene=21#wechat_redirect">jvm系列(八):jvm知识点总览</a></h2><h2 id="jvm系列九如何优化java-gc译"><a href="#jvm系列-九-如何优化Java-GC「译」" class="headerlink" title="jvm系列(九):如何优化Java GC「译」"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484042&idx=1&sn=51d2ed451151be872b601007597dd47f&chksm=ebf6daf5dc8153e3a7cb88ca97621cfae5aeaaeec0a1ff63e16278fbea6a43457e50a7fc9f0b&scene=21#wechat_redirect">jvm系列(九):如何优化Java GC「译」</a></h2><h2 id="jvm系列十教你如何成为java的oom-killer"><a href="#jvm系列-十-教你如何成为Java的OOM-Killer" class="headerlink" title="jvm系列(十):教你如何成为Java的OOM Killer"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484071&idx=1&sn=84604a51fd18b91f73c46507c182540a&chksm=ebf6dad8dc8153cebb029372c0745a3c6570e527e1f95cee2fb9fb33c50d46c64f20722a3d96&scene=21#wechat_redirect">jvm系列(十):教你如何成为Java的OOM Killer</a></h2><p>##<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&mid=2247484074&idx=1&sn=826318867783afaf99f62b38b2f5c268&chksm=ebf6dad5dc8153c32a6ce0201afe310b47135b07c8bb028a8fd9df7ecaf6e60950a7847c7df5&scene=21#wechat_redirect">jvm系列(十一):Java 8-从持久代到metaspace</a></p>
 
       
     </div>
@@ -988,7 +988,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="sed编辑器">sed编辑器</span></h2><p>不修改原内容的行级别流编辑器</p>
+          <h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
 <ul>
 <li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
 <blockquote>
@@ -1031,7 +1031,7 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="awk">awk</span></h2><ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
 <li><p>awk ‘{print $1}’ access.log | head -10</p>
 <blockquote>
 <p>打印指定的列</p>
@@ -1053,7 +1053,7 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="shell">shell</span></h2><ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
 <li>  系统load超过2或者磁盘利用率超过85%报警：</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
@@ -1142,7 +1142,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="查看文件的内容">查看文件的内容</span></h2><ul>
+          <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
 <li><p>cat：正序查看</p>
 <blockquote>
 <p>cat access.log</p>
@@ -1168,7 +1168,7 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="显示文件尾">显示文件尾</span></h2><ul>
+<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
 <li><p>tail</p>
 <blockquote>
 <p>tail  -f -n 500 access.log</p>
@@ -1176,13 +1176,13 @@
 <p>   -f  持续查看<br>   -n 显示最后n行</p>
 </li>
 </ul>
-<h2><span id="显示文件头">显示文件头</span></h2><ul>
+<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
 <li>head<blockquote>
 <p>head -n2 access.log</p>
 </blockquote>
 </li>
 </ul>
-<h2><span id="内容排序">内容排序</span></h2><ul>
+<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
 <li><p>sort</p>
 <blockquote>
 <p>sort -n -r access.log</p>
@@ -1194,7 +1194,7 @@
 <p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
 </li>
 </ul>
-<h2><span id="字符统计">字符统计</span></h2><ul>
+<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
 <li><p>wc</p>
 <blockquote>
 <p>  wc -l access.log</p>
@@ -1218,7 +1218,7 @@
 </code></pre>
 </li>
 </ul>
-<h2><span id="重复行">重复行</span></h2><ul>
+<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
 <li><p>uniq</p>
 <blockquote>
 <p> sort uniqfile| uniq -c</p>
@@ -1237,7 +1237,7 @@
 </code></pre>
 </li>
 </ul>
-<h2><span id="字符串查找">字符串查找</span></h2><ul>
+<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
 <li><p>grep</p>
 <pre><code>  &gt;   grep earyant access.log
 
@@ -1251,7 +1251,7 @@
 
     支持正则表达式
 </code></pre>
-<h2><span id="文件查找">文件查找</span></h2></li>
+<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
 <li><p>find</p>
 <blockquote>
 <p>find /home/earyant -name access.log</p>
@@ -1276,13 +1276,13 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="表达式求值">表达式求值</span></h2><ul>
+<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
 <li>expr<blockquote>
 <p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
 </blockquote>
 </li>
 </ul>
-<h2><span id="压缩">压缩</span></h2><ul>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
 <li><p>tar</p>
 <blockquote>
 <p>tar -cf aaa.tar tmp1 tmp2</p>
@@ -1303,7 +1303,7 @@
 </code></pre>
 </li>
 </ul>
-<h2><span id="url-访问工具">url 访问工具</span></h2><ul>
+<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
 <li><p>curl</p>
 <blockquote>
 <p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
@@ -1314,7 +1314,7 @@
 <p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
 </blockquote>
 <p>  -I 只返回页面的header信息</p>
-<h2><span id="查看请求访问量">查看请求访问量</span></h2></li>
+<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
 </ul>
 <blockquote>
 <p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
@@ -1324,10 +1324,10 @@
 <p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
 </blockquote>
 <p>页面访问量排名前10的url</p>
-<h2><span id="查看最耗时的页面">查看最耗时的页面</span></h2><blockquote>
+<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
 <p>cat access.log | sort -k 2 -n -r |head -10</p>
 </blockquote>
-<h2><span id="统计404请求的占比">统计404请求的占比</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
+<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1406,13 +1406,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="11-使用和避免null">1.1-使用和避免null</span></h1><p>map允许null作为键，但只能有一个。<br>concurrentHashMap不允许null作为键。</p>
-<h2><span id="optional">Optional</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">possible.isPresent(); <span class="comment">// returns true</span></span><br><span class="line">possible.get(); <span class="comment">// returns 5</span></span><br></pre></td></tr></table></figure>
+          <h1 id="11-使用和避免null"><a href="#1-1-使用和避免null" class="headerlink" title="1.1-使用和避免null"></a>1.1-使用和避免null</h1><p>map允许null作为键，但只能有一个。<br>concurrentHashMap不允许null作为键。</p>
+<h2 id="optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">possible.isPresent(); <span class="comment">// returns true</span></span><br><span class="line">possible.get(); <span class="comment">// returns 5</span></span><br></pre></td></tr></table></figure>
 
-<h3><span id="静态创建方法">静态创建方法</span></h3><ul>
+<h3 id="静态创建方法"><a href="#静态创建方法" class="headerlink" title="静态创建方法"></a>静态创建方法</h3><ul>
 <li>  of</li>
 <li>  ofNullable</li>
-<li>empty<h3><span id="实例方法">实例方法</span></h3></li>
+<li>empty<h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3></li>
 <li>  isPresent</li>
 <li>  get</li>
 <li>  or (jdk中是orElse)</li>
@@ -1422,15 +1422,15 @@
 <blockquote>
 <p>意义：<br>    使用Optional除了赋予null语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。Optional迫使你积极思考引用缺失的情况，因为你必须显式地从Optional获取引用。直接使用null很容易让人忘掉某些情形，尽管FindBugs可以帮助查找null相关的问题，但是我们还是认为它并不能准确地定位问题根源。<br>    如同输入参数，方法的返回值也可能是null。和其他人一样，你绝对很可能会忘记别人写的方法method(a,b)会返回一个null，就好像当你实现method(a,b)时，也很可能忘记输入参数a可以为null。将方法的返回类型指定为Optional，也可以迫使调用者思考返回的引用缺失的情形。</p>
 </blockquote>
-<h3><span id="使用方式">使用方式：</span></h3><ul>
+<h3 id="使用方式"><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><ul>
 <li>错误的使用方式：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">if</span> (user.isPresent()) &#123;</span><br><span class="line">  <span class="keyword">int</span> sex = user.getSex();</span><br><span class="line">  <span class="comment">// 链式调用，最容易出现空指针</span></span><br><span class="line">  <span class="keyword">int</span> age = user.getParent().getParent().getParent().getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>正确的使用方式  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">int</span> sex = user.map(User::getSex).orElse(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">int</span> age = user.map(User::getParent).map(User::getParent).map(User::getParent).map(User::getAge).orElse(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2><span id="其他处理null的便利方法">其他处理null的便利方法</span></h2><ul>
+<h2 id="其他处理null的便利方法"><a href="#其他处理null的便利方法" class="headerlink" title="其他处理null的便利方法"></a>其他处理null的便利方法</h2><ul>
 <li>  Objects.firstNonNull(T, T)</li>
 <li>  Objects还有其它一些方法专门处理null或空字符串：emptyToNull(String)，nullToEmpty(String)，isNullOrEmpty(String)。</li>
 </ul>
-<h1><span id="12-前置条件-preconditions">1.2-前置条件 Preconditions</span></h1><table>
+<h1 id="12-前置条件-preconditions"><a href="#1-2-前置条件-Preconditions" class="headerlink" title="1.2-前置条件 Preconditions"></a>1.2-前置条件 Preconditions</h1><table>
 <thead>
 <tr>
 <th>–</th>

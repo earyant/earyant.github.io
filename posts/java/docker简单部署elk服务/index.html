@@ -273,10 +273,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1><span id="本文章记录自己通过docker搭建elk的过程">本文章记录自己通过docker搭建elk的过程</span></h1><h2><span id="docker下载镜像">docker下载镜像</span></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
+        <h1 id="本文章记录自己通过docker搭建elk的过程"><a href="#本文章记录自己通过docker搭建elk的过程" class="headerlink" title="本文章记录自己通过docker搭建elk的过程"></a>本文章记录自己通过docker搭建elk的过程</h1><h2 id="docker下载镜像"><a href="#docker下载镜像" class="headerlink" title="docker下载镜像"></a>docker下载镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk :latest</span><br></pre></td></tr></table></figure>
 
-<h2><span id="docker-至少分配3g内存">docker 至少分配3g内存</span></h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
-<h2><span id="设置最大运行线程数">设置最大运行线程数</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
+<h2 id="docker-至少分配3g内存"><a href="#docker-至少分配3g内存" class="headerlink" title="docker 至少分配3g内存"></a>docker 至少分配3g内存</h2><p>elasticsearch 至少需要2g，logstash至少需要1g</p>
+<h2 id="设置最大运行线程数"><a href="#设置最大运行线程数" class="headerlink" title="设置最大运行线程数"></a>设置最大运行线程数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最大线程数要超过262144</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>使用docker toolbox方式 先进入虚拟机</p>
@@ -301,12 +301,12 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="启动">启动</span></h2><p>启动，并配置端口映射</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动，并配置端口映射</p>
 <blockquote>
 <p>docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it –name elk sebp/elk</p>
 </blockquote>
-<h2><span id="查看kibana">查看kibana</span></h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
-<h2><span id="配置使用">配置使用</span></h2><ol>
+<h2 id="查看kibana"><a href="#查看kibana" class="headerlink" title="查看kibana"></a>查看kibana</h2><p>打开网址 http:\192.168.99.100:5601 若打开成功说明部署成功</p>
+<h2 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h2><ol>
 <li>进入容器</li>
 </ol>
 <blockquote>
@@ -447,7 +447,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">本文章记录自己通过docker搭建elk的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">docker下载镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">docker 至少分配3g内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">设置最大运行线程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">查看kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.6.</span> <span class="nav-text">配置使用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%AB%A0%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E9%80%9A%E8%BF%87docker%E6%90%AD%E5%BB%BAelk%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">本文章记录自己通过docker搭建elk的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.</span> <span class="nav-text">docker下载镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E8%87%B3%E5%B0%91%E5%88%86%E9%85%8D3g%E5%86%85%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">docker 至少分配3g内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E8%BF%90%E8%A1%8C%E7%BA%BF%E7%A8%8B%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">设置最大运行线程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bkibana"><span class="nav-number">1.5.</span> <span class="nav-text">查看kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">配置使用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -359,9 +359,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1><span id="2-learning-to-answer-yesno">2 – Learning to Answer Yes/No</span></h1><p>上节课，我们主要简述了机器学习的定义及其重要性，并用流程图的形式介绍了机器学习的整个过程：根据模型H，使用演算法A，在训练样本D上进行训练，得到最好的h，其对应的g就是我们最后需要的机器学习的模型函数，一般g接近于目标函数f。本节课将继续深入探讨机器学习问题，介绍感知机Perceptron模型，并推导课程的第一个机器学习算法：Perceptron Learning Algorithm（PLA）。</p>
+        <h1 id="2-learning-to-answer-yesno"><a href="#2-–-Learning-to-Answer-Yes-No" class="headerlink" title="2 – Learning to Answer Yes/No"></a>2 – Learning to Answer Yes/No</h1><p>上节课，我们主要简述了机器学习的定义及其重要性，并用流程图的形式介绍了机器学习的整个过程：根据模型H，使用演算法A，在训练样本D上进行训练，得到最好的h，其对应的g就是我们最后需要的机器学习的模型函数，一般g接近于目标函数f。本节课将继续深入探讨机器学习问题，介绍感知机Perceptron模型，并推导课程的第一个机器学习算法：Perceptron Learning Algorithm（PLA）。</p>
 <span id="more"></span>
-<h3><span id="一-perceptron-hypothesis-set"><strong>一、Perceptron Hypothesis Set</strong></span></h3><p>引入这样一个例子：某银行要根据用户的年龄、性别、年收入等情况来判断是否给该用户发信用卡。现在有训练样本D，即之前用户的信息和是否发了信用卡。这是一个典型的机器学习问题，我们要根据D，通过A，在H中选择最好的h，得到g，接近目标函数f，也就是根据先验知识建立是否给用户发信用卡的模型。银行用这个模型对以后用户进行判断：发信用卡（+1），不发信用卡（-1）。</p>
+<h3 id="一-perceptron-hypothesis-set"><a href="#一、Perceptron-Hypothesis-Set" class="headerlink" title="一、Perceptron Hypothesis Set"></a><strong>一、Perceptron Hypothesis Set</strong></h3><p>引入这样一个例子：某银行要根据用户的年龄、性别、年收入等情况来判断是否给该用户发信用卡。现在有训练样本D，即之前用户的信息和是否发了信用卡。这是一个典型的机器学习问题，我们要根据D，通过A，在H中选择最好的h，得到g，接近目标函数f，也就是根据先验知识建立是否给用户发信用卡的模型。银行用这个模型对以后用户进行判断：发信用卡（+1），不发信用卡（-1）。</p>
 <p>在这个机器学习的整个流程中，有一个部分非常重要：就是模型选择，即Hypothesis Set。选择什么样的模型，很大程度上会影响机器学习的效果和表现。下面介绍一个简单常用的Hypothesis Set：感知机（Perceptron）。</p>
 <p>还是刚才银行是否给用户发信用卡的例子，我们把用户的个人信息作为特征向量x，令总共有d个特征，每个特征赋予不同的权重w，表示该特征对输出（是否发信用卡）的影响有多大。那所有特征的加权和的值与一个设定的阈值threshold进行比较：大于这个阈值，输出为+1，即发信用卡；小于这个阈值，输出为-1，即不发信用卡。感知机模型，就是当特征加权和与阈值的差大于或等于0，则输出h(x)=1；当特征加权和与阈值的差小于0，则输出h(x)=-1，而我们的目的就是计算出所有权值w和阈值threshold。</p>
 <p><img data-src="./b82f5722a3ab38fa777a0941ce313102.jpg"></p>
@@ -371,7 +371,7 @@
 <p><img data-src="./6eb760b955af84cb1123dd680eb4b559.jpg"></p>
 <p>那么，我们所说的Perceptron，在这个模型上就是一条直线，称之为linear(binary) classifiers。注意一下，感知器线性分类不限定在二维空间中，在3D中，线性分类用平面表示，在更高维度中，线性分类用超平面表示，即只要是形如<img data-src="./b060a4879c8127c91fe14a0a743ca23d.jpg">的线性模型就都属于linear(binary) classifiers。</p>
 <p>同时，需要注意的是，这里所说的linear(binary) classifiers是用简单的感知器模型建立的，线性分类问题还可以使用logistic regression来解决，后面将会介绍。</p>
-<h3><span id="二-perceptron-learning-algorithmpla"><strong>二、Perceptron Learning Algorithm(PLA)</strong></span></h3><p>根据上一部分的介绍，我们已经知道了hypothesis set由许多条直线构成。接下来，我们的目的就是如何设计一个演算法A，来选择一个最好的直线，能将平面上所有的正类和负类完全分开，也就是找到最好的g，使<img data-src="./061263d047d98f81c1e18f8f49c57003.jpg">。</p>
+<h3 id="二-perceptron-learning-algorithmpla"><a href="#二、Perceptron-Learning-Algorithm-PLA" class="headerlink" title="二、Perceptron Learning Algorithm(PLA)"></a><strong>二、Perceptron Learning Algorithm(PLA)</strong></h3><p>根据上一部分的介绍，我们已经知道了hypothesis set由许多条直线构成。接下来，我们的目的就是如何设计一个演算法A，来选择一个最好的直线，能将平面上所有的正类和负类完全分开，也就是找到最好的g，使<img data-src="./061263d047d98f81c1e18f8f49c57003.jpg">。</p>
 <p>如何找到这样一条最好的直线呢？我们可以使用逐点修正的思想，首先在平面上随意取一条直线，看看哪些点分类错误。然后开始对第一个错误点就行修正，即变换直线的位置，使这个错误点变成分类正确的点。接着，再对第二个、第三个等所有的错误分类点就行直线纠正，直到所有的点都完全分类正确了，就得到了最好的直线。这种“逐步修正”，就是PLA思想所在。</p>
 <p><img data-src="./75217f1e29be523c4e5b655d738984a2.jpg"></p>
 <p>下面介绍一下PLA是怎么做的。首先随机选择一条直线进行分类。然后找到第一个分类错误的点，如果这个点表示正类，被误分为负类，即<img data-src="./4042fc2c320d85292df45d0c2633965e.jpg">，那表示w和x夹角大于90度，其中w是直线的法向量。所以，x被误分在直线的下侧（相对于法向量，法向量的方向即为正类所在的一侧），修正的方法就是使w和x夹角小于90度。通常做法是<img data-src="./cdb3c7bd482f1beb34c202eef937eefd.jpg">，如图右上角所示，一次或多次更新后的<img data-src="./9cfd891e8acb93d51d15087897f73aa2.jpg">与x夹角小于90度，能保证x位于直线的上侧，则对误分为负类的错误点完成了直线修正。</p>
@@ -398,7 +398,7 @@
 <li><p>  PLA停下来的时候，是否能保证<img data-src="./4e89dc8628aa25992aee4c27f454472b.jpg">？如果没有停下来，是否有<img data-src=".//4e89dc8628aa25992aee4c27f454472b.jpg">？</p>
 </li>
 </ul>
-<h3><span id="三-guarantee-of-pla"><strong>三、Guarantee of PLA</strong></span></h3><p>PLA什么时候会停下来呢？根据PLA的定义，当找到一条直线，能将所有平面上的点都分类正确，那么PLA就停止了。要达到这个终止条件，就必须保证D是线性可分（linear separable）。如果是非线性可分的，那么，PLA就不会停止。</p>
+<h3 id="三-guarantee-of-pla"><a href="#三、Guarantee-of-PLA" class="headerlink" title="三、Guarantee of PLA"></a><strong>三、Guarantee of PLA</strong></h3><p>PLA什么时候会停下来呢？根据PLA的定义，当找到一条直线，能将所有平面上的点都分类正确，那么PLA就停止了。要达到这个终止条件，就必须保证D是线性可分（linear separable）。如果是非线性可分的，那么，PLA就不会停止。</p>
 <p><img data-src="./eed8a5d3f418163842ee06008346de06.jpg"></p>
 <p>对于线性可分的情况，如果有这样一条直线，能够将正类和负类完全分开，令这时候的目标权重为<img data-src="./40de538fbc9692d37d7d1b7ab8958efb.jpg">，则对每个点，必然满足<img data-src="./e70d3b173167e8a06cb87df08df81c73.jpg">，即对任一点：</p>
 <p><img data-src="./e13d51359e00687861a9c469e7e0f8d8.jpg"></p>
@@ -412,7 +412,7 @@
 <p><img data-src="./9499cd5bc28ac0c3d524f8115ef09a46.jpg"></p>
 <p><img data-src="./182b2ba169926a57c9bb35d350c6d04f.jpg"></p>
 <p>上述不等式左边其实是<img data-src="./2ed3b41c02e21f3224f54ab912153516.jpg">与<img data-src=".//40de538fbc9692d37d7d1b7ab8958efb.jpg">夹角的余弦值，随着T增大，该余弦值越来越接近1，即<img data-src=".//2ed3b41c02e21f3224f54ab912153516.jpg">与<img data-src=".//40de538fbc9692d37d7d1b7ab8958efb.jpg">越来越接近。同时，需要注意的是，<img data-src="./2b1582bb9dd36767edc8638d5142f4a6.jpg">，也就是说，迭代次数T是有上界的。根据以上证明，我们最终得到的结论是：<img data-src=".//75cc738213b9d738d2f3b8b323d07aef.jpg">与<img data-src=".//40de538fbc9692d37d7d1b7ab8958efb.jpg">的是随着迭代次数增加，逐渐接近的。而且，PLA最终会停下来（因为T有上界），实现对线性可分的数据集完全分类。</p>
-<h3><span id="四-non-separable-data"><strong>四、Non-Separable Data</strong></span></h3><p>上一部分，我们证明了线性可分的情况下，PLA是可以停下来并正确分类的，但对于非线性可分的情况，<img data-src=".//40de538fbc9692d37d7d1b7ab8958efb.jpg">实际上并不存在，那么之前的推导并不成立，PLA不一定会停下来。所以，PLA虽然实现简单，但也有缺点：</p>
+<h3 id="四-non-separable-data"><a href="#四、Non-Separable-Data" class="headerlink" title="四、Non-Separable Data"></a><strong>四、Non-Separable Data</strong></h3><p>上一部分，我们证明了线性可分的情况下，PLA是可以停下来并正确分类的，但对于非线性可分的情况，<img data-src=".//40de538fbc9692d37d7d1b7ab8958efb.jpg">实际上并不存在，那么之前的推导并不成立，PLA不一定会停下来。所以，PLA虽然实现简单，但也有缺点：</p>
 <p><img data-src="./184006fbd0c94062a9bad5aecdb2b705.jpg"></p>
 <p>对于非线性可分的情况，我们可以把它当成是数据集D中掺杂了一下noise，事实上，大多数情况下我们遇到的D，都或多或少地掺杂了noise。这时，机器学习流程是这样的：</p>
 <p><img data-src="./5ca498908766c95678b857366c359ede.jpg"></p>
@@ -422,7 +422,7 @@
 <p>修改后的PLA称为Packet Algorithm。它的算法流程与PLA基本类似，首先初始化权重<img data-src=".//80aba44293dd8bc07d580471772db0d3.jpg">，计算出在这条初始化的直线中，分类错误点的个数。然后对错误点进行修正，更新w，得到一条新的直线，在计算其对应的分类错误的点的个数，并与之前错误点个数比较，取个数较小的直线作为我们当前选择的分类直线。之后，再经过n次迭代，不断比较当前分类错误点个数与之前最少的错误点个数比较，选择最小的值保存。直到迭代次数完成后，选取个数最少的直线对应的w，即为我们最终想要得到的权重值。</p>
 <p><img data-src="./5d5060a872bbddfe2d5fb0263407ee05.jpg"></p>
 <p>如何判断数据集D是不是线性可分？对于二维数据来说，通常还是通过肉眼观察来判断的。一般情况下，Pocket Algorithm要比PLA速度慢一些。</p>
-<h3><span id="五-总结"><strong>五、总结</strong></span></h3><p>本节课主要介绍了线性感知机模型，以及解决这类感知机分类问题的简单算法：PLA。我们详细证明了对于线性可分问题，PLA可以停下来并实现完全正确分类。对于不是线性可分的问题，可以使用PLA的修正算法Pocket Algorithm来解决。</p>
+<h3 id="五-总结"><a href="#五、总结" class="headerlink" title="五、总结"></a><strong>五、总结</strong></h3><p>本节课主要介绍了线性感知机模型，以及解决这类感知机分类问题的简单算法：PLA。我们详细证明了对于线性可分问题，PLA可以停下来并实现完全正确分类。对于不是线性可分的问题，可以使用PLA的修正算法Pocket Algorithm来解决。</p>
 <p><strong><em>注明：</em></strong></p>
 <p>文章中所有的图片均来自台湾大学林轩田《机器学习基石》课程。</p>
 
@@ -538,7 +538,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">2 – Learning to Answer Yes&#x2F;No</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、Perceptron Hypothesis Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Perceptron Learning Algorithm(PLA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、Guarantee of PLA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、Non-Separable Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、总结</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-learning-to-answer-yesno"><span class="nav-number">1.</span> <span class="nav-text">2 – Learning to Answer Yes&#x2F;No</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-perceptron-hypothesis-set"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、Perceptron Hypothesis Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-perceptron-learning-algorithmpla"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Perceptron Learning Algorithm(PLA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89-guarantee-of-pla"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、Guarantee of PLA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B-non-separable-data"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、Non-Separable Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94-%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、总结</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

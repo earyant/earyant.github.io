@@ -272,7 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="sed编辑器">sed编辑器</span></h2><p>不修改原内容的行级别流编辑器</p>
+        <h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
 <ul>
 <li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
 <blockquote>
@@ -315,7 +315,7 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="awk">awk</span></h2><ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
 <li><p>awk ‘{print $1}’ access.log | head -10</p>
 <blockquote>
 <p>打印指定的列</p>
@@ -337,7 +337,7 @@
 </blockquote>
 </li>
 </ul>
-<h2><span id="shell">shell</span></h2><ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
 <li>  系统load超过2或者磁盘利用率超过85%报警：</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
@@ -458,7 +458,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sed编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">shell</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sed%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">sed编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk"><span class="nav-number">2.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell"><span class="nav-number">3.</span> <span class="nav-text">shell</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
