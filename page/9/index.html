@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">105</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">106</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,143 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">微信机器人流程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-03 15:10:30" itemprop="dateCreated datePublished" datetime="2017-09-03T15:10:30+08:00">2017-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:16:39" itemprop="dateModified" datetime="2021-09-28T17:16:39+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h2 id="获取uuid和二维码"><a href="#获取uuid和二维码：" class="headerlink" title="获取uuid和二维码："></a>获取uuid和二维码：</h2><ul>
+<li>在公众号输入8，即可返回二维码图片；<ul>
+<li>生成uuid；</li>
+<li>生成二维码；</li>
+<li>redis中保存要登陆用户的信息；</li>
+<li>返回二维码。</li>
+</ul>
+</li>
+</ul>
+<h2 id="后台守护进程"><a href="#后台守护进程：" class="headerlink" title="后台守护进程："></a>后台守护进程：</h2><ul>
+<li>开启一个守护线程：<ul>
+<li>获取redis中保存的用户信息；</li>
+<li>判断如果未登陆则继续执行以下操作，如果已经登陆了，返回，不做任何操作。</li>
+<li>loginService.login()<ul>
+<li>代码登陆逻辑，如果登陆了，将状态setAlive置为已经登陆，若未登陆，sleep1秒继续。</li>
+<li>将联系人信息保存到redis中</li>
+</ul>
+</li>
+<li>webWxInit()<ul>
+<li>获取user信息，并保存到数据库。</li>
+<li>获取用户的联系人信息，并保存到数据库；</li>
+<li>获取SyncKeyBean信息，并保存到数据库；</li>
+</ul>
+</li>
+<li>wxStatusNotify()<ul>
+<li>微信通知状态改变，手机端提示网页端登陆成功。</li>
+</ul>
+</li>
+<li>startReceiving()<ul>
+<li>开启消息接收。</li>
+<li>开启新线程：<ul>
+<li>syncCheck() 检查是否有新消息<ul>
+<li>状态为0(收到正常报文)：<ul>
+<li>webWxSync() 联网获取新消息；<ul>
+<li>通过初始化过去的SyncKey参数进行获取，返回成功后，要把新返回的SyncKey保存到数据库中，下次用新SyncKey进行获取新信息。</li>
+<li>对获取到的新信息进行操作。 MsgCenter.produceMsg();</li>
+<li>保存消息到数据库。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>webWxGetContact() 获取好友列表</li>
+<li>WebWxBatchGetContact()</li>
+<li>setUserInfo() 缓存本次好友信息。</li>
+<li>CheckLoginStatusThread开启登陆状态线程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="20170904"><a href="#2017-09-04" class="headerlink" title="2017.09.04"></a>2017.09.04</h2><p>  做好微信机器人，在微信公众平台界面发送8将返回一个二维码，扫码登陆后即可开启机器人。<br>  机器人功能： //TODO<br>    * 集成聊天机器人功能。<br>    * 备份聊天记录。<br>    * 爬取所有用户，并分析用户联系人的男女比例，整合头像。<br>    * 爬取公众号文章。<br>    * 撤回消息备份<br>    * 关键词监听<br>    * 消息搜索<br>    * 信息分析<br>    * 查看/删除文件[文件名] e.g. 查看文件[123345234.mp3]<br>    * 撤回附件列表 (查看都有哪些保存在电脑中的已撤回附件)<br>    * 清空附件列表 (清空已经保存在电脑中的附件)<br>    * 添加关键词[关键词] e.g. 设置关键词[在不在]<br>    * 删除关键词[关键词] e.g. 删除关键词[在不在]<br>    * 清空关键词 清空已经设置的所有关键词<br>    * 查看关键词 查看目前设置的关键词<br>    * 添加签到口令#公众号:签到口令# e.g. 添加签到口令#招商银行信用卡:签到#<br>    * 删除签到口令#公众号# e.g. 删除签到口令#招商银行信用卡#<br>    * 查看签到口令 查看已经存在的公众和和对应的签到口令<br>    * 清空签到口令 清空所有签到口令<br>    * 截图 截取当前屏幕发送到文件助手<br>    * 添加自动回复#针对的关键词:回复内容# e.g.添加自动回复#在不在:我现在有事情，待会儿回复你#<br>    * 删除自动回复#针对的关键词# e.g.删除自动回复#在不在#<br>    * 清空自动回复 清空所有的自定义回复规则<br>    * 关闭自动回复<br>    * 打开自动回复<br>    * 退出程序</p>
+<h2 id="备份聊天功能"><a href="#备份聊天功能：" class="headerlink" title="备份聊天功能："></a>备份聊天功能：</h2><pre><code>* 发送 “开启**回复” 即可回复 ** 信息
+  后台将配置记录到sql中，并缓存到redis中。
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1038,88 +1175,6 @@ B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E7%AE%97%E6%B3%95/100%E5%9D%97%E9%92%B1%E5%8F%AF%E4%BB%A5%E5%85%91%E6%8D%A250%E5%9D%97%E3%80%8110%E5%9D%97%E3%80%815%E5%9D%97%E3%80%811%E5%9D%97%E7%9A%84%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E7%AE%97%E6%B3%95/100%E5%9D%97%E9%92%B1%E5%8F%AF%E4%BB%A5%E5%85%91%E6%8D%A250%E5%9D%97%E3%80%8110%E5%9D%97%E3%80%815%E5%9D%97%E3%80%811%E5%9D%97%E7%9A%84%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">100块钱可以兑换50块、10块、5块、1块的算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-26 11:10:38" itemprop="dateCreated datePublished" datetime="2017-07-26T11:10:38+08:00">2017-07-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:13:42" itemprop="dateModified" datetime="2021-09-28T17:13:42+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>760</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="最先想到的当然是for循环了"><a href="#最先想到的当然是for循环了：" class="headerlink" title="最先想到的当然是for循环了："></a>最先想到的当然是for循环了：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   long time1 = System.currentTimeMillis();</span><br><span class="line">           System.out.println(&quot;当前时间为&quot;+time1);</span><br><span class="line">           int n = 0;</span><br><span class="line">           int n1, n5, n10, n50;</span><br><span class="line">           for (n1 = 0; n1 &lt; 100; n1++) &#123;</span><br><span class="line">               for (n5 = 0; n5 &lt; 20; n5++) &#123;</span><br><span class="line">                   for (n10 = 0; n10 &lt; 10; n10++) &#123;</span><br><span class="line">                       for (n50 = 0; n50 &lt; 2; n50++) &#123;</span><br><span class="line">                           if (n1 * 1 + n5 * 5 + n10 * 10 + n50 * 50 == 100) &#123;</span><br><span class="line">                               n++;</span><br><span class="line">                               System.out.println(&quot;1块的：&quot; + n1 + &quot;张 5块的： &quot; + n5 + &quot;张 10块的 ：&quot; + n10 + &quot;张 50块的：&quot; + n50 + &quot;张&quot;);</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           long time2 = System.currentTimeMillis();</span><br><span class="line">           System.out.println(&quot;结束时间为&quot;+time2);</span><br><span class="line">           long time = time2 - time1;</span><br><span class="line">           System.out.println(n + &quot; 耗费时间为 &quot; + time);</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-<pre><code>很容易得出结果154.但是耗费时间为 1501038954420 - 1501038954413 =7;
-虽然时间耗费不是很多，但是通过打印信息可以看出来，50为2的时候只有一种情况，却空跑了很多空循环。
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1191,7 +1246,7 @@ B - 树，每个节点包含最多k个孩子，k被称为阶，k的大小取决�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

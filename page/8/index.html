@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">105</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">106</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,148 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Spring中的事务管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-17 17:40:06" itemprop="dateCreated datePublished" datetime="2017-09-17T17:40:06+08:00">2017-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:17:42" itemprop="dateModified" datetime="2021-09-28T17:17:42+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h2><ul>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性<h2 id="事务的分类"><a href="#事务的分类" class="headerlink" title="事务的分类"></a>事务的分类</h2></li>
+<li>声明式事务</li>
+<li>编程式事务</li>
+</ul>
+<h2 id="数据错误类型"><a href="#数据错误类型" class="headerlink" title="数据错误类型"></a>数据错误类型</h2><ul>
+<li><p>脏读(dirty read)</p>
+<blockquote>
+<p>当前有两个事务A和B，当A事务对数据进行更改，但是还没提交（会有缓存），此时被事务B读取，然后事务A因其他原因导致失败数据回滚，此时的事务A的操作都是失败的，对数据的操作也是失败的，但是B事务已经读取了A没提交的数据，导致B读到了错误的数据。</p>
+</blockquote>
+</li>
+<li><p>不可重复读(no-repeatable-read)</p>
+<blockquote>
+<p>当前有两个事务A和B，A事务将会对数据进行两次操作，当A事务操作一次成功后，B事务此时对数据操作更改了值并提交，随后A事务再进行读取数据，发现数据已经被更改，造成A事务的数据混乱。</p>
+</blockquote>
+</li>
+<li><p>幻读(phantom read)</p>
+<blockquote>
+<p>与不可重复读同样都是多次读数据不一致的问题，但是no-repeatable-read强调的是本身需要的数据集改变了， phantom read强调多次查询得出的条件数据集改变了。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><ul>
+<li>ISOLATION_DEFAULT 默认级别</li>
+<li>ISOLATION_READ_UNCOMMIT   事务最低级别，允许其他事务看到此事务中未提交的数据。   <strong>这种级别会导致脏读、幻读、不可重复读</strong></li>
+<li>ISOLATION_READ_COMMIT   保证数据提交后才能被另外一个事务看到。  <strong>这种级别可以防止脏读，但是不能防止不可重复读和幻读</strong></li>
+<li>ISOLATION_REPEATABLE_READ       <strong>这种级别可以防止脏读、不可重复读，但是不能防止幻读</strong></li>
+<li>ISOLATION_SERALIZABLE     <strong>最强级别，可以防止脏读、不可重复读、幻读</strong></li>
+</ul>
+<h2 id="事务的传播行为"><a href="#事务的传播行为" class="headerlink" title="事务的传播行为"></a>事务的传播行为</h2><ul>
+<li><p>PROPAGATION_REQUIRED 如果存在一个事务，就是用这个事务，如果没有事务，就开启一个新的事务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    methodB();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>PROPAGATION_SUPPORTS 如果存在一个事务，就用这个事务，如果没有事务，就非事务执行，但是对于事务同步管理器，PROPAGATION_SUPPORTS和不使用事务有少许区别。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    methodB();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_SUPPORTS</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当通过methodA调用methodB时，methodB就是用methodA的事务，如果单独调用methodB的时候，methodB就非事务执行。</p>
+</li>
+<li><p>PROPAGATION_MANDATORY 如果存在一个事务，就是用当前事务，如果不存在事务，就抛出一个异常。</p>
+</li>
+<li><p>PROPAGATION_REQUIRED_NEW 开启一个新的事务，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">  doSomeThingA();</span><br><span class="line">  methodB();</span><br><span class="line">  doSomeThingB();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRES_NEW</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">TransactionManager tm = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="comment">//获得一个JTA事务管理器</span></span><br><span class="line">  tm = getTransactionManager();</span><br><span class="line">  tm.begin();<span class="comment">//开启一个新的事务</span></span><br><span class="line">  Transaction ts1 = tm.getTransaction();</span><br><span class="line">  doSomeThing();</span><br><span class="line">  tm.suspend();<span class="comment">//挂起当前事务</span></span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    tm.begin();<span class="comment">//重新开启第二个事务</span></span><br><span class="line">    Transaction ts2 = tm.getTransaction();</span><br><span class="line">    methodB();</span><br><span class="line">    ts2.commit();<span class="comment">//提交第二个事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  Catch(RunTimeException ex)&#123;</span><br><span class="line">    ts2.rollback();<span class="comment">//回滚第二个事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span>&#123;</span><br><span class="line">   <span class="comment">//释放资源</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methodB执行完后，复恢第一个事务</span></span><br><span class="line">  tm.resume(ts1);</span><br><span class="line">  doSomeThingB();</span><br><span class="line">  ts1.commit();<span class="comment">//提交第一个事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(RunTimeException ex)&#123;</span><br><span class="line">  ts1.rollback();<span class="comment">//回滚第一个事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line"><span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这里，我把ts1称为外层事务，ts2称为内层事务。从上面的代码可以看出，ts2与ts1是两个独立的事务，互不相干。Ts2是否成功并不依赖于ts1。如果methodA方法在调用methodB方法后的doSomeThingB方法失败了，而methodB方法所做的结果依然被提交。而除了methodB之外的其它代码导致的结果却被回滚了。使用PROPAGATION_REQUIRES_NEW,需要使用JtaTransactionManager作为事务管理器。</p>
+</blockquote>
+</li>
+<li><p>PROPAGATION_NOT_SUPPORTED 总是非事务执行，并挂起任何事务，也需要JTATransctionManager作为事务管理器</p>
+</li>
+<li><p>PROPAGATION_NEVER  总是非事务执行，如果存在一个事务，则抛出异常。</p>
+</li>
+<li><p>PROPAGATION_NESTED 如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行。这是一个嵌套事务,使用JDBC 3.0驱动时,仅仅支持DataSourceTransactionManager作为事务管理器。需要JDBC 驱动的java.sql.Savepoint类。有一些JTA的事务管理器实现可能也提供了同样的功能。使用PROPAGATION_NESTED，还需要把PlatformTransactionManager的nestedTransactionAllowed属性设为true;而nestedTransactionAllowed属性值默认为false;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事务属性 PROPAGATION_REQUIRED</span></span><br><span class="line">methodA()&#123;</span><br><span class="line">doSomeThingA();</span><br><span class="line">methodB();</span><br><span class="line">doSomeThingB();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//事务属性 PROPAGATION_NESTED</span></span><br><span class="line">methodB()&#123;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果单独调用methodB方法，则按REQUIRED属性执行。如果调用methodA方法，相当于下面的效果：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  Connection con = <span class="keyword">null</span>;</span><br><span class="line">Savepoint savepoint = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"> con = getConnection();</span><br><span class="line"> con.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line"> doSomeThingA();</span><br><span class="line"> savepoint = con2.setSavepoint();</span><br><span class="line"> <span class="keyword">try</span>&#123;</span><br><span class="line">     methodB();</span><br><span class="line"> &#125;<span class="keyword">catch</span>(RuntimeException ex)&#123;</span><br><span class="line">    con.rollback(savepoint);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">finally</span>&#123;</span><br><span class="line">   <span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br><span class="line">  doSomeThingB();</span><br><span class="line">  con.commit();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(RuntimeException ex)&#123;</span><br><span class="line">  con.rollback();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line"> <span class="comment">//释放资源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>PROPAGATION_NESTED 与PROPAGATION_REQUIRES_NEW的区别:它们非常类似,都像一个嵌套事务，如果不存在一个活动的事务，都会开启一个新的事务。使用PROPAGATION_REQUIRES_NEW时，内层事务与外层事务就像两个独立的事务一样，一旦内层事务进行了提交后，外层事务不能对其进行回滚。两个事务互不影响。两个事务不是一个真正的嵌套事务。同时它需要JTA事务管理器的支持。<br>  使用PROPAGATION_NESTED时，外层事务的回滚可以引起内层事务的回滚。而内层事务的异常并不会导致外层事务的回滚，它是一个真正的嵌套事务。DataSourceTransactionManager使用savepoint支持PROPAGATION_NESTED时，需要JDBC 3.0以上驱动及1.4以上的JDK版本支持。其它的JTA TrasactionManager实现可能有不同的支持方式。<br>  PROPAGATION_REQUIRES_NEW 启动一个新的, 不依赖于环境的 “内部” 事务. 这个事务将被完全 commited 或 rolled back 而不依赖于外部事务, 它拥有自己的隔离范围, 自己的锁, 等等. 当内部事务开始执行时, 外部事务将被挂起, 内务事务结束时, 外部事务将继续执行。<br>  另一方面, PROPAGATION_NESTED 开始一个 “嵌套的” 事务,  它是已经存在事务的一个真正的子事务. 潜套事务开始执行时,  它将取得一个 savepoint. 如果这个嵌套事务失败, 我们将回滚到此 savepoint. 潜套事务是外部事务的一部分, 只有外部事务结束后它才会被提交。<br>  由此可见, PROPAGATION_REQUIRES_NEW 和 PROPAGATION_NESTED 的最大区别在于, PROPAGATION_REQUIRES_NEW 完全是一个新的事务, 而 PROPAGATION_NESTED 则是外部事务的子事务, 如果外部事务 commit, 潜套事务也会被 commit, 这个规则同样适用于 roll back.<br>  PROPAGATION_REQUIRED应该是我们首先的事务传播行为。它能够满足我们大多数的事务需求。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -2197,143 +2339,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%B5%81%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">微信机器人流程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-03 15:10:30" itemprop="dateCreated datePublished" datetime="2017-09-03T15:10:30+08:00">2017-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:16:39" itemprop="dateModified" datetime="2021-09-28T17:16:39+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p>
-<h2 id="获取uuid和二维码"><a href="#获取uuid和二维码：" class="headerlink" title="获取uuid和二维码："></a>获取uuid和二维码：</h2><ul>
-<li>在公众号输入8，即可返回二维码图片；<ul>
-<li>生成uuid；</li>
-<li>生成二维码；</li>
-<li>redis中保存要登陆用户的信息；</li>
-<li>返回二维码。</li>
-</ul>
-</li>
-</ul>
-<h2 id="后台守护进程"><a href="#后台守护进程：" class="headerlink" title="后台守护进程："></a>后台守护进程：</h2><ul>
-<li>开启一个守护线程：<ul>
-<li>获取redis中保存的用户信息；</li>
-<li>判断如果未登陆则继续执行以下操作，如果已经登陆了，返回，不做任何操作。</li>
-<li>loginService.login()<ul>
-<li>代码登陆逻辑，如果登陆了，将状态setAlive置为已经登陆，若未登陆，sleep1秒继续。</li>
-<li>将联系人信息保存到redis中</li>
-</ul>
-</li>
-<li>webWxInit()<ul>
-<li>获取user信息，并保存到数据库。</li>
-<li>获取用户的联系人信息，并保存到数据库；</li>
-<li>获取SyncKeyBean信息，并保存到数据库；</li>
-</ul>
-</li>
-<li>wxStatusNotify()<ul>
-<li>微信通知状态改变，手机端提示网页端登陆成功。</li>
-</ul>
-</li>
-<li>startReceiving()<ul>
-<li>开启消息接收。</li>
-<li>开启新线程：<ul>
-<li>syncCheck() 检查是否有新消息<ul>
-<li>状态为0(收到正常报文)：<ul>
-<li>webWxSync() 联网获取新消息；<ul>
-<li>通过初始化过去的SyncKey参数进行获取，返回成功后，要把新返回的SyncKey保存到数据库中，下次用新SyncKey进行获取新信息。</li>
-<li>对获取到的新信息进行操作。 MsgCenter.produceMsg();</li>
-<li>保存消息到数据库。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>webWxGetContact() 获取好友列表</li>
-<li>WebWxBatchGetContact()</li>
-<li>setUserInfo() 缓存本次好友信息。</li>
-<li>CheckLoginStatusThread开启登陆状态线程。</li>
-</ul>
-</li>
-</ul>
-<h2 id="20170904"><a href="#2017-09-04" class="headerlink" title="2017.09.04"></a>2017.09.04</h2><p>  做好微信机器人，在微信公众平台界面发送8将返回一个二维码，扫码登陆后即可开启机器人。<br>  机器人功能： //TODO<br>    * 集成聊天机器人功能。<br>    * 备份聊天记录。<br>    * 爬取所有用户，并分析用户联系人的男女比例，整合头像。<br>    * 爬取公众号文章。<br>    * 撤回消息备份<br>    * 关键词监听<br>    * 消息搜索<br>    * 信息分析<br>    * 查看/删除文件[文件名] e.g. 查看文件[123345234.mp3]<br>    * 撤回附件列表 (查看都有哪些保存在电脑中的已撤回附件)<br>    * 清空附件列表 (清空已经保存在电脑中的附件)<br>    * 添加关键词[关键词] e.g. 设置关键词[在不在]<br>    * 删除关键词[关键词] e.g. 删除关键词[在不在]<br>    * 清空关键词 清空已经设置的所有关键词<br>    * 查看关键词 查看目前设置的关键词<br>    * 添加签到口令#公众号:签到口令# e.g. 添加签到口令#招商银行信用卡:签到#<br>    * 删除签到口令#公众号# e.g. 删除签到口令#招商银行信用卡#<br>    * 查看签到口令 查看已经存在的公众和和对应的签到口令<br>    * 清空签到口令 清空所有签到口令<br>    * 截图 截取当前屏幕发送到文件助手<br>    * 添加自动回复#针对的关键词:回复内容# e.g.添加自动回复#在不在:我现在有事情，待会儿回复你#<br>    * 删除自动回复#针对的关键词# e.g.删除自动回复#在不在#<br>    * 清空自动回复 清空所有的自定义回复规则<br>    * 关闭自动回复<br>    * 打开自动回复<br>    * 退出程序</p>
-<h2 id="备份聊天功能"><a href="#备份聊天功能：" class="headerlink" title="备份聊天功能："></a>备份聊天功能：</h2><pre><code>* 发送 “开启**回复” 即可回复 ** 信息
-  后台将配置记录到sql中，并缓存到redis中。
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2405,7 +2410,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-10-11T05:29:53.000Z</updated>
+  <updated>2021-10-27T12:43:18.000Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>孤夜</title>
+    <link href="http://earyant.github.io/posts/%E6%95%A3%E6%96%87%E8%AF%97/%E5%AD%A4%E5%A4%9C/"/>
+    <id>http://earyant.github.io/posts/%E6%95%A3%E6%96%87%E8%AF%97/%E5%AD%A4%E5%A4%9C/</id>
+    <published>2021-10-27T12:43:18.000Z</published>
+    <updated>2021-10-27T12:43:18.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="散文诗" scheme="http://earyant.github.io/categories/%E6%95%A3%E6%96%87%E8%AF%97/"/>
+    
+    
+    <category term="散文诗" scheme="http://earyant.github.io/tags/%E6%95%A3%E6%96%87%E8%AF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>到底什么是知行合一</title>
@@ -407,29 +429,6 @@
     
     
     <summary type="html">&lt;p&gt;对数据集进行分组并对各组应用一个函数（无论是聚合还是转换），通常是数据分析工作中的重要环节。在将数据集加载、融合、准备好之后，通常就是计算分组统计或生成透视表。pandas提供了一个灵活高效的gruopby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="matplotlib" scheme="http://earyant.github.io/tags/matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-9.可视化</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-9-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-9-%E5%8F%AF%E8%A7%86%E5%8C%96/</id>
-    <published>2021-09-23T15:16:24.000Z</published>
-    <updated>2021-09-28T09:12:59.445Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（&lt;a href=&quot;http://matplotlib.org/%EF%BC%89%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%AE%83%E7%9A%84%E5%BA%93%E3%80%82&quot;&gt;http://matplotlib.org/）和基于它的库。&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
