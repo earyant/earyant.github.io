@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-10-27T12:43:18.000Z</updated>
+  <updated>2021-11-12T05:53:22.000Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>心情篇</title>
+    <link href="http://earyant.github.io/posts/%E6%97%A5%E8%AE%B0/%E5%BF%83%E6%83%85%E7%AF%87/"/>
+    <id>http://earyant.github.io/posts/%E6%97%A5%E8%AE%B0/%E5%BF%83%E6%83%85%E7%AF%87/</id>
+    <published>2021-11-12T05:53:22.000Z</published>
+    <updated>2021-11-12T05:53:22.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;心情篇集合，心情好了和心情不好了，都来这里逛一逛，看看当时为啥心情不好，回头看看，哪些事情还值不值得。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>人类简史</title>
+    <link href="http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/"/>
+    <id>http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/</id>
+    <published>2021-11-10T09:17:56.000Z</published>
+    <updated>2021-11-10T09:17:56.000Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;早就听闻这本奇书，本身是一本历史书，却有多位商业大亨推荐，特写下读后感.&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>孤夜</title>
@@ -392,52 +422,6 @@
     <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-11.时间序列</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-11-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/</id>
-    <published>2021-09-23T15:17:36.000Z</published>
-    <updated>2021-09-28T09:12:59.483Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;时间序列（time series）数据是一种重要的结构化数据形式，应用于多个领域，包括金融学、经济学、生态学、神经科学、物理学等。在多个时间点观察或测量到的任何事物都可以形成一段时间序列。很多时间序列是固定频率的，也就是说，数据点是根据某种规律定期出现的（比如每15秒、每5分钟、每月出现一次）。时间序列也可以是不定期的，没有固定的时间单位或单位之间的偏移量。时间序列数据的意义取决于具体的应用场景，主要有以下几种：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="时间序列" scheme="http://earyant.github.io/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-10.数据聚合和分组计算</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-10-%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E5%92%8C%E5%88%86%E7%BB%84%E8%AE%A1%E7%AE%97/</id>
-    <published>2021-09-23T15:17:31.000Z</published>
-    <updated>2021-09-28T09:12:59.463Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;对数据集进行分组并对各组应用一个函数（无论是聚合还是转换），通常是数据分析工作中的重要环节。在将数据集加载、融合、准备好之后，通常就是计算分组统计或生成透视表。pandas提供了一个灵活高效的gruopby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="matplotlib" scheme="http://earyant.github.io/tags/matplotlib/"/>
     
   </entry>
   

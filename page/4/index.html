@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">106</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">108</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,204 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Scikit-Learn%E4%B8%8ETensorFlow%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97-1/" class="post-title-link" itemprop="url">Scikit-Learn与TensorFlow机器学习实用指南-1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-21 23:10:25" itemprop="dateCreated datePublished" datetime="2021-09-21T23:10:25+08:00">2021-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:20:51" itemprop="dateModified" datetime="2021-09-28T17:20:51+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、简介</p>
+<p>很多机器学习的问题都会涉及到有着几千甚至数百万维的特征的训练实例。这不仅让训练过程变得非常缓慢，同时还很难找到一个很好的解，我们接下来就会遇到这种情况。这种问题通常被称为维数灾难（curse of dimentionality）。</p>
+<p>幸运的是，在现实生活中我们经常可以极大的降低特征维度，将一个十分棘手的问题转变成一个可以较为容易解决的问题。例如，对于 MNIST 图片集（第 3 章中提到）：图片四周边缘部分的像素几乎总是白的，因此你完全可以将这些像素从你的训练集中扔掉而不会丢失太多信息。图 7-6 向我们证实了这些像素的确对我们的分类任务是完全不重要的。同时，两个相邻的像素往往是高度相关的：如果你想要将他们合并成一个像素（比如取这两个像素点的平均值）你并不会丢失很多信息。</p>
+<p>警告：降维肯定会丢失一些信息（这就好比将一个图片压缩成 JPEG 的格式会降低图像的质量），因此即使这种方法可以加快训练的速度，同时也会让你的系统表现的稍微差一点。降维会让你的工作流水线更复杂因而更难维护。所有你应该先尝试使用原始的数据来训练，如果训练速度太慢的话再考虑使用降维。在某些情况下，降低训练集数据的维度可能会筛选掉一些噪音和不必要的细节，这可能会让你的结果比降维之前更好（这种情况通常不会发生；它只会加快你训练的速度）。</p>
+<p>降维除了可以加快训练速度外，在数据可视化方面（或者 DataViz）也十分有用。降低特征维度到 2（或者 3）维从而可以在图中画出一个高维度的训练集，让我们可以通过视觉直观的发现一些非常重要的信息，比如聚类。</p>
+<p>在这一章里，我们将会讨论维数灾难问题并且了解在高维空间的数据。然后，我们将会展示两种主要的降维方法：投影（projection）和流形学习（Manifold Learning），同时我们还会介绍三种流行的降维技术：主成分分析（PCA），核主成分分析（Kernel PCA）和局部线性嵌入（LLE）。</p>
+<p>二、维数灾难<br>我们已经习惯生活在一个三维的世界里，以至于当我们尝试想象更高维的空间时，我们的直觉不管用了。即使是一个基本的 4D 超正方体也很难在我们的脑中想象出来（见图 8-1），更不用说一个 200 维的椭球弯曲在一个 1000 维的空间里了。</p>
+<p>图 8-1 点，线，方形，立方体和超正方体（0D 到 4D 超正方体）<br>这表明很多物体在高维空间表现的十分不同。比如，如果你在一个正方形单元中随机取一个点（一个1×1的正方形），那么随机选的点离所有边界大于 0.001（靠近中间位置）的概率为 0.4%（1 - 0.998^2）（换句话说，一个随机产生的点不大可能严格落在某一个维度上。但是在一个 1,0000 维的单位超正方体（一个1×1×…×1的立方体，有 10,000 个 1），这种可能性超过了 99.999999%。在高维超正方体中，大多数点都分布在边界处。</p>
+<p>还有一个更麻烦的区别：如果你在一个平方单位中随机选取两个点，那么这两个点之间的距离平均约为 0.52。如果您在单位 3D 立方体中选取两个随机点，平均距离将大致为 0.66。但是，在一个 1,000,000 维超立方体中随机抽取两点呢？那么，平均距离，信不信由你，大概为 408.25！这非常违反直觉：当它们都位于同一单元超立方体内时，两点是怎么距离这么远的？这一事实意味着高维数据集有很大风险分布的非常稀疏：大多数训练实例可能彼此远离。当然，这也意味着一个新实例可能远离任何训练实例，这使得预测的可靠性远低于我们处理较低维度数据的预测，因为它们将基于更大的推测（extrapolations）。简而言之，训练集的维度越高，过拟合的风险就越大。</p>
+<p>理论上来说，维数爆炸的一个解决方案是增加训练集的大小从而达到拥有足够密度的训练集。不幸的是，在实践中，达到给定密度所需的训练实例的数量随着维度的数量呈指数增长。如果只有 100 个特征（比 MNIST 问题要少得多）并且假设它们均匀分布在所有维度上，那么如果想要各个临近的训练实例之间的距离在 0.1 以内，您需要比宇宙中的原子还要多的训练实例。</p>
+<p>三、降维的主要方法<br>在我们深入研究具体的降维算法之前，我们来看看降低维度的两种主要方法：投影和流形学习。</p>
+<p>3.1 投影（Projection）<br>在大多数现实生活的问题中，训练实例并不是在所有维度上均匀分布的。许多特征几乎是常数，而其他特征则高度相关（如前面讨论的 MNIST）。结果，所有训练实例实际上位于（或接近）高维空间的低维子空间内。这听起来有些抽象，所以我们不妨来看一个例子。在图 8-2 中，您可以看到由圆圈表示的 3D 数据集。</p>
+<p>图 8-2 一个分布接近于2D子空间的3D数据集<br>注意到所有训练实例的分布都贴近一个平面：这是高维（3D）空间的较低维（2D）子空间。现在，如果我们将每个训练实例垂直投影到这个子空间上（就像将短线连接到平面的点所表示的那样），我们就可以得到如图8-3所示的新2D数据集。铛铛铛！我们刚刚将数据集的维度从 3D 降低到了 2D。请注意，坐标轴对应于新的特征z1和z2（平面上投影的坐标）。</p>
+<p>图 8-3 一个经过投影后的新的 2D 数据集<br>但是，投影并不总是降维的最佳方法。在很多情况下，子空间可能会扭曲和转动，比如图 8-4 所示的着名瑞士滚动玩具数据集。</p>
+<p>图 8-4 瑞士滚动数玩具数据集<br>简单地将数据集投射到一个平面上（例如，直接丢弃x3）会将瑞士卷的不同层叠在一起，如图 8-5 左侧所示。但是，你真正想要的是展开瑞士卷所获取到的类似图 8-5 右侧的 2D 数据集。</p>
+<p>图 8-5 投射到平面的压缩（左）vs 展开瑞士卷（右）<br>3.2 流形学习</p>
+<p>瑞士卷一个是二维流形的例子。简而言之，二维流形是一种二维形状，它可以在更高维空间中弯曲或扭曲。更一般地，一个d维流形是类似于d维超平面的n维空间（其中d &lt; n）的一部分。在我们瑞士卷这个例子中，d = 2，n = 3：它有些像 2D 平面，但是它实际上是在第三维中卷曲。</p>
+<p>许多降维算法通过对训练实例所在的流形进行建模从而达到降维目的；这叫做流形学习。它依赖于流形猜想（manifold assumption），也被称为流形假设（manifold hypothesis），它认为大多数现实世界的高维数据集大都靠近一个更低维的流形。这种假设经常在实践中被证实。</p>
+<p>让我们再回到 MNIST 数据集：所有手写数字图像都有一些相似之处。它们由连线组成，边界是白色的，大多是在图片中中间的，等等。如果你随机生成图像，只有一小部分看起来像手写数字。换句话说，如果您尝试创建数字图像，那么您的自由度远低于您生成任何随便一个图像时的自由度。这些约束往往会将数据集压缩到较低维流形中。</p>
+<p>流形假设通常包含着另一个隐含的假设：你现在的手上的工作（例如分类或回归）如果在流形的较低维空间中表示，那么它们会变得更简单。例如，在图 8-6 的第一行中，瑞士卷被分为两类：在三维空间中（图左上），分类边界会相当复杂，但在二维展开的流形空间中（图右上），分类边界是一条简单的直线。</p>
+<p>但是，这个假设并不总是成立。例如，在图 8-6 的最下面一行，决策边界位于x1 = 5（图左下）。这个决策边界在原始三维空间（一个垂直平面）看起来非常简单，但在展开的流形中却变得更复杂了（四个独立线段的集合）（图右下）。</p>
+<p>简而言之，如果在训练模型之前降低训练集的维数，那训练速度肯定会加快，但并不总是会得出更好的训练效果；这一切都取决于数据集。</p>
+<p>希望你现在对于维数爆炸以及降维算法如何解决这个问题有了一定的理解，特别是对流形假设提出的内容。本章的其余部分将介绍一些最流行的降维算法。</p>
+<p>图 8-6 决策边界并不总是会在低维空间中变的简单</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/83284762">参考</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/topic/20134952/hot">参考二</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">利用python进行数据分析-1.简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-21 22:29:02" itemprop="dateCreated datePublished" datetime="2021-09-21T22:29:02+08:00">2021-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:12:59" itemprop="dateModified" datetime="2021-09-28T17:12:59+08:00">2021-09-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="第1章-准备工作"><a href="#第1章-准备工作" class="headerlink" title="第1章 准备工作"></a>第1章 准备工作</h1><h2 id="1-1-本书的内容"><a href="#1-1-本书的内容" class="headerlink" title="1.1 本书的内容"></a>1.1 本书的内容</h2><p>本书讲的是利用Python进行数据控制、处理、整理、分析等方面的具体细节和基本要点。我的目标是介绍Python编程和用于数据处理的库和工具环境，掌握这些，可以让你成为一个数据分析专家。虽然本书的标题是“数据分析”，重点却是Python编程、库，以及用于数据分析的工具。这就是数据分析要用到的Python编程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-1-%E7%AE%80%E4%BB%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1204,417 +1402,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">日志分析常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-04 16:06:10" itemprop="dateCreated datePublished" datetime="2018-05-04T16:06:10+08:00">2018-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:17:20" itemprop="dateModified" datetime="2021-09-28T17:17:20+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h2><ul>
-<li><p>cat：正序查看</p>
-<blockquote>
-<p>cat access.log</p>
-</blockquote>
-</li>
-<li><p>tac：倒序查看</p>
-<blockquote>
-<p>tac access.log</p>
-</blockquote>
-</li>
-</ul>
-<p>##分页显示文件</p>
-<ul>
-<li><p>more</p>
-<blockquote>
-<p>more access.log</p>
-</blockquote>
-<p>   Enter显示文件下一行<br>   空格显示下一页<br>   F显示下一屏内容<br>   B显示上一屏内容</p>
-</li>
-<li><p>less</p>
-<blockquote>
-<p>/GET 查找GET字符串</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="显示文件尾"><a href="#显示文件尾" class="headerlink" title="显示文件尾"></a>显示文件尾</h2><ul>
-<li><p>tail</p>
-<blockquote>
-<p>tail  -f -n 500 access.log</p>
-</blockquote>
-<p>   -f  持续查看<br>   -n 显示最后n行</p>
-</li>
-</ul>
-<h2 id="显示文件头"><a href="#显示文件头" class="headerlink" title="显示文件头"></a>显示文件头</h2><ul>
-<li>head<blockquote>
-<p>head -n2 access.log</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h2><ul>
-<li><p>sort</p>
-<blockquote>
-<p>sort -n -r access.log</p>
-</blockquote>
-<p>   -n 按照数字排序<br>   -r 逆序排序</p>
-<blockquote>
-<p>sort -k 2 -t “ “ -n access.log</p>
-</blockquote>
-<p>   -k 指定排序的列<br>   -t 指定列分隔符<br>   -n 按照数字排序</p>
-</li>
-</ul>
-<h2 id="字符统计"><a href="#字符统计" class="headerlink" title="字符统计"></a>字符统计</h2><ul>
-<li><p>wc</p>
-<blockquote>
-<p>  wc -l access.log</p>
-</blockquote>
-<pre><code>-l 统计文件中的行数
-</code></pre>
-<blockquote>
-<p>  wc -c access.log</p>
-</blockquote>
-<pre><code>-c 显示文件的字节数
-</code></pre>
-<blockquote>
-<p>  wc -L access.log</p>
-</blockquote>
-<pre><code>-L得出最长的行长度
-</code></pre>
-<blockquote>
-<p>  wc -w access.log</p>
-</blockquote>
-<pre><code>-w 查看文件包含多少单词
-</code></pre>
-</li>
-</ul>
-<h2 id="重复行"><a href="#重复行" class="headerlink" title="重复行"></a>重复行</h2><ul>
-<li><p>uniq</p>
-<blockquote>
-<p> sort uniqfile| uniq -c</p>
-</blockquote>
-<pre><code>\-c 用来在每一行前面加上该行出现的次数
-</code></pre>
-<blockquote>
-<p>  sort uniqfile | uniq -c -u</p>
-</blockquote>
-<pre><code>\-u 只会显示出现一次的行
-</code></pre>
-<blockquote>
-<p>  sort uniqfile | uniq -c -d</p>
-</blockquote>
-<pre><code>\-d 只会显示重复出现的行
-</code></pre>
-</li>
-</ul>
-<h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><ul>
-<li><p>grep</p>
-<pre><code>  &gt;   grep earyant access.log
-
-    earyant 为指定的查找串
-
-  &gt; grep -c earyant access.log
-
-    -c 可以显示查找到的行数
-
-  &gt;   grep &#39;G.\*T&#39; access.log
-
-    支持正则表达式
-</code></pre>
-<h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2></li>
-<li><p>find</p>
-<blockquote>
-<p>find /home/earyant -name access.log</p>
-</blockquote>
-<pre><code> 在/home/earyant 目录下查找文件名为access.log的文件
-</code></pre>
-<blockquote>
-<p>find /home/earyant -name “*.txt”</p>
-<p>find . -print</p>
-</blockquote>
-<pre><code> 打印当前目录所有文件
-</code></pre>
-</li>
-<li><p>whereis</p>
-<blockquote>
-<p>whereis java</p>
-</blockquote>
-</li>
-<li><p>which</p>
-<blockquote>
-<p>which java</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h2><ul>
-<li>expr<blockquote>
-<p>expr 10 * 3<br>expr 10 % 3<br>expr index “earyant.github.io” earyant</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
-<li><p>tar</p>
-<blockquote>
-<p>tar -cf aaa.tar tmp1 tmp2</p>
-</blockquote>
-<pre><code>  将当前目录下的tmp1和tmp2目录打包成aaa.tar
-  -c 表示生成新包
-  -f 指定包名称
-</code></pre>
-<blockquote>
-<p>tar -tf aaa.tar</p>
-</blockquote>
-<pre><code>  -t 能够列出包中文件的名称
-</code></pre>
-<blockquote>
-<p>tar -xf aaa.tar</p>
-</blockquote>
-<pre><code>  -x 将打包文件解压
-</code></pre>
-</li>
-</ul>
-<h2 id="url-访问工具"><a href="#url-访问工具" class="headerlink" title="url 访问工具"></a>url 访问工具</h2><ul>
-<li><p>curl</p>
-<blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
-<p>curl -i <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
-</blockquote>
-<p>  -i 返回带header的文档</p>
-<blockquote>
-<p>curl -I <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
-</blockquote>
-<p>  -I 只返回页面的header信息</p>
-<h2 id="查看请求访问量"><a href="#查看请求访问量" class="headerlink" title="查看请求访问量"></a>查看请求访问量</h2></li>
-</ul>
-<blockquote>
-<p>cat access.log | cut -f1 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
-</blockquote>
-<p>访问量排名前10的ip地址</p>
-<blockquote>
-<p>cat  access.log | cut  -f4 -d “ “ | sort | uniq -c | sort -k 1 -n -r | head -10</p>
-</blockquote>
-<p>页面访问量排名前10的url</p>
-<h2 id="查看最耗时的页面"><a href="#查看最耗时的页面" class="headerlink" title="查看最耗时的页面"></a>查看最耗时的页面</h2><blockquote>
-<p>cat access.log | sort -k 2 -n -r |head -10</p>
-</blockquote>
-<h2 id="统计404请求的占比"><a href="#统计404请求的占比" class="headerlink" title="统计404请求的占比"></a>统计404请求的占比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export total_line = `wc -l access.log | cut -f1 -d &quot; &quot;` &amp;&amp; export not_found_line = `awk &#x27;$6==&#x27;404&#x27;&#123;print $6&#125;&#x27; access.log | wc -l`  &amp;&amp; expr $ not_found_line \*100 / $total_line</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/Guava-1-1%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">Guava 1.1基本工具</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-19 17:13:44" itemprop="dateCreated datePublished" datetime="2018-04-19T17:13:44+08:00">2018-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:14:18" itemprop="dateModified" datetime="2021-09-28T17:14:18+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="11-使用和避免null"><a href="#1-1-使用和避免null" class="headerlink" title="1.1-使用和避免null"></a>1.1-使用和避免null</h1><p>map允许null作为键，但只能有一个。<br>concurrentHashMap不允许null作为键。</p>
-<h2 id="optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">possible.isPresent(); <span class="comment">// returns true</span></span><br><span class="line">possible.get(); <span class="comment">// returns 5</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="静态创建方法"><a href="#静态创建方法" class="headerlink" title="静态创建方法"></a>静态创建方法</h3><ul>
-<li>  of</li>
-<li>  ofNullable</li>
-<li>empty<h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3></li>
-<li>  isPresent</li>
-<li>  get</li>
-<li>  or (jdk中是orElse)</li>
-<li>  orNull</li>
-<li>  asSet</li>
-</ul>
-<blockquote>
-<p>意义：<br>    使用Optional除了赋予null语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。Optional迫使你积极思考引用缺失的情况，因为你必须显式地从Optional获取引用。直接使用null很容易让人忘掉某些情形，尽管FindBugs可以帮助查找null相关的问题，但是我们还是认为它并不能准确地定位问题根源。<br>    如同输入参数，方法的返回值也可能是null。和其他人一样，你绝对很可能会忘记别人写的方法method(a,b)会返回一个null，就好像当你实现method(a,b)时，也很可能忘记输入参数a可以为null。将方法的返回类型指定为Optional，也可以迫使调用者思考返回的引用缺失的情形。</p>
-</blockquote>
-<h3 id="使用方式"><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><ul>
-<li>错误的使用方式：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">if</span> (user.isPresent()) &#123;</span><br><span class="line">  <span class="keyword">int</span> sex = user.getSex();</span><br><span class="line">  <span class="comment">// 链式调用，最容易出现空指针</span></span><br><span class="line">  <span class="keyword">int</span> age = user.getParent().getParent().getParent().getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>正确的使用方式  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;User&gt; user = Optional.ofNullable(user);</span><br><span class="line"><span class="keyword">int</span> sex = user.map(User::getSex).orElse(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">int</span> age = user.map(User::getParent).map(User::getParent).map(User::getParent).map(User::getAge).orElse(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="其他处理null的便利方法"><a href="#其他处理null的便利方法" class="headerlink" title="其他处理null的便利方法"></a>其他处理null的便利方法</h2><ul>
-<li>  Objects.firstNonNull(T, T)</li>
-<li>  Objects还有其它一些方法专门处理null或空字符串：emptyToNull(String)，nullToEmpty(String)，isNullOrEmpty(String)。</li>
-</ul>
-<h1 id="12-前置条件-preconditions"><a href="#1-2-前置条件-Preconditions" class="headerlink" title="1.2-前置条件 Preconditions"></a>1.2-前置条件 Preconditions</h1><table>
-<thead>
-<tr>
-<th>–</th>
-<th>–</th>
-<th>–</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>方法声明（不包括额外参数）</td>
-<td>描述</td>
-<td>检查失败时抛出的异常</td>
-</tr>
-<tr>
-<td>checkArgument(boolean)</td>
-<td>检查boolean是否为true，用来检查传递给方法的参数。</td>
-<td>IllegalArgumentException</td>
-</tr>
-<tr>
-<td>checkNotNull(T)</td>
-<td>检查value是否为null，该方法直接返回value，因此可以内嵌使用checkNotNull。</td>
-<td>NullPointerException</td>
-</tr>
-<tr>
-<td>checkState(boolean)</td>
-<td>用来检查对象的某些状态。</td>
-<td>IllegalStateException</td>
-</tr>
-<tr>
-<td>checkElementIndex(int index, int size)</td>
-<td>检查index作为索引值对某个列表、字符串或数组是否有效</td>
-<td>IndexOutOfBoundsException</td>
-</tr>
-<tr>
-<td>checkPositionIndex(int index, int size)</td>
-<td>检查index作为位置值对某个列表、字符串或数组是否有效。</td>
-<td>IndexOutOfBoundsException</td>
-</tr>
-<tr>
-<td>checkPositionIndexes(int start, int end, int size)</td>
-<td>检查[start, end]表示的位置范围对某个列表、字符串或数组是否有效*</td>
-<td>IndexOutOfBoundsException</td>
-</tr>
-</tbody></table>
-<p><a target="_blank" rel="noopener" href="http://ifeve.com/google-guava-using-and-avoiding-null/">参考</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1686,7 +1473,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1769,12 +1556,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">686k</span>
+    <span title="站点总字数">701k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:24</span>
+    <span title="站点阅读时长">10:37</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
