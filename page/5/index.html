@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">108</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">109</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,160 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">日志分析脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 22:06:22" itemprop="dateCreated datePublished" datetime="2018-05-04T22:06:22+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:17:20" itemprop="dateModified" datetime="2021-09-28T17:17:20+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="sed编辑器"><a href="#sed编辑器" class="headerlink" title="sed编辑器"></a>sed编辑器</h2><p>不修改原内容的行级别流编辑器</p>
+<ul>
+<li><p>sed ‘s/baidu /earyant/‘ access.log | head -10</p>
+<blockquote>
+<p>将日志文件中的baidu替换成earyant输出<br>s表示执行的事文本替换命令</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘2,6p’ access.log</p>
+<blockquote>
+<p>-n表示只输出指定的行，’2,6p’表示选择的事第二行到第六行</p>
+</blockquote>
+</li>
+<li><p>sed ‘/earyant/d’ access.log</p>
+<blockquote>
+<p>d表示执行文本删除命令，将包含earyant的行删除</p>
+</blockquote>
+</li>
+<li><p>sed ‘=’ access.log</p>
+<blockquote>
+<p>显示文本行号</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘i\head’ access.log | head -10</p>
+<blockquote>
+<p>在行首插入文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘a\end’ access.log | head -10</p>
+<blockquote>
+<p> 在文末追加文本</p>
+</blockquote>
+</li>
+<li><p>sed -e ‘/baidu/c\hello’ access.log | head -10</p>
+<blockquote>
+<p>c命令对文本进行替换，查找/baidu/匹配的行，用hello对匹配的行进行替换，与s不同的是，这个替换行，s是替换单词</p>
+</blockquote>
+</li>
+<li><p>sed -n ‘1,5p;1,5=’ access.log</p>
+<blockquote>
+<p>多条命令，分号隔开</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
+<li><p>awk ‘{print $1}’ access.log | head -10</p>
+<blockquote>
+<p>打印指定的列</p>
+</blockquote>
+</li>
+<li><p>awk ‘/baidu/{print $5,%6}’ access.log | head -10</p>
+<blockquote>
+<p>筛选指定的行，并且打印出其中一部分列</p>
+</blockquote>
+</li>
+<li><p>awk ‘length{$0} &gt; 40 {print $3}’ access.log | head  -10</p>
+<blockquote>
+<p>$0 表示当前的行，length($0)获取当前行的长度，print $3 打印出第三列</p>
+</blockquote>
+</li>
+<li><p>awk ‘{line = sprintf (“method:%s,response:%s”,$3,$7); print line}’ access.log | head -10</p>
+<blockquote>
+<p>定义line接收sprintf输出，sprintf用户格式化输出第三行的请求式和第七行的响应时间</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
+<li>  系统load超过2或者磁盘利用率超过85%报警：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#top取系统load值， -n 1 表示只刷新一次</span></span><br><span class="line"><span class="comment"># sed 过滤第一行</span></span><br><span class="line"><span class="comment"># top命令会输出1分钟、5分钟、15分钟load的平均值，awk筛选出1分钟内的平均load，赋值给load</span></span><br><span class="line">load = `top -n 1| sed -n <span class="string">&#x27;1p&#x27;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span>`</span><br><span class="line"><span class="comment"># 从右边开始，过滤掉不需要的逗号</span></span><br><span class="line">load = <span class="variable">$&#123;load%\,*&#125;</span></span><br><span class="line"><span class="comment"># df取得磁盘利用率信息，用sed筛选磁盘总利用率第二行</span></span><br><span class="line">disk_usage = `df -h | sed -n <span class="string">&#x27;2p&#x27;</span> |awk <span class="string">&#x27;&#123;print $(NF - 1)&#125;&#x27;</span> `</span><br><span class="line"><span class="comment"># 过滤掉百分号</span></span><br><span class="line">disk_usage = <span class="variable">$&#123;disk_usage%\%*&#125;</span></span><br><span class="line">overhead = `expr <span class="variable">$load</span> \&gt; 2.00`</span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$overhead</span> -eq 1];<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;System load is overhead&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [<span class="variable">$disk_usage</span> -gt 85 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;disk is nearly full ,need more disk space&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>读取日志文件，对字段切割，插入到sql。<br>  db:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create table access_log(</span><br><span class="line">  ip varchar(20),# ip地址</span><br><span class="line">  rt bigint,# 响应时间</span><br><span class="line">  method varchar(10), #请求方式</span><br><span class="line">  url varchar (400), # 请求地址</span><br><span class="line">  refer varchar(400),# 请求来源</span><br><span class="line">  return_code int,# 返回码</span><br><span class="line">  response_size bigint # 响应大小</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>shell:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#earyantlee@gmail.com</span></span><br><span class="line"><span class="comment"># 日志路径</span></span><br><span class="line">ACCESS_FILE=<span class="string">&quot;D:\\0\\nginx-1.11.13\\logs\\access2.log&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> LINE</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 系统数组分隔符</span></span><br><span class="line">  OLD_IFS=<span class="string">&quot;<span class="variable">$IFS</span>&quot;</span></span><br><span class="line">  IFS=<span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="comment"># 每行分割成数组</span></span><br><span class="line">  field_arr=(<span class="variable">$LINE</span>)</span><br><span class="line">  IFS=<span class="string">&quot;<span class="variable">$OLD_IFS</span>&quot;</span></span><br><span class="line">  <span class="comment"># 生成插入语句，各列的值对应什么，懒得改了。</span></span><br><span class="line">  STATEMENT=<span class="string">&quot;insert into access_log values(&#x27;<span class="variable">$&#123;field_arr[0]&#125;</span>&#x27; , &#x27;<span class="variable">$&#123;field_arr[1]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[2]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[3]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[4]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[5]&#125;</span>&#x27;, &#x27;<span class="variable">$&#123;field_arr[6]&#125;</span>&#x27;);&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$STATEMENT</span></span><br><span class="line">  mysql earyant -u root -p123456 -e <span class="string">&quot;<span class="variable">$&#123;STATEMENT&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$ACCESS_FILE</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1431,99 +1585,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:16:23" itemprop="dateModified" datetime="2021-09-28T17:16:23+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>注册中心不自动上线下线</li>
-<li>异步返回值</li>
-<li>bean参数传值</li>
-<li></li>
-</ul>
-<h3 id="eureka-不自动下线"><a href="#eureka-不自动下线" class="headerlink" title="eureka 不自动下线"></a>eureka 不自动下线</h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
-<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
-<p>解决方法：设置enableSelfPreservation:false</p>
-<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
-<h3 id="负载均衡在服务下掉后的重试策略"><a href="#负载均衡在服务下掉后的重试策略：" class="headerlink" title="负载均衡在服务下掉后的重试策略："></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">负载均衡在服务下掉后的重试策略：</a></h3><p>默认没有开启：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="断路器配置重试"><a href="#断路器配置重试" class="headerlink" title="断路器配置重试:"></a><a target="_blank" rel="noopener" href="http://blog.didispace.com/spring-cloud-ribbon-failed-retry/">断路器配置重试:</a></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1595,7 +1656,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1678,12 +1739,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">701k</span>
+    <span title="站点总字数">715k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:37</span>
+    <span title="站点阅读时长">10:50</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

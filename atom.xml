@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2021-11-12T05:53:22.000Z</updated>
+  <updated>2021-11-22T13:39:33.000Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>人类误判心理</title>
+    <link href="http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E4%BA%BA%E7%B1%BB%E8%AF%AF%E5%88%A4%E5%BF%83%E7%90%86-%E8%8A%92%E6%A0%BC/"/>
+    <id>http://earyant.github.io/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E4%BA%BA%E7%B1%BB%E8%AF%AF%E5%88%A4%E5%BF%83%E7%90%86-%E8%8A%92%E6%A0%BC/</id>
+    <published>2021-11-22T13:39:33.000Z</published>
+    <updated>2021-11-22T13:39:33.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;人类误判心理学-芒格&lt;/p&gt;
+&lt;p&gt;注：根据书本、网络等内容整理而成。&lt;/p&gt;
+&lt;h1 id=&quot;整体及25个心理学误区&quot;&gt;&lt;a href=&quot;#整体及25个心理学误区&quot; class=&quot;headerlink&quot; title=&quot;整体及25个心理学误区&quot;&gt;&lt;/a&gt;整体及&lt;strong&gt;25&lt;/strong&gt;个心理学误区&lt;/h1&gt;&lt;p&gt;​        总共25个人类误判心理倾向，查理通过自己的实践证明，他的这25条是比大多数心理学教材有用了，在实用性上拥有巨大的优势。人类的――经常出错但总体上很有用――心理倾向相当多，而且相当不同。大量的心理倾向的自然结果就是社会心理学的重要原理：认知往往取决于情景，所以不同的情景通常会引起不同的结论，哪怕是同一个人在思考同一个问题的时候也是如此。人不同于机器，不能非常科学精密地进行分析判断，因此人在决策时会有很多错误倾向，而且难以察觉。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>心情篇</title>
@@ -399,29 +416,6 @@
     <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     <category term="python库" scheme="http://earyant.github.io/tags/python%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用python进行数据分析-12.pandas高级应用</title>
-    <link href="http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-12-pandas%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
-    <id>http://earyant.github.io/posts/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-12-pandas%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</id>
-    <published>2021-09-23T15:18:31.000Z</published>
-    <updated>2021-09-28T09:12:59.505Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;前面的章节关注于不同类型的数据规整流程和NumPy、pandas与其它库的特点。随着时间的发展，pandas发展出了更多适合高级用户的功能。本章就要深入学习pandas的高级功能。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="http://earyant.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="利用python进行数据分析" scheme="http://earyant.github.io/tags/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据分析" scheme="http://earyant.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="pandas" scheme="http://earyant.github.io/tags/pandas/"/>
     
   </entry>
   
