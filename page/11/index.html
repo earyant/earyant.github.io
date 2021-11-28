@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">109</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">112</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -200,6 +200,322 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/" class="post-title-link" itemprop="url">SpringCloud学习2服务消费者</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-21 11:32:34" itemprop="dateCreated datePublished" datetime="2017-07-21T11:32:34+08:00">2017-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:16:23" itemprop="dateModified" datetime="2021-09-28T17:16:23+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>993</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在上一篇文章，讲了服务的注册和发现。在服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于 http restful 的。spring cloud 有两种调用方式，一种是 ribbon+restTemplate，另一种是 feign。在这一篇文章首先讲解下基于 ribbon+rest。</p>
+<h2 id="ribbon"><a href="#ribbon" class="headerlink" title="ribbon"></a>ribbon</h2><ul>
+<li><p>是一个负载均衡客户端，可以很好的控制 http 和 tcp 的一些行为。Feign 也用到 ribbon，当你使用 @ FeignClient，ribbon 自动被应用。</p>
+</li>
+<li><p>ribbon 已经默认实现了这些配置 bean：</p>
+<ul>
+<li><p>IClientConfig ribbonClientConfig: DefaultClientConfigImpl</p>
+</li>
+<li><p>IRule ribbonRule: ZoneAvoidanceRule</p>
+</li>
+<li><p>IPing ribbonPing: NoOpPing</p>
+</li>
+<li><p>ServerList ribbonServerList: ConfigurationBasedServerList</p>
+</li>
+<li><p>ServerListFilter ribbonServerListFilter: ZonePreferenceServerListFilter</p>
+</li>
+<li><p>ILoadBalancer ribbonLoadBalancer: ZoneAwareLoadBalancer</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>基于上一节的工程，启动 eureka-server 工程；启动 service-hi 工程，它的端口为 8762；将 service-hi 的配置文件的端口改为 8763, 并启动它，这时你会发现：service-hi 在 eureka-server 注册了 2 个，这就相当于一个小的集群。访问 localhost:8761 如图所示：</li>
+</ul>
+<h2 id="新建一个service-ribbon"><a href="#新建一个service-ribbon" class="headerlink" title="新建一个service-ribbon"></a>新建一个service-ribbon</h2><ul>
+<li>spring-cloud-starter-eureka</li>
+<li>spring-cloud-starter-ribbon</li>
+<li>spring-boot-starter-web</li>
+<li>spring-boot-starter-test</li>
+</ul>
+<h3 id="想eureka注册一个客户端"><a href="#想eureka注册一个客户端" class="headerlink" title="想eureka注册一个客户端"></a>想eureka注册一个客户端</h3><pre><code>eureka:
+   client:
+     serviceUrl:
+       defaultZone: http://localhost:8761/eureka/
+ server:
+   port: 8764
+ spring:
+   application:
+     name: service-ribbon  
+     
+</code></pre>
+<h3 id="启动类"><a href="#启动类" class="headerlink" title="启动类"></a>启动类</h3><ul>
+<li>在工程的启动类中, 通过 @EnableDiscoveryClient 向服务中心注册；   </li>
+</ul>
+<h3 id="架构如下"><a href="#架构如下" class="headerlink" title="架构如下"></a>架构如下</h3><p>   <img data-src="img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="image"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A01EurekaServer/" class="post-title-link" itemprop="url">SpringCloud学习1EurekaServer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-20 18:23:14" itemprop="dateCreated datePublished" datetime="2017-07-20T18:23:14+08:00">2017-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:16:23" itemprop="dateModified" datetime="2021-09-28T17:16:23+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>456</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="创建eurekaserver"><a href="#创建EurekaServer" class="headerlink" title="创建EurekaServer"></a>创建EurekaServer</h2><h3 id="idea初始化项目"><a href="#Idea初始化项目" class="headerlink" title="Idea初始化项目"></a>Idea初始化项目</h3><ul>
+<li>选择cloud discovery-&gt;eureka server 。</li>
+</ul>
+<h3 id="创建启动类"><a href="#创建启动类" class="headerlink" title="创建启动类"></a>创建启动类</h3><ul>
+<li>@EnableEurekaServer</li>
+</ul>
+<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code>server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
+      
+      
+      
+</code></pre>
+<h2 id="创建eurekaclient"><a href="#创建EurekaClient" class="headerlink" title="创建EurekaClient"></a>创建EurekaClient</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><ul>
+<li>通server</li>
+</ul>
+<h3 id="创阿金启动类"><a href="#创阿金启动类" class="headerlink" title="创阿金启动类"></a>创阿金启动类</h3><ul>
+<li>@EnableEurekaClient</li>
+</ul>
+<h3 id="配置参数"><a href="#配置参数-1" class="headerlink" title="配置参数"></a>配置参数</h3><pre><code> eureka:
+   client:
+     serviceUrl:
+       defaultZone: http://localhost:8761/eureka/
+ server:
+   port: 8762
+ spring:
+   application:
+     name: service-hi
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0Dubbo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0Dubbo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">微信公众平台Dubbo项目结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-20 17:07:10" itemprop="dateCreated datePublished" datetime="2017-07-20T17:07:10+08:00">2017-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 17:16:39" itemprop="dateModified" datetime="2021-09-28T17:16:39+08:00">2021-09-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -911,237 +1227,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/jvm/JVM%E4%BB%8B%E7%BB%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/jvm/JVM%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">JVM介绍</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-18 09:54:39" itemprop="dateCreated datePublished" datetime="2017-07-18T09:54:39+08:00">2017-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:22:52" itemprop="dateModified" datetime="2021-09-28T17:22:52+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jvm介绍"><a href="#JVM介绍" class="headerlink" title="JVM介绍"></a>JVM介绍</h1><h2 id="jvm包括"><a href="#JVM包括：" class="headerlink" title="JVM包括："></a>JVM包括：</h2><pre><code>* 1、 字节码指令集
-* 2、 一组寄存器
-* 3、 一个栈
-* 4、 一个垃圾回收堆
-* 5、 存储方法区
-</code></pre>
-<h2 id="jvm-的生命周期"><a href="#JVM-的生命周期" class="headerlink" title="JVM 的生命周期"></a>JVM 的生命周期</h2><ol>
-<li>JVM 实例对应了一个独立运行的 java 程序它是进程级别 <ol>
-<li>启动。启动一个 Java 程序时，一个 JVM 实例就产生了，任何一个拥有 public static void main(String[] args) 函数的 class 都可以作为 JVM 实例运行的起点 </li>
-<li>运行。main() 作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM 内部有两种线程：守护线程和非守护线程，main() 属于非守护线程，守护线程通常由 JVM 自己使用，<b> java 程序也可以表明自己创建的线程是守护线程 <b></b></b></li>
-<li>消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用 Runtime 类或者 System.exit() 来退出</li>
-</ol>
-</li>
-<li>JVM 执行引擎实例则对应了属于用户运行程序的线程它是线程级别的</li>
-</ol>
-<h2 id="jvm模型"><a href="#JVM模型" class="headerlink" title="JVM模型"></a>JVM模型</h2><p><img data-src="http://images.cnitblog.com/i/437053/201403/030952082544688.png" alt="image"></p>
-<h2 id="内存空间"><a href="#内存空间：" class="headerlink" title="内存空间："></a>内存空间：</h2><pre><code>1) 方法区： 指令计数器以及其他隐含寄存器
-2) Java堆： 
-3) Java栈：
-4) 本地方法栈：
-</code></pre>
-<h2 id="共享不共享"><a href="#共享不共享：" class="headerlink" title="共享不共享："></a>共享不共享：</h2><pre><code>共享：
-    1) 方法区
-    2) 栈（Heap）
-不共享：
-    1)程序计数器
-    2)VM stack 虚拟机栈
-    3)本地方法栈
-
-
-1) 程序计数器： 
-2) 栈： 线程私有的，每个线程创建的同时都会创建 JVM 栈，JVM栈中存放的为当前线程中局部基本类型的变量（java中定义的八种基本类型：boolean、char、byte、short、int、long、float、double）、部分的返回结果以及 Stack Frame，非基本类型的对象在 JVM 栈上仅存放一个指向堆上的地址。
-3) 堆：1）存储 *对象实例以及数组值*
-       2）**！Sun Hospot JVM为了提高对象内存分配的效率，对于所创建的线程都会分配一个独立的空间TLAB（Thread Local Allocation Buffer） ，其大小由JVM根据运行的情况计算而得，在TLAB中分配的对象不需要加锁，因此JVM在给线程的对象分配内存时会尽量在TLAB中分配，性能和C性能差不多高效，如果对象过大，仍然直接在堆中分配。 **
-       3）TLAB仅作用于新生代的Eden Space，因此多个小对象比一个大对象高效。
-       4）新创建的对象总是被放在新生代中，如果在一次或者多次GC后活下来，就会被转移到老年代。
-4）方法区：1）在Sun JDK中对应着为永久带、持久带 ！！！
-           2）方法区存放了所加载类的信息（名称，修饰符等），类中的静态变量，类中定义为final类型的常量，类中的Field信息，类中的方法信息，当开发人员用Class对象的getname,isInterface等获取信息时，数据都来源于方法区，方法区也是**共享的**，在一定条件下，也会被GC，当方法区使用的内存超过其允许的大小，也会抛OutMemory异常。
-</code></pre>
-<h3 id="原因"><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><pre><code>JVM每遇到一个线程，都会为其分配一个程序计数器，VM stack 和本地方法栈，当线程终止时三者所使用的空间也被回收掉。
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://earyant.github.io/posts/java/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E5%87%86%E7%A1%AE%E6%8E%A8%E9%80%81%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/" class="post-title-link" itemprop="url">如何保证推送消息能够准确推送到客户端</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-18 09:52:39" itemprop="dateCreated datePublished" datetime="2017-07-18T09:52:39+08:00">2017-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-28 17:19:47" itemprop="dateModified" datetime="2021-09-28T17:19:47+08:00">2021-09-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="如何保证推送消息能够准确推送到客户端"><a href="#如何保证推送消息能够准确推送到客户端。" class="headerlink" title="如何保证推送消息能够准确推送到客户端。"></a>如何保证推送消息能够准确推送到客户端。</h1><h2 id="手机端"><a href="#手机端：" class="headerlink" title="手机端："></a>手机端：</h2><ul>
-<li>轮询方式获取消息。</li>
-<li>短信拦截模式。  发送短信通知消息，应用中的短信拦截模块拦截短信，并解析成数据。成本高。</li>
-<li>持久连接。</li>
-</ul>
-<p> 监听电量变化，网络变化，开关屏幕等等时候注册BroadCastReceiver来接收通知，接手后进行消息获取。<br> 有些ROM一旦用户kill掉主线程，就不会再投送广播消息给应用，导致应用无法启动，这是可以Fork一个进程,一旦发现主线程被杀，立即调用shell启动该Service（应用保活）</p>
-<h2 id="微服务间如何选择推送和拉取数据"><a href="#微服务间如何选择推送和拉取数据" class="headerlink" title="微服务间如何选择推送和拉取数据"></a>微服务间如何选择推送和拉取数据</h2><p>在消息系统中，一般有两种消费模式：生产端推送消息，消费主动拉取消息。</p>
-<h4 id="数据是动态的且实时性较强宜采用生产端推送"><a href="#数据是动态的，且实时性较强，宜采用生产端推送。" class="headerlink" title="数据是动态的，且实时性较强，宜采用生产端推送。"></a>数据是动态的，且实时性较强，宜采用生产端推送。</h4><p>   例如家长手机控制孩子手机使用，希望设置立即生效，家长端设置后由<strong>立即</strong>由中间系统进行通知。如果让消费端轮询查消息，不仅不能保证消息的实时性和准确性，而且系统也会造成一定的损耗，供应链系统也会被迫处理重复订单问题。<br>    如果把消息设置成实时推送也是不合适的，<strong>推送成不成功不应该作为设置成功的条件</strong>。设置功能和推送功能不应该是强关联的，就像发送验证码，服务器收到了发送验证码的功能请求后，异步交给验证码发送功能，返回给客户200成功，随后验证码发送功能进行异步通知，确保通知成功即可。</p>
-<h4 id="客户端长时间离线状态"><a href="#客户端长时间离线状态" class="headerlink" title="客户端长时间离线状态"></a>客户端长时间离线状态</h4><p>   客户端长时间离线状态（断网，没电等等），没办法推送过去，会暂存在一个暂存表中，等待客户端联网等监听广播事件进行主动获取，消息获取成功，就会把离线消息表里的消息转移到已发送的消息表中。（不在本表中将已发送的消息的字段置为已读，会影响查询速度。）</p>
-<h4 id="推送的优点"><a href="#推送的优点" class="headerlink" title="推送的优点"></a>推送的优点</h4><ul>
-<li>时效性高。</li>
-<li>服务器压力小。 相对比轮询拉取模式，每次推送都会有数据，有效避免了空轮询</li>
-<li>交互简单。 只需要提供推送接口就好了，不需要额外开销。</li>
-</ul>
-<h4 id="推送的缺点"><a href="#推送的缺点" class="headerlink" title="推送的缺点"></a>推送的缺点</h4><ul>
-<li>不能保证一定能推送成功。</li>
-<li>缺乏数据多样性，推送的消息一般都有固定的模板<br>####极光推送</li>
-<li>活跃用户的到达率在90%以上。轮询获取99%以上。</li>
-<li>并发情况下第三方服务的实时性不太理想。</li>
-</ul>
-<h4 id="自主研发的推送系统"><a href="#自主研发的推送系统" class="headerlink" title="自主研发的推送系统"></a>自主研发的推送系统</h4><ul>
-<li>对客户端的海量长连接的维护管理消耗太大。</li>
-<li>App端Service稳定性，保活。</li>
-<li>有些厂商不允许有push service存在。</li>
-</ul>
-<p>##自主研发的推送架构</p>
-<h3 id="架构方案类似"><a href="#架构方案类似：" class="headerlink" title="架构方案类似："></a>架构方案类似：</h3><p>   <img data-src="http://upload-images.jianshu.io/upload_images/1760830-e6fbb7ae6613b8ae?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>            （图片来自架构之美公众号，侵删）</p>
-<ul>
-<li>通过动态组合和扩展方式，结合移动Push推送数据分析，不同的手机使用不同的方案，针对性的优化，android平台中，融合多种不同的第三方推送PUSH平台，提高转化率。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1209,7 +1298,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1292,12 +1381,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">715k</span>
+    <span title="站点总字数">728k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:50</span>
+    <span title="站点阅读时长">11:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
