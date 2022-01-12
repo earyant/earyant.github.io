@@ -6,7 +6,7 @@
   <link href="http://earyant.github.io/atom.xml" rel="self"/>
   
   <link href="http://earyant.github.io/"/>
-  <updated>2022-01-12T10:52:09.000Z</updated>
+  <updated>2022-01-12T12:00:01.000Z</updated>
   <id>http://earyant.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>夕阳老奶奶</title>
+    <link href="http://earyant.github.io/posts/%E6%95%A3%E6%96%87%E8%AF%97/%E5%A4%95%E9%98%B3%E8%80%81%E5%A5%B6%E5%A5%B6/"/>
+    <id>http://earyant.github.io/posts/%E6%95%A3%E6%96%87%E8%AF%97/%E5%A4%95%E9%98%B3%E8%80%81%E5%A5%B6%E5%A5%B6/</id>
+    <published>2022-01-12T12:00:01.000Z</published>
+    <updated>2022-01-12T12:00:01.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>上杉达也</title>
@@ -351,25 +369,6 @@
     
     
     <summary type="html">&lt;h1 id=&quot;3-–-Types-of-Learning&quot;&gt;&lt;a href=&quot;#3-–-Types-of-Learning&quot; class=&quot;headerlink&quot; title=&quot;3 – Types of Learning&quot;&gt;&lt;/a&gt;3 – Types of Learning&lt;/h1&gt;&lt;p&gt;上节课我们主要介绍了解决线性分类问题的一个简单的方法：PLA。PLA能够在平面中选择一条直线将样本数据完全正确分类。而对于线性不可分的情况，可以使用Pocket Algorithm来处理。本节课将主要介绍一下机器学习有哪些种类，并进行归纳。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="机器学习基石" scheme="http://earyant.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/"/>
-    
-    
-    <category term="机器学习" scheme="http://earyant.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习基石-2</title>
-    <link href="http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-2/"/>
-    <id>http://earyant.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-2/</id>
-    <published>2021-09-26T13:20:37.000Z</published>
-    <updated>2021-09-27T09:12:36.354Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;2-–-Learning-to-Answer-Yes-No&quot;&gt;&lt;a href=&quot;#2-–-Learning-to-Answer-Yes-No&quot; class=&quot;headerlink&quot; title=&quot;2 – Learning to Answer Yes/No&quot;&gt;&lt;/a&gt;2 – Learning to Answer Yes/No&lt;/h1&gt;&lt;p&gt;上节课，我们主要简述了机器学习的定义及其重要性，并用流程图的形式介绍了机器学习的整个过程：根据模型H，使用演算法A，在训练样本D上进行训练，得到最好的h，其对应的g就是我们最后需要的机器学习的模型函数，一般g接近于目标函数f。本节课将继续深入探讨机器学习问题，介绍感知机Perceptron模型，并推导课程的第一个机器学习算法：Perceptron Learning Algorithm（PLA）。&lt;/p&gt;</summary>
     
     
     
