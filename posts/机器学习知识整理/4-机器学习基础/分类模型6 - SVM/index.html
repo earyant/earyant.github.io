@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="简介 基础准备 1. 线性可分 2. 最大间隔超平面 3. 什么是支持向量？ 4. SVM 能解决哪些问题？ 5. 支持向量机的分类   硬间隔 SVM 0. 几何间隔与函数间隔 1. SVM 最优化问题 2. 对偶问题 1. 拉格朗日乘数法 - 等式约束优化问题 2. 拉格朗日乘数法 - 不等式约束优化问题   3. 引入对偶问题 — TODO 4. SVM 优化 2. 软间隔SVM   3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分类模型1-SVM">
+<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B6%20-%20SVM/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="简介 基础准备 1. 线性可分 2. 最大间隔超平面 3. 什么是支持向量？ 4. SVM 能解决哪些问题？ 5. 支持向量机的分类   硬间隔 SVM 0. 几何间隔与函数间隔 1. SVM 最优化问题 2. 对偶问题 1. 拉格朗日乘数法 - 等式约束优化问题 2. 拉格朗日乘数法 - 不等式约束优化问题   3. 引入对偶问题 — TODO 4. SVM 优化 2. 软间隔SVM   3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/SVM/1.jpg">
+<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/SVM/2.jpg">
+<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/SVM/3.jpg">
+<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/10.svm.png">
+<meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="机器学习知识整理">
+<meta property="article:tag" content="机器学习基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/SVM/1.jpg">
+
+<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B6%20-%20SVM/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>分类模型1-SVM | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B6%20-%20SVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分类模型1-SVM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <!-- toc -->
+<ul>
+<li><a href="#简介">简介</a></li>
+<li><a href="#基础准备">基础准备</a><ul>
+<li><a href="#1-线性可分">1. 线性可分</a></li>
+<li><a href="#2-最大间隔超平面">2. 最大间隔超平面</a></li>
+<li><a href="#3-什么是支持向量">3. 什么是支持向量？</a></li>
+<li><a href="#4-svm-能解决哪些问题">4. SVM 能解决哪些问题？</a></li>
+<li><a href="#5-支持向量机的分类">5. 支持向量机的分类</a></li>
+</ul>
+</li>
+<li><a href="#硬间隔-svm">硬间隔 SVM</a><ul>
+<li><a href="#0-几何间隔与函数间隔">0. 几何间隔与函数间隔</a></li>
+<li><a href="#1-svm-最优化问题">1. SVM 最优化问题</a></li>
+<li><a href="#2-对偶问题">2. 对偶问题</a><ul>
+<li><a href="#1-拉格朗日乘数法-等式约束优化问题">1. 拉格朗日乘数法 - 等式约束优化问题</a></li>
+<li><a href="#2-拉格朗日乘数法-不等式约束优化问题">2. 拉格朗日乘数法 - 不等式约束优化问题</a></li>
+</ul>
+</li>
+<li><a href="#3-引入对偶问题-todo">3. 引入对偶问题 — TODO</a></li>
+<li><a href="#4-svm-优化">4. SVM 优化</a></li>
+<li><a href="#2-软间隔svm">2. 软间隔SVM</a></li>
+</ul>
+</li>
+<li><a href="#3-kernel-svm">3. Kernel SVM</a><ul>
+<li><a href="#1-思想">1. 思想</a></li>
+<li><a href="#2-核函数的作用">2. 核函数的作用</a></li>
+<li><a href="#2-常见核函数">2. 常见核函数</a></li>
+</ul>
+</li>
+<li><a href="#qa">QA</a><ul>
+<li><a href="#1-svm-中的支持向量是什么意思">1. SVM 中的支持向量是什么意思？</a></li>
+<li><a href="#2-什么是svm">2. 什么是SVM ？</a></li>
+<li><a href="#3-svm-为何采用间隔最大化">3. SVM 为何采用间隔最大化？</a></li>
+<li><a href="#4-为何要讲求解-svm-的原始问题转换为其对偶问题">4. 为何要讲求解 SVM 的原始问题转换为其对偶问题？</a></li>
+<li><a href="#5-svm-与-lr-的区别">5. SVM 与 LR 的区别</a></li>
+<li><a href="#6-svm如何处理多分类问题">6. SVM如何处理多分类问题？</a></li>
+<li><a href="#5-svm-软间隔与硬间隔表达式">5. SVM 软间隔与硬间隔表达式</a></li>
+<li><a href="#11-核函数的种类和应用场景">11. 核函数的种类和应用场景</a></li>
+<li><a href="#12-svm-损失函数是什么">12. SVM 损失函数是什么？</a></li>
+<li><a href="#13-核函数的作用是啥">13. 核函数的作用是啥？</a></li>
+<li><a href="#14-svm-为何能用对偶函数求解">14. SVM 为何能用对偶函数求解？</a></li>
+<li><a href="#15-svm-和全部数据有关还是和局部数据有关">15. SVM 和全部数据有关还是和局部数据有关?</a></li>
+<li><a href="#16-为什么高斯核能够拟合无穷维度">16. 为什么高斯核能够拟合无穷维度？</a></li>
+<li><a href="#17-lr-与-svm-的区别">17. LR 与 SVM 的区别？</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h2><span id="简介">简介</span></h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77750026">https://zhuanlan.zhihu.com/p/77750026</a></p>
+<p>SVM 三宝： <strong>间隔，对偶，核技巧</strong>。它属于<strong>判别模型</strong>。Support Vector Machine</p>
+<ul>
+<li><strong>支持向量：</strong>在求解的过程中，会发现只根据部分数据就可以确定分类器，这些数据称为支持向量。</li>
+<li><strong>支持向量机（SVM）</strong>：其含义是通过<strong>支持向量</strong>运算的分类器。</li>
+</ul>
+<p>SVM 是一种<strong>二分类模型</strong>， 它的目的是寻找一个超平面来对样本进行分割，分割的依据是<strong>间隔最大化</strong>，最终转化为一个<strong>凸二次规划问题</strong>来求解。</p>
+<h2><span id="基础准备">基础准备</span></h2><h3><span id="1-线性可分">1. 线性可分</span></h3><p>$D_0$ 和 $D_1$ 是 n 维空间中的两个点集， 如果存在 n 维向量 $w$ 和实数 $b$ ， 使得：</p>
+<script type="math/tex; mode=display">
+wx_i +b > 0; \quad x_i \in D_0 \\
+wx_j + b < 0; \quad x_j \in D_1</script><p>则称 $D_0$ 与 $D_1$ 线性可分。</p>
+<h3><span id="2-最大间隔超平面">2. 最大间隔超平面</span></h3><p>能够将 $D_0$  与 $D_1$ 完全正确分开的 $wx+b = 0$ 就成了一个超平面。</p>
+<p>为了使得这个超平面更具鲁棒性，我们会去找最佳超平面，以最大间隔把两类样本分开的超平面，也称之为<strong>最大间隔超平面</strong>。</p>
+<ul>
+<li>两类样本分别分割在该超平面的两侧</li>
+<li>两侧距离超平面最近的样本点到超平面的距离被最大化了</li>
+</ul>
+<h3><span id="3-什么是支持向量">3. 什么是支持向量？</span></h3><p><strong>训练数据集中与分离超平面距离最近的样本点成为支持向量</strong></p>
+<p><img data-src="..\img\SVM\1.jpg" alt="1"></p>
+<h3><span id="4-svm-能解决哪些问题">4. SVM 能解决哪些问题？</span></h3><ul>
+<li><p><strong>线性分类：</strong>对于n维数据，SVM 的目标是找到一个 n-1 维的最佳超平面来将数据分成两部分。 </p>
+<p>通过增加一个约束条件： <strong>要求这个超平面到每边最近数据点的距离是最大的。</strong></p>
+</li>
+<li><p><strong>非线性分类：</strong> SVM通过结合使用<strong>拉格朗日乘子法</strong>和KTT条件，以及<strong>核函数</strong>可以生产线性分类器</p>
+</li>
+</ul>
+<h3><span id="5-支持向量机的分类">5. 支持向量机的分类</span></h3><ul>
+<li><strong>硬间隔SVM（线性可分SVM)</strong>： 当训练数据可分时，通过间隔最大化，学习一个线性表分类器。</li>
+<li><strong>软间隔SVM(线性SVM)</strong>：当训练数据接近线性可分时，通过软间隔最大化，学习一个线性分类器。</li>
+<li><strong>Kernel SVM</strong>： 当训练数据线性不可分时，通过使用<strong>核技巧及软间隔最大化</strong>，学习非线性SVM。</li>
+</ul>
+<p>必会：硬间隔最大化 —&gt; 学习的对偶问题 —&gt; 软间隔最大化 —&gt; 非线性支持向量机（核技巧）</p>
+<h2><span id="硬间隔-svm">硬间隔 SVM</span></h2><h3><span id="0-几何间隔与函数间隔">0. 几何间隔与函数间隔</span></h3><h3><span id="1-svm-最优化问题">1. SVM 最优化问题</span></h3><p>任意分离超平面可定义为：</p>
+<script type="math/tex; mode=display">
+w^Tx + b = 0</script><p>二维空间中点 $(x,y)$ 到直线 $Ax + By + C=0$ 的距离公式为：</p>
+<script type="math/tex; mode=display">
+\frac{|Ax+ By + C}{\sqrt{A^2 + B^2}}</script><p>扩展到n维空间中，任意点 $x$  到超平面$w^Tx + b = 0$ 的距离为：</p>
+<script type="math/tex; mode=display">
+\frac{|w^Tx + b|}{||w||} \\
+||w|| = \sqrt{w_1^2 + ... + w_n^2}</script><p>假设，支持向量到超平面的距离为 $d$ ，那么就有：</p>
+<script type="math/tex; mode=display">
+\begin{cases} \frac{w^Tx_i + b}{||w||} \geq d, & y_i = +1 \\ \frac{w^Tx_i + b}{||w||} \leq -d, & y_i = -1 \end{cases}</script><p>稍作转化可得到：</p>
+<script type="math/tex; mode=display">
+\begin{cases} \frac{w^Tx_i + b}{||w||d} \geq 1, & y_i = +1 \\ \frac{w^Tx_i + b}{||w||d} \leq -1, & y_i = -1 \end{cases}</script><p>考虑到 $||w||d$ 为正数，我们暂且令它为 1（之所以令它等于 1，是为了方便推导和优化，且这样做对目标函数的优化没有影响）：</p>
+<script type="math/tex; mode=display">
+\begin{cases} w^Tx_i + b >= +1, & y_i = +1 \\ w^Tx_i + b <= -1, & y_i = -1 \end{cases}</script><p>两个方程合并，则有：</p>
+<script type="math/tex; mode=display">
+y_i (w^Tx_i + b) \geq 1</script><p>那么我们就得到了最大间隔超平面的上下两个超平面：</p>
+<p><img data-src="..\img\SVM\2.jpg" alt="2"></p>
+<p>两个异类超平面的公式分别为：</p>
+<script type="math/tex; mode=display">
+\begin{cases} w^Tx_i + b = +1, & y_i = +1 \\ w^Tx_i + b = -1, & y_i = -1 \end{cases}</script><p>那么两个异类超平面之间的间隔为：</p>
+<script type="math/tex; mode=display">
+\frac{2}{||w||}</script><p>我们的目的是最大化这种间隔：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+max \quad \frac{2}{||w||} &:= min \quad \frac{1}{2} ||w|| \\
+&:= min \quad \frac{1}{2} ||w||^2
+\end{align}</script><p>那么我们的最优化问题为：</p>
+<script type="math/tex; mode=display">
+min \quad \frac{1}{2} ||w||^2 \quad \\ st. y_i(w^Tx_i + b) \geq 1</script><h3><span id="2-对偶问题">2. 对偶问题</span></h3><h4><span id="1-拉格朗日乘数法-等式约束优化问题">1. 拉格朗日乘数法 - 等式约束优化问题</span></h4><p>高等数学中，其等式约束优化问题为：</p>
+<script type="math/tex; mode=display">
+min \, f(x_1, ..., x_n) \quad  st. \quad h_k(x_1, ... , x_n) = 0</script><p>那么令：</p>
+<script type="math/tex; mode=display">
+L(x, \lambda) = f(x) + \sum_{k=1}^l \lambda_k h_k(x)</script><ul>
+<li>$L(x, \lambda)$ ： Lagrange 函数</li>
+<li>$\lambda$ ： Lagrange 乘子，没有非负要求</li>
+</ul>
+<p>利用必要条件找到可能的极值点，我们得到如下的方程组：</p>
+<script type="math/tex; mode=display">
+\begin{cases} 
+\frac{\delta L}{ \delta x_i} = 0, & i=1,2,...,n \\ 
+\frac{\delta L}{ \delta \lambda_k} = 0, & k=1,2,...,l
+\end{cases}</script><p>等式约束下的Lagrange 乘数法引入了 $l$ 个 Lagrange 乘子，我们将 $x_i$ 与 $\lambda_k$ 一视同仁，将$\lambda_k$ 也看做优化变量，那么共有 $(n+l)$ 个优化变量。</p>
+<h4><span id="2-拉格朗日乘数法-不等式约束优化问题">2. 拉格朗日乘数法 - 不等式约束优化问题</span></h4><p>对于不等式约束优化问题，其主要思想在于<strong>将不等式约束条件转变为等式约束条件，引入松弛变量，将松弛变量也是为优化变量。</strong></p>
+<p><img data-src="..\img\SVM\3.jpg" alt="3"></p>
+<p>对于我们的问题：</p>
+<script type="math/tex; mode=display">
+min \quad \frac{1}{2} ||w||^2 \quad \\ st. \quad  g_i(w) = 1- y_i(w^Tx_i + b) \leq 0</script><p>引入松弛变量 $a_i^2$ 得到：</p>
+<script type="math/tex; mode=display">
+f(w) =  \frac{1}{2} ||w||^2 \\
+g_i(w) = 1- y_i(w^Tx_i + b)  \\
+h_i(w, a_i) = g_i(w) + a_i^2 = 0</script><p>这里加平方主要为了不再引入新的约束条件，如果只引入 $a_i$ 那我们必须要保证 $a_i \geq 0$ 才能保证 $h_i(w, a_i)$ ，这不符合我们的意愿。</p>
+<p>此时，我们就将不等式约束转化为等式约束，并得到 Lagrange 函数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(w, \lambda, a) &= \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i h_i(w) \\
+&= \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i [g_i(w) + a_i^2] \quad \lambda_i \geq 0
+\end{align}</script><p>那么我们得到方程组有：</p>
+<script type="math/tex; mode=display">
+\begin{cases} 
+\frac{\delta L}{ \delta w_i} =\frac{\delta f}{\delta w_i} + \sum_{i=1}^n \lambda_i \frac{\delta g_i}{\delta w_i} =0 \\ 
+\frac{\delta L}{ \delta a_i} = 2 \lambda_i a_i =0 \\
+\frac{\delta L}{ \delta \lambda_i}=g_i(w) + a_i^2 = 0 \\
+\lambda_i \geq 0  \qquad ？ 需要看一看
+\end{cases}</script><p>针对 $\lambda_i a_i = 0$ 有两种情况：</p>
+<ul>
+<li><p>$\lambda_i = 0, a_i \neq 0$：此时约束条件 $g_i(w)$ 不起作用且 $g_i(w) &lt; 0$ </p>
+</li>
+<li><p>$\lambda_i \neq 0, a_i = 0$： 此时 $g_i(w)=0, \lambda_i &gt; 0$， 可以理解为约束条件 $g_i(w)$ 起作用了， 且$g_i(w) = 0$</p>
+</li>
+</ul>
+<p>综合可得：$\lambda_ig_i(w) = 0$， 且在约束条件起作用时 $\lambda_i &gt; 0, g_i(w) = 0 $； 约束不起作用时， $\lambda_i = 0, g_i(w) &lt; 0 $。</p>
+<p>此时，方程组转化为：</p>
+<script type="math/tex; mode=display">
+\begin{cases} 
+\frac{\delta L}{ \delta w_i} =\frac{\delta f}{\delta w_i} + \sum_{i=j}^n \lambda_j \frac{\delta g_i}{\delta w_i} =0 \\ 
+\lambda_ig_i(w) = 0 \\
+g_i(w) \leq 0 \\
+\lambda_i \geq 0
+\end{cases}</script><p>以上便是不等式约束优化优化问题的 <strong>KKT(Karush-Kuhn-Tucker) 条件</strong>， $\lambda_i$ 称为 KKT 乘子。</p>
+<p>KTT 条件中，对于不同样本点来说</p>
+<ul>
+<li>支持向量 $g_i(w) = 0$， 此时 $\lambda_i &gt; 0$ 即可</li>
+<li>其余向量 $g_i(w) &lt; 0$， 此时 $\lambda_i = 0$</li>
+</ul>
+<p>回到原优化问题中：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(w, \lambda, a) &= \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i h_i(w) \\
+&= \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i [g_i(w) + a_i^2] \\
+&= \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i g_i(w) + \sum_{i=1}^n \lambda_i a_i^2
+\end{align}</script><p>由于 $\sum_{i=1}^n \lambda_ia_i^2 \geq 0$， 那么问题可以转化为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(w, \lambda) &=  \frac{1}{2} f(w) + \sum_{i=1}^n \lambda_i g_i(w) \\
+&=  \frac{1}{2} ||w||^2 + \sum_{i=1}^n \lambda_i (1- y_i(w^Tx_i + b) )
+\end{align}</script><p>假设我们找到了最佳的参数 $w$ 使得 $\frac{1}{2} ||w||^2 = p$ ，又因为 $\sum_{i=1}^n \lambda_i (1- y_i(w^Tx + b) ) \leq 0$， 因此有 $L(w, \lambda) \leq p$， 我们需要找到最佳的参数 $\lambda$， 使得 $L(w, \lambda)$ 接近 p， 此时问题转化为：</p>
+<script type="math/tex; mode=display">
+min_wmax_{\lambda} \, L(w, \lambda) \quad \\ s.t. \quad \lambda_i \geq 0</script><h3><span id="3-引入对偶问题-todo">3. 引入对偶问题 — TODO</span></h3><ul>
+<li><p>弱对偶性： 最大的里面挑出来的最小的也要比最小的里面挑出来的最大的要大</p>
+<script type="math/tex; mode=display">
+min \, max \, f \geq max \, min \, f</script></li>
+<li><p>强对偶性：KKT 条件是强对偶性的充要条件。</p>
+</li>
+</ul>
+<h3><span id="4-svm-优化">4. SVM 优化</span></h3><ul>
+<li>SVM 的优化问题为：<script type="math/tex; mode=display">
+min \quad \frac{1}{2} ||w||^2 \quad \\ st. \quad  g_i(w) = 1- y_i(w^Tx_i + b) \leq 0</script></li>
+</ul>
+<ul>
+<li><p>构造拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+min_{w,b}max_{\lambda} L(w, b, \lambda) = \frac{1}{2} ||w||^2 + \sum_{i=1}^n \lambda_i (1- y_i(w^Tx_i + b) ) \\
+s.t. \lambda_i \geq 0</script></li>
+<li><p>利用强对偶性转化：</p>
+<script type="math/tex; mode=display">
+max_{\lambda}min_{w,b} \, L(w, b, \lambda)</script><p>对参数 $w, b$ 求偏导有：</p>
+<script type="math/tex; mode=display">
+\frac{\delta L}{\delta w} = w - \sum_{i=1}^n \lambda_i x_i y_i = 0 \\
+\frac{\delta L}{\delta b} = \sum_{i=1}^n \lambda_i y_i = 0</script><p>得到：</p>
+<script type="math/tex; mode=display">
+w =  \sum_{i=1}^n \lambda_i x_i y_i \\
+\sum_{i=1}^n \lambda_i y_i = 0</script><p>将两式带入到 $L(w, b, \lambda)$ 中有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+min_{w,b} \, L(w, b, \lambda) &=\sum_{j=1}^n \lambda_i - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n \lambda_i \lambda_j y_i y_j x_i^Tx_j
+\end{align}</script></li>
+<li><p>求解模型：</p>
+</li>
+</ul>
+<h3><span id="2-软间隔svm">2. 软间隔SVM</span></h3><p>软间隔允许部分样本点不满足约束条件：</p>
+<script type="math/tex; mode=display">
+1 - y_i (w^Tx_i + b) \leq 0</script><h2><span id="3-kernel-svm">3. Kernel SVM</span></h2><h3><span id="1-思想">1. 思想</span></h3><p><strong>对于在有限维度向量空间中线性不可分的样本，我们将其映射到更高维度的向量空间里，再通过间隔最大化的方式，学习得到支持向量机，就是非线性 SVM。</strong></p>
+<p>用 x 表示原来的样本点，用 $\phi(x)$ 表示 x 映射到新特征空间后的新向量。那么分割超平面可以表示为：</p>
+<script type="math/tex; mode=display">
+f(x) = w \phi (x) + b</script><p>此时，非线性 SVM 的对偶问题转化为：</p>
+<script type="math/tex; mode=display">
+min_{\lambda} [\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^n  ]</script><h3><span id="2-核函数的作用">2. 核函数的作用</span></h3><ul>
+<li>目的： 将原坐标系中线性不可分数据通过核函数映射到另一空间，尽量使数据在新的空间里线性可分。</li>
+</ul>
+<h3><span id="2-常见核函数">2. 常见核函数</span></h3><ul>
+<li>线性核函数：<script type="math/tex; mode=display">
+K(x_i, x_j)</script></li>
+</ul>
+<h2><span id="qa">QA</span></h2><h3><span id="1-svm-中的支持向量是什么意思">1. SVM 中的支持向量是什么意思？</span></h3><p><img data-src="..\img\10.svm.png" alt="10.svm"></p>
+<p> 如上图所示，我们在获得分离超平面时，并非所有的点都对分离超平面的位置起决定作用。</p>
+<p>其实在特别远的区域，哪怕你增加10000个样本点，对于超平面的位置，也是没有作用的，因为分割线是由几个关键点决定的（图上三个），这几个关键点支撑起了一个分离超平面，所以这些关键点，就是<strong>支持向量</strong>。</p>
+<h3><span id="2-什么是svm">2.  什么是SVM ？</span></h3><p>SVM 是一种二类分类模型。它的基本思想是在特征空间中寻找间隔最大的分离超平面使数据得到高效的二分类， 主要分三种情况：</p>
+<ul>
+<li>当训练样本线性可分时，通过硬间隔最大化，学习一个线性分类器，即线性可分支持向量机；</li>
+<li>当训练数据近似线性可分时，引入松弛变量，通过软间隔最大化，学习一个线性分类器，即线性支持向量机</li>
+<li>当训练数据线性不可分时，通过使用核技巧及软间隔最大化，学习非线性支持向量机。</li>
+</ul>
+<h3><span id="3-svm-为何采用间隔最大化">3. SVM 为何采用间隔最大化？</span></h3><p>当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。</p>
+<ul>
+<li>感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。</li>
+<li>线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。</li>
+</ul>
+<p>SVM 求得的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。</p>
+<h3><span id="4-为何要讲求解-svm-的原始问题转换为其对偶问题">4. 为何要讲求解 SVM 的原始问题转换为其对偶问题？</span></h3><ul>
+<li><p>对偶问题往往更易求解</p>
+<p>当我们寻找约束存在时的最优点的时候，约束的存在虽然减小了需要搜寻的范围，但是却使问题变得更加复杂。为了使问题变得易于处理，我们的方法是把目标函数和约束全部融入一个新的函数，即拉格朗日函数，再通过这个函数来寻找最优点。</p>
+</li>
+<li><p>自然引入核函数，进而推广到非线性分类问题</p>
+</li>
+</ul>
+<h3><span id="5-svm-与-lr-的区别">5. SVM 与 LR 的区别</span></h3><ul>
+<li>LR是参数模型，SVM为非参数模型。</li>
+<li>LR采用的损失函数为logisticalloss，而SVM采用的是hingeloss。</li>
+<li>在学习分类器的时候，SVM只考虑与分类最相关的少数支持向量点。</li>
+<li>LR的模型相对简单，在进行大规模线性分类时比较方便。</li>
+</ul>
+<h3><span id="6-svm如何处理多分类问题">6. SVM如何处理多分类问题？</span></h3><ul>
+<li>直接法：直接在目标函数上修改，将多个分类面的参数求解合并到一个最优化问题里面。看似简单但是计算量却非常的大。</li>
+<li>间接法：对训练器进行组合。其中比较典型的有一对一，和一对多。</li>
+</ul>
+<p>一对多： 对每个类都训练出一个分类器，由svm是二分类，所以将此而分类器的两类设定为目标类为一类，其余类为另外一类。这样针对k个类可以训练出k个分类器，当有一个新的样本来的时候，用这k个分类器来测试，那个分类器的概率高，那么这个样本就属于哪一类。这种方法效果不太好，bias 比较高。</p>
+<p>一对一： 针对任意两个类训练出一个分类器，如果有 k 类，一共训练出 $C_k^2$ 个分类器，这样当有一个新的样本要来的时候，用这 $C_k^2$ 个分类器来测试，每当被判定属于某一类的时候，该类就加一，最后票数最多的类别被认定为该样本的类。</p>
+<h3><span id="5-svm-软间隔与硬间隔表达式">5. SVM 软间隔与硬间隔表达式</span></h3><ul>
+<li><p>硬间隔：</p>
+<script type="math/tex; mode=display">
+min_{w,b} \frac{1}{2} ||w||^2 \qquad st. \quad y^{(i)}(w^Tx^{(i)} + b) \geq 1</script></li>
+<li><p>软间隔：</p>
+<script type="math/tex; mode=display">
+min_{w,b} \frac{1}{2} ||w||^2 + C \sum_{i=1}^m \xi_i  \qquad st. \quad y^{(i)}(w^Tx^{(i)} + b) \geq 1 \quad \xi_i \geq 0</script></li>
+</ul>
+<h3><span id="11-核函数的种类和应用场景">11. 核函数的种类和应用场景</span></h3><ul>
+<li>线性核函数：主要用于线性可分的情形。参数少，速度快。</li>
+<li>多项式核函数：</li>
+<li>高斯核函数：主要用于线性不可分的情形。参数多，分类结果非常依赖于参数。</li>
+<li>sigmoid 核函数：</li>
+<li>拉普拉斯核函数：</li>
+</ul>
+<p>如果feature数量很大，跟样本数量差不多，建议使用LR或者 Linear kernel 的SVM。<br>如果 feature 数量较少，样本数量一般，建议使用 Gaussian Kernel 的SVM。</p>
+<h3><span id="12-svm-损失函数是什么">12. SVM 损失函数是什么？</span></h3><script type="math/tex; mode=display">
+J(\theta) = \frac{1}{2} ||\theta||^2 + C \sum_i max(0, 1-y_i(\theta^Tx_i + b))</script><h3><span id="13-核函数的作用是啥">13. 核函数的作用是啥？</span></h3><p>核函数能够将特征从低维空间映射到高维空间， 这个映射可以把低维空间中不可分的两类点变成线性可分的。</p>
+<h3><span id="14-svm-为何能用对偶函数求解">14. SVM 为何能用对偶函数求解？</span></h3><p>对偶将原始问题中的约束转为了对偶问题中的等式约束， 而且更加方便了核函数的引入， 同时也改变了问题的复杂度， 在原始问题下， 求解问题的复杂度只与样本的维度有关， 在对偶问题下， 只与样本的数量有关。</p>
+<h3><span id="15-svm-和全部数据有关还是和局部数据有关">15. SVM 和全部数据有关还是和局部数据有关?</span></h3><p>SVM 只和分类界限上的支持向量点有关， 换而言之只和局部数据有关。</p>
+<h3><span id="16-为什么高斯核能够拟合无穷维度">16. 为什么高斯核能够拟合无穷维度？</span></h3><p>因为将泰勒展开式代入高斯核，将会得到一个无穷维度的映射。</p>
+<h3><span id="17-lr-与-svm-的区别">17. LR 与 SVM 的区别？</span></h3><ul>
+<li>LR是参数模型，SVM是非参数模型</li>
+<li>从目标函数来看，区别在于逻辑回归采用的是logistical loss，SVM采用的是hinge loss。这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。</li>
+<li>SVM的处理方法是只考虑支持向量，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过<strong>非线性映射</strong>，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。</li>
+<li>逻辑回归相对来说模型更简单，好理解，特别是大规模线性分类时比较方便。而SVM的理解和优化相对来说复杂一些，SVM转化为对偶问题后，分类只需要计算与少数几个支持向量的距离，这个在进行复杂核函数计算时优势很明显，能够大大简化模型和计算。</li>
+<li>logic 能做的 svm能做，但可能在准确率上有问题，svm能做的logic有的做不了。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" rel="tag"># 机器学习知识整理</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" rel="tag"># 机器学习基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B1%20-%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="prev" title="回归模型1-线性回归">
+      <i class="fa fa-chevron-left"></i> 回归模型1-线性回归
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B5%20-%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="next" title="分类模型1-随机森林">
+      分类模型1-随机森林 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">基础准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">1. 线性可分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">2. 最大间隔超平面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">3. 什么是支持向量？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">4. SVM 能解决哪些问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.5.</span> <span class="nav-text">5. 支持向量机的分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">硬间隔 SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">0. 几何间隔与函数间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">1. SVM 最优化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">2. 对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">3.3.1.</span> <span class="nav-text">1. 拉格朗日乘数法 - 等式约束优化问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">3.3.2.</span> <span class="nav-text">2. 拉格朗日乘数法 - 不等式约束优化问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">3. 引入对偶问题 — TODO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">4. SVM 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.6.</span> <span class="nav-text">2. 软间隔SVM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">3. Kernel SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">1. 思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">2. 核函数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">2. 常见核函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">QA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">1. SVM 中的支持向量是什么意思？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">2.  什么是SVM ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">3. SVM 为何采用间隔最大化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">4. 为何要讲求解 SVM 的原始问题转换为其对偶问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.5.</span> <span class="nav-text">5. SVM 与 LR 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.6.</span> <span class="nav-text">6. SVM如何处理多分类问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.7.</span> <span class="nav-text">5. SVM 软间隔与硬间隔表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.8.</span> <span class="nav-text">11. 核函数的种类和应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.9.</span> <span class="nav-text">12. SVM 损失函数是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.10.</span> <span class="nav-text">13. 核函数的作用是啥？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.11.</span> <span class="nav-text">14. SVM 为何能用对偶函数求解？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.12.</span> <span class="nav-text">15. SVM 和全部数据有关还是和局部数据有关?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.13.</span> <span class="nav-text">16. 为什么高斯核能够拟合无穷维度？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.14.</span> <span class="nav-text">17. LR 与 SVM 的区别？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : 'c3b0fb5267680f7362393bd31c1e8e40',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

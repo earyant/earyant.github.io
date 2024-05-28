@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="简述九型人格，又被称为“性格型态学”，它包括活跃程度；规律性；感兴趣的范围；反应的强度；心理的素质；分心程度；专注力范围&#x2F;持久性。  九型人格是一个近年来倍受美国斯坦福大学等国际知名大学MBA学员推崇并成为现今最热门的课程之一，近十几年来已风行欧美学术界及工商界。全球500强企业的管理阶层均有研习九型性格，并以此培训员工，建立团队，提高执行力。九型人格作为一个人格心理学理论在当前社会还未被主流心理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九型人格">
+<meta property="og:url" content="http://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="简述九型人格，又被称为“性格型态学”，它包括活跃程度；规律性；感兴趣的范围；反应的强度；心理的素质；分心程度；专注力范围&#x2F;持久性。  九型人格是一个近年来倍受美国斯坦福大学等国际知名大学MBA学员推崇并成为现今最热门的课程之一，近十几年来已风行欧美学术界及工商界。全球500强企业的管理阶层均有研习九型性格，并以此培训员工，建立团队，提高执行力。九型人格作为一个人格心理学理论在当前社会还未被主流心理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/format,f_auto.jpeg">
+<meta property="article:published_time" content="2023-08-15T10:54:54.000Z">
+<meta property="article:modified_time" content="2023-08-15T10:54:54.000Z">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/format,f_auto.jpeg">
+
+<link rel="canonical" href="http://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>九型人格 | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九型人格
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-15 18:54:54" itemprop="dateCreated datePublished" datetime="2023-08-15T18:54:54+08:00">2023-08-15</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <h2><span id="简述">简述</span></h2><p>九型人格，又被称为“性格型态学”，它包括活跃程度；规律性；感兴趣的范围；反应的强度；心理的素质；分心程度；专注力范围/持久性。</p>
+<blockquote>
+<p>九型人格是一个近年来倍受美国斯坦福大学等国际知名大学MBA学员推崇并成为现今最热门的课程之一，近十几年来已风行欧美学术界及工商界。全球500强企业的管理阶层均有研习九型性格，并以此培训员工，建立团队，提高执行力。九型人格作为一个人格心理学理论在当前社会还未被主流心理学界认可。<br>九型人格不仅仅是一种精妙的性格分析工具，更主要的是为个人修养、自我提升和历练提供更深入的洞察力。与当今其它性格分类法不同，九型人格揭示了人们内在最深层的价值观和注意力焦点，它不受表面的外在行为的变化所影响。它可以让人真正地知己知彼；可以帮助人们明白自己的个性，从而完全接纳自己的短处、活出自己的长处；可以让人明白其它不同人的个性类型，从而懂得如何与不同的人交往沟通及融洽相处，与别人建立更真挚、和谐的合作伙伴关系。<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/9222652?fr=ge_ala">定义详见百度百科</a></p>
+</blockquote>
+<p>该性格分法不同于mbti，他更注重内心感知事物的注意力在哪、价值观如何。mbti更注重的是思考的方式，如何获取信息、思考信息、感知信息、产出结论；</p>
+<h3><span id="九型人格能够带来什么">九型人格能够带来什么？</span></h3><p>九型人格论是一门讲求实践效益的学科，属人格心理学范畴，是应用心理学中的一种，其应用范围广泛，有助于个人成长、企业管理及人际沟通和关系处理，特别适于企事业单位在人员招聘、组织构建、团队沟通过程中，作为评价人员性格的工具，更扩展至夫妻相处、子女教育及亲子关系等方方面面。九型人格论把人格清晰简洁的分成九种类型，每种类型都有其鲜明的人格特征。九型人格论所描述的九种人格类型，并没有好坏之别，只不过不同类型的人回应世界的方式具有可被辨识的根本差异。九型人格是一张详尽描绘人类性格特征的活地图，是一件与人沟通、有效交流的利器！</p>
+<h2><span id="注意力区域划分">注意力区域划分</span></h2><p>凯伦-韦布的区域划分（三大直觉中心）<br>腹中心：8 9 1，或者称为生存（行为模式）中心，以<strong>身体力行</strong>为导向，对生存的问题直觉最强。<br>脑中心：5 6 7，或者称为资讯（思维模式）中心，以<strong>思考和分析</strong>为导向，对现实事物的运动现象直觉最强。<br>心中心：2 3 4，或者称为情感（情绪模式）中心，以<strong>感受和想象</strong>为导向，对人情和环境的气氛直觉最强。</p>
+<h2><span id="价值观划分">价值观划分</span></h2><p>九型人格与当今各种性格分类法的最大区别在于，九型性格揭示了人们内在最深层的价值观和注意力焦点，它不受表面的外在行为的变化所影响：</p>
+<ul>
+<li>深入观察发现“我是谁”</li>
+<li>你的思维模式及怎样影响你的决策</li>
+<li>你的价值取向及怎样影响你的事业</li>
+<li>你的情绪反应及怎样影响你的人际</li>
+<li>你的行为方式及怎样影响你成长</li>
+<li>你个性的优势与局限</li>
+<li>你在事业发展中的个性障碍及突破的方向</li>
+<li>你在人际关系中的个性冲突及改善的技巧</li>
+<li>你在亲密关系中的个性困扰及解决的方法</li>
+</ul>
+<h2><span id="障碍种类及表现"><strong>障碍种类及表现</strong></span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>障碍种类</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>偏执型人格障碍</td>
+<td>以猜忌和偏执为主要特点。表现出一般性猜疑，不信赖或者疑惑他人，过分警戒与防守;强烈地意识到自己的主要性，有将四周发生的事件说明为“诡计”、不合乎事实的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/先占观念/53288499?fromModule=lemma_inlink">先占观念</a>;过火自信，以为自己准确，将挫折和失败归罪于他人;容易发生病感性嫉妒;对挫折和谢绝特别敏感，不能体谅别人，长期耿耿于怀，常与人发生争执或沉湎于诉讼，人际关系不良。</td>
+</tr>
+<tr>
+<td>决裂型人格障碍</td>
+<td>以观点、外貌和行动独特，人际关联有显明缺点和感情冷漠为重要特色。对喜事缺乏高兴感，对人冷淡，对生涯缺少热忱和兴致，孤单古怪，缺乏知音，刚愎自用，很少与人交往，因而也较少与人产生抵触。</td>
+</tr>
+<tr>
+<td>冲动型人格障碍</td>
+<td>又称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/暴发型/53721216?fromModule=lemma_inlink">暴发型</a>或袭击型的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/人格障碍/3169525?fromModule=lemma_inlink">人格障碍</a>。以行为和情绪存在显著的激动性为主要特点。发生不预兆，不考虑成果，不能自控，易与他人发生矛盾。发生之后能意识错误，间歇期普通表现畸形。患者<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/心理发育/55475381?fromModule=lemma_inlink">心理发育</a>不成熟，断定剖析能力差,惯用和少用的内感官，轻易被人教唆鼓动，对他人和社会表现出敌意、攻打和损坏行为。</td>
+</tr>
+<tr>
+<td>依赖型人格障碍</td>
+<td>又称之为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/艺术型/12612783?fromModule=lemma_inlink">艺术型</a>人格障碍。主要特点是极度依赖他人。他们固然有较好的工作能力，但因为缺乏自信念，缺乏独破能力，遇事没有主意，事事依赖别人。自以为笨拙，对别人的看法从不反驳，对长辈和上级驯如绵羊，对配偶也是唯命是从,理智型的个性特质。生活中的大事，好比抉择职业、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/找对象/4579901?fromModule=lemma_inlink">找对象</a>等，老是依附别人来替他作出决议或指出方向</td>
+</tr>
+<tr>
+<td>癔症型人格障碍</td>
+<td>又称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/表演型人格障碍/112521?fromModule=lemma_inlink">表演型人格障碍</a>。好情感用事，名义上显得热情、讨人爱好，但缺乏真挚，易变而成熟。行为特点是大吹大擂，矫揉造作。他们盼望本人的言行能引起别人的关注，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/虚荣心/1436076?fromModule=lemma_inlink">虚荣心</a>强，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/自我核心/22324286?fromModule=lemma_inlink">自我核心</a>，自我放荡，常对小事<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/情感反映/3921313?fromModule=lemma_inlink">情感反映</a>过于强烈，有时无故发性格。他们的请求特殊多，依附性强，总愿望得到别人的照料，而很少为别人着想。他们的生活，有时就如戏剧个别，追求刺激，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/暗示性/10576569?fromModule=lemma_inlink">暗示性</a>强。</td>
+</tr>
+<tr>
+<td>逼迫型人格障碍</td>
+<td>以要求严厉和完美为主要特点。有以下表现：<strong>1.不断定感</strong>。仿佛觉得所面对的世界不肯定，偶尔和意外的事件太多，应用自己制订的“法则”来加以抗衡，拘泥于情势、规矩、次序，做事安分守己、墨守成规，刻板执拗，不能随机应变，有僵化的特别作风。常喜欢计数，偏好对称，有巫术偏向,和平型，把偶尔的表面景象与自己的利弊相接洽。<strong>2.不保险感</strong>。做事过于细心谨严,重复检讨核查,唯恐忽视和错误，为了平安不惜就义效力跟经济。自我猜忌有无才能、念头是否纯粹等。遇事就心境缓和，总象面临重大考验似的。<strong>3.寻求完善</strong>。追求美中不足，对己斥责求全，求全责备，但又缺乏自负。</td>
+</tr>
+<tr>
+<td>反社会型人格障碍</td>
+<td>亦称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/悖德型人格障碍/7230206?fromModule=lemma_inlink">悖德型人格障碍</a>。其最明显的行为特点是疏忽社会<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/道德标准/862443?fromModule=lemma_inlink">道德标准</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/行为准则/3986118?fromModule=lemma_inlink">行为准则</a>和任务，没有恻隐同情之心，对他人的感触不闻不问。这种人的智力发育良好但<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/易激惹/10456854?fromModule=lemma_inlink">易激惹</a>，常发生冲动<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/性行为/1282989?fromModule=lemma_inlink">性行为</a>;即便给别人造成苦楚，也很少感内疚，缺乏罪反感;因此常发生不负义务的行为，甚至是守法乱纪的行为，虽屡受处分，也不易接受教训，屡教不改。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/临床表现/9731119?fromModule=lemma_inlink">临床表现</a>的中心是缺乏自我把持能力。</td>
+</tr>
+<tr>
+<td>自恋型人格障碍</td>
+<td>这种人主要表示为过份地自我关怀、自诩自尊。比方自认为是了不起的人物，夸张自己的成绩、能力与外貌。往往异想天开，沉沦于空想之中。平时好出风头，喜欢得到别人的留神和称颂,环境保护的挑战。不能接收别人的倡议和批驳，从不斟酌别人的好处，要求别人都按自己的志愿去做，对人对事不能辩证地看，讨论人时很极端。不能替别人着想，不懂得别人的难处和苦衷。</td>
+</tr>
+<tr>
+<td>躲避型人格障碍</td>
+<td>特点是行为退缩、心理自大，面对挑衅多采用回避立场或无能敷衍。不敢深刻到自己心灵的内部去，他们的回避带有强制性、盲目性和非理智性等特点。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img data-src="./format,f_auto.jpeg" alt="九型人格性格"></p>
+<h2><span id="性格演变路线">性格演变路线</span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>美德</th>
+<th>原罪</th>
+<th>性格惯性</th>
+<th>破解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平静</td>
+<td>愤怒</td>
+<td>批判</td>
+<td>耐性</td>
+</tr>
+<tr>
+<td>谦卑</td>
+<td>骄傲</td>
+<td>服务</td>
+<td>爱己如人</td>
+</tr>
+<tr>
+<td>诚实</td>
+<td>虚假</td>
+<td>修饰</td>
+<td>不做作</td>
+</tr>
+<tr>
+<td>自在</td>
+<td>嫉妒</td>
+<td>幻想</td>
+<td>自制力</td>
+</tr>
+<tr>
+<td>放下</td>
+<td>贪心</td>
+<td>偏执</td>
+<td>分享</td>
+</tr>
+<tr>
+<td>勇气</td>
+<td>恐惧</td>
+<td>怀疑</td>
+<td>相信</td>
+</tr>
+<tr>
+<td>节制</td>
+<td>贪吃</td>
+<td>乐观</td>
+<td>承受</td>
+</tr>
+<tr>
+<td>纯真</td>
+<td>欲望</td>
+<td>政府</td>
+<td>同理心</td>
+</tr>
+<tr>
+<td>行动</td>
+<td>懒惰</td>
+<td>传统</td>
+<td>独立</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="预期期望">预期期望</span></h2><p>九型人格中<strong>第一型</strong>会要求<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/自我控制/1810124?fromModule=lemma_inlink">自我控制</a>、合理、规律，并且延迟奖励的能力，他们的孩子是一个小成年人。</p>
+<p>九型人格中<strong>第二型</strong>会要求宽厚、有思想、有用，并且注意他人，他们的孩子是一个小帮手。</p>
+<p>九型人格中<strong>第三型</strong>会要求处事卓越，履行家庭的希望，外型完美，并且非常受欢迎，他们的孩子是一个小的明星。</p>
+<p>九型人格中<strong>第四型</strong>会要求敏感、艺术的创造性，情感深度和了解，他们的孩子是一位小治疗师。</p>
+<p>九型人格中<strong>第五型</strong>会要求独立、用功、聪颖和有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/求知欲/3240264?fromModule=lemma_inlink">求知欲</a>，他们的孩子是一个小天才。</p>
+<p>九型人格中<strong>第六型</strong>会要求可靠、守纪律、坚持不懈并且可信赖，他们的孩子是一位忠于工作信念的人。</p>
+<p>九型人格中<strong>第七型</strong>会要求生命力、幽默、韧性和自然，他们的孩子是一位小艺人。</p>
+<p>九型人格中<strong>第八型</strong>会要坚强的、自给自足、勇气和自我克制力，他们的孩子是一位小企业家。</p>
+<p>九型人格中<strong>第九型</strong>会要求安静、压抑要求、温和并且不要求，他们的孩子是一个小天使。</p>
+<p>孩子的求知欲往往使父母惊奇，支持儿童以自己的方式去展开未来。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/亲子关系/17644287?fromModule=lemma_inlink">亲子关系</a>中只有一件事是肯定的，孩子将显现出意想不到的能力和处事方式如果父母设法阻拦儿童自然的开展，孩子将不会成功，仅会成为扭曲的人或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/神经病/183922?fromModule=lemma_inlink">神经病</a>患者。父母必须<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/观察儿童/4510870?fromModule=lemma_inlink">观察儿童</a>的类型，并且以儿童所属型号的最佳发展来与他相处，而不是意图去改变他们。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B9%9D%E5%9E%8B%E4%BA%BA%E6%A0%BC/9222652?fr=ge_ala#6_3">参考百度百科</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42827329?from=groupmessage">参考知乎</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E5%BF%83%E7%90%86%E5%AD%A6/mbti%E4%B8%8D%E5%90%8C%E4%BA%BA%E6%A0%BC%E7%9A%84%E5%8E%86%E5%8F%B2%E4%BA%BA%E7%89%A9%E9%9B%86%E5%90%88/" rel="prev" title="mbti不同人格的历史人物集合">
+      <i class="fa fa-chevron-left"></i> mbti不同人格的历史人物集合
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E9%87%91%E5%8F%A5%E6%91%98%E6%8A%84/" rel="next" title="金句摘抄">
+      金句摘抄 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">九型人格能够带来什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">注意力区域划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">价值观划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">障碍种类及表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">性格演变路线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">预期期望</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : '29c79234b25f9c247342b07bfe92041a',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

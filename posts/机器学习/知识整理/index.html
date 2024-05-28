@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="机器学习相关知识点整理，    编程语言相关 java python   数学基础 抽样方法 1.分层抽样的适用范围？     机器学习相关 线性回归和LR gbdt、xgboost相关 RF相关 kmeans相关 EM HMM CRF相关 决策树相关 SVM相关 降维算法相关 各种ML模型比较   其他   深度学习相关 自然语言处理相关 手撕算法&amp;场景题 面经分享 一些有用的知识整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习知识整理">
+<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="机器学习相关知识点整理，    编程语言相关 java python   数学基础 抽样方法 1.分层抽样的适用范围？     机器学习相关 线性回归和LR gbdt、xgboost相关 RF相关 kmeans相关 EM HMM CRF相关 决策树相关 SVM相关 降维算法相关 各种ML模型比较   其他   深度学习相关 自然语言处理相关 手撕算法&amp;场景题 面经分享 一些有用的知识整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/afd47e42ly1g26n7hu2r0j20f60pegoo.jpg">
+<meta property="article:published_time" content="2022-03-30T11:17:03.000Z">
+<meta property="article:modified_time" content="2022-03-30T11:17:03.000Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="AL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/afd47e42ly1g26n7hu2r0j20f60pegoo.jpg">
+
+<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机器学习知识整理 | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习知识整理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-30 19:17:03" itemprop="dateCreated datePublished" datetime="2022-03-30T19:17:03+08:00">2022-03-30</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <blockquote>
+<p>机器学习相关知识点整理，</p>
+</blockquote>
+<!-- toc -->
+<ul>
+<li><a href="#编程语言相关">编程语言相关</a><ul>
+<li><a href="#java">java</a></li>
+<li><a href="#python">python</a></li>
+</ul>
+</li>
+<li><a href="#数学基础">数学基础</a><ul>
+<li><a href="#抽样方法">抽样方法</a><ul>
+<li><a href="#1分层抽样的适用范围">1.分层抽样的适用范围？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#机器学习相关">机器学习相关</a><ul>
+<li><a href="#线性回归和lr">线性回归和LR</a></li>
+<li><a href="#gbdt-xgboost相关">gbdt、xgboost相关</a></li>
+<li><a href="#rf相关">RF相关</a></li>
+<li><a href="#kmeans相关">kmeans相关</a></li>
+<li><a href="#em-hmm-crf相关">EM HMM CRF相关</a></li>
+<li><a href="#决策树相关">决策树相关</a></li>
+<li><a href="#svm相关">SVM相关</a></li>
+<li><a href="#降维算法相关">降维算法相关</a><ul>
+<li><a href="#各种ml模型比较">各种ML模型比较</a></li>
+</ul>
+</li>
+<li><a href="#其他">其他</a></li>
+</ul>
+</li>
+<li><a href="#深度学习相关">深度学习相关</a></li>
+<li><a href="#自然语言处理相关">自然语言处理相关</a></li>
+<li><a href="#手撕算法场景题">手撕算法&amp;场景题</a></li>
+<li><a href="#面经分享">面经分享</a></li>
+<li><a href="#一些有用的知识整理">一些有用的知识整理</a></li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h1><span id="编程语言相关">编程语言相关</span></h1><h2><span id="java">java</span></h2><p>java语言相关请看<a href="/posts/java/java语言基础/java整理/">这里</a></p>
+<h2><span id="python">python</span></h2><ul>
+<li>python内存机制<ul>
+<li>引用计数，垃圾回收，内存池 </li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geaozhang/p/7111961.html">https://www.cnblogs.com/geaozhang/p/7111961.html</a> </li>
+</ul>
+</li>
+<li>python中dictionary，set的底层原理 <ul>
+<li>使用伪随机探测的散列表作为字典的底层数据结构</li>
+</ul>
+</li>
+<li>介绍一下构造函数，析构函数，函数重载(面向对象这一块的知识)<ul>
+<li><code>__metaclass__</code> 元类方法，在创建类的时候执行 </li>
+<li><code>__new__</code> 是一个静态方法，返回一个创建的实例</li>
+<li><code>__init__</code>构造函数，在初始化实例的时候会执行，没有返回</li>
+<li><code>__del__</code>析构函数，被python垃圾回收器销毁的时候调用</li>
+<li>python中不需要函数重载</li>
+</ul>
+</li>
+<li>解释python元类？<ul>
+<li>首先理解python中的类也是对象</li>
+<li>元类就是用来创建类的（type()就是python在背后用来创建所有类的元类）</li>
+</ul>
+</li>
+<li>python的静态方法，类方法和实例方法？<ul>
+<li>实例方法就是一般的方法，需要先将类实例化后调用，关键字<code>self</code></li>
+<li>静态方法(staticmethod)不需要创建类的实例就可以调用，没有关键字</li>
+<li>类方法(classmethod)可以使用类和实例调用，关键字<code>cls</code></li>
+</ul>
+</li>
+<li>python自省？<ul>
+<li>自省就是运行时能知道对象的类型，比如type(), dir(), getattr(), hasattr(), isinstance()</li>
+</ul>
+</li>
+<li>新式类和旧式类？<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html">https://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html</a> </li>
+</ul>
+</li>
+<li>python里的拷贝（引用，copy(),deepcopy()）<ul>
+<li>引用， <code>b=a</code>，a改变b也改变</li>
+<li>copy(), 浅拷贝，拷贝父对象，但不会拷贝对象的内部子对象</li>
+<li>deepcopy(), 深拷贝，完全拷贝父对象及其子对象</li>
+</ul>
+</li>
+<li>python的is和=？<ul>
+<li><code>is</code>是对比地址</li>
+<li><code>=</code>是对比值</li>
+</ul>
+</li>
+<li>python如何实现单例模式?请写出两种实现方式?</li>
+<li>python中变量查找顺序？<ul>
+<li>LEGB顺序，即<ul>
+<li>local， 函数内部作用域</li>
+<li>enclosing， 函数内部与内嵌函数之间</li>
+<li>global， 全局作用域</li>
+<li>build-in， 内置作用域</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>请描述抽象类和接口类的区别和联系？</li>
+<li>python中的进程和线程<ul>
+<li>进程：一个运行的程序（代码）就是一个进程，没有运行的代码叫程序，进程是系统资源分配的最小单位，进程拥有自己独立的内存空间，所有进程间数据不共享，开销大</li>
+<li>线程: cpu调度执行的最小单位，也叫执行路径，不能独立存在，依赖进程存在，一个进程至少有一个线程，叫主线程，而多个线程共享内存（数据共享，共享全局变量),从而极大地提高了程序的运行效率。</li>
+<li>协程: 是一种用户态的轻量级线程，协程的调度完全由用户控制。协程拥有自己的寄存器上下文和栈。协程调度时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈，直接操中栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="数学基础">数学基础</span></h1><h2><span id="抽样方法">抽样方法</span></h2><h3><span id="1分层抽样的适用范围">1.分层抽样的适用范围？</span></h3><p>分层抽样利用事先掌握的信息， 充分考虑了保持样本结构和总体结构的一致性，当总体由差异明显的几部分组成的时候，适合用分层抽样。</p>
+<h1><span id="机器学习相关">机器学习相关</span></h1><p>本目录主要按照不同算法整理机器学习相关面试知识点。</p>
+<ul>
+<li>常见的loss函数：<ul>
+<li>平方损失函数（最小二乘法）<ul>
+<li>$L(Y, f(X))=(Y-f(X))^{2}$</li>
+</ul>
+</li>
+<li>对数损失函数（方便极大似然估计）<ul>
+<li>$J(\theta)=-\frac{1}{m}\left[\sum<em>{i=1}^{m} y^{(i)} \log h</em>{\theta}\left(x^{(i)}\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]$`</li>
+</ul>
+</li>
+<li>指数损失函数（Adaboost）<ul>
+<li>$L(Y, f(X))=\frac{1}{n} \sum<em>{i=1}^{n} e^{-Y</em>{i} f\left(X_{i}\right)}$</li>
+</ul>
+</li>
+<li>Hinge损失函数（SVM）<ul>
+<li>$L(Y)=\max (0,1-t Y)$</li>
+</ul>
+</li>
+<li>0-1损失<ul>
+<li>$L(Y, f(X))=\left{\begin{array}{l}{1, Y \neq f(X)} \ {0, Y=f(X)}\end{array}\right.$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见的优化算法：<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kaiyuan_sjtu/article/details/85126721">https://blog.csdn.net/Kaiyuan_sjtu/article/details/85126721</a> </li>
+</ul>
+</li>
+<li>常见的激活函数：<ul>
+<li>sigmoid/tanh/relu/leaky relu/maxout/softmax</li>
+</ul>
+</li>
+<li>常用的评价指标：<ul>
+<li>precision（精确性、查准率）： 预测出的正确正样本数比上所有预测为正样本数</li>
+<li>recall（召回率、查全率）:预测出的正确正样本数比上所有实际正样本数</li>
+<li>F1: precision和recall的调和均值</li>
+<li>ROC（Receiver Operating Characteristic）：<ul>
+<li>横坐标伪正类率（False Positive Rate），预测为正但实际为负的样本占所有负样本的比例；</li>
+<li>纵坐标真正类率（True Positive Rate），预测为正且实际为正的样本占所有正样本的比例；</li>
+</ul>
+</li>
+<li>AUC：ROC曲线下的面积</li>
+</ul>
+</li>
+<li>常用的距离度量方式<ul>
+<li>欧式距离：$d<em>{a b}=\sqrt{\left(x</em>{1}-y<em>{1}\right)^{2}+\left(x</em>{2}-y_{2}\right)^{2}}$</li>
+<li>曼哈顿距离：$d<em>{a b}=\left|x</em>{1}-y<em>{1}\right|+\left|x</em>{2}-y_{2}\right|$</li>
+<li>余弦相似度：$\cos \theta=\frac{a^{<em>} b}{|a|^{</em>}|b|}=\frac{x<em>{1} * y</em>{1}+x<em>{2} * y</em>{2}}{\sqrt{x<em>{1}^{2}+x</em>{2}^{2}} * \sqrt{y<em>{1}^{2}+y</em>{2}^{2}}}$</li>
+<li>切比雪夫距离：各对应坐标数值差的最大值，如平面两个向量$a=(x<em>{1}, y</em>{1}), b=(x<em>{2}, y</em>{2})$，其 $d<em>{a b}=\max \left{\left|x</em>{1}-x<em>{2}\right|,\left|y</em>{1}-y_{2}\right|\right}$</li>
+<li>汉明距离：字符串对应位置的不同字符个数</li>
+<li>编辑距离：两个字符串之间由一个转成另一个所需的最少编辑操作次数</li>
+<li>Person相关系数：反应两个变量的线性相关性。</li>
+<li>K-L散度：相对熵，$D(P | Q)=\sum_{i=1}^{n} P(i) \log \frac{P(i)}{Q(i)}$</li>
+</ul>
+</li>
+</ul>
+<h3><span id="线性回归和lr">线性回归和LR</span></h3><ul>
+<li>对于LR模型，特征有<x1,x2,...,xn> 如果手误把第一个特征又加了一次变成了n+1个特征<x1,x2,...,xn,x1>请问会有什么影响？如果是加了一个噪声特征呢？<ul>
+<li>冗余特征过多，训练过程越慢</li>
+<li>会改变模型参数值，使得模型不稳定。极端假设所有特征均重复，则LR模型参数w会变为原来的1/2</li>
+</ul>
+</x1,x2,...,xn,x1></x1,x2,...,xn></li>
+<li>逻辑回归损失函数为什么用极大似然？<ul>
+<li>用最小二乘法目标函数就是平方损失的话是非凸函数，会有很多局部最优点 </li>
+<li>用最大似然估计目标函数就是对数似然函数</li>
+</ul>
+</li>
+<li>回归问题的损失函数都有哪些？从哪些角度设计一个合理的损失函数？<ul>
+<li>绝对值损失，平方误差损失，huber损失等</li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/68390722/answer/266034620">https://www.zhihu.com/question/68390722/answer/266034620</a></li>
+</ul>
+</li>
+<li>逻辑回归VS线性回归？<ul>
+<li>都属于广义线性模型</li>
+<li>一个回归问题一个分类问题</li>
+</ul>
+</li>
+</ul>
+<h3><span id="gbdt-xgboost相关">gbdt、xgboost相关</span></h3><ul>
+<li>xgboost和GBDT区别：<ul>
+<li>基学习模型不同：GBDT使用的是CART，而xgb还支持线性分类器</li>
+<li>优化方案不同：gbdt使用一阶导，xgb使用二阶泰勒展开</li>
+<li>xgb支持自定义代价函数，但必须二阶可导</li>
+<li>xgb加入了正则化项</li>
+<li>列采样</li>
+<li>xgb支持缺失值的处理，会自动学习出分裂方向</li>
+<li>xgb支持并行，不是tree粒度的并行而是特征粒度的并行。提前将数据进行排序存在block结构中，后面迭代直接使用减少计算量。</li>
+<li>近似直方图算法，用于高效的生成候选的分割点</li>
+<li>xgb支持交叉验证，方便选取合最优参数，early stop</li>
+</ul>
+</li>
+<li>xgb如何缓解过拟合？<ul>
+<li>正则化：对树中叶子节点的数目L1正则，对叶子节点分数L2正则</li>
+<li>列抽样：即特征抽样</li>
+<li>shrinkage：类似学习率，在学习出每一颗树之后对这个树增加一个权重参数，减小其影响力，为后续的树提供空间去优化模型</li>
+</ul>
+</li>
+<li>xgb如何调参？</li>
+<li>xgb的特征重要性是怎么计算的？<ul>
+<li>某个特征的重要性（feature score），等于它被选中为树节点分裂特征的次数的和</li>
+</ul>
+</li>
+<li>adaboost流程？权重更新公式？<ul>
+<li>加法模型+指数损失+前向分布算法的二类分类学习算法 </li>
+<li>流程：<ul>
+<li>初始化权重分布</li>
+<li>计算基分类器在训练集上的分类误差率：$e<em>{m}=P\left(G</em>{m}\left(x<em>{i}\right) \neq y</em>{i}\right)=\sum<em>{i=1}^{N} w</em>{m i} I\left(G<em>{m}\left(x</em>{i}\right) \neq y_{i}\right)$</li>
+<li>计算该分类器的对应系数：$\alpha<em>{m}=\frac{1}{2} \log \frac{1-e</em>{m}}{e_{m}}$`</li>
+<li>更新训练集的权重分布：$w<em>{m+1, i}=\frac{w</em>{m i}}{Z<em>{m}} \exp \left(-\alpha</em>{m} y<em>{i} G</em>{m}\left(x_{i}\right)\right)$</li>
+<li>重复2-4过程直至效果比较好</li>
+<li>将所有基分类器加权求和</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>gbdt流程？<ul>
+<li>加法模型+负梯度函数+前向分布算法 </li>
+<li>流程：<ul>
+<li>初始化基学习器：$f<em>{0}(x)=\arg \min </em>{c} \sum<em>{i=1}^{N} L\left(y</em>{i}, c\right)$</li>
+<li>对迭代轮数1,2,…,M:<ul>
+<li>对所有样本，计算负梯度：$r<em>{i m}=-\left[\frac{\partial L\left(y</em>{i}, f\left(x<em>{i}\right)\right)}{\partial f\left(x</em>{i}\right)}\right]<em>{f=f</em>{m-1}}$`</li>
+<li>对$r<em>{i m}$拟合一个回归树，得到第m棵树的叶节点区域$R</em>{m j}$,  j=1,2,…,J</li>
+<li>对j=1,2,…,J：计算$c<em>{m j}=\arg \min </em>{c} \sum<em>{x</em>{i} \in R<em>{m j}} L\left(y</em>{i}, f<em>{m-1}\left(x</em>{i}\right)+c\right)$</li>
+<li>更新回归树：$f<em>{m}(x)=f</em>{m-1}(x)+\sum<em>{j=1}^{J} c</em>{m j} I\left(x \in R_{m j}\right)$</li>
+</ul>
+</li>
+<li>得到最终回归树：$\hat{f}(x)=f<em>{M}(x)=\sum</em>{m=1}^{M} \sum<em>{j=1}^{J} c</em>{m j} I\left(x \in R_{m j}\right)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>xgb损失函数？推导？<ul>
+<li>$\mathcal{L}(\phi)=\sum<em>{i} l\left(\hat{y}</em>{i}, y<em>{i}\right)+\sum</em>{k} \Omega\left(f_{k}\right)$，其中等式右侧第二项为正则化项：$\Omega(f)=\gamma T+\frac{1}{2} \lambda|w|^{2}$</li>
+<li>损失函数的优化：<ul>
+<li>$\mathcal{L}^{(t)}=\sum<em>{i=1}^{n} l\left(y</em>{i}, \hat{y}<em>{i}^{(t-1)}+f</em>{t}\left(\mathbf{x}<em>{i}\right)\right)+\Omega\left(f</em>{t}\right)$</li>
+<li>$\mathcal{L}^{(t)} \simeq \sum<em>{i=1}^{n}\left[l\left(y</em>{i}, \hat{y}^{(t-1)}\right)+g<em>{i} f</em>{t}\left(\mathbf{x}<em>{i}\right)+\frac{1}{2} h</em>{i} f<em>{t}^{2}\left(\mathbf{x}</em>{i}\right)\right]+\Omega\left(f_{t}\right)$</li>
+<li>$\tilde{\mathcal{L}}^{(t)}=\sum<em>{i=1}^{n}\left[g</em>{i} f<em>{t}\left(\mathbf{x}</em>{i}\right)+\frac{1}{2} h<em>{i} f</em>{t}^{2}\left(\mathbf{x}<em>{i}\right)\right]+\gamma T+\frac{1}{2} \lambda \sum</em>{j=1}^{T} w_{j}^{2}$</li>
+<li>$w<em>{j}^{*}=-\frac{\sum</em>{i \in I<em>{j}} g</em>{i}}{\sum<em>{i \in I</em>{j}} h_{i}+\lambda}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>xgb节点分裂规则？<ul>
+<li>$G=\frac{1}{2}\left[\frac{G<em>{L}^{2}}{H</em>{L}+\lambda}+\frac{G<em>{R}^{2}}{H</em>{R}+\lambda}-\frac{\left(G<em>{L}+G</em>{R}\right)^{2}}{\left(H<em>{L}+H</em>{R}\right)+\lambda}\right]-\gamma$</li>
+</ul>
+</li>
+<li>xgb如何处理稀疏值？<ul>
+<li>会分别计算将该样本分到左右子树两种情况的增益，选择增益大的进行分裂。</li>
+<li>在测试时，如果出现缺失值，默认右子树</li>
+</ul>
+</li>
+<li>为什么gbdt不适合处理sparse特征？<ul>
+<li>对于高维稀疏数据，每棵树在进行分裂时，金辉选取一个特征，大部分特征是不会被选到的</li>
+</ul>
+</li>
+<li>gbdt和lr的区别？<ul>
+<li>都是监督学习，判别式模型</li>
+<li>一个线性，一个非线性</li>
+<li>lr可以选择一阶导数或者二阶优化，gbdt只有一阶</li>
+<li>lr适合处理稀疏数据，gbdt适合稠密特征</li>
+<li></li>
+</ul>
+</li>
+<li>xgb的VC维？</li>
+<li>为什么xgb加了二阶梯度会更好？<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61374305">xgboost是用二阶泰勒展开的优势在哪？</a></li>
+<li>为什么引入二阶泰勒展开？统一损失函数求导的形式以支持自定义损失函数</li>
+<li>为什么更好？类比牛顿法和SGD，二阶求导信息量更大，训练过程收敛更快更准确。</li>
+</ul>
+</li>
+<li>lgb对比xgb和原始gbdt的优缺点是什么</li>
+<li>xgb和LR关于特征的处理有什么区别？<ul>
+<li>LR一般是离散值，而xgb可以连续</li>
+<li>LR各个特征独立，xgb可以特征组合</li>
+</ul>
+</li>
+</ul>
+<h3><span id="rf相关">RF相关</span></h3><ul>
+<li>RF变量重要性排序原理？<ul>
+<li>平均不纯度的减少：对于每棵树，按照不纯度（gini/information entropy等)给特征排序，然后整个森林取平均</li>
+<li>平均准确率的减少：测量每种特征对模型预测准确率的影响</li>
+</ul>
+</li>
+</ul>
+<h3><span id="kmeans相关">kmeans相关</span></h3><ul>
+<li>KNN和kmeans的区别？<ul>
+<li>KNN是有监督学习（分类/回归），kmeans是无监督学习（聚类）</li>
+<li>k的含义：KNN中k表示找到距离样本X最近的k个点；kmeans表示人为定义将数据分为k个类别</li>
+</ul>
+</li>
+<li>kmeans的基本流程：<ul>
+<li>选取k个类的初始中心点</li>
+<li>对所有点进行计算距离划分到最近的类</li>
+<li>重新计算每一类的中心点</li>
+<li>重新回到上述2，如果中心点没变则输出类别</li>
+</ul>
+</li>
+<li>k值的选取？<ul>
+<li>先验知识</li>
+<li>Elbow method</li>
+</ul>
+</li>
+<li>如何选取初始中心点？<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6164214.html">https://www.cnblogs.com/pinard/p/6164214.html</a>   </li>
+</ul>
+</li>
+<li>kmeans时间复杂度和空间复杂度？<ul>
+<li>时间：O(NlogN)</li>
+<li>空间： O(K*(M+N))</li>
+</ul>
+</li>
+</ul>
+<h3><span id="em-hmm-crf相关">EM HMM CRF相关</span></h3><ul>
+<li>EM算法推导？jensen不等式确定的下界？<ul>
+<li>EM算法就是含有隐变量的概率模型参数的极大似然估计</li>
+<li><img data-src="http://ww1.sinaimg.cn/large/afd47e42ly1g26n7hu2r0j20f60pegoo.jpg" alt></li>
+<li>Jensen不等式：<ul>
+<li>对于凸函数：$E[f(X)] \geq f(E[X])$</li>
+<li>对于凹函数：$E[f(X)] \leq f(E[X])$</li>
+</ul>
+</li>
+<li>EM算法是收敛的，但是不能保证收敛到全局最优 </li>
+<li>对初始值的选取敏感</li>
+</ul>
+</li>
+<li>HMM和CRF的区别？<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/53458773">https://www.zhihu.com/question/53458773</a><ul>
+<li>两者都可以用于序列模型</li>
+<li>CRF是无向图，HMM是有向图</li>
+<li>CRF是判别式模型，HMM是生成式模型</li>
+<li>CRF没有假设，HMM有马尔科夫假设</li>
+<li>CRF可以全局最优，HMM可能局部最优</li>
+</ul>
+</li>
+<li>CRF模型优化目标，怎么训练的？<ul>
+<li>CRF的三个问题以及解决思路</li>
+</ul>
+</li>
+<li>HMM做了哪些独立性假设？<ul>
+<li>有限历史假设：即当前状态仅仅与前一个状态有关</li>
+<li>输出独立假设：即输出状态仅仅与当前的隐状态有关</li>
+<li>齐次性假设：状态与时间无关</li>
+</ul>
+</li>
+<li>viterbi算法原理<ul>
+<li>动态规划求最大路径</li>
+</ul>
+</li>
+</ul>
+<h3><span id="决策树相关">决策树相关</span></h3><ul>
+<li>信息增益、信息增益比、基尼系数的公式和原理<ul>
+<li>信息增益：g=H(D)-H(D|A), 在特征选择时偏向于取值较多的特征,对应ID3算法，该算法只有树的生成，容易过拟合；</li>
+<li>信息增益率：$g<em>{\mathrm{g}}(D, A)=\frac{g(D, A)}{H</em>{A}(D)} \quad, \quad \mathrm{H}<em>{A}(D)=-\sum</em>{i=1}^{n} \frac{\left|D<em>{\mathrm{i}}\right|}{|D|} \log </em>{2} \frac{\left|D_{\mathrm{i}}\right|}{|D|}$</li>
+<li>gini指数：$\operatorname{Gini}(p)=\sum<em>{k=1}^{K} p</em>{k}\left(1-p<em>{k}\right)=1-\sum</em>{k=1}^{K} p_{k}^{2}$</li>
+</ul>
+</li>
+<li>决策树的VC维<ul>
+<li>VC维是描述模型复杂度的，模型假设空间越大，vc维越高</li>
+<li><a target="_blank" rel="noopener" href="http://www.flickering.cn/machine_learning/2015/04/vc%E7%BB%B4%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89/">http://www.flickering.cn/machine_learning/2015/04/vc%E7%BB%B4%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89/</a></li>
+<li>VC = 节点数+1</li>
+</ul>
+</li>
+<li>决策树怎么做特征离散化？<ul>
+<li>可以采用二分法对连续属性离散化：$T_{a}=\left{\frac{a^{i}+a^{i+1}}{2} | 1 \leq i \leq n-1\right}$</li>
+</ul>
+</li>
+<li>决策树的缺失值怎么处理？<ul>
+<li>对于建树节点分裂过程缺失：对特征计算非缺失样本的熵然后乘上权重（非缺失样本占比）就是该特征最终的熵 </li>
+<li>对于建树完成训练时缺失某个特征：将样本分配到每颗分裂出的子树中，然后乘上落入该子树的概率（即该子树中样本比上总样本）</li>
+<li>对于预测过程：确定额的划分</li>
+</ul>
+</li>
+<li>CART决策树的剪枝？<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22697086">https://www.zhihu.com/question/22697086</a></li>
+</ul>
+</li>
+<li>CART回归树是怎么做节点划分的？<ul>
+<li>采用启发式的方法 </li>
+</ul>
+</li>
+<li>CART为什么采用gini指数作为特征划分标准？<ul>
+<li>信息增益(比)是基于信息论为熵模型的，会涉及大量的对数运算。而基尼系数和熵之半的曲线非常接近，都可以近似代表分类误差率</li>
+</ul>
+</li>
+</ul>
+<h3><span id="svm相关">SVM相关</span></h3><ul>
+<li>SVM推导</li>
+<li>SVM损失函数？<ul>
+<li>hinge：$L(y)=\max (0,1-t \cdot y)$</li>
+<li>表示当样本点被分类正确且函数间隔大于1时，损失为0；否则损失为$1-t \cdot y$</li>
+</ul>
+</li>
+<li>为什么要使用hinge loss？<ul>
+<li>只考虑支持向量的影响</li>
+</ul>
+</li>
+<li>SVR原理</li>
+<li>核函数原理、哪些地方引入、如何选择？<ul>
+<li>$\mathrm{K}(\mathrm{x}, \mathrm{z})=&lt;\Phi(\mathrm{x}), \Phi(\mathrm{Z})&gt;$</li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24627666">https://www.zhihu.com/question/24627666</a></li>
+<li>核函数的作用就是一个从低维到高维的映射</li>
+<li>线性：$K\left(v<em>{1}, v</em>{2}\right)=<v_{1}, v_{2}>$</v_{1},></li>
+<li>多项式：$K\left(v<em>{1}, v</em>{2}\right)=\left(\gamma<v_{1}, v_{2}>+c\right)^{n}$</v_{1},></li>
+<li>RBF：$K\left(v<em>{1}, v</em>{2}\right)=\exp \left(-\gamma\left|v<em>{1}-v</em>{2}\right|^{2}\right)$</li>
+<li>sigmoid：$K\left(v<em>{1}, v</em>{2}\right)=\tanh \left(\gamma<v_{1}, v_{2}>+c\right)$</v_{1},></li>
+<li>如果特征维数很大（跟样本数量差不多），优先选用线性；如果特征数量小，样本数量一般，选用高斯核；如果特征数量小，样本数量很大，手工添加一些feature变成第一种情况。</li>
+</ul>
+</li>
+<li>为什么需要转成对偶形式？<ul>
+<li>原问题是一个凸二次规划问题   </li>
+<li>优化了复杂度。由求特征向量w转化为求比例系数</li>
+<li>可以方便引出核函数</li>
+</ul>
+</li>
+<li>线性回归的梯度下降和牛顿法求解公式的推导</li>
+<li>最速下降法和共轭梯度法 wolfe条件 最速下降法和共轭梯度法的收敛速度如何判断<ul>
+<li>最速下降法即梯度下降：一阶信</li>
+<li>共轭梯度法：介于最速下降和牛顿法之间的一种优化方法，仅需要一阶导数信息（方向限制在初始点的共轭区间内），但收敛速度较快，同时避免了牛顿法求Hessian矩阵的缺点</li>
+<li>wolfe条件：跟line search有关</li>
+</ul>
+</li>
+<li>LDA中有哪些分布？定义？什么是共轭分布？<ul>
+<li>共轭分布：在贝叶斯统计中，如果先验分布和后验分布属于同一类分布，则成这俩为共轭分布</li>
+<li>LDA过程：<ul>
+<li>从狄利克雷分布D(a)中采样生成文档的主题分布$\theta_{i}$</li>
+<li>从主题$\theta<em>{i}$的多项式分布中采样生成文档第j个词的主题$z</em>{i, j}$</li>
+<li>从狄利克雷分布D(b)中采样生成主题$z<em>{i, j}$对应的词语分布$\phi</em>{\tilde{z}_{i, j}}$</li>
+<li>从词语的多项式分布中采样生成最终词语$w_{i, j}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>k折交叉验证中k取值？<ul>
+<li>从偏差和方差角度回答： <ul>
+<li>当k取值很小时，比如k=2，此时模型训练数据较少，不容易拟合正确，所以偏差较高，方差较低</li>
+<li>当k取值较大时，比如k=n，此时相当于所有数据都用于训练，容易过拟合，所以偏差低，方差高</li>
+</ul>
+</li>
+<li>论文给出k值参考公式：k=log(N)，N为样本总数</li>
+</ul>
+</li>
+<li>KKT条件？（L为拉格朗日函数，g(x), h(x)为约束函数）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\left\&#123;\begin&#123;array&#125;&#123;l&#125;&#123;\nabla_&#123;x&#125; L=0&#125; \\ &#123;\mu g(x)=0&#125; \\ &#123;h(x)=0&#125; \\ &#123;g(x) \leq 0&#125; \\ &#123;\lambda \neq 0&#125; \\ &#123;\mu \geq 0&#125;\end&#123;array&#125;\right.$$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3><span id="降维算法相关">降维算法相关</span></h3><ul>
+<li>常见降维方法：L1，PCA, LDA t-SNE</li>
+<li>什么是主成分？</li>
+<li>PCA是一种无监督的降维方法，为了让映射后的样本具有最大的发散性（即尽可能少的重叠，保留原有信息）；</li>
+<li>LDA是一种有监督的降维方法，为了让映射后的样本具有最好的分类性能（即类内方差最小，类间方差最大）</li>
+<li>局部线性嵌入(LLE)是一种非线性降维算法，能够使降维后的数据较好地保持原有流形结构。</li>
+</ul>
+<h5><span id="各种ml模型比较">各种ML模型比较</span></h5><ul>
+<li>逻辑回归VS线性回归？<ul>
+<li>都属于广义线性模型</li>
+<li>一个回归问题一个分类问题</li>
+</ul>
+</li>
+<li>SVM和LR逻辑回归？<ul>
+<li>都属于线性分类算法，判别模型，监督学习</li>
+<li>损失函数不同</li>
+<li>确定决策边界时考虑的训练点不同</li>
+<li>SVM有核函数，LR虽然也可以用但是一般不适用</li>
+<li>SVM自带正则项</li>
+</ul>
+</li>
+</ul>
+<h3><span id="其他">其他</span></h3><ul>
+<li>谈谈牛顿法？牛顿法如何优化的？<ul>
+<li>牛顿法迭代公式：$x<em>{k+1}=x</em>{k}-\frac{f^{\prime}\left(x<em>{k}\right)}{f^{\prime \prime}\left(x</em>{k}\right)}$,优点是二阶导收敛速度快，但是需要就算hessian矩阵的逆，计算复杂</li>
+<li>优化：拟牛顿法，使用正定矩阵来近似Hessian矩阵的逆</li>
+</ul>
+</li>
+<li>交叉熵损失函数公式？怎么推导得到的？<ul>
+<li>公式： $L=\sum_{i=1}^{N} y^{(i)} \log \hat{y}^{(i)}+\left(1-y^{(i)}\right) \log \left(1-\hat{y}^{(i)}\right)$</li>
+<li>推导：<ul>
+<li>$P(y=1 | x)= \hat{y}$</li>
+<li>$P(y=0 | x)=1- \hat{y}$</li>
+<li>$P(y|x)=\hat{y}^{y} \cdot(1-\hat{y})^{1-y}$</li>
+<li>log化：$\log P(y | x)=\log \left(\hat{y}^{y} \cdot(1-\hat{y})^{1-y}\right)=y \log \hat{y}+(1-y) \log (1-\hat{y})$</li>
+<li>求log化的最大值，前面加个负号就是求最小值，就是交叉熵的公式了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mapreduce原理<ul>
+<li>map和reduce两个过程：分而治之</li>
+</ul>
+</li>
+<li>共线性的特征会对模型产生怎样的影响？<ul>
+<li>LR中特征强相关，不会影响最优性，但是会造成权重的数值解不稳定性（即模型系数每次都不一样）</li>
+</ul>
+</li>
+<li>朴素贝叶斯公式，先验概率，后验概率，条件概率<ul>
+<li>贝叶斯公式：$P\left(Y | X\right)=\frac{P\left(X | Y\right) P\left(Y\right)}{ P(Y)}$</li>
+</ul>
+</li>
+<li>各种机器学习的应用场景分别是什么？例如，k近邻,贝叶斯，决策树，svm，逻辑斯蒂回归和最大熵模型。<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26726794">https://www.zhihu.com/question/26726794</a> </li>
+</ul>
+</li>
+<li>如何解决L1不可导问题？<ul>
+<li>L1能产生稀疏解，而且稀疏解的泛化能力比较好</li>
+<li>subgradient: 绝对值函数只有在零点是不可导的，可以把abs的导数定义成符号函数sgn</li>
+<li>proximal gradient：</li>
+</ul>
+</li>
+<li>L0，L1，L2正则化<ul>
+<li>L0正则化的值是模型参数中非零参数的个数，L0很难优化求解是NP难问题</li>
+<li>L1对应拉普拉斯分布</li>
+<li>L2对应高斯分布</li>
+</ul>
+</li>
+<li>哪些常用的分类器是有VC维的，怎么计算？<ul>
+<li>线性分类器： d+1</li>
+<li>高斯核分类器： 无穷</li>
+<li>神经网络：参数数量</li>
+<li>决策树：节点数+1</li>
+</ul>
+</li>
+<li>特征选择方法？<ul>
+<li>皮尔森相关系数：<ul>
+<li>协方差和标准差比值：$\rho<em>{X, Y}=\frac{\operatorname{cov}(X, Y)}{\sigma</em>{X} \sigma_{Y}}$</li>
+<li>衡量两个变量之间的线性关系，取值[-1,1]，对非线性有明显缺陷</li>
+</ul>
+</li>
+<li>卡方检验<ul>
+<li>表示自变量对应变量的相关性：$\chi^{2}=\sum \frac{(A-E)^{2}}{E}$</li>
+</ul>
+</li>
+<li>互信息<ul>
+<li>$I(X ; Y)=\sum<em>{x \in X} \sum</em>{y \in Y} p(x, y) \log \frac{p(x, y)}{p(x) p(y)}$</li>
+</ul>
+</li>
+<li>基于惩罚项的特征选择<ul>
+<li>L1正则</li>
+</ul>
+</li>
+<li>基于学习模型的特征排序<ul>
+<li>RF，GBDT，xgboost</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最大似然估计(MLE)VS最大后验估计(MAP)<ul>
+<li>MLE： $\hat{\theta}_{\mathrm{MLE}}=\arg \max P(X |  \theta)$，但由于连乘会造成浮点下溢，通常使用最大化对数形式</li>
+<li>MAP: $\hat{\theta}<em>{\mathrm{MAP}}=\underset{\theta}{\operatorname{argmax}} P(\theta | X)=\underset{\theta}{\operatorname{argmax}} \frac{P(X | \theta) P(\theta)}{P(X)} \propto \operatorname{argmax}</em>{\theta} P(X | \theta) P(\theta)$</li>
+<li>MLE是频率派的思想，认为参数$\theta$是固定的；而MAP是贝叶斯派的思想，认为参数符合某种概率分布（先验概率）</li>
+<li>MLE可以认为是经验风险最小化，MAP可以认为是结构风险最小化</li>
+</ul>
+</li>
+<li>判别式模型 VS 生成式模型？<ul>
+<li>判别式，无向图，求解的是条件概率，如LR,SVM,NN,CRF等</li>
+<li>生成式，有向图，求解的是联合概率，如HMM,NB,LDA等</li>
+<li>由生成式模型可以得到判别式模型，但反之不行</li>
+</ul>
+</li>
+<li>模型融合？原理？怎么选融合的模型？<ul>
+<li>模型融合的方法有：voting/averaging/bagging/boosting/stacking等</li>
+<li>stacking融合：交叉验证+拼接；<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011630575/article/details/81302994">https://blog.csdn.net/u011630575/article/details/81302994</a></li>
+<li>融合模型要求： 好而不同。要求模型效果优秀且各模型个体之间尽量不同（如模型类型，模型超参数等）</li>
+</ul>
+</li>
+</ul>
+<h1><span id="深度学习相关">深度学习相关</span></h1><p>本目录主要整理深度学习相关面试知识点。</p>
+<ul>
+<li>深度学习神经网络为什么不用牛顿法而使用梯度下降？<ul>
+<li>数据量大： 牛顿法所需统计量（梯度Hessian矩阵等）不可能每一次迭代都使用全部样本</li>
+<li>维度高：参数多，导致hessian矩阵巨大</li>
+<li>非凸性：牛顿法会受限于鞍点。sgd一定会收敛，但牛顿法不一定会收敛</li>
+<li>…</li>
+</ul>
+</li>
+<li>Batch-norm层的作用？<ul>
+<li>使网络中每层输入数据的分布相对稳定，加速模型学习速度</li>
+<li>使模型对网络中的参数不那么敏感，网络学习更稳定</li>
+<li>缓解梯度消失问题</li>
+<li>具有一定的正则化效果</li>
+<li>…</li>
+</ul>
+</li>
+<li>残差网络的作用？<ul>
+<li>解决深度网络的退化问题</li>
+<li>解决梯度弥散问题</li>
+<li>…</li>
+</ul>
+</li>
+<li>网络初始化有哪些方式，他们的公式 初始化过程？</li>
+<li>优化方法 SGD、Adam算法过程 动量算法过程</li>
+<li></li>
+</ul>
+<h1><span id="自然语言处理相关">自然语言处理相关</span></h1><ul>
+<li>word2vec原理</li>
+<li>glove原理？模型推导？<ul>
+<li>思路是将全局词-词共现矩阵进行分解，训练得到词向量</li>
+<li>目标函数： $J=\sum<em>{i, j=1}^{V} f\left(X</em>{i j}\right)\left(w<em>{i}^{T} \tilde{w}</em>{j}+b<em>{i}+\tilde{b}</em>{j}-\log X_{i j}\right)^{2}$</li>
+<li>$X_{ij}$表示单词j出现在单词i上下文中的次数</li>
+</ul>
+</li>
+<li>fasttext原理<ul>
+<li>模型框架类似于Word2vec的CBOW,但是也有区别：<ul>
+<li>输入：word2vec用的是上下文单词的one-hot编码；fasttext用的是一个sentence的单词向量同时包括subword, 字符级别n-gran向量</li>
+<li>中间层：word2vec使用的是求和；fasttext使用的是平均；</li>
+<li>输出：cbow输出目标词汇；fasttext输出文本分类标签</li>
+</ul>
+</li>
+<li>速度快，使用层次softmax，对oov友好 </li>
+<li>有监督的文本分裂，无监督的词向量学习</li>
+</ul>
+</li>
+<li>glove和word2vec区别：<ul>
+<li>g是基于全局语料的，w是基于滑动窗口局部语料的；因此w可以进行在线学习，而g则需要固定语料信息</li>
+<li>目标函数不一样</li>
+<li>g更快，对于高频词的处理更有效</li>
+</ul>
+</li>
+<li>LDA的词表示和word2vec的词表示有什么区别？<ul>
+<li>LDA出来的词向量不如word2vec的精细，一些任务无法完成</li>
+<li>训练过程LDA使用的是狄利克雷先验分布，属于生成式模型；word2vec使用的是语言模型，属于判别式模型</li>
+<li></li>
+</ul>
+</li>
+<li>分词的原理<ul>
+<li>最大正向匹配，最大逆向匹配，双向匹配</li>
+<li>n-gram</li>
+<li>BMES模型（HMM，CRF）</li>
+</ul>
+</li>
+<li>字典树的优缺点？手写字典树？<ul>
+<li>优点：查询速度快，可以做前缀比较</li>
+<li>缺点：内存消耗大</li>
+</ul>
+</li>
+<li>输入补全可以由那种数据结构来做？<ul>
+<li>字典树 </li>
+</ul>
+</li>
+<li>为什么正则化处理中bias不需要正则<ul>
+<li>bias影响的是结果的偏差，对输入没有放大缩小的作用，而正则化要降低方差（提高模型泛化能力），所以不需要正则化bias</li>
+</ul>
+</li>
+<li>反卷积与反池化<ul>
+<li>反卷积：</li>
+<li>反池化：</li>
+</ul>
+</li>
+<li>attention机制原理</li>
+<li>transformer结构图以及原理</li>
+<li>BLEU原理及代码</li>
+<li>dropout train和test的区别<ul>
+<li>train过程：输出会依一定概率p让输入为0</li>
+<li>test过程： 需要乘上概率p</li>
+</ul>
+</li>
+<li>BN  train和test的区别？<ul>
+<li>train： 有batch</li>
+<li>test：只有单个样本，所以方差和均值使用之前训练阶段每个batch保存下来的平均</li>
+</ul>
+</li>
+<li>正负样本不平衡问题？<ul>
+<li>过采样或欠采样</li>
+<li>组合/集成方法：</li>
+<li>正负样本设置惩罚权重</li>
+<li>focal loss</li>
+</ul>
+</li>
+<li>BN前向传播公式，反向求导公式？<ul>
+<li>对一批数据进行归一化，沿着特征方向：$B N\left(x<em>{i}\right)=\alpha \times \frac{x</em>{i}-\mu<em>{b}}{\sqrt{\sigma</em>{B}^{2}+\epsilon}}+\beta$</li>
+<li>其中两个参数alpha和beta是调节参数，可学习的，防止网络表达能力下降</li>
+<li><a target="_blank" rel="noopener" href="https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html">https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html</a></li>
+</ul>
+</li>
+<li>BN为什么不适用与RNN？<ul>
+<li>RNN是变长的，基于timestep计算，如果使用BN，需要保存每个timestep下batch的均值和方差，效率很低 </li>
+</ul>
+</li>
+<li>加了dropout后，神经网络的BP阶段有什么改变，求导公式要怎么改<ul>
+<li>需要乘上mask向量，因为在前向传播过程中失活的神经元在反向传播时应该也是要不起作用的</li>
+</ul>
+</li>
+<li>试分析为什么不能在循环神经网络中的循环连接上直接应用丢弃法？<ul>
+<li>若放在循环链接，则信息将会因循环进行而逐渐丢失</li>
+<li>rnn的dropout只能设置在输入输出层上</li>
+</ul>
+</li>
+<li>在LSTM中，隐藏层神经元数量与参数数量之间的关系？<ul>
+<li>对照LSTM中gate过程的公式可算出：num=4<em>（O</em>(I+H)+O）</li>
+</ul>
+</li>
+<li>CNN卷积的反向传播过程</li>
+<li>胶囊网络？<ul>
+<li>CNN对物体之间的空间关系识别能力不强</li>
+<li>CNN对物体旋转之后识别能力不强</li>
+<li>胶囊是一个包含多个神经元的载体，每个神经元表示了图像中出现的特定实体的各种属性</li>
+<li><a target="_blank" rel="noopener" href="https://www.tinymind.cn/articles/61">https://www.tinymind.cn/articles/61</a></li>
+</ul>
+</li>
+<li>转置卷积？<ul>
+<li>一般卷积：$\mathbf{z}=C \mathbf{x}$</li>
+<li>转置卷积: $\mathbf{x}=C^{\mathrm{T}} \mathbf{z}$</li>
+</ul>
+</li>
+<li>微步卷积？<ul>
+<li>步长s&lt;1的转置卷积 </li>
+<li>如果卷积操作的步长s&gt;1，希望其对应的转置卷积的步长为1/s，需要在输入特征之间插入s-1个0来使得其移动的速度变慢</li>
+</ul>
+</li>
+<li>空洞卷积？存在什么问题？<ul>
+<li>通过间隔地对输入进行卷积操作以增加输出单元的感受野</li>
+</ul>
+</li>
+<li>1*1卷积核的作用？<ul>
+<li>降维</li>
+<li>升维</li>
+<li>增加非线性</li>
+</ul>
+</li>
+<li>TensorFlow训练模型的整个流程？</li>
+<li>梯度消失是否可以通过增加学习率来缓解？</li>
+<li>卷积层神经元数量计算？<ul>
+<li>假设卷积层的输入神经元个数为n，卷积大小为m，步长（stride）为s，输入神经元两端各填补p 个零（zero padding），则神经元数量为<script type="math/tex">(n-m+2 p) / s+1</script></li>
+</ul>
+</li>
+<li>CNN的反向传播？</li>
+<li>什么样的任务适合用深度学习，什么样的问题不适合？<ul>
+<li>不适合：<ul>
+<li>小样本</li>
+<li>低维数据，大样本量，不如ensemble</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NLP中的CNN的max pooling<ul>
+<li>能减少模型参数数量，有利于缓解过拟合</li>
+<li>可以把变长的输入X整理成固定长度的输入</li>
+<li>丢失最大强度特征的位置信息</li>
+<li>有时候强特征出现多次</li>
+<li>改进：k-max pooling和chunk-max pooling</li>
+</ul>
+</li>
+<li>LSTM中为什么选择tanh？<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61265076">https://www.zhihu.com/question/61265076</a></li>
+</ul>
+</li>
+<li>算法的错误样例分析方法？（即预测与真实标签不符）</li>
+<li>warmup策略为什么有效？<ul>
+<li>warmup是指在训练初始阶段使用较小的学习率来启动，接着切换到大学效率而后进行常见的decay训练</li>
+<li>有助于缓解模型在初始阶段对mini-batch的提前过拟合现象，保持分布的平稳</li>
+<li>有助于保持模型深层的稳定性</li>
+</ul>
+</li>
+</ul>
+<h1><span id="手撕算法amp场景题">手撕算法&amp;场景题</span></h1><ul>
+<li>排序啊查找啊  基础</li>
+<li>千万向量中找到和单个向量相似的那个  <ul>
+<li>先聚类，然后输入向量先与聚类中心比较再与类中的向量比较</li>
+<li>update by <a target="_blank" rel="noopener" href="https://github.com/ZhengZixiang">ZhengZixiang</a>: 答聚类做法不是太完美，我实习中学到的实现，会做tpo k的近似最近邻。具体说来就是用局部敏感哈希LSH做降维分桶，然后落在同一个哈希桶里的取相似，比如问句匹配就会这么干</li>
+</ul>
+</li>
+<li>海量数据排序（找中位数）<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sykpour/article/details/26480217">https://blog.csdn.net/sykpour/article/details/26480217</a></li>
+</ul>
+</li>
+<li>判断是否平衡二叉树<ul>
+<li>设置flag，一边遍历一遍记录深度，如果深度差大于1，则flag设置为False </li>
+</ul>
+</li>
+<li>扇形涂色问题。一个圆被分成M个扇形，一共有N种颜色，相邻扇形不同色，一共有几种涂法？</li>
+<li>判断二叉树对称</li>
+<li>递归和非递归实现求二叉树深度</li>
+<li>求字符串中最长的不重复子串的长度（双指针、dp）</li>
+<li>大数加法？大数乘法？</li>
+<li>给个一个二维矩阵，矩阵中每一位是字符，从任意一个字符出发，不断向上下左右能拼成一个字符串；给定一些字符串，逐个判断是否能在该矩阵中拼出</li>
+<li>一棵二叉树，每个节点的值是一个整数，求这个树中路径上数字都相同的路径中最长的一条</li>
+<li>求n的m次方根，怎么转换成优化算法然后解</li>
+<li>求树两个节点的最低公共祖先</li>
+<li>实现一个hashmap，包含put get delete方法</li>
+<li>给定数组{a1, a2, a3, … an}，要求挑出一些数，这些数不能相邻，使得加起来的和最大。如果是环怎么处理？</li>
+<li>一个四位数abcd，满足abcd*4=dcba,求这个数？</li>
+<li>一个链表，奇数位升序，偶数为降序，将其转化成完全升序的链表</li>
+<li>求逆序对的数目</li>
+<li>求二维矩阵的子矩阵，使得和最大</li>
+<li>名人问题，给出最优解？</li>
+<li>01矩阵找出由1组成的最大面积的矩阵？</li>
+<li>编辑距离</li>
+<li>射气球</li>
+<li>求二叉树哪一个点到其他所有点的路径总和最小，即树的重心？</li>
+<li>设计一个结构存取稀疏矩阵<ul>
+<li>只存非零元素，三元组形式：（元素，行，列） </li>
+</ul>
+</li>
+<li>电梯上升只能停一层，大家下电梯再各自步行到自己的楼层，求停在哪一层所有人步行层数总和最少？</li>
+<li>给一个环形数组长度为N，数组每个位置都有一种颜色，总共M种颜色，求包含全部颜色的最短长度</li>
+<li>有M个有序链表（从大到小），要求取出前K大的元素。<ul>
+<li>把M个链表的头结点做成一个大小为M的最大堆，每次取出堆中最大的节点，然后将这个节点的后续节点放进堆中重新排序</li>
+<li>时间复杂度$O((k+m)log^{m})$，空间复杂度$O(M)$</li>
+</ul>
+</li>
+<li>求A的长度为L的各个连续子串在B中出现的次数总和<ul>
+<li>先预处理一下字符串B，将B中长度为L的子串及其出现次数记录在hashmap里；然后去遍历A中长度为L的子串并查找hashmap；时间复杂度O(N)</li>
+</ul>
+</li>
+<li>N！中0的个数？<ul>
+<li>关注5的个数</li>
+</ul>
+</li>
+<li>二叉树中是否存在和为target的路径？<ul>
+<li>dfs</li>
+</ul>
+</li>
+<li>B+、 B、 平衡二叉树 、AVL树、红黑树的区别</li>
+<li>实现带有求最大值功能的栈，要求时间复杂度为O（1）<ul>
+<li>两个栈，一个保存数据，一个保存每次操作后的最大元素 </li>
+</ul>
+</li>
+<li>给出一个n*n数字矩阵，寻找一条最长上升路径，每个位置只能向上下左右四个位置移动。</li>
+<li>环形打印二维矩阵？</li>
+<li>求二维数组中，任意矩形之和？</li>
+</ul>
+<h1><span id="面经分享">面经分享</span></h1><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484654&amp;idx=2&amp;sn=2e1b3f0e13be9a793a9ad01cf9dd2538&amp;chksm=97aee23ca0d96b2a10d918ba4957f38c1bec4cd515582aaa37dcf2ae60f227a21229a406d5ee&amp;token=1761549850&amp;lang=zh_CN#rd">字节AI Lab-NLP算法热乎面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484614&amp;idx=1&amp;sn=7cc14c23b1fa71f812c37567f7352173&amp;chksm=97aee214a0d96b02297a1b46486c1ddebbc99b249122c117605b46dab5c8158dec8f22618c28&amp;token=1761549850&amp;lang=zh_CN#rd">算法面经分享 | 双非研究生斩获大厂offer</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484614&amp;idx=2&amp;sn=719b7b680c98e266eef6e4a2a81a0537&amp;chksm=97aee214a0d96b026f20702329541f5def04994ea24773d61c7ee0d25edf8f7a1dd306ba7075&amp;token=1761549850&amp;lang=zh_CN#rd">太难啦！面试官盘点NLP近五年招聘动态</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484551&amp;idx=1&amp;sn=74489dfac7b34966bff65bd9bbda3c02&amp;chksm=97aee255a0d96b43bceef1ef00792a8259043625c83c1cadcd86039920940a94bee011f8fb30&amp;token=1761549850&amp;lang=zh_CN#rd">算法面经大乱斗Plus</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484460&amp;idx=2&amp;sn=c55b103ccea3d025cc71e2b52d0894d3&amp;chksm=97aee2fea0d96be84fe2c081a743ce6140c4b3924fbc754689eb702a6532510c2302886c3f3b&amp;token=1761549850&amp;lang=zh_CN#rd">来啦！百度凤巢算法面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484410&amp;idx=1&amp;sn=fd9524b12158b80db6596f5b35db83a8&amp;chksm=97aee528a0d96c3eff1d26d7acf314f65824ec98c74cc11cb92ad8e15ec80951f3b940f7efbe&amp;token=1761549850&amp;lang=zh_CN#rd">算法面经大乱斗</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484380&amp;idx=2&amp;sn=5df4641bb323237cc92c7c45b180087b&amp;chksm=97aee50ea0d96c185cc391d39a47b44ed52a694eda3d0290dd1af3fb7e53b2311e5601d403e9&amp;token=1761549850&amp;lang=zh_CN#rd">头条+腾讯 双杀面经（NLP实习）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484306&amp;idx=2&amp;sn=bb19811abf7eaa6978acfcaf313eed49&amp;chksm=97aee540a0d96c562b8692a03c8a6421824c681242a5006c6609583bbe03769bf00447f00611&amp;token=1761549850&amp;lang=zh_CN#rd">字节跳动 算法全四面 详细面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G6Vibdy2_XGhr4CiV1wx7Q">暑期实习 | 百度NLP算法岗面试复盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/mVVei2NXqOF_xbGQ25dMwg">【社招】1年工作经验，字节跳动算法面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GK86DAmWJ-DIIa5qSeKqKQ">NLP面试复盘 | 阿里/腾讯/头条/paypal/快手</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/U3IZ1WTUXIDif4Nv0wUX2Q">字节跳动 | 算法三面复盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/X4OAf1aZo4S9MYwXck62aA">春招面经集合 | 腾讯/字节/华为/东芝/360/Boss</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/n4H8US5QnFeddmKhmuTAeA">NLP算法岗面经 | 微软/腾讯/字节跳动/快手</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6tmllHZ09uVCKYwUXmigvg">字节跳动 | 大数据/数据挖掘面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/FI4AH2E9f5x8Q0ZdNXccTw">蚂蚁金服 | 算法面试复盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/lIV0TNQNw5Uuz8gp5xG-5w">美团+阿里 | 机器学习算法春招面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Eyiyqa74-rZ7D_-QYGPB8Q">达摩院+华为 | NLP博士的春招历程</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Nwg60Ld2QDZW6e9_Mng-Cg">福娃之路 | 五面阿里算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f5hMbe5rh7GNcWP9TimtqA">豪取BAT！超详细暑期实习算法面经(非科班无论文)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/McCPYbr-Kv2xOz_q1mGpwg">字节跳动 | 算法面试复盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qPlLAevEToMFi26ab-dGKg">超强整理，非科班小硕的进击之路</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qq9M8NQv6gQ7wSOr6UQzwg">嘿同学， 你点的面筋</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qljmCNybQD-bX7GDaut80w">NLP面经集结 | 达摩院、腾讯、微软、美团、百度</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/B5mH9-G2SC_IgaX_Z0YKWw">腾讯+头条 算法双杀面经</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OYK_ZJ9QK2T1W8GPzeeZJw">来看看offer收割机的烦恼</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VPXlrEse1bYRJAelidxVBg">六面！终斩腾讯NLP暑期实习offer</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/19YTgfG4jNNzC0sKVRCi3g0">字节跳动AI-LAB | 算法三轮技术面分享</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/psCrq7M3s1NDvk0KokcZJw">超详细！腾讯NLP算法岗面经（已offer）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZSReDAswMUsRK7Ab83nnMg">阿里机器学习算法面经（已offer）</a></li>
+</ul>
+<h1><span id="一些有用的知识整理">一些有用的知识整理</span></h1><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484306&amp;idx=1&amp;sn=b9b996cf512d62a9e41571d134a62636&amp;chksm=97aee540a0d96c561b157737b6d0ffb70bd8130c17d575bc247eb148ab1ce564fc281120d3c4&amp;token=1761549850&amp;lang=zh_CN#rd">关于ELMo，面试官们都怎么问</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484333&amp;idx=1&amp;sn=7e26a0dc657af9373ce384db94b9b1e1&amp;chksm=97aee57fa0d96c69ce36f58c9ef7ca0a9b4f4cfa9816a8d6295a54dcbe55f29a04ca69630eb4&amp;token=1761549850&amp;lang=zh_CN#rd">关于Transformer，面试官们都怎么问</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484380&amp;idx=1&amp;sn=55fccbb2565520bf747fa35359271673&amp;chksm=97aee50ea0d96c180ccf9177c653e78097ee7a9f18a3fb02811c128548cb585b427887d0dc8f&amp;token=1761549850&amp;lang=zh_CN#rd">关于BERT，面试官们都怎么问</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483759&amp;idx=1&amp;sn=26e3e1139413af63ec4cdc2a29271088&amp;chksm=97aee7bda0d96eab29ebc216486fbee1456a38aaff046e82bdfa08bf96f17bc9dc22f1a96dc7&amp;token=1761549850&amp;lang=zh_CN#rd">Transformers Assemble（PART I）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483798&amp;idx=1&amp;sn=72d8c9c1870a095bcdd32014fcdcb235&amp;chksm=97aee744a0d96e52512dec76848993df462c87e5f78da6444d2c3793e199a7bb211f460438b0&amp;token=1761549850&amp;lang=zh_CN#rd">Transformers Assemble（PART II）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483970&amp;idx=1&amp;sn=bf3696f54985e779b5f0f3ccbd923b91&amp;chksm=97aee490a0d96d867586e0196c64a9b36e38e3ca537e7beba1f8af6ab01109ecd746e47d80dd&amp;token=1761549850&amp;lang=zh_CN#rd">Transformers Assemble（PART III）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484067&amp;idx=1&amp;sn=84bd52abaf9b17ac9b41e312ba8d688b&amp;chksm=97aee471a0d96d67c5e9149a53d1eca8222fa65e11dab90348276b9429ebd4781d3e47fa0f9d&amp;token=1761549850&amp;lang=zh_CN#rd">Transformers Assemble（PART IV）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484450&amp;idx=1&amp;sn=038e11feebcc01193ee6fbc1b157411c&amp;chksm=97aee2f0a0d96be6571f984c602b722b1a0bd88f1bbe89c8226f90b32a8469d6ae1591904ec9&amp;token=1761549850&amp;lang=zh_CN#rd">Transformers Assemble（PART V）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484015&amp;idx=1&amp;sn=7e79cf7f2b3abe51b82c4a8beacdf195&amp;chksm=97aee4bda0d96dab57db412e7c9f51e7e9bd5d9d17742f2a522f2dbc881c77fb59183c098d04&amp;token=1761549850&amp;lang=zh_CN#rd">【ICLR2020】Transformer Complex-order：一种新的位置编码方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483778&amp;idx=1&amp;sn=4d5e9c0a80280734d380137cb23b4a55&amp;chksm=97aee750a0d96e464e114b7859d9ab0082ccfeda6a0b402cbbceb99fa49216592dc86dd6756a&amp;token=1761549850&amp;lang=zh_CN#rd">BERT源码分析（PART I）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483808&amp;idx=1&amp;sn=d533c7fcc8f274f3f3920ee26ae38d17&amp;chksm=97aee772a0d96e64cfc31fba1f47fce8f07386588dc53595a116b06ec6ce0a47e57a857cc134&amp;token=1761549850&amp;lang=zh_CN#rd">BERT源码分析（PART II）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247483828&amp;idx=1&amp;sn=3022bf8631c93b3c8633398b35546726&amp;chksm=97aee766a0d96e70c9627ab54b075b5083a98fc8ee5ed1b2d34d84fffe6c9bcd438e0b427ab3&amp;token=1761549850&amp;lang=zh_CN#rd">BERT源码分析（PART III）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484028&amp;idx=1&amp;sn=f3b0eee66c60100a097a169c05ce8181&amp;chksm=97aee4aea0d96db838f45c63d637c14cbc6dbc8ada083025ff83060230d2cf7aece331b572d4&amp;token=1761549850&amp;lang=zh_CN#rd">【NLP保姆级教程】手把手带你CNN文本分类(附代码)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484040&amp;idx=1&amp;sn=b85f2183c942ede4181c3d89e625bc50&amp;chksm=97aee45aa0d96d4caafbd97e9e019100af8ff5bb9e2f4faa31dcbafe910eab1f55f424687038&amp;token=1761549850&amp;lang=zh_CN#rd">【NLP保姆级教程】手把手带你RNN文本分类(附代码)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484075&amp;idx=2&amp;sn=a1280a4d661848d7d8f9a054c0c4e5b9&amp;chksm=97aee479a0d96d6fde3f2f17695ca8df0ea78538ad484c87da191fc26a80b8af9bd0fb34ed9d&amp;token=1761549850&amp;lang=zh_CN#rd">【NLP保姆级教程】手把手带你fastText文本分类(附代码)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484260&amp;idx=3&amp;sn=e48ffb63e24b82e9c3aac6ed011dcd53&amp;chksm=97aee5b6a0d96ca03c6f435a0b49f215a40804277543f1df32177ea7170abffe95eb4f792723&amp;token=1761549850&amp;lang=zh_CN#rd">【NLP保姆级教程】手把手带你RCNN文本分类(附代码)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484260&amp;idx=1&amp;sn=68d9ccd65a60c31b853dc2882105773e&amp;chksm=97aee5b6a0d96ca00df4f485bd5b1fe4293ebb65c5ba923d72f5498aecb5fb52c4d4ae63a951&amp;token=1761549850&amp;lang=zh_CN#rd">【NLP保姆级教程】手把手带你HAN文本分类(附代码)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484169&amp;idx=1&amp;sn=31007086d6b42517275415ef3d717ef7&amp;chksm=97aee5dba0d96ccdf1804968222432c11fe090736e58b26267ebd584d3c3b94c6591219ec33e&amp;token=1761549850&amp;lang=zh_CN#rd">【情感分析】基于Aspect的情感分析模型总结（PART I）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484214&amp;idx=1&amp;sn=9d31862263657abb00054c7829c320b8&amp;chksm=97aee5e4a0d96cf25550e15816041c15d6707df6cb7d6aaf3b3348b116087c5984928904d6aa&amp;token=1761549850&amp;lang=zh_CN#rd">【情感分析】基于Aspect的情感分析模型总结（PART II）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484335&amp;idx=1&amp;sn=e4bb3e0eee0faf96ed72fbb5ef9a7d4d&amp;chksm=97aee57da0d96c6b0f3866744984e501ab877ea0e957ecbc5ff2cda4b7a57887d33e30d33166&amp;token=1761549850&amp;lang=zh_CN#rd">【情感分析】基于Aspect的情感分析模型总结（PART III）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484533&amp;idx=2&amp;sn=681b4882feb90237dd1762ab064bf254&amp;chksm=97aee2a7a0d96bb1fc5cd4201672204c0fba3378e0ddfb3b1494ef9edb24b97ca8091f76d38a&amp;token=1761549850&amp;lang=zh_CN#rd">【情感分析】基于Aspect的情感分析模型总结（PART IV）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484460&amp;idx=1&amp;sn=87f3f00e6730bb363d3b77fd092c3e3a&amp;chksm=97aee2fea0d96be8a3c0c07a2891bd802fa78e02cb73026a088dd5b67177ea3507cf0166915d&amp;token=1761549850&amp;lang=zh_CN#rd">预训练模型中的可插拔式知识融入——利用Adapter结构</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484547&amp;idx=1&amp;sn=283f59407b771af588868e96ccb0582b&amp;chksm=97aee251a0d96b4734197b300ab44548315bec4f16f9ae9465588bb7b4113936ae925ed6521a&amp;token=1761549850&amp;lang=zh_CN#rd">详解ERNIE-Baidu进化史及应用场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484569&amp;idx=1&amp;sn=c1c6592196179ac2f68f7705eb2d9eb5&amp;chksm=97aee24ba0d96b5d5029720e965b2b71ea840cfc9baec5bd1d4715e5c8380b53687de96bcb9c&amp;token=1761549850&amp;lang=zh_CN#rd">安排！微软UniLM 2.0解读</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484602&amp;idx=1&amp;sn=c1c68bcba3d0261a39947d33d98ac5a4&amp;chksm=97aee268a0d96b7e4f9844c7fe26eb479f7f472b6331f5e79058c9e94dd31c72c41ea2265fdc&amp;token=1761549850&amp;lang=zh_CN#rd">Huggingface出品！NLP论文研讨会</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484633&amp;idx=1&amp;sn=1404ab98e7d87221a9004ab4cb790b6b&amp;chksm=97aee20ba0d96b1df963895fcd0f0a3342fa2b70b3e566b6d64e5744b32a5d196f44cf276915&amp;token=1761549850&amp;lang=zh_CN#rd">业务，工程和算法的互殴现场</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484350&amp;idx=1&amp;sn=dd6a7ec6ca90c421acd6d42847acd7b0&amp;chksm=97aee56ca0d96c7ab78663b2302c7117b761d71625170baef91b3d2a3dfb3c491569d7b78ae4&amp;token=1761549850&amp;lang=zh_CN#rd">我是如何收集信息的</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484335&amp;idx=2&amp;sn=e2204e4950e796c31a7f12e82cfc42f0&amp;chksm=97aee57da0d96c6be91f479d75ec1763549f6bd4fbbd421834154dc8938c06237ee580f51a31&amp;token=1761549850&amp;lang=zh_CN#rd">如何优雅地训练大型模型？</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/AL/" rel="tag"># AL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/4.%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="prev" title="4.信息论">
+      <i class="fa fa-chevron-left"></i> 4.信息论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/5.%E6%8A%BD%E6%A0%B7%E6%96%B9%E6%B3%95/" rel="next" title="5.抽样方法">
+      5.抽样方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">编程语言相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">python</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">数学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">抽样方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.分层抽样的适用范围？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">机器学习相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.1.</span> <span class="nav-text">线性回归和LR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.2.</span> <span class="nav-text">gbdt、xgboost相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.3.</span> <span class="nav-text">RF相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.4.</span> <span class="nav-text">kmeans相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.5.</span> <span class="nav-text">EM HMM CRF相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.6.</span> <span class="nav-text">决策树相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.7.</span> <span class="nav-text">SVM相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.8.</span> <span class="nav-text">降维算法相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.0.8.0.1.</span> <span class="nav-text">各种ML模型比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.0.9.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">深度学习相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">自然语言处理相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">手撕算法&amp;场景题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">面经分享</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">一些有用的知识整理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : '29f2a027583c3e0df0367bcaa7f66ff1',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

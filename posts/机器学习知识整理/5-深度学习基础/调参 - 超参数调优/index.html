@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="1. 超参数一览 1. 超参数是什么？ 2. 网络结构参数 2. 优化参数 3. Trick 参数   2. 几个重要的超参数 1. 学习率 — 最重要的超参数 2. batch size 3. dropout 4. 优化器参数   超参数调优策略 1. 网格搜索 2. 随机搜索 3. 贝叶斯优化   QA 1. 为何学习率那么重要？ 2. 卷积核尺寸为何都是奇数？ 3. 深层网络为何难以训练">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调参-超参数调优">
+<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="1. 超参数一览 1. 超参数是什么？ 2. 网络结构参数 2. 优化参数 3. Trick 参数   2. 几个重要的超参数 1. 学习率 — 最重要的超参数 2. batch size 3. dropout 4. 优化器参数   超参数调优策略 1. 网格搜索 2. 随机搜索 3. 贝叶斯优化   QA 1. 为何学习率那么重要？ 2. 卷积核尺寸为何都是奇数？ 3. 深层网络为何难以训练">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="机器学习知识整理">
+<meta property="article:tag" content="深度学习基础">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>调参-超参数调优 | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          调参-超参数调优
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <!-- toc -->
+<ul>
+<li><a href="#1-超参数一览">1. 超参数一览</a><ul>
+<li><a href="#1-超参数是什么">1. 超参数是什么？</a></li>
+<li><a href="#2-网络结构参数">2. 网络结构参数</a></li>
+<li><a href="#2-优化参数">2. 优化参数</a></li>
+<li><a href="#3-trick-参数">3. Trick 参数</a></li>
+</ul>
+</li>
+<li><a href="#2-几个重要的超参数">2. 几个重要的超参数</a><ul>
+<li><a href="#1-学习率-最重要的超参数">1. 学习率 — 最重要的超参数</a></li>
+<li><a href="#2-batch-size">2. batch size</a></li>
+<li><a href="#3-dropout">3. dropout</a></li>
+<li><a href="#4-优化器参数">4. 优化器参数</a></li>
+</ul>
+</li>
+<li><a href="#超参数调优策略">超参数调优策略</a><ul>
+<li><a href="#1-网格搜索">1. 网格搜索</a></li>
+<li><a href="#2-随机搜索">2. 随机搜索</a></li>
+<li><a href="#3-贝叶斯优化">3. 贝叶斯优化</a></li>
+</ul>
+</li>
+<li><a href="#qa">QA</a><ul>
+<li><a href="#1-为何学习率那么重要">1. 为何学习率那么重要？</a></li>
+<li><a href="#2-卷积核尺寸为何都是奇数">2. 卷积核尺寸为何都是奇数？</a></li>
+<li><a href="#3-深层网络为何难以训练">3. 深层网络为何难以训练</a></li>
+<li><a href="#4-神经网络为何要做深">4. 神经网络为何要做深？</a></li>
+<li><a href="#5-调节-batch_size-对训练效果影响如何">5. 调节 batch_size 对训练效果影响如何？</a></li>
+<li><a href="#6-合理增加-batch-size-有何好处">6. 合理增加 batch size 有何好处？</a></li>
+<li><a href="#7-盲目增大-batch_size-有何坏处">7. 盲目增大 Batch_Size 有何坏处？</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29247151">https://zhuanlan.zhihu.com/p/29247151</a></p>
+<h2><span id="1-超参数一览">1. 超参数一览</span></h2><h3><span id="1-超参数是什么">1. 超参数是什么？</span></h3><ul>
+<li>参数： 需要训练，指的是模型训练中的权重参数和 bias 参数。</li>
+<li>超参数： 不需要训练，需要在训练前进行指定，并不断调整。</li>
+</ul>
+<p>其实就很多超参数来说，调整的意义并不大，毕竟往往网络的超参数多达几十个，要是都精调的话，那岂不是得 gg， 因此往往是对重要参数精调，对次要参数粗调。</p>
+<p>此外，很多 Trick 往往需要一些其他的超参数，对于这部分参数，往往我会遵循原论文，适当的调一调就行。毕竟，Trick 无穷尽呀。</p>
+<h3><span id="2-网络结构参数">2. 网络结构参数</span></h3><p>网络参数指的是你自己构建网络结构时的相关参数，如卷积核数量，网络层数等</p>
+<ul>
+<li><p>CNN 网络参数</p>
+<p>| 超参数      | 说明          | 推荐值                                         |<br>| —————- | ——————- | ——————————————————————— |<br>| kernel size | 卷积核的 size | 一般为奇数：[7 <em> 7], [5 </em> 5], [3 <em> 3], [1 </em> 1] |<br>| kernel num  | 卷积核的数量  | 一般在 [100, 600] 间探索                       |<br>|             |               |                                                |</p>
+</li>
+<li><p>RNN 网络参数</p>
+<p>| 超参数 | 说明 | 推荐值 |<br>| ——— | —— | ——— |<br>|        |      |        |<br>|        |      |        |<br>|        |      |        |</p>
+</li>
+<li><p>Transformer 参数</p>
+<p>| 超参数 | 说明 | 推荐值 |<br>| ——— | —— | ——— |<br>|        |      |        |<br>|        |      |        |<br>|        |      |        |</p>
+</li>
+</ul>
+<h3><span id="2-优化参数">2. 优化参数</span></h3><p>优化参数指的是反向传播中所涉及到的参数，主要包括：学习率， batch_size， 对应优化器参数， 损失函数参数等。</p>
+<ul>
+<li>常见参数</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>超参数</th>
+<th>说明</th>
+<th>推荐值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>learning rate</td>
+<td>最重要的参数，需要精调</td>
+<td>下文有推荐</td>
+</tr>
+<tr>
+<td>batch size</td>
+<td>次要重要参数，需要精调</td>
+<td>[1: 1024]</td>
+</tr>
+<tr>
+<td>dropout</td>
+<td>解决过拟合的重要参数，需要精调</td>
+<td>[0: 0.5]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>优化器相关参数：</p>
+<p>| 优化器 | 参数说明 | 推荐值 |<br>| ——— | ———— | ——— |<br>| Adam   |          |        |<br>|        |          |        |<br>|        |          |        |</p>
+</li>
+<li><p>正则化参数：</p>
+<p>| 超参            | 说明 | 推荐值    |<br>| ———————- | —— | ————- |<br>| L2 权重衰减系数 |      | [0, 1e-4] |<br>|                 |      |           |<br>|                 |      |           |</p>
+</li>
+</ul>
+<h3><span id="3-trick-参数">3. Trick 参数</span></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>超参数</th>
+<th>说明</th>
+<th>推荐值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="2-几个重要的超参数">2. 几个重要的超参数</span></h2><h3><span id="1-学习率-最重要的超参数">1. 学习率 — 最重要的超参数</span></h3><p>学习率直接控制着梯度更新时的量级，从而直接影响模型的优化与最终的有效容量。 幸运的是，对于学习率的设置，已经有一套行之可效的指导方案了， 针对不同的优化器，有不同的设置区间。 </p>
+<p>如果是微调，那么学习率要降低两个数量级左右（参考 Bert 的 adam 学习率)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>优化器</th>
+<th>设置范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SGD</td>
+<td>[1e-2 ,1e-1]</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>[1e-3, 1e-2]</td>
+</tr>
+<tr>
+<td>Adagrad</td>
+<td>[1e-3, 1e-2]</td>
+</tr>
+<tr>
+<td>Adadelta</td>
+<td>[1e-2, 1e-1]</td>
+</tr>
+<tr>
+<td>RMSprop</td>
+<td>[1e-3, 1e-2]</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>[1e-3, 1e-2]</td>
+</tr>
+<tr>
+<td>Nadam</td>
+<td>[1e-3, 1e-2]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3><span id="2-batch-size">2. batch size</span></h3><p>一般情况下，  batch size 我往往会以 128 为起点，上下调整，注意，batch size 要设置为 2 的幂次方， 范围在 [1, 1024] 之间。</p>
+<p>此外，需要一提的是 Batch Normalization 与 batch size 息息相关，如果你使用了 Batch Normalization， 那么 batch size 就不能设的太小， 这点我在 Normalization 那一节中有详细解释。</p>
+<h3><span id="3-dropout">3. dropout</span></h3><p>dropout 我往往会设置先为 0.5， 然后在 [0.0, 0.5] 范围内精调。</p>
+<p>Dropout 往往会在卷积层和全连接层之间是有来防止过拟合。 使用 Dropout 需要注意两点：</p>
+<ul>
+<li>在RNN中，如果直接放在memory cell中,循环会放大噪声，扰乱学习。一般会建议放在输入和输出层；</li>
+<li>不建议dropout后直接跟上batchnorm，dropout很可能影响batchnorm计算统计量，导致方差偏移，这种情况下会使得推理阶段出现模型完全垮掉的极端情况；</li>
+</ul>
+<h3><span id="4-优化器参数">4. 优化器参数</span></h3><p>对于优化器的一些参数，我往往会采取默认值，这是因为，默认值都是论文最初的设置，一般都能够获得不错的表现，我个人一般不做很精细的调试，也不建议这样去做。</p>
+<h2><span id="超参数调优策略">超参数调优策略</span></h2><p><strong>采用2的幂次方作为 batch_size 的值，并在对数尺度上对学习率进行采样。</strong></p>
+<h3><span id="1-网格搜索">1. 网格搜索</span></h3><ul>
+<li>定义一个 n 维的网格，每一格都有一个超参数。</li>
+<li>对于每个维度，定义可能的取值范围</li>
+<li>搜索所有可能的配置并获得最佳结果</li>
+</ul>
+<p>我个人一般还是用 Markdown 表格来做记录， 如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>优化算法</th>
+<th>学习率</th>
+<th>batch_size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>adam</td>
+<td>1e-5</td>
+<td>128</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>缺点：</strong>该方法痛点真的很痛，那就是：<strong>维数灾难</strong>。 随着要精调的超参数的增加，搜索在时间复杂度上也会增加的越多（指数级别），最终使得该策略不可行。</li>
+<li><strong>优点：</strong> 如果采用较大的搜索范围以及较小步长，该方法有很大概率能找到全局最优值</li>
+</ul>
+<p>因此， 我一般尽可能少的去调节次要超参数，比如优化算法默认 Adam 等。此外， 先进行粗调来寻找全局最优值可能的位置，然后采用精调的策略寻找更精确的最优值。</p>
+<p>一般只有超参数在 4 个以内才使用网格搜索，不然太费时间了。</p>
+<h3><span id="2-随机搜索">2. 随机搜索</span></h3><p>随机搜索在搜索范围内随机选取样本点，它认为如果样本点集足够大，那么通过随机采样也能大概率的找到全局最优值或其近似值。</p>
+<ul>
+<li>优点： 比网格搜索要快</li>
+<li>缺点：结果无法保证，很依靠调参经验。</li>
+</ul>
+<p>我一般都是以推荐超参数设置方案来作为第一次的设置，然后围绕这个设置点上下浮动。</p>
+<h3><span id="3-贝叶斯优化">3. 贝叶斯优化</span></h3><p>网格搜索与随机搜索都是独立于之前的训练的，</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29779000">https://zhuanlan.zhihu.com/p/29779000</a></p>
+<p>贝叶斯则是利用历史的搜索结果进行优化搜索。其主要有四部分组成，</p>
+<ul>
+<li>目标函数，大部分情况下就是模型验证集上的损失。</li>
+<li>搜索空间，即各类待搜索的超参数。</li>
+<li>优化策略，建立的概率模型和选择超参数的方式。</li>
+<li>历史的搜索结果。</li>
+</ul>
+<p>首先对搜索空间进行一个先验性的假设猜想，即假设一种选择超参的方式，然后不断的优化更新概率模型，最终的目标是找到验证集上误差最小的一组超参数。</p>
+<hr>
+<h2><span id="qa">QA</span></h2><h3><span id="1-为何学习率那么重要">1. 为何学习率那么重要？</span></h3><p>当模型训练到一定程度后， 损失将不再减少，这个时候模型的一阶梯度接近于0，此时的Hessian 矩阵通常是两种情况：</p>
+<ul>
+<li>正定，即所有特征值均为正，此时通常可以得到一个局部极小值，若这个局部极小值接近全局最小则模型已经能得到不错  的性能了，但若差距很大，则模型性能还有待于提升，通常情况下后者在训练初最常见。</li>
+<li>特征值有正有负，此时模型很可能陷入了鞍点，若陷入鞍点，模型性能表现就很差。</li>
+</ul>
+<h3><span id="2-卷积核尺寸为何都是奇数">2. 卷积核尺寸为何都是奇数？</span></h3><ul>
+<li>保证像素点中心位置，避免位置信息偏移</li>
+<li>填充边缘时能保证两边都能填充，原矩阵依然对称</li>
+</ul>
+<h3><span id="3-深层网络为何难以训练">3. 深层网络为何难以训练</span></h3><ul>
+<li>梯度消失， 梯度爆炸问题</li>
+</ul>
+<h3><span id="4-神经网络为何要做深">4. 神经网络为何要做深？</span></h3><ul>
+<li>神经元数量相同的情况下，深层网络比浅层网络具有更大容量和表达空间。</li>
+<li>隐藏层增加意味着由激活函数带来的非线性变换的嵌套层数更多，就能构造更复杂的映射关系。</li>
+</ul>
+<h3><span id="5-调节-batch_size-对训练效果影响如何">5. 调节 batch_size 对训练效果影响如何？</span></h3><ul>
+<li>Batch_size 太小，模型表现效果极其糟糕(error )</li>
+</ul>
+<h3><span id="6-合理增加-batch-size-有何好处">6. 合理增加 batch size 有何好处？</span></h3><ul>
+<li>内存</li>
+<li>利用率提高了，大矩阵乘法的并行化效率提高。</li>
+<li>跑完一次 epoch 所需的迭代次数减少，对于相同数据量的处理速度进一步加快。</li>
+<li>在一定范围内，一般来说 Batch_Size 越大，其确定的下降方向越准，引起训练震荡越小。</li>
+</ul>
+<h3><span id="7-盲目增大-batch_size-有何坏处">7. 盲目增大 Batch_Size 有何坏处？</span></h3><ul>
+<li>内存，显存容量可能撑不住</li>
+<li>跑完一次 epoch 所需的迭代次数减少，要想达到相同的精度，其所花费的时间大大增加了，从而对参数的修正也就显得更加缓慢。</li>
+<li>Batch_Size 增大到一定程度，其确定的下降方向已经基本不再变化。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" rel="tag"># 机器学习知识整理</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" rel="tag"># 深度学习基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/" rel="prev" title="迁移学习">
+      <i class="fa fa-chevron-left"></i> 迁移学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" rel="next" title="调参-激活函数">
+      调参-激活函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">1. 超参数一览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">1. 超参数是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">2. 网络结构参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">2. 优化参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">3. Trick 参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">2. 几个重要的超参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">1. 学习率 — 最重要的超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">2. batch size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">3. dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">4. 优化器参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">超参数调优策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">1. 网格搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">2. 随机搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">3. 贝叶斯优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">QA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">1. 为何学习率那么重要？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">2. 卷积核尺寸为何都是奇数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">3. 深层网络为何难以训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">4. 神经网络为何要做深？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text">5. 调节 batch_size 对训练效果影响如何？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.6.</span> <span class="nav-text">6. 合理增加 batch size 有何好处？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.7.</span> <span class="nav-text">7. 盲目增大 Batch_Size 有何坏处？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : '4ff4fa8f2b80b770dfcbede90d562f5a',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

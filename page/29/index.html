@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Earyant的技术博客">
+<meta property="og:url" content="http://blog.lirui.pub/page/29/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Earyant">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.lirui.pub/page/29/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-20 09:47:36" itemprop="dateCreated datePublished" datetime="2018-01-20T09:47:36+08:00">2018-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="java8新特性">java8新特性</span></h1><h2><span id="lambda表达式">lambda表达式</span></h2><blockquote>
+<p>java8接受一个函数作为另一个函数的参数传入进去</p>
+</blockquote>
+<p>Arrays.asList( “a”, “b”, “d” ).forEach( e -&gt; System.out.println( e ) ); 参数的类型是编译器推断出来的</p>
+<blockquote>
+<p>Lambda可以引用类的成员变量与局部变量（如果这些变量不是final的话，它们会被隐含的转为final，这样效率更高）。</p>
+</blockquote>
+<h2><span id="默认方法和静态方法">默认方法和静态方法</span></h2><blockquote>
+<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到java.util.Collection接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
+</blockquote>
+<h2><span id="重复注解">重复注解</span></h2><h2><span id="java编译器的新特性">Java编译器的新特性</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterNames</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Method method = ParameterNames.class.getMethod( <span class="string">&quot;main&quot;</span>, String[].class );</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">final</span> Parameter parameter: method.getParameters() ) &#123;</span><br><span class="line">            System.out.println( <span class="string">&quot;Parameter: &quot;</span> + parameter.getName() );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Parameter: args</p>
+</blockquote>
+<p>对于有经验的Maven用户，通过maven-compiler-plugin的配置可以将-parameters参数添加到编译器中去。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">compilerArgument</span>&gt;</span>-parameters<span class="tag">&lt;/<span class="name">compilerArgument</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="java-类库的新特性">Java 类库的新特性</span></h2><h3><span id="optional">Optional</span></h3><p>平时用的判空：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (name == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改成Optional：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  Optional&lt;String &gt; names = Opntional.of(name);</span><br><span class="line">  <span class="keyword">if</span> (names.isPresent())&#123;</span><br><span class="line">      <span class="keyword">return</span> names.get();</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果单纯改成这样，还不如直接写成 ==null，看起来更加繁琐。 应该改成这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Opntional.of(name).get().orElse(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="stream">Stream</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> totalPointsOfOpenTasks = tasks</span><br><span class="line">    .stream()</span><br><span class="line">    .filter( task -&gt; task.getStatus() == Status.OPEN )</span><br><span class="line">    .mapToInt( Task::getPoints )</span><br><span class="line">    .sum();</span><br></pre></td></tr></table></figure>
+<h4><span id="filter">filter</span></h4><blockquote>
+<p>对于Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素；</p>
+</blockquote>
+<h4><span id="map">map</span></h4><blockquote>
+<p>映射转换</p>
+</blockquote>
+<h4><span id="mapto">mapTo*</span></h4><blockquote>
+<p>映射转换成 <em>的类型，</em> 包括Integer、Double、Long</p>
+</blockquote>
+<h4><span id="flatmap">flatMap</span></h4><blockquote>
+<p>合并集合,和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;1,2&#125;，&#123;3,4&#125;，&#123;5,6&#125;&#125; - &gt; flatMap - &gt; &#123;1,2,3,4,5,6&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#x27;a&#x27;，&#x27;b&#x27;&#125;，&#123;&#x27;c&#x27;，&#x27;d&#x27;&#125;，&#123;&#x27;e&#x27;，&#x27;f&#x27;&#125;&#125; - &gt; flatMap - &gt; &#123;&#x27;a&#x27;，&#x27;b&#x27;，&#x27;c&#x27; D&quot;， &#x27;E&#x27;， &#x27;F&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="flatmapto">flatMapTo*</span></h4><h4><span id="distinct">distinct</span></h4><blockquote>
+<p>对于Stream中包含的元素进行去重操作（去重逻辑依赖元素的equals方法），新生成的Stream中没有重复的元素；</p>
+<h4><span id="sorted">sorted</span></h4></blockquote>
+<h4><span id="peek">peek</span></h4><blockquote>
+<p>监控器</p>
+</blockquote>
+<p>提供一个Consumer消费函数，返回一个新的Stream，如果只写 Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)) 是不会打印结果的 新Stream每个元素被<strong>消费</strong>的时候都会执行给定的消费函数； Stream.of(“1”,”2”,”3”).peek(e-&gt; System.out.Println(e)).collect(Collectors.toList());</p>
+<h4><span id="limit">limit</span></h4><p>对一个Stream进行截断操作，获取其前N个元素，如果原Stream中包含的元素个数小于N，那就获取其所有的元素；</p>
+<h4><span id="skip">skip</span></h4><p>返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；</p>
+<h4><span id="foreach">forEach</span></h4><blockquote>
+<p>遍历</p>
+</blockquote>
+<h4><span id="foreachordered">forEachOrdered</span></h4><blockquote>
+<p>与forEach一样，只不过每次遍历结果都是相同的，forEach不是固定的序列</p>
+</blockquote>
+<h4><span id="generate">generate</span></h4><p>给定一个生成函数，生成一个无限的队列 Stream.generate(Math::random);</p>
+<h4><span id="iterate">iterate</span></h4><p>也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环</p>
+<p>Stream.iterate(1, item -&gt; item + 1).limit(10).forEach(System.out::println);</p>
+<h4><span id="collect">collect</span></h4><blockquote>
+<p>汇聚函数</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法参数</th>
+<th>返回类型</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toList</td>
+<td>List<code>&lt;T &gt;</code></td>
+<td>把流中的参数汇聚成List集合</td>
+<td>示例:List<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>Set<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到Set中,删除重复项</td>
+<td>Set<code>&lt;Menu&gt;</code> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>Collection<code>&lt;T&gt;</code></td>
+<td>把流中所有元素收集到给定的供应源创建的集合中</td>
+<td><code>ArrayList&lt;Menu&gt; menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</code></td>
+</tr>
+<tr>
+<td>Counting</td>
+<td>Long</td>
+<td>计算流中元素个数</td>
+<td>Long count=Menu.getMenus.stream().collect(Collectors.counting());</td>
+</tr>
+<tr>
+<td>SummingInt</td>
+<td>Integer</td>
+<td>对流中元素的一个整数属性求和</td>
+<td>Integer count=Menu.getMenus.stream().collect(Collectors.summingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>Double</td>
+<td>计算流中元素integer属性的平均值</td>
+<td>Double averaging=Menu.getMenus.stream().collect((Collectors.averagingInt(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Joining</td>
+<td>String</td>
+<td>连接流中每个元素的toString方法生成的字符串</td>
+<td>String name=Menu.getMenus.stream().map(Menu::getName).collect(Collectors.joining(“, “))</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> fattest=Menu.getMenus.stream().collectCollectors.maxBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>Optional<code>&lt;T&gt;</code></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的optional如果为空返回的是Optional.empty()</td>
+<td>Optional<code>&lt;Menu&gt;</code> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
+</tr>
+<tr>
+<td>Reducing</td>
+<td>归约操作产生的类型</td>
+<td>从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
+<td>int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>转换函数返回的类型</td>
+<td>包裹另一个转换器,对其结果应用转换函数</td>
+<td>Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>Map<code>&lt;K,List&lt;T&gt;&gt;</code></td>
+<td>根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
+<td>Map<code>&lt;Type,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>Map<code>&lt;Boolean,List&lt;T&gt;&gt;</code></td>
+<td>根据流中每个元素应用谓语的结果来对项目进行分区</td>
+<td>Map<code>&lt;Boolean,List&lt;Menu&gt;&gt;</code> menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4><span id="reduce">reduce</span></h4><ul>
+<li><code>Optional&lt;t&gt; reduce(BinaryOperator&lt;t&gt; accumulator);</code></li>
+</ul>
+<p>List <code>&lt;integer&gt;</code> ints = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10); System.out.println(“ints sum is:” + ints.stream().reduce((sum, item) -&gt; sum + item).get());</p>
+<p>可以看到reduce方法接受一个函数，这个函数有两个参数，第一个参数是上次函数执行的返回值（也称为中间结果），第二个参数是stream中的元素，这个函数把这两个值相加，得到的和会被赋值给下次执行这个函数的第一个参数。要注意的是：<strong>第一次执行的时候第一个参数的值是Stream的第一个元素，第二个参数是Stream的第二个元素</strong>。这个方法返回值类型是Optional，这是Java8防止出现NPE的一种可行方法，后面的文章会详细介绍，这里就简单的认为是一个容器，其中可能会包含0个或者1个对象。</p>
+<ul>
+<li>T reduce(T identity, BinaryOperator<code>&lt;t&gt;</code> accumulator);<br>这个定义上上面已经介绍过的基本一致，不同的是：它允许用户提供一个循环计算的初始值，如果Stream为空，就直接返回该值。而且这个方法不会返回Optional，因为其不会出现null值。</li>
+</ul>
+<h4><span id="count">count</span></h4><blockquote>
+<p>个数</p>
+</blockquote>
+<h4><span id="allmatch">allMatch</span></h4><p>是不是所有都满足给定的条件</p>
+<h4><span id="anymatch">anyMatch</span></h4><p>是不是存在某一个元素满足给定的条件</p>
+<h4><span id="findfirst">findFirst</span></h4><p>返回第一个，返回的是Optional值</p>
+<h4><span id="nonematch">noneMatch</span></h4><p>是否没有一个元素满足给定的条件</p>
+<h4><span id="max和min">max和min</span></h4><p>给定的比较条件，返回最大最小值</p>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/stream/">参考</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dm_vincent/article/category/2268127">好文收藏</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/springcloud%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">springcloud配置问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-14 21:41:03" itemprop="dateCreated datePublished" datetime="2018-01-14T21:41:03+08:00">2018-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>注册中心不自动上线下线</li>
+<li>异步返回值</li>
+<li>bean参数传值<br>*</li>
+</ul>
+<h3><span id="eureka-不自动下线">eureka 不自动下线</span></h3><p>Eureka Server在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%，如果出现低于的情况（在单机调试的时候很容易满足，实际在生产环境上通常是由于网络不稳定导致），Eureka Server会将当前的实例注册信息保护起来，同时提示这个警告。保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。</p>
+<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication">https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication</a></p>
+<p>解决方法：设置enableSelfPreservation:false</p>
+<p>配置心跳检测时长，下线leaseRenewalIntervalInSeconds: 2</p>
+<h3><span id="负载均衡在服务下掉后的重试策略"></span></h3><p>默认没有开启：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">hystrix.command.<span class="keyword">default</span>.execution.isolation.thread.timeoutInMilliseconds=<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">hello-service.ribbon.ConnectTimeout=<span class="number">250</span></span><br><span class="line">hello-service.ribbon.ReadTimeout=<span class="number">1000</span></span><br><span class="line">hello-service.ribbon.OkToRetryOnAllOperations=<span class="keyword">true</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetriesNextServer=<span class="number">2</span></span><br><span class="line">hello-service.ribbon.MaxAutoRetries=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h3><span id="断路器配置重试"></span></h3><p>如何处理服务挂掉后或者手动关闭服务后，Ribbon负载均衡还是一直调用这个服务，然后调用@HystrixCommand断路器注解的方法：利用Hystrix，在error callback方法中可以shutdown指定的server<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ZoneAwareLoadBalancer&lt;Server&gt; lb = (ZoneAwareLoadBalancer&lt;Server&gt;) springClientFactory.getLoadBalancer(<span class="string">&quot;CLOUD-SERVICE&quot;</span>);</span><br><span class="line">Server server = lb.chooseServer();</span><br><span class="line">System.out.println(<span class="string">&quot;error-&gt;&quot;</span> + server.getHostPort());</span><br><span class="line">lb.markServerDown(server);</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E3%80%81%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%AE%9E%E4%BE%8B%E6%B3%A8%E5%86%8C%E3%80%81%E5%BF%83%E8%B7%B3%E3%80%81%E4%B8%8B%E7%BA%BF%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">SpringCloud集群同步、自我保护模式以及实例注册、心跳、下线配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-26 00:28:39" itemprop="dateCreated datePublished" datetime="2017-12-26T00:28:39+08:00">2017-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="1-概述">1. 概述</span></h1><p>本文在上文 Spring cloud系列四 Eureka 之概述和服务注册中心集群的基础上，继续介绍Eureka新的内容:</p>
+<pre><code>集群重要类：PeerAwareInstanceRegistryImpl
+新的Eureka Server节点加入集群后的影响
+新服务注册(Register)注册时的影响
+服务心跳(renew)
+服务下线和剔除
+自我保护模式
+</code></pre><h1><span id="2-eureka-server的集群同步操作">2. Eureka Server的集群同步操作</span></h1><h2><span id="21-eureka官网的架构图">2.1. Eureka官网的架构图</span></h2><p>下方的操作需要结合下图理解：<br>这里写图片描述</p>
+<h2><span id="22-peerawareinstanceregistryimpl">2.2. PeerAwareInstanceRegistryImpl</span></h2><p>集群相关重要的类com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: 为了保证集群里所有Eureka Server节点的状态同步，所有以下操作都会同步到集群的所有服务上：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）。以下是一些部分方法：</p>
+<pre><code>syncUp：在Eureka Server重启或新的Eureka Server节点加进来的，会执行初始化，从集群其他节点中获取所有的实例注册信息，从而能够正常提供服务。当Eureka Server启动时，它会从其它节点获取所有的注册信息，如果获取同步失败，它在一定时间（此值由决定）内拒绝服务。
+replicateToPeers： 同步以下操作到所有的集群节点：服务注册（Registers）、服务更新（Renewals）、服务取消（Cancels）,服务超时（Expirations）和服务状态变更（Status Changes）
+register: 注册实例，并且复印此实例的信息到所有的eureka server的节点。如果其它Eureka Server调用此节点，只在本节点更新实例信息，避免通知其他节点执行更新
+renew：心跳，同步集群
+cancel
+其他
+</code></pre><p>Eureka Server集群之间的状态是采用异步方式同步的，所以不保证节点间的状态一定是一致的，不过基本能保证最终状态是一致的。</p>
+<h2><span id="23-新的eureka-server节点加入集群后的影响">2.3. 新的Eureka Server节点加入集群后的影响</span></h2><p>当有新的节点加入到集群中，会对现在Eureka Server和Eureka Client有什么影响以及他们如何发现新增的Eureka Server节点：</p>
+<pre><code>新增的Eureka Server：在Eureka Server重启或新的Eureka Server节点加进来的，它会从集群里其它节点获取所有的实例注册信息。如果获取同步失败，它会在一定时间（此值由决定eureka.server.peer-eureka-nodes-update-interval-ms决定）内拒绝服务。
+
+已有Eureka Server和Service Consumer如何发现新的Eureka Server
+    已有的Eureka Server：在运行过程中，Eureka Server之间会定时同步实例的注册信息。这样即使新的Application Service只向集群中一台注册服务，则经过一段时间会集群中所有的Eureka Server都会有这个实例的信息。那么Eureka Server节点之间如何相互发现，各个节点之间定时（时间由eureka.server.peer-eureka-nodes-update-interval-ms决定）更新节点信息，进行相互发现。
+    Service Consumer：Service Consumer刚启动时，它会从配置文件读取Eureka Server的地址信息。当集群中新增一个Eureka Server中时，那么Service Provider如何发现这个Eureka Server？Service Consumer会定时（此值由eureka.client.eureka-service-url-poll-interval-seconds决定）调用Eureka Server集群接口，获取所有的Eureka Server信息的并更新本地配置。
+</code></pre><h2><span id="24-新服务注册register注册时的影响">2.4. 新服务注册(Register)注册时的影响</span></h2><p>Service Provider要对外提供服务，把自己注册到Eureka Server上。如果配置参数eureka.client.registerWithEureka=true（默认值true）时，会向Eureka Server注册进行注册，Eureka Server会保存注册信息到内存中。</p>
+<p>Service Consumer为了避免每次调用服务请求都需要向Eureka Server获取服务实例的注册信息，此时需要设置eureka.client.fetchRegistry=true，它会在本地缓存所有实例注册信息。为了保证缓存数据的有效性，它会定时（值由eureka.client.registry-fetch-interval-seconds定义，默认值为30s）向注册中心更新实例。</p>
+<h2><span id="25-服务心跳renew">2.5. 服务心跳(renew)</span></h2><p>服务实例会通过心跳(eureka.instance.lease-renewal-interval-in-seconds定义心跳的频率，默认值为30s)续约的方式向Eureka Server定时更新自己的状态。Eureka Server收到心跳后，会通知集群里的其它Eureka Server更新此实例的状态。Service Provider/Service Consumer也会定时更新缓存的实例信息。</p>
+<h2><span id="26-服务下线和剔除">2.6. 服务下线和剔除</span></h2><p>服务的下线有两种情况：</p>
+<pre><code>在Service Provider服务shutdown的时候，主动通知Eureka Server把自己剔除，从而避免客户端调用已经下线的服务。
+Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms，默认值为0，默认情况不删除实例）进行检查，如果发现实例在在一定时间（此值由eureka.instance.lease-expiration-duration-in-seconds定义，默认值为90s）内没有收到心跳，则会注销此实例。
+</code></pre><p>这种情况下，Eureka Client的最多需要[eureka.instance.lease-renewal-interval-in-seconds + eureka.client.registry-fetch-interval-seconds]时间才发现服务已经下线。同理，一个新的服务上线后，Eureka Client的服务消费方最多需要相同的时间才发现服务已经上线</p>
+<p>服务下线，同时会更新到Eureka Server其他节点和Eureka client的缓存，流程类似同以上的register过程</p>
+<h2><span id="27-自我保护模式">2.7. 自我保护模式</span></h2><p>如果Eureka Server最近1分钟收到renew的次数小于阈值（即预期的最小值），则会触发自我保护模式，此时Eureka Server此时会认为这是网络问题，它不会注销任何过期的实例。等到最近收到renew的次数大于阈值后，则Eureka Server退出自我保护模式。</p>
+<p>自我保护模式阈值计算：</p>
+<pre><code>每个instance的预期心跳数目 = 60/每个instance的心跳间隔秒数
+阈值 = 所有注册到服务的instance的数量的预期心跳之和 *自我保护系数
+</code></pre><p>以上的参数都可配置的：</p>
+<pre><code>instance的心跳间隔秒数：eureka.instance.lease-renewal-interval-in-seconds
+自我保护系数：eureka.server.renewal-percent-threshold
+</code></pre><p>如果我们的实例比较少且是内部网络时，推荐关掉此选项。我们也可以通过eureka.server.enable-self-preservation = false来禁用自我保护系数</p>
+<h2><span id="28-配置demo">2.8 配置demo</span></h2><p>以下配置的demo如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10761</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-registration-center</span></span><br><span class="line"><span class="comment">## eureka ： 主要配置属性在EurekaInstanceConfigBean和EurekaClientConfigBean中</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># hostname: 127.0.0.1</span></span><br><span class="line">    <span class="comment"># 使用IP注册</span></span><br><span class="line">    <span class="attr">preferIpAddress:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 心跳间隔</span></span><br><span class="line">    <span class="attr">lease-renewal-interval-in-seconds:</span> <span class="number">3</span></span><br><span class="line">    <span class="comment"># 服务失效时间： 如果多久没有收到请求，则可以删除服务</span></span><br><span class="line">    <span class="attr">lease-expiration-duration-in-seconds:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment"># 关闭eureka client</span></span><br><span class="line">    <span class="comment"># enabled: false</span></span><br><span class="line">    <span class="comment"># 注册自身到eureka服务器</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 表示是否从eureka服务器获取注册信息</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># 客户端从Eureka Server集群里更新Eureka Server信息的频率</span></span><br><span class="line">    <span class="attr">eureka-service-url-poll-interval-seconds:</span> <span class="number">60</span></span><br><span class="line">    <span class="comment"># 定义从注册中心获取注册服务的信息</span></span><br><span class="line">    <span class="attr">registry-fetch-interval-seconds:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 设置eureka服务器所在的地址，查询服务和注册服务都需要依赖这个地址</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10761/eureka/</span></span><br><span class="line">       <span class="comment"># 设置eureka服务器所在的地址，可以同时向多个服务注册服务</span></span><br><span class="line">       <span class="comment"># defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold: 0.1</span></span><br><span class="line">     <span class="comment"># 关闭自我保护模式</span></span><br><span class="line">     <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br><span class="line">     <span class="comment"># Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用</span></span><br><span class="line">     <span class="comment"># renewal-percent-threshold:</span></span><br><span class="line">     <span class="comment"># 设置清理间隔,单位为毫秒,默认为0</span></span><br><span class="line">     <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">3000</span></span><br><span class="line">     <span class="comment"># 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务</span></span><br><span class="line">     <span class="attr">wait-time-in-ms-when-sync-empty:</span> <span class="number">6000000</span></span><br><span class="line">     <span class="comment"># 集群之间相互更新节点信息的时间频率</span></span><br><span class="line">     <span class="attr">peer-eureka-nodes-update-interval-ms:</span> <span class="number">60000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-11-09 17:27:04" itemprop="dateCreated datePublished" datetime="2017-11-09T17:27:04+08:00">2017-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="索引介绍">索引介绍</span></h2><blockquote>
+<p>索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I/O，假设磁盘每次I/O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好很多很多)。如果对之建立B-Tree索引，则只需要进行log100(10^6^)=3次页面读取，最坏情况下耗时30ms。这就是索引带来的效果，很多时候，当你的应用程序进行SQL查询速度很慢时，应该想想是否可以建索引</p>
+</blockquote>
+<h2><span id="索引与优化">索引与优化</span></h2><h3><span id="索引的数据类型">索引的数据类型</span></h3><pre><code>选择索引类型原则：
+</code></pre><ol>
+<li>数据整形： 越小的整形在磁盘、内存、和CPU之间都需要更少的空间，处理起来更快。<ol>
+<li>简单的数据类型更好： 整形数据比起字符型，处理开销更小，因为字符串的比较更复杂，在Mysql中，应该用内置的日期和时间数据类型，而不是字符串来存储时间，以及用整形数据类型存储ip地址。</li>
+<li>尽量避免NULL： 应该指定列为NOT NULL ，除非想存储NULL。在mysql中，含有空值的列很难进行查询优化，以为他使得索引、索引的统计信息以及比较运算符更加复杂。应该用0、一个特殊值、或者一个空串代替空值。</li>
+</ol>
+</li>
+</ol>
+<h4><span id="选择标识符">选择标识符</span></h4><p>  选择合适的标识符是非常重要的，选择是不仅应该考虑存储类型，而且应该考虑mysql是怎么进行运算和比较的，一旦选定数据类型，应该保证所有的表都使用相同的数据类型。</p>
+<pre><code>1. 整形： 通常是作为标识符最好的选择，因为更苦阿爹处理，因为可以更快的处理，而且可以设置为AUTO_INCREMENT。
+2. 字符串：尽量避免使用字符串作为标识符，它们消耗更好的空间，处理起来也较慢。而且，通常来说，字符串都是随机的，所以它们在索引中的位置也是随机的，这会导致页面分裂、随机访问磁盘，聚簇索引分裂（对于使用聚簇索引的存储引擎）。
+</code></pre><h3><span id="索引入门">索引入门</span></h3><pre><code>对于任何DBMS，索引都是进行优化的最主要的因素。对于少量的数据，没有合适的索引影响不是很大，但是，当随着数据量的增加，性能会急剧下降。
+如果对多列进行索引(组合索引)，**列的顺序**非常重要，MySQL仅能对索引最左边的前缀进行有效的查找。例如：
+</code></pre><p>假设存在组合索引 表t1 建立 c1c2(c1,c2)联合索引，查询语句select <em> from t1 where c1=1 and c2=2能够使用该索引。查询语句select </em> from t1 where c1=1也能够使用该索引。但是，查询语句select * from t1 where c2=2不能够使用该索引，因为没有组合索引的引导列，即，要想使用c2列进行查找，必需出现c1等于某值。</p>
+<h4><span id="索引的类型">索引的类型</span></h4><p>索引是在存储引擎中实现的，而不是在服务器层中实现的。所以，每种存储引擎的索引都不一定完全相同，并不是所有的存储引擎都支持所有的索引类型。</p>
+<h5><span id="b-tree索引">B-Tree索引</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE People (</span><br><span class="line"></span><br><span class="line"> last_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> first_name varchar(50)    not null,</span><br><span class="line"></span><br><span class="line"> dob        date           not null,</span><br><span class="line"></span><br><span class="line"> gender     enum(&#x27;m&#x27;, &#x27;f&#x27;) not null,</span><br><span class="line"></span><br><span class="line"> key(last_name, first_name, dob)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>其索引包含表中每一行的last_name、first_name和dob列。其结构大致如下：<br><img data-src="img/mysql索引关系.jpg" alt><br>索引存储的值按索引列中的顺序排列。可以利用B-Tree索引进行全关键字、关键字范围和关键字前缀查询，当然，如果想使用索引，你必须保证按索引的最左边前缀(leftmost prefix of the index)来进行查询。</p>
+<ol>
+<li>匹配全值(Match the full value)：对索引中的所有列都指定具体的值。例如，上图中索引可以帮助你查找出生于1960-01-01的Cuba Allen。</li>
+<li>匹配最左前缀(Match a leftmost prefix)：你可以利用索引查找last name为Allen的人，仅仅使用索引中的第1列。</li>
+<li>匹配列前缀(Match a column prefix)：例如，你可以利用索引查找last name以J开始的人，这仅仅使用索引中的第1列。</li>
+<li>匹配值的范围查询(Match a range of values)：可以利用索引查找last name在Allen和Barrymore之间的人，仅仅使用索引中第1列。</li>
+<li>匹配部分精确而其它部分进行范围匹配(Match one part exactly and match a range on another part)：可以利用索引查找last name为Allen，而first name以字母K开始的人。</li>
+<li>仅对索引进行查询(Index-only queries)：如果查询的列都位于索引中，则不需要读取元组的值。</li>
+</ol>
+<p>由于B-树中的节点都是<strong>顺序存储</strong>的，所以可以利用索引进行查找(找某些值)，也可以对查询结果进行ORDER BY。当然，使用B-tree索引有以下一些限制：</p>
+<ol>
+<li>查询必须从索引的最左边的列开始。关于这点已经提了很多遍了。例如你不能利用索引查找在某一天出生的人。</li>
+<li>不能跳过某一索引列。例如，你不能利用索引查找last name为Smith且出生于某一天的人。</li>
+<li><p>存储引擎不能使用索引中范围条件右边的列。例如，如果你的查询语句为WHERE last_name=”Smith” AND first_name LIKE ‘J%’ AND dob=’1976-12-23’，则该查询只会使用索引中的前两列，因为LIKE是范围查询。</p>
+<h5><span id="hash索引">Hash索引</span></h5><blockquote>
+<p>MySQL中，只有Memory存储引擎显示支持hash索引，是Memory表的默认索引类型，尽管Memory表也可以使用B-Tree索引。Memory存储引擎支持非唯一hash索引，这在数据库领域是罕见的，如果多个值有相同的hash code，索引把它们的行指针用链表保存到同一个hash表项中。</p>
+</blockquote>
+<p>假设创建如下一个表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE testhash (</span><br><span class="line">   fname VARCHAR(50) NOT NULL,</span><br><span class="line">   lname VARCHAR(50) NOT NULL,</span><br><span class="line">   KEY USING HASH(fname)</span><br><span class="line">) ENGINE=MEMORY;</span><br></pre></td></tr></table></figure>
+<p>假设索引使用hash函数f( )，如下：</p>
+<blockquote>
+<p>  f(‘Arjen’) = 2323<br>f(‘Baron’) = 7437<br>f(‘Peter’) = 8784<br>f(‘Vadim’) = 2458<br>此时，索引的结构大概如下：<br><img data-src="img/mysqlHash索引图.jpg" alt></p>
+</blockquote>
+</li>
+</ol>
+<p>Slots是有序的，但是记录不是有序的。当你执行<br>mysql&gt; SELECT lname FROM testhash WHERE fname=’Peter’;<br>MySQL会计算’Peter’的hash值，然后通过它来查询索引的行指针。因为f(‘Peter’) = 8784，MySQL会在索引中查找8784，得到指向记录3的指针。<br>因为索引自己仅仅存储很短的值，所以，索引非常紧凑。Hash值不取决于列的数据类型，一个TINYINT列的索引与一个长字符串列的索引一样大。<br>Hash索引有以下一些<strong>限制</strong>：</p>
+<ol>
+<li>由于索引仅包含hash code和记录指针，所以，MySQL不能通过使用索引避免读取记录。但是访问内存中的记录是非常迅速的，不会对性造成太大的影响。</li>
+<li>不能使用hash索引排序。</li>
+<li>Hash索引不支持键的部分匹配，因为是通过整个索引值来计算hash值的。</li>
+<li>Hash索引只支持等值比较，例如使用=，IN( )和&lt;=&gt;。对于WHERE price&gt;100并不能加速查询。</li>
+</ol>
+<h5><span id="空间r-tree索引">空间(R-Tree)索引</span></h5><pre><code>MyISAM支持空间索引，主要用于地理空间数据类型，例如GEOMETRY。
+</code></pre><h5><span id="全文full-text索引">全文(Full-text)索引</span></h5><pre><code>全文索引是MyISAM的一个特殊索引类型，主要用于全文检索。
+</code></pre><h2><span id="高性能的索引策略">高性能的索引策略</span></h2><h3><span id="聚簇索引clustered-indexes">聚簇索引(Clustered Indexes)</span></h3><blockquote>
+<p>mysql聚簇索引保证关键字的值相近的元组存储的物理位置也相同（所以字符串类型不宜建立聚簇索引，特别是随机字符串，会使得系统进行大量的移动操作），且一个表只能有一个聚簇索引。因为由存储引擎实现索引，所以，并不是所有的引擎都支持聚簇索引。目前，只有solidDB和InnoDB支持。<br> 结构如下：<br> <img data-src="img/mysql聚簇索引.jpg" alt><br>注：叶子页面包含完整的元组，而内节点页面仅包含索引的列(索引的列为整型)。一些DBMS允许用户指定聚簇索引，但是MySQL的存储引擎到目前为止都不支持。InnoDB对主键建立聚簇索引。如果你不指定主键，InnoDB会用一个具有唯一且非空值的索引来代替。如果不存在这样的索引，InnoDB会定义一个隐藏的主键，然后对其建立聚簇索引。一般来说，DBMS都会以聚簇索引的形式来存储实际的数据，它是其它二级索引的基础。</p>
+</blockquote>
+<h4><span id="innodb和myisam的数据布局的比较">InnoDB和MyISAM的数据布局的比较</span></h4><blockquote>
+<p>为了更加理解聚簇索引和非聚簇索引，或者primary索引和second索引(MyISAM不支持聚簇索引)，来比较一下InnoDB和MyISAM的数据布局，对于如下表：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE layout_test (</span><br><span class="line"></span><br><span class="line">col1 int NOT NULL,</span><br><span class="line"></span><br><span class="line">col2 int NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(col1),</span><br><span class="line"></span><br><span class="line">KEY(col2)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure><br>假设主键的值位于1—-10,000之间，且按随机顺序插入，然后用OPTIMIZE TABLE进行优化。col2随机赋予1—-100之间的值，所以会存在许多重复的值。</p>
+<ol>
+<li>MyISAM的数据布局<br>其布局十分简单，MyISAM按照插入的顺序在磁盘上存储数据，如下：<br><img data-src="img/mysqlMyisam索引.jpg" alt></li>
+</ol>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/java/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" class="post-title-link" itemprop="url">线程间通信</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-11-09 13:53:12" itemprop="dateCreated datePublished" datetime="2017-11-09T13:53:12+08:00">2017-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s/Nij2KMBmDn5E5nFhpwn24w">参考如下</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/java/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/EffectiveJava%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">EffectiveJava读书笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-26 22:13:26" itemprop="dateCreated datePublished" datetime="2017-10-26T22:13:26+08:00">2017-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="effectivejava-读书笔记">EffectiveJava 读书笔记</span></h1><p>本文于2017年10月26日再读一遍，对书中的内容进行整理提取，方便以后查阅</p>
+<p>[TOC]</p>
+<h2><span id="第一章创建和销毁对象">第一章：创建和销毁对象</span></h2><h3><span id="创建对象的方法">创建对象的方法</span></h3><ul>
+<li>构造器方法new一个；</li>
+<li>公共静态方法返回实例；</li>
+<li>Build工程模式。<blockquote>
+<p>一般来说创建对象最简单的方法就是使用的时候new一个，如Person  person = new Person();既通过构造器创建对象。这种使用方法不适用于所有情况，例如一个单例工具类，不需要每次使用都new，而是通过一个公共静态方法返回类的实例。</p>
+</blockquote>
+</li>
+</ul>
+<h4><span id="构造器方式">构造器方式</span></h4><p>  <em>缺点</em></p>
+<blockquote>
+<p>每一个构造器都与类名相同，无法知其寓意。</p>
+</blockquote>
+<p>  构造器方法时最常用的方法；</p>
+<h4><span id="公共静态方法">公共静态方法</span></h4><p>  <em>优点1</em></p>
+<blockquote>
+<p>每一个公共静态方法都有名字，顾名思义。</p>
+</blockquote>
+<p>  <em>优点2</em></p>
+<blockquote>
+<p>不必为每次调用都产生一个新的实例，可以重复利用。</p>
+</blockquote>
+<p>  <em>优点3</em></p>
+<blockquote>
+<p>可以返回原返回类型的任何子类型对象。</p>
+</blockquote>
+<p>  <em>优点3</em></p>
+<blockquote>
+<p>创建参数化类型实例，使代码变得更简洁。</p>
+</blockquote>
+<p>  <em>缺点1</em></p>
+<blockquote>
+<p>类如果不含有共有的或者受保护的构造器，就不能被子类化。</p>
+</blockquote>
+<p>  <em>缺点2</em></p>
+<blockquote>
+<p>与其他静态方法没有任何区别。</p>
+</blockquote>
+<h4><span id="使用情景1-通过方法名知其方法作用">使用情景1 通过方法名知其方法作用</span></h4><p>  如BigInteger(int,int,Random)返回的BitInteger可能为素数，但如果用BigInteger.probablePrime静态方法来表示，更加清楚方法寓意。</p>
+<p>  如果两个构造器方法中只是参数类型顺序上不同，很容易造成寓意混乱，需要进一步查询文档才能确定用哪一个，容错率很低。</p>
+<h4><span id="使用场景2-使用预先定义好的实例">使用场景2 使用预先定义好的实例。</span></h4><p>  公共静态方法返回的实例可以控制是否是单例,或者控制是否可以实例化。</p>
+<ul>
+<li>getInstance和newInstance区别：<blockquote>
+<p>getInstance方法重点是返回已经创建好的实例。<br>newInstance方法重点是返回一个新的实例。</p>
+</blockquote>
+</li>
+</ul>
+<h4><span id="使用场景3-collections的32个便利实现-通过适配器提供更丰富的服务接口">使用场景3 Collections的32个便利实现、通过适配器提供更丰富的服务接口</span></h4><p>  分别提供了不可修改的集合、同步集合等。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Service interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Service provider interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Provider</span></span>&#123;</span><br><span class="line">  <span class="function">Service <span class="title">newService</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Services</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Services</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String,Provider&gt; providers = <span class="keyword">new</span> ConcurrentHashMap&lt;String,Provider&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PROVIDER_NAME = <span class="string">&quot;&lt;def&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerDefaultProvider</span><span class="params">(Provider p)</span></span>&#123;</span><br><span class="line">    registerProvider(DEFAULT_PROVIDER_NAME,p););</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerProvider</span><span class="params">(String name,Provider p)</span></span>&#123;</span><br><span class="line">    providers.put(name,p);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> newInstance(DEFAULT_PROVIDER_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Service <span class="title">newInstance</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">    Provider p = provider.get(name);</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="keyword">null</span>)&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;No provider registered with name:&quot;</span>+ name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p.newService();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4><span id="使用场景4-代替繁琐的参数声明">使用场景4  代替繁琐的参数声明。</span></h4><h4><span id="使用场景6">使用场景6</span></h4><p>  valueOf — 返回的实例与参数具有相同的值，实际上是类型转换方法。<br>  of  — valueOf的简洁替代。<br>  getInstance  — 返回的实例是通过方法的参数来描述的，但是不能说与参数有相同的值。对于Singleton来说，该方法没有参数。<br>  newInstance  — 跟getInstance一样，但是该方法确保返回的实例与其他实例不同。<br>  getType  — 跟getInstance一样，但是在工厂方法中处于不同的类中的时候使用，Type表示工厂方法锁返回的对象类型。<br>  newType  — 像newInstance一样，但是在工厂方法中处于不同的类中的时候使用。</p>
+<h3><span id="构建器">构建器</span></h3><p>  静态工厂和构造器都有个局限性，都不能很好的扩展到大量的可选参数。<br>  参数量大的情况下通常有两种方法：</p>
+<ul>
+<li><p>重叠构造器</p>
+<blockquote>
+<p>可行，但很难编写，难以阅读。</p>
+</blockquote>
+</li>
+<li><p><em>工厂模式</em></p>
+<blockquote>
+<p>build构造参数很简单明了，链式调用很少出错。<br>  但是在构造Bean的时候，可能出现不一致的状态，类无法仅仅通过构造器参数的有效性来保证一致性。</p>
+</blockquote>
+</li>
+</ul>
+<h3><span id="用私有构造器或者枚举类型强化singleton属性">用私有构造器或者枚举类型强化Singleton属性</span></h3><p>  构造器私有，公开一个公共静态方法返回实例。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E7%B1%BB%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E7%B1%BB%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">java类解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-26 14:21:04" itemprop="dateCreated datePublished" datetime="2017-10-26T14:21:04+08:00">2017-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>177</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="java对象头">Java对象头</span></h2><p>  一般占用两个机器码，在32位虚拟机中，一个机器码占用4个字节，就是32位，但是如果是数组，需要占用3个机器码，需要1位确认数组大小。</p>
+<ul>
+<li>标记字段<ul>
+<li>哈希码</li>
+<li>GC分代年龄</li>
+<li>锁状态标志</li>
+<li>线程持有的锁</li>
+<li>偏向线程ID</li>
+<li>偏向时间戳</li>
+</ul>
+</li>
+<li><p>类型指针</p>
+<p>| 25bit | 4bit | 1bit | 2bit |<br>| —- | —- | —- | —- |<br>| 对象的hashCode | 分代年龄  | 是否是偏向锁 | 锁标记位 |</p>
+<p><img data-src="img/java对象头.jpg" alt></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E7%AE%97%E6%B3%95/%E6%B1%82m%E7%9A%84n%E6%AC%A1%E6%96%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E7%AE%97%E6%B3%95/%E6%B1%82m%E7%9A%84n%E6%AC%A1%E6%96%B9/" class="post-title-link" itemprop="url">求m的n次方</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-24 16:45:47" itemprop="dateCreated datePublished" datetime="2017-10-24T16:45:47+08:00">2017-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="初步设想">初步设想</span></h2><p>  最简单的方法，就是for循环一下。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">     result *= m;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>  这种方法结果肯定正确，但是时间复杂度上，需要O(n)。很是不理想。于是我想着改进一下。</p>
+<h2><span id="探求乘法原理">探求乘法原理</span></h2><p>  乘法原理就是n个m相乘，例如m=10，n=5， 那么表达式为 10<em>10</em>10<em>10</em>10,有人说这不是废话嘛，当然不是，之所以展开，是因为可以改写法，如：(10<em>10)</em> (10<em>10)</em> 10,又有人说了，这不是还是废话嘛，别急往下看，你会发现(10*10)重复了。</p>
+<p>  什么意思？</p>
+<p>  如果单纯用for循环10的4次幂，需要 <em>循环4次运算</em>，现在我先用10<em>10,</em>第1次运算<em>，再用得出的结果乘以得出的结果，也就是(10</em>10)<em> (10</em>10),<em>第2次运算</em>。就这么简单，此次运算节省了2次，节省了百分之50啊，重大发现啊。</p>
+<p>  如果是10的8次幂呢？单纯for循环需要8次，新的方法需要几次？<em>3次</em>。怎么算的？(10<em>10)</em> (10<em>10)</em> (10<em>10)</em> (10<em>10)。发现就是算10</em>10的4次方，算出10<em>10需要 </em>第一次*，4次方刚刚算了是2次，一共是3次，这么神奇啊，节省了5次运算啊。这是节省了百分之。。。ummmm，管他百分之多少呢，反正很多。</p>
+<p>  照这么下去，16次方需要 <em>4</em> 次运算，32次方需要 <em>5</em> 次运算，64次方需要 <em>6</em> 次运算，重大发现，也就是说，<em>如果n是2的i次幂，那么就需要i次运算就可以算出m的n次方了。</em></p>
+<p>  天晴了， 世界和平了，我又拯救了世界了，可以回家睡懒觉了。</p>
+<p>  咦，等等，如果n不是2的多少次幂怎么办？比如10的5次幂？</p>
+<p>  ummmm，我想了想，把5拆成4+1呢？也就是10的4次幂再乘以10，这个方法可以。</p>
+<p>  那10的6次幂就可以拆成4+2.</p>
+<p>  7次方就可以拆成4+2+1.嗯，不错。</p>
+<p>  于是，我写了个代码，如下</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pow</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> m = <span class="number">5</span>;</span><br><span class="line">      <span class="keyword">int</span> n = <span class="number">134</span>;</span><br><span class="line">      <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">      System.out.println(<span class="string">&quot;for循环版，结果为 ： &quot;</span> + Double.toString(pow(m, n)));</span><br><span class="line">      <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">      System.out.println(<span class="string">&quot;for循环版，总耗时： &quot;</span> + (end - start));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      start = System.currentTimeMillis();</span><br><span class="line">      System.out.println(<span class="string">&quot;叠乘法，结果为 ： &quot;</span> + Double.toString(pow2(m, n)));</span><br><span class="line">      end = System.currentTimeMillis();</span><br><span class="line">      System.out.println(<span class="string">&quot;叠乘法，总耗时： &quot;</span> + (end - start));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * m的n次方,for循环版</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> m 底数</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> n 幂数</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">boolean</span> negative = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (m == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">          n = -n;</span><br><span class="line">          negative = <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 循环乘法</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">          result *= m;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (negative) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span> / result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * m的n次方,折中叠乘法</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> m 底数</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> n 幂数</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">pow2</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">boolean</span> negative = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (m == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">          n = -n;</span><br><span class="line">          negative = <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//        当m是2的时候，直接位移就可以。</span></span><br><span class="line">      <span class="keyword">if</span> (m == <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">2</span> &lt;&lt; n;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 叠乘法</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line"><span class="comment">//        最后结果。</span></span><br><span class="line">      <span class="keyword">double</span> result = <span class="number">1L</span>;</span><br><span class="line"><span class="comment">//        定义一个指针，从右向左按位与。</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line"><span class="comment">//            按位与，如果大于0，说明此位为1,需要m的i次方。</span></span><br><span class="line">          <span class="keyword">if</span> ((i &amp; n) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              <span class="keyword">double</span> resultTemp = <span class="number">1L</span>;</span><br><span class="line"><span class="comment">//                m的i次方不能写成循环i次的m相乘，而是m叠乘，次数为ln(i)。    例如m的8次方，就是((m*m)*(m*m))*((m*m)*(m*m)),也就是 ((m*m)2)2</span></span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (j == <span class="number">1</span>) &#123;</span><br><span class="line">                      resultTemp = m;</span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                      <span class="keyword">if</span> (greatThanMax(resultTemp, resultTemp)) &#123;</span><br><span class="line">                          <span class="keyword">return</span> Double.MAX_VALUE;</span><br><span class="line">                      &#125;</span><br><span class="line">                          resultTemp *= resultTemp;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (greatThanMax(resultTemp, result)) &#123;</span><br><span class="line">                  <span class="keyword">return</span> Double.MAX_VALUE;</span><br><span class="line">              &#125;</span><br><span class="line">              result *= resultTemp;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (negative) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span> / result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 检查两个数相乘是否大于double的最大值。</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> m</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">greatThanMax</span><span class="params">(<span class="keyword">double</span> m, <span class="keyword">double</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (m &gt; (Double.MAX_VALUE / n));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果为</p>
+<blockquote>
+<p>for循环版，结果为 ： 4.591774807899563E93<br>    for循环版，总耗时： 1<br>    叠乘法，结果为 ： 4.591774807899562E93<br>    叠乘法，总耗时： 0</p>
+</blockquote>
+<h2><span id="彩蛋">彩蛋</span></h2><p>  如果m是2的话，只需要返回2&lt;&lt;n就行了。自行判断是否越界。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">java学习路线</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-24 14:21:01" itemprop="dateCreated datePublished" datetime="2017-10-24T14:21:01+08:00">2017-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="本文作为收藏用">本文作为收藏用</span></h1><h1><span id>#</span></h1><p>作者：匿名用户<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39890405/answer/83676977">https://www.zhihu.com/question/39890405/answer/83676977</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<ul>
+<li><p>第一个是基础。</p>
+<blockquote>
+<p>比如对集合类，并发包，IO/NIO，JVM，内存模型，泛型，异常，反射，等有深入了解，最好是看过源码了解底层的设计。比如一般面试都会问ConcurrentHashMap，CopyOnWrite，线程池，CAS，AQS，虚拟机优化等知识点，因为这些对互联网的企业是绝对重要的。而且一般人这关都过不了，还发闹骚说这些没什么用，为什么要面试。举一例子，在使用线程池时，因为使用了无界队列，在远程服务异常情况下导致内层飙升，怎么去解决？你要是连线程池都不清楚，你怎么去玩？再举一例，由于对ThreadLocal理解出错，使用它做线程安全的控制，导致没能实现真的线程安全。所以作为一个拿两万的JAVA程序员这点基础是要有的。</p>
+</blockquote>
+</li>
+<li><p>第二你需要有全面的互联网技术相关知识。</p>
+<blockquote>
+<p>从底层说起，你起码得深入了解mysql，redis，mongodb，nginx，tomcat，rpc，jms等方面的知识。你要问需要了解到什么程度，我可以给你说个大慨。首先对于MySQL，你要知道常见的参数设置，存储引擎怎么去选择，还需要了解常见的索引引擎，知道怎么去选择。知道怎么去设计表，怎么优化sql，怎么根据执行计划去调优。高级的你需要去做分库分表的设计和优化，一般互联网企业的数据库都是读写分离，还会垂直与水平拆分，所以这个也有经验的成分在里面。然后redis，mongodb都是需要了解原理，需要会调整参数的，而nginx和tomcat几乎都是JAVA互联网方面必配，其实很阿里的技术栈选择有点关系。至于rpc相关的就多的去，必须各种网络协议，序列化技术，SOA等等，你要有一个深入的理解。现在应用比较广的rpc框架，在国内就是dubbo了，可以自行搜索。至于jms相关的起码得了解原理吧，一般情况下不是专门开发中间件系统和支撑系统的不需要了解太多细节，国内企业常用的主要是activeMQ和kafka。你能对我说的都研究的比较深入，阿里p7都不是太大问题的，当然这个还需要看你的架构能力方面的面试表现了。</p>
+</blockquote>
+</li>
+<li><p>第三就是编程能力</p>
+<blockquote>
+<p>编程思想，算法能力，架构能力。首先2W程序员对算法的要求我觉得还是比较低，再高级也最多红黑树吧，但是排序和查询的基本算法得会。编程思想是必须的，问你个AOP和IOC你起码的清清楚楚，设计模式不说每种都用过，但也能了解个几种吧。编程能力这个我觉得不好去评价，但是拿一个2000W用户根据姓名年龄排序这种题目也能信手拈来。最后就是架构能力，这种不是说要你设计个多牛逼多高并发的系统，起码让你做一个秒杀系统，防重请求的设计能快速搞定而没有坑吧。</p>
+</blockquote>
+</li>
+</ul>
+<h3><span id="感谢">感谢</span></h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39890405/answer/83676977">在北京做Java开发如何月薪达到两万，需要技术水平达到什么程度？</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/40801731/answer/91814769">零基础应该选择学习 java、php、前端 还是 python？</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E8%BD%AC%E5%8F%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E8%BD%AC%E5%8F%91%EF%BC%89/" class="post-title-link" itemprop="url">数据库架构设计（转发）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-12 18:20:17" itemprop="dateCreated datePublished" datetime="2017-10-12T18:20:17+08:00">2017-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://gitbook.cn/books/59be67b577cac00b9c2362fa/index.html">链接地址</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+
+</body>
+</html>

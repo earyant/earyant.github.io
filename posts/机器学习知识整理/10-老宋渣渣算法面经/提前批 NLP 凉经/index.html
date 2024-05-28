@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="OPPO 提前批 一面 二面 - 总监&#x2F;部长面 为啥凉 - 自我分析(安慰)一波   今日头条凉经 1. 一面 2. 原因分析   提前批 - 阿里大文娱 1. 一面 2. 二面 自我分析   学霸批 - 拼多多 1. 一面 - hr 2. 二面 三面 自我分析   网易- 提前批 1. 一面 二面 总监面 HR面 - 15分钟   360 - 垃圾 一面 - 10分钟 二面 - 10分钟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提前批NLP面经">
+<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E6%8F%90%E5%89%8D%E6%89%B9%20NLP%20%E5%87%89%E7%BB%8F/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="OPPO 提前批 一面 二面 - 总监&#x2F;部长面 为啥凉 - 自我分析(安慰)一波   今日头条凉经 1. 一面 2. 原因分析   提前批 - 阿里大文娱 1. 一面 2. 二面 自我分析   学霸批 - 拼多多 1. 一面 - hr 2. 二面 三面 自我分析   网易- 提前批 1. 一面 二面 总监面 HR面 - 15分钟   360 - 垃圾 一面 - 10分钟 二面 - 10分钟">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="机器学习知识整理">
+<meta property="article:tag" content="老宋渣渣算法面经">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E6%8F%90%E5%89%8D%E6%89%B9%20NLP%20%E5%87%89%E7%BB%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>提前批NLP面经 | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E6%8F%90%E5%89%8D%E6%89%B9%20NLP%20%E5%87%89%E7%BB%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          提前批NLP面经
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <!-- toc -->
+<ul>
+<li><a href="#oppo-提前批">OPPO 提前批</a><ul>
+<li><a href="#一面">一面</a></li>
+<li><a href="#二面-总监部长面">二面 - 总监/部长面</a></li>
+<li><a href="#为啥凉-自我分析安慰一波">为啥凉 - 自我分析(安慰)一波</a></li>
+</ul>
+</li>
+<li><a href="#今日头条凉经">今日头条凉经</a><ul>
+<li><a href="#1-一面">1. 一面</a></li>
+<li><a href="#2-原因分析">2. 原因分析</a></li>
+</ul>
+</li>
+<li><a href="#提前批-阿里大文娱">提前批 - 阿里大文娱</a><ul>
+<li><a href="#1-一面">1. 一面</a></li>
+<li><a href="#2-二面">2. 二面</a></li>
+<li><a href="#自我分析">自我分析</a></li>
+</ul>
+</li>
+<li><a href="#学霸批-拼多多">学霸批 - 拼多多</a><ul>
+<li><a href="#1-一面-hr">1. 一面 - hr</a></li>
+<li><a href="#2-二面-1">2. 二面</a></li>
+<li><a href="#三面">三面</a></li>
+<li><a href="#自我分析-1">自我分析</a></li>
+</ul>
+</li>
+<li><a href="#网易-提前批">网易- 提前批</a><ul>
+<li><a href="#1-一面-1">1. 一面</a></li>
+<li><a href="#二面">二面</a></li>
+<li><a href="#总监面">总监面</a></li>
+<li><a href="#hr面-15分钟">HR面 - 15分钟</a></li>
+</ul>
+</li>
+<li><a href="#360-垃圾">360 - 垃圾</a><ul>
+<li><a href="#一面-10分钟">一面 - 10分钟</a></li>
+<li><a href="#二面-10分钟">二面 - 10分钟</a></li>
+</ul>
+</li>
+<li><a href="#小米">小米</a><ul>
+<li><a href="#一面-1">一面</a></li>
+<li><a href="#二面-1">二面</a></li>
+</ul>
+</li>
+<li><a href="#搜狗">搜狗</a><ul>
+<li><a href="#1-一面-2">1. 一面</a></li>
+<li><a href="#2-二面-2">2. 二面</a></li>
+</ul>
+</li>
+<li><a href="#猿辅导">猿辅导</a></li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h2><span id="oppo-提前批">OPPO 提前批</span></h2><h3><span id="一面">一面</span></h3><p>等了将近4个小时，Oppo的效率有点差呀。</p>
+<ul>
+<li>项目</li>
+<li>Transformer 结构， 大致说一下</li>
+<li>懂 ELMO 吗？ 谈谈 ELMO 的结构</li>
+<li>数据处理的一些手段</li>
+<li><strong>BertTextClassification</strong> 都做了啥</li>
+<li>语言模型懂得多么？ 简单谈谈</li>
+<li>Word2Vec 的 Nagative sample </li>
+<li>Bert 没有很深入，简单谈谈</li>
+<li>你一般怎么找论文（然后我就说我看论文蛮快的）</li>
+<li>一道编程题： [743, 74  2, 54], 组成最大的数为 74743542</li>
+<li>你有什么想问我的吗？</li>
+</ul>
+<h3><span id="二面-总监部长面">二面 - 总监/部长面</span></h3><p>面我的年纪应该不小了，应该是不太懂技术的，感觉不太看得起深度学习。</p>
+<ul>
+<li>评价一下你的一面面试官（我说，面试官好像没有跟进最新paper，其实可以聊一下， 不过面试官真的很nice）</li>
+<li>你的一面面试官是做翻译的，我看你好像偏向搜索，所以谈谈你想做啥？（我就说我想做搜索方面的）</li>
+<li>简单聊了一下Github项目，和阅读理解。</li>
+<li>你有什么想问我的吗？ 然后我问了俩问题。</li>
+</ul>
+<p>然后， 凉凉。</p>
+<h3><span id="为啥凉-自我分析安慰一波">为啥凉 - 自我分析(安慰)一波</span></h3><ul>
+<li>岗位少： 我投的方向只招收5个人，还是机器翻译 + 对话两个方向总共招这么点人。 说实话，感觉 Oppo对NLP并不看重， 对比 CV 就能看的出来。</li>
+<li>竞争激烈，神仙打架</li>
+</ul>
+<h2><span id="今日头条凉经">今日头条凉经</span></h2><h3><span id="1-一面">1.  一面</span></h3><ul>
+<li><p>先自我介绍一下，主要说自己的研究方向（阅读理解，balabala）</p>
+</li>
+<li><p>深挖了一下 Bert 的细节（包括预训练过程细节，损失函数与自己使用的一些经验，在阅读理解与分类问题上)</p>
+</li>
+<li><p>语言模型相关： AR , AE 模型（我自己扩展的，面试官没打断）</p>
+</li>
+<li><p>我们来一道有意思的概率题（瞬间心里咯噔一下，概率论早就还给老师了，答的并不好，难受）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个地区的某个疾病的患病率为 0.01， 一个模型能够预测患病与否，错误率为 0.01， 现在，我已经被检测出来患病了， 求我真正患病的概率。</span><br></pre></td></tr></table></figure>
+<p>假设真正患病为事件A， 预测为患病为事件B， 那么我们要求：</p>
+<script type="math/tex; mode=display">
+P(A|B) = \frac{P(AB)}{P(B)} = \frac{P(B|A) * P(A)}{P(B)} = ?  \qquad \text{俺就答到这，不会算了}</script></li>
+<li><p>我们来一道有意思的编程题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将驼峰命名方式为 abcdAutoDecoder， abcHTTPDecoder 改为下划线命名为 abcd_auto_decoder, abc_http_decoder</span><br></pre></td></tr></table></figure>
+<p>一道贪心的题， 比较简单。</p>
+</li>
+<li><p>又问了一些 Pytorch 的内容，我觉得主要看我对 Pytorch 熟不熟悉</p>
+</li>
+<li><p>你可以问我一些问题， 然后我就问了俩问题， 就道谢离开。</p>
+</li>
+</ul>
+<h3><span id="2-原因分析">2. 原因分析</span></h3><p>概率论那道题没有答上来，算法写的不是很好，虽然答出来了，但因为题很简单，边界处理的不干净。</p>
+<h2><span id="提前批-阿里大文娱">提前批 - 阿里大文娱</span></h2><h3><span id="1-一面">1. 一面</span></h3><ul>
+<li>简单介绍一下自己</li>
+<li>项目从头到尾问了问</li>
+<li>目前主要做什么？</li>
+<li>Bert</li>
+<li>Transformer</li>
+<li>一道概率题，54张牌，分为三份，每份18张，求大小王在一起的概率</li>
+<li>写了一道快排</li>
+</ul>
+<h3><span id="2-二面">2. 二面</span></h3><ul>
+<li>介绍一下自己</li>
+<li>项目谈了谈</li>
+<li>做过 文本聚类 方面的工作吗</li>
+<li>会C++吗</li>
+<li>会其余一些任务吗，如命名实体识别</li>
+<li>来一到编程题。 <strong>给一句话，求里面长度最长的单词</strong>。（写的很快，但有小bug，面试官很不满意）</li>
+</ul>
+<h3><span id="自我分析">自我分析</span></h3><p>凉的原因在于： </p>
+<ul>
+<li>c++ ， 很多靠这个卡人的</li>
+<li>编程题边界没处理干净</li>
+</ul>
+<h2><span id="学霸批-拼多多">学霸批 - 拼多多</span></h2><h3><span id="1-一面-hr">1. 一面 - hr</span></h3><ul>
+<li>加班能接受吗？ 11， 11， 6</li>
+<li>父母都是做什么的？</li>
+<li>手里的offer 情况，没有去试试头条吗？</li>
+<li>如果手里有百度和拼多多的offer， 你选哪个？</li>
+<li>你有什么想问我的吗？</li>
+</ul>
+<h3><span id="2-二面">2. 二面</span></h3><ul>
+<li>聊一聊项目和Bert </li>
+<li>一道概率题（忘记是啥了）</li>
+<li>一道编程题： 长度为 n-1 的数组中，数字全部都是 1-n 的数，找出那个没有出现的数（当时智障了，居然答的乱七八糟）</li>
+</ul>
+<h3><span id="三面">三面</span></h3><ul>
+<li>Word2Vec  的Skip-Gram模型</li>
+<li>多头注意力机制</li>
+<li>两道编程题：<ul>
+<li>求一棵二叉树的深度</li>
+<li>给定一个二维数组， 数组中全是 0 和 1， 求孤岛中所有为 1 的坐标（当时没有现在强，没做出来，面试官急着吃饭）</li>
+</ul>
+</li>
+</ul>
+<h3><span id="自我分析">自我分析</span></h3><p>我个人觉得还是编程题部分没有答好，因为题蛮简单的，答成这样的确有挂的风险。 此外，我看到接到offer 的人，很多手上都握着bat，头条至少一家的offer， 感觉十月份会有很多拒的人。</p>
+<h2><span id="网易-提前批">网易- 提前批</span></h2><h3><span id="1-一面">1. 一面</span></h3><ul>
+<li>自我介绍， 这部分感觉最重要</li>
+<li>编程题：编辑距离</li>
+<li>编程题：一道链表medium，忘了</li>
+<li>聊了 linux命令， git命令， 正则</li>
+<li>BERT 简单聊了聊</li>
+</ul>
+<h3><span id="二面">二面</span></h3><ul>
+<li>自我介绍，聊项目</li>
+<li>聊语言模型， Bert， XLNet等，我吹了一波</li>
+<li>然后聊了聊linux， 给正则匹配</li>
+</ul>
+<h3><span id="总监面">总监面</span></h3><ul>
+<li>自我介绍</li>
+<li>总监说，技术方面我不问，我们谈谈落地， 博客写的不错（这个应该加分很大）</li>
+<li>我们有道目前布局 AI 教育方面，你是做阅读理解的，你觉得阅读理解能用在我们哪些产品上？ 就这个问题，一直深挖，谈了将近50分钟。</li>
+</ul>
+<h3><span id="hr面-15分钟">HR面 - 15分钟</span></h3><p>面试官本来以为是现场面，hr这边通知我是 视频面，因此前面很多时间都浪费了，所以只面了15分钟。</p>
+<p>我态度很好，面试官觉得很加分。</p>
+<ul>
+<li>自我介绍一下</li>
+<li>你选择工作主要看哪些方面：我说先看团队，再看方向，然后看地点， 工资什么的对我不重要。 最后舔了一波： 如果网易这边要我的话，我就结束秋招了， 面试官听了很开心</li>
+<li>你觉得你在别人眼中是什么样子： 我就说我算是技术比较强的一波人，大家有问题都会向我寻求帮助，获得“大神”称号</li>
+<li>你觉得你是一个怎么样的人？ 我是一个很开朗的人，很喜欢分享，您看我的博客就知道了，在团队中往往起到一个活跃气氛的作用。</li>
+<li>你有什么问题想问我的吗？</li>
+</ul>
+<h2><span id="360-垃圾">360 - 垃圾</span></h2><p>估计我投的岗不招人</p>
+<h3><span id="一面-10分钟">一面 - 10分钟</span></h3><p>聊了聊项目，谈了谈我的几个仓库都在做啥，就过了。  excuse me？？？</p>
+<h3><span id="二面-10分钟">二面 - 10分钟</span></h3><p>项目简单说一下，说了一下他们这边在做什么， 然后问你有没有什么问题， 就凉了。 （没有问技术） excuse me？ 不招人就直说， 浪费我时间。</p>
+<h2><span id="小米">小米</span></h2><h3><span id="一面">一面</span></h3><ul>
+<li>自我介绍</li>
+<li>聊项目</li>
+<li>聊 Transformer， 包括各个细节， 功能，并用 pytorch 写了一下多头</li>
+<li>Layer Normalization 原理，用 pytorch 写一下</li>
+<li>一道编程题： 编辑距离</li>
+</ul>
+<h3><span id="二面">二面</span></h3><p>面试官情商不高，态度优点居高临下， 让我很不舒服。</p>
+<ul>
+<li>softmax 公式， 会溢出吗？ 怎么解决溢出？ </li>
+<li>Word2Vec 的多层softmax 是怎么实现的，思路是怎样的，损失函数变化</li>
+<li>阅读理解应用？ 做过问答系统吗？</li>
+<li>机器翻译了解吗？</li>
+<li>你的博客对我来说一点用都没，我写的一定比你好… </li>
+</ul>
+<p>技术问题就完了，直言我做的不够深。 然后问我，你有什么想问的吗？</p>
+<p>我个人觉得这是很恶心的一点， 因为我是做阅读理解的，你又没问，怎么知道我做的不深？ 还说我数据结构不扎实， 我编辑距离都写出来了，就因为 word2vec 的多层softmax 没有联想到哈夫曼树，就说我不深？</p>
+<ul>
+<li>反问： 您觉得我有哪些方面不足？ 面试官说了一堆，什么这个不行，那个不行</li>
+<li>反问：  在阅读理解领域，您觉得什么叫深？ 面试官说，我不是做这个的，我不知道， excuse me？</li>
+</ul>
+<h2><span id="搜狗">搜狗</span></h2><h3><span id="1-一面">1. 一面</span></h3><ul>
+<li>自我介绍，项目</li>
+<li>现在还在搜狗实习吗？</li>
+<li>一道概率题： 对于一个超长文本，等概率的从该文本中抽取 m 行</li>
+<li>一道编程题： 编辑距离</li>
+</ul>
+<h3><span id="2-二面">2. 二面</span></h3><ul>
+<li>自我介绍</li>
+<li>聊 Bert 细节</li>
+<li>聊 Transformer 细节，用 pytorch 写了下多头和 layernormlization</li>
+<li>编程题：判定二叉树为对称二叉树，很简单</li>
+<li>会c++吗？</li>
+</ul>
+<p>如果挂了，必然是挂在 c++ 上了， 等通知。</p>
+<h2><span id="猿辅导">猿辅导</span></h2><p>做题就对了， 一面一道medium， 一道hard。 二面一道hard</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" rel="tag"># 机器学习知识整理</a>
+              <a href="/tags/%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/" rel="tag"># 老宋渣渣算法面经</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E7%AE%80%E5%8E%86%E4%B8%AD%E7%9A%84%E7%82%B9/" rel="prev" title="整理简历中的点">
+      <i class="fa fa-chevron-left"></i> 整理简历中的点
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="next" title="优秀算法博客">
+      优秀算法博客 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">OPPO 提前批</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">二面 - 总监&#x2F;部长面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">为啥凉 - 自我分析(安慰)一波</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">今日头条凉经</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">1.  一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">2. 原因分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">提前批 - 阿里大文娱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">1. 一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">2. 二面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">自我分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">学霸批 - 拼多多</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">1. 一面 - hr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">2. 二面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">三面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">自我分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">网易- 提前批</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">1. 一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">二面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">总监面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">HR面 - 15分钟</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">360 - 垃圾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">一面 - 10分钟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">二面 - 10分钟</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">小米</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">二面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">搜狗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">1. 一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">2. 二面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">猿辅导</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">997k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : 'ea38dcfcb1b84c5d8666640930ceb227',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>
