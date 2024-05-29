@@ -34,20 +34,20 @@
   <meta name="description" content="NLP中的迁移学习 1. 为何NLP中要引入迁移学习 2. 迁移学习的类型 3. Sequential transfer learning 1. 为何选择语言模型作为预训练阶段的任务？ 2. NLP中迁移学习演变 3. 为何语言模型表现极佳 4. 数据越多，模型越大越好吗 5. 跨语言预训练语言模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP中的迁移学习">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="NLP中的迁移学习 1. 为何NLP中要引入迁移学习 2. 迁移学习的类型 3. Sequential transfer learning 1. 为何选择语言模型作为预训练阶段的任务？ 2. NLP中迁移学习演变 3. 为何语言模型表现极佳 4. 数据越多，模型越大越好吗 5. 跨语言预训练语言模型">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/img/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/1.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/img/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/1.png">
 <meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="机器学习知识整理">
 <meta property="article:tag" content="深度学习自然语言处理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/img/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/1.png">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/img/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/1.png">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
@@ -241,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/NLP%20%E4%B8%AD%E7%9A%84%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

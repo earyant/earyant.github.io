@@ -34,7 +34,7 @@
   <meta name="description" content="1. 梯度消失，梯度爆炸产生原因 2. 解决方案 1. 采用 Relu 系激活函数 2. 合适的权重初始化 3. 残差结构 4. Batch Normalization， Layer Normalization 5. LSTM 6. 梯度裁剪 - 梯度爆炸">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础理论-梯度消失、梯度爆炸">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="1. 梯度消失，梯度爆炸产生原因 2. 解决方案 1. 采用 Relu 系激活函数 2. 合适的权重初始化 3. 残差结构 4. Batch Normalization， Layer Normalization 5. LSTM 6. 梯度裁剪 - 梯度爆炸">
 <meta property="og:locale" content="zh_CN">
@@ -45,7 +45,7 @@
 <meta property="article:tag" content="深度学习基础">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -239,7 +239,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

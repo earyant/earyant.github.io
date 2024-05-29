@@ -34,23 +34,23 @@
   <meta name="description" content="索引介绍 索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I&#x2F;O，假设磁盘每次I&#x2F;O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="索引介绍 索引对查询的速度有至关重要的影响。考虑如下情况，假设数据库中一个表有10^6^条记录，DBMS的页面大小为4K，并存储100条记录。如果没有索引，查询将对整个表进行扫描，最坏的情况下，如果所有数据页都不在内存，需要读取10^4^个页面，如果这10^4^个页面在磁盘上随机分布，需要进行10^4^次I&#x2F;O，假设磁盘每次I&#x2F;O时间为10ms(忽略数据传输时间)，则总共需要100s(但实际上要好">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysqlHash%E7%B4%A2%E5%BC%95%E5%9B%BE.jpg">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.jpg">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysqlMyisam%E7%B4%A2%E5%BC%95.jpg">
 <meta property="article:published_time" content="2017-11-09T09:27:04.000Z">
 <meta property="article:modified_time" content="2023-10-11T14:11:40.105Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="mysql">
 <meta property="article:tag" content="索引">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/img/mysql%E7%B4%A2%E5%BC%95%E5%85%B3%E7%B3%BB.jpg">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/">
 
 
 <script id="page-configurations">
@@ -244,7 +244,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

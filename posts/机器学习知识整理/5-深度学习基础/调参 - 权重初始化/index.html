@@ -34,7 +34,7 @@
   <meta name="description" content="前言 权重初始化为何如此重要？ Xavier 初始化 Kaiming 初始化 初始化方案 1. 常量初始化 2. 随机初始化 2. 均匀分布初始化 - U(a,b) 3. 高斯分布 - N(mean, std) 4. 单位矩阵初始化 5. Xavier  初始化 6. Kaiming 初始化（MSRA初始化） 7. 正交初始化 8. 稀疏初始化   QA 1. 推导一下 Xavier 的过程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="调参-权重初始化">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="前言 权重初始化为何如此重要？ Xavier 初始化 Kaiming 初始化 初始化方案 1. 常量初始化 2. 随机初始化 2. 均匀分布初始化 - U(a,b) 3. 高斯分布 - N(mean, std) 4. 单位矩阵初始化 5. Xavier  初始化 6. Kaiming 初始化（MSRA初始化） 7. 正交初始化 8. 稀疏初始化   QA 1. 推导一下 Xavier 的过程">
 <meta property="og:locale" content="zh_CN">
@@ -45,7 +45,7 @@
 <meta property="article:tag" content="深度学习基础">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">
 
 
 <script id="page-configurations">
@@ -239,7 +239,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%B0%83%E5%8F%82%20-%20%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

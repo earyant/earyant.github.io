@@ -34,20 +34,20 @@
   <meta name="description" content="在上一篇文章，讲了服务的注册和发现。在服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于 http restful 的。spring cloud 有两种调用方式，一种是 ribbon+restTemplate，另一种是 feign。在这一篇文章首先讲解下基于 ribbon+rest。 ribbon 是一个负载均衡客户端，可以很好的控制 http 和 tcp 的一些行为。Feign">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringCloud学习2服务消费者">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="在上一篇文章，讲了服务的注册和发现。在服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于 http restful 的。spring cloud 有两种调用方式，一种是 ribbon+restTemplate，另一种是 feign。在这一篇文章首先讲解下基于 ribbon+rest。 ribbon 是一个负载均衡客户端，可以很好的控制 http 和 tcp 的一些行为。Feign">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png">
 <meta property="article:published_time" content="2017-07-21T03:32:34.000Z">
 <meta property="article:modified_time" content="2023-10-11T14:11:40.105Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="springCloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/img/ribbon%E5%90%8E%E7%9A%84%E6%9E%B6%E6%9E%84.png">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/">
 
 
 <script id="page-configurations">
@@ -241,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud%E5%AD%A6%E4%B9%A02%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

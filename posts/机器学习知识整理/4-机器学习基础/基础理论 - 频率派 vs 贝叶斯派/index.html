@@ -34,20 +34,20 @@
   <meta name="description" content="1. 频率派 vs 贝叶斯派 频率派 贝叶斯派   2. 极大似然估计 vs 最大后验估计 1. 极大似然估计 - MLE 2. 最大后验估计 - MAP   QA 1. 极大似然估计与最大后验概率的区别？ 2. 概率与似然的区别 3. 贝叶斯派与频率学派的区别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础理论-概率派 VS 贝叶斯派">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="1. 频率派 vs 贝叶斯派 频率派 贝叶斯派   2. 极大似然估计 vs 最大后验估计 1. 极大似然估计 - MLE 2. 最大后验估计 - MAP   QA 1. 极大似然估计与最大后验概率的区别？ 2. 概率与似然的区别 3. 贝叶斯派与频率学派的区别">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E8%B4%9D%E5%8F%B6%E6%96%AF/%E8%B4%9D%E5%8F%B6%E6%96%AF.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E8%B4%9D%E5%8F%B6%E6%96%AF/%E8%B4%9D%E5%8F%B6%E6%96%AF.png">
 <meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="机器学习知识整理">
 <meta property="article:tag" content="机器学习基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E8%B4%9D%E5%8F%B6%E6%96%AF/%E8%B4%9D%E5%8F%B6%E6%96%AF.png">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E8%B4%9D%E5%8F%B6%E6%96%AF/%E8%B4%9D%E5%8F%B6%E6%96%AF.png">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/">
 
 
 <script id="page-configurations">
@@ -241,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/4-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20vs%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

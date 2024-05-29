@@ -34,21 +34,21 @@
   <meta name="description" content="正则化 1. L1 正则化 - 稀疏正则化 2. L2 正则化 — 权重衰减 QA 1. 为何只对权重进行正则惩罚，而不针对偏置 2. 权重衰减的目的 3. L1 与 L2 的异同 4.为什么 L1 正则化 可以产生稀疏值，而 L2 不会？ 5. 为何 L1 和 L2 正则化可以防止过拟合？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Trick-正则化">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="正则化 1. L1 正则化 - 稀疏正则化 2. L2 正则化 — 权重衰减 QA 1. 为何只对权重进行正则惩罚，而不针对偏置 2. 权重衰减的目的 3. L1 与 L2 的异同 4.为什么 L1 正则化 可以产生稀疏值，而 L2 不会？ 5. 为何 L1 和 L2 正则化可以防止过拟合？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L1.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L2.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L1.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L2.png">
 <meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="机器学习知识整理">
 <meta property="article:tag" content="深度学习基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L1.png">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/img/%E6%AD%A3%E5%88%99%E5%8C%96/L1.png">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/">
 
 
 <script id="page-configurations">
@@ -242,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

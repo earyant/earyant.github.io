@@ -34,7 +34,7 @@
   <meta name="description" content="优点归一化是数据预处理的一种常用方法，它将不同尺度的特征转化为统一的尺度，使得数据在同一量纲下进行比较和分析。对于数值类型的特征，归一化的目的是消除不同特征之间的量纲差异，使得模型能够更好地学习特征之间的关系，提高模型的性能。对数值类型的特征进行归一化是为了确保不同特征之间的数值范围一致，从而有助于机器学习模型更好地理解和处理数据。以下是一些常见的原因和好处：  梯度下降：在许多机器学习算法中，如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1. 为什么要对数值类型的特征做归一化">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="优点归一化是数据预处理的一种常用方法，它将不同尺度的特征转化为统一的尺度，使得数据在同一量纲下进行比较和分析。对于数值类型的特征，归一化的目的是消除不同特征之间的量纲差异，使得模型能够更好地学习特征之间的关系，提高模型的性能。对数值类型的特征进行归一化是为了确保不同特征之间的数值范围一致，从而有助于机器学习模型更好地理解和处理数据。以下是一些常见的原因和好处：  梯度下降：在许多机器学习算法中，如">
 <meta property="og:locale" content="zh_CN">
@@ -45,7 +45,7 @@
 <meta property="article:tag" content="特征工程">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/">
 
 
 <script id="page-configurations">
@@ -239,7 +239,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%89%B9%E5%BE%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">

@@ -34,30 +34,30 @@
   <meta name="description" content="language+vision 预训练模型 idea — 多模态融合 单流模型与双流模型 单流模型 双流模型   1. Image-based 单流模型 VisualBERT Vl-BERT Unicoder-VL OSCAR   2. Image-based 双流模型 Vil-Bert LXMERT Welan   3. Video-based 单流模型 VideoBERT 1. 输入格式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="language+vision预训练模型">
-<meta property="og:url" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:url" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Earyant的技术博客">
 <meta property="og:description" content="language+vision 预训练模型 idea — 多模态融合 单流模型与双流模型 单流模型 双流模型   1. Image-based 单流模型 VisualBERT Vl-BERT Unicoder-VL OSCAR   2. Image-based 双流模型 Vil-Bert LXMERT Welan   3. Video-based 单流模型 VideoBERT 1. 输入格式">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/VisualBERT.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/Vl-BERT.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/Unicoder-VL.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_1.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_2.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_3.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_2.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/VideoBERT.png">
-<meta property="og:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/CBT.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/VisualBERT.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/Vl-BERT.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/Unicoder-VL.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_1.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_2.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/OSCAR_3.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_2.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/VideoBERT.png">
+<meta property="og:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/CBT.png">
 <meta property="article:published_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:modified_time" content="2022-03-12T15:33:22.000Z">
 <meta property="article:author" content="Earyant">
 <meta property="article:tag" content="机器学习知识整理">
 <meta property="article:tag" content="多模态">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
+<meta name="twitter:image" content="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/image/LXMERT_1.png">
 
-<link rel="canonical" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
+<link rel="canonical" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -251,7 +251,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/15-%E5%A4%9A%E6%A8%A1%E6%80%81/language+vision%20%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me/me2.png">
