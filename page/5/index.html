@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.2.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">340</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -230,6 +230,145 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/1.%E6%A6%82%E7%8E%87%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/1.%E6%A6%82%E7%8E%87%E8%AE%BA/" class="post-title-link" itemprop="url">1.概率论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-29 20:33:22" itemprop="dateCreated datePublished" datetime="2022-03-29T20:33:22+08:00">2022-03-29</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h2><!-- toc -->
+<ul>
+<li><a href="#1-随机事件和概率">1. 随机事件和概率</a><ul>
+<li><a href="#1-事件运算规律">1. 事件运算规律</a></li>
+<li><a href="#2-条件概率">2. 条件概率</a></li>
+<li><a href="#3-事件独立性">3. 事件独立性</a></li>
+<li><a href="#4-五大公式">4. 五大公式</a></li>
+<li><a href="#5-古典型概率">5. 古典型概率</a></li>
+<li><a href="#6-几何型概率">6. 几何型概率</a></li>
+<li><a href="#7-n重伯努利试验">7. n重伯努利试验</a></li>
+</ul>
+</li>
+<li><a href="#2-随机变量与分布">2. 随机变量与分布</a><ul>
+<li><a href="#1离散型随机变量">1.离散型随机变量</a></li>
+<li><a href="#2-连续型随机变量">2. 连续型随机变量</a></li>
+<li><a href="#3-常见分布">3. 常见分布</a></li>
+<li><a href="#4-todo">4. TODO</a></li>
+</ul>
+</li>
+<li><a href="#4-随机变量的数学特征">4. 随机变量的数学特征</a><ul>
+<li><a href="#1-数学期望">1. 数学期望</a></li>
+<li><a href="#2-方差">2. 方差</a></li>
+<li><a href="#3-常见分布期望与方差-todo">3. 常见分布期望与方差 — TODO</a></li>
+<li><a href="#4-协方差">4. 协方差</a></li>
+<li><a href="#5-相关系数">5. 相关系数</a></li>
+<li><a href="#6-独立与不相关">6. 独立与不相关</a></li>
+</ul>
+</li>
+<li><a href="#5-知识点">5. 知识点</a><ul>
+<li><a href="#1-古典概率模型">1. 古典概率模型</a></li>
+<li><a href="#2-几何概率">2. 几何概率</a></li>
+<li><a href="#3-数学期望">3. 数学期望</a></li>
+<li><a href="#4-贝叶斯">4. 贝叶斯</a></li>
+</ul>
+</li>
+<li><a href="#6-贝叶斯定理">6. 贝叶斯定理</a><ul>
+<li><a href="#1-基本概率">1. 基本概率</a></li>
+<li><a href="#2-两大规则">2. 两大规则</a></li>
+<li><a href="#3-实例说明">3. 实例说明</a></li>
+</ul>
+</li>
+<li><a href="#qa">QA</a><ul>
+<li><a href="#1-简单古典概率">1. 简单古典概率</a></li>
+<li><a href="#2-纸牌问题">2. 纸牌问题</a></li>
+<li><a href="#3-棍子问题">3. 棍子问题</a></li>
+<li><a href="#4-采样问题">4. 采样问题</a></li>
+<li><a href="#5-贝叶斯">5. 贝叶斯</a></li>
+<li><a href="#6-假期期望">6. 假期期望</a></li>
+<li><a href="#7-下雨概率">7. 下雨概率</a></li>
+<li><a href="#8-见面概率">8. 见面概率</a></li>
+<li><a href="#9-为何推荐使用高斯分布">9. 为何推荐使用高斯分布？</a></li>
+<li><a href="#10-玫瑰花">10. 玫瑰花</a></li>
+<li><a href="#11-切比雪夫不等式">11. 切比雪夫不等式</a></li>
+<li><a href="#12-0~1均匀分布的随机器如何变化成均值为0方差为1的随机器">12. 0~1均匀分布的随机器如何变化成均值为0，方差为1的随机器</a></li>
+<li><a href="#13-红蓝球">13. 红蓝球</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/1.%E6%A6%82%E7%8E%87%E8%AE%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1016,104 +1155,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E8%AF%95%E5%A5%97%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E8%AF%95%E5%A5%97%E8%B7%AF/" class="post-title-link" itemprop="url">面试套路</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-  
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<ul>
-<li><a href="#1-自我介绍">1. 自我介绍</a></li>
-<li><a href="#2-看了这么多论文有什么idea吗快手第一问">2. 看了这么多论文，有什么idea吗？（快手第一问）</a><ul>
-<li><a href="#1-简单idea-文本分类在做ing">1. 简单idea — 文本分类（在做ing）</a></li>
-<li><a href="#2-复杂一点的idea-阅读理解">2. 复杂一点的idea — 阅读理解</a></li>
-<li><a href="#3-多维向量融合-多种数据集">3. 多维向量融合 — 多种数据集</a></li>
-<li><a href="#4-探索-attention-在语义匹配机制中的选择">4. 探索 Attention 在语义匹配机制中的选择</a></li>
-<li><a href="#3-关于预训练语言模型-知识图谱-雏形做不了没资源">3. 关于预训练语言模型 + 知识图谱  - 雏形（做不了，没资源）</a></li>
-<li><a href="#4-预训练语言模型-自然语言生成-下一个爆点雏形">4. 预训练语言模型 + 自然语言生成 — 下一个爆点（雏形）</a></li>
-<li><a href="#5-信息融合-受到-char-word-embdding-启发">5. 信息融合 - 受到 char + word embdding 启发、</a></li>
-</ul>
-</li>
-<li><a href="#3-你有什么想问的吗">3. 你有什么想问的吗</a></li>
-<li><a href="#4-hr-的提问">4. HR 的提问</a></li>
-<li><a href="#5-部门领导的提问">5. 部门领导的提问</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/10-%E8%80%81%E5%AE%8B%E6%B8%A3%E6%B8%A3%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E8%AF%95%E5%A5%97%E8%B7%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1209,7 +1250,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-count">340</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1308,7 +1349,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1317,12 +1358,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">997k</span>
+    <span title="站点总字数">1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:06</span>
+    <span title="站点阅读时长">15:25</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

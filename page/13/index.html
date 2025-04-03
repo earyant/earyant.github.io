@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.2.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">339</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">340</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -230,6 +230,103 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/" class="post-title-link" itemprop="url">Trick-正则化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<ul>
+<li><a href="#正则化">正则化</a><ul>
+<li><a href="#1-l1-正则化-稀疏正则化">1. L1 正则化 - 稀疏正则化</a></li>
+<li><a href="#2-l2-正则化-权重衰减">2. L2 正则化 — 权重衰减</a></li>
+<li><a href="#qa">QA</a><ul>
+<li><a href="#1-为何只对权重进行正则惩罚而不针对偏置">1. 为何只对权重进行正则惩罚，而不针对偏置</a></li>
+<li><a href="#2-权重衰减的目的">2. 权重衰减的目的</a></li>
+<li><a href="#3-l1-与-l2-的异同">3. L1 与 L2 的异同</a></li>
+<li><a href="#4为什么-l1-正则化-可以产生稀疏值而-l2-不会">4.为什么 L1 正则化 可以产生稀疏值，而 L2 不会？</a></li>
+<li><a href="#5-为何-l1-和-l2-正则化可以防止过拟合">5. 为何 L1 和 L2 正则化可以防止过拟合？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Trick%20-%20%E6%AD%A3%E5%88%99%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1031,103 +1128,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" class="post-title-link" itemprop="url">基础理论-分类问题评估指标</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-12 23:33:22" itemprop="dateCreated datePublished" datetime="2022-03-12T23:33:22+08:00">2022-03-12</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-  
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<ul>
-<li><a href="#几个定义混淆矩阵">几个定义：混淆矩阵</a></li>
-<li><a href="#几个常规的指标">几个常规的指标</a></li>
-<li><a href="#f1-score">F1-Score</a></li>
-<li><a href="#mcc-马修斯相关系数">MCC ： 马修斯相关系数</a></li>
-<li><a href="#roc-曲线">ROC 曲线</a></li>
-<li><a href="#aucarea-under-curve">AUC：Area under Curve</a></li>
-<li><a href="#p-r-曲线">P-R 曲线</a></li>
-<li><a href="#最后">最后</a></li>
-<li><a href="#reference">Reference</a></li>
-<li><a href="#qa">QA</a><ul>
-<li><a href="#1-训练集中类别不平衡哪个参数最不准确">1. 训练集中类别不平衡，哪个参数最不准确？</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/5-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1223,7 +1223,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">339</span>
+          <span class="site-state-item-count">340</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1322,7 +1322,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1331,12 +1331,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">997k</span>
+    <span title="站点总字数">1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:06</span>
+    <span title="站点阅读时长">15:25</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
