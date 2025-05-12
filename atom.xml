@@ -6,7 +6,7 @@
   <link href="https://blog.lirui.pub/atom.xml" rel="self"/>
   
   <link href="https://blog.lirui.pub/"/>
-  <updated>2025-04-03T13:54:54.000Z</updated>
+  <updated>2025-05-12T05:33:22.000Z</updated>
   <id>https://blog.lirui.pub/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>follow认证</title>
+    <link href="https://blog.lirui.pub/posts/%E6%97%A5%E8%AE%B0/follow%E8%AE%A4%E8%AF%81/"/>
+    <id>https://blog.lirui.pub/posts/%E6%97%A5%E8%AE%B0/follow%E8%AE%A4%E8%AF%81/</id>
+    <published>2025-05-12T05:33:22.000Z</published>
+    <updated>2025-05-12T05:33:22.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>查理芒格的100个思维模型</title>
@@ -39,7 +57,7 @@
     <link href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
     <published>2024-01-03T09:20:02.000Z</published>
-    <updated>2025-05-12T09:56:22.614Z</updated>
+    <updated>2025-05-12T10:00:10.722Z</updated>
     
     
       
@@ -403,32 +421,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>摄影书单</title>
-    <link href="https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E4%B9%A6%E5%8D%95/"/>
-    <id>https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E4%B9%A6%E5%8D%95/</id>
-    <published>2023-02-20T03:11:40.000Z</published>
-    <updated>2023-02-20T03:11:40.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="书单" scheme="https://blog.lirui.pub/categories/%E4%B9%A6%E5%8D%95/"/>
-    
-    <category term="摄影资源" scheme="https://blog.lirui.pub/categories/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="书单" scheme="https://blog.lirui.pub/tags/%E4%B9%A6%E5%8D%95/"/>
-    
-    <category term="摄影资源" scheme="https://blog.lirui.pub/tags/%E6%91%84%E5%BD%B1%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
