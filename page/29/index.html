@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">341</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">340</span></a>
 
   </li>
         <li class="menu-item menu-item-相册">
@@ -230,101 +230,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/java/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me/me2.png">
-      <meta itemprop="name" content="Earyant">
-      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Earyant的技术博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/java/docker%E7%AE%80%E5%8D%95%E7%BB%93%E5%90%88elk%E3%80%81logstash/" class="post-title-link" itemprop="url">docker简单结合elk、logstash</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-13 10:40:28" itemprop="dateCreated datePublished" datetime="2018-02-13T10:40:28+08:00">2018-02-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>729</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-  
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="本文记录docker搭建elk并简单结合logstash日志输出">本文记录docker搭建elk，并简单结合logstash日志输出</span></h2><h3><span id="filebeat">filebeat</span></h3><blockquote>
-<p>docker pull docker.elastic.co/beats/filebeat:6.2.1</p>
-</blockquote>
-<ul>
-<li>filebeat.yml<br><strong>enabled要改为true，filebeat默认为false</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">    - D:\workspace\baidu\baiyi\baidu\dsp\dsp-main-server\log\*.log</span><br><span class="line">output:</span><br><span class="line">    logstash:</span><br><span class="line">          hosts: [&quot;192.168.99.100:5044&quot;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>docker run -it —name filebeat -v /data/filebeat.yml::/usr/share/filebeat/filebeat.yml</p>
-</blockquote>
-</li>
-</ul>
-<h3><span id="logstash">logstash</span></h3><p>改写/opt/logstash/logstash/config/logstash.yml文件</p>
-<ul>
-<li>logstash.yml</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    beats &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; &quot;192.168.99.100:9200&quot;</span><br><span class="line">        index =&gt;  &quot;t-server-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;log4j_type&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1472,10 +1377,109 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">java学习路线</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-24 14:21:01" itemprop="dateCreated datePublished" datetime="2017-10-24T14:21:01+08:00">2017-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-11 22:11:40" itemprop="dateModified" datetime="2023-10-11T22:11:40+08:00">2023-10-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="本文作为收藏用">本文作为收藏用</span></h1><h1><span id>#</span></h1><p>作者：匿名用户<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39890405/answer/83676977">https://www.zhihu.com/question/39890405/answer/83676977</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<ul>
+<li><p>第一个是基础。</p>
+<blockquote>
+<p>比如对集合类，并发包，IO/NIO，JVM，内存模型，泛型，异常，反射，等有深入了解，最好是看过源码了解底层的设计。比如一般面试都会问ConcurrentHashMap，CopyOnWrite，线程池，CAS，AQS，虚拟机优化等知识点，因为这些对互联网的企业是绝对重要的。而且一般人这关都过不了，还发闹骚说这些没什么用，为什么要面试。举一例子，在使用线程池时，因为使用了无界队列，在远程服务异常情况下导致内层飙升，怎么去解决？你要是连线程池都不清楚，你怎么去玩？再举一例，由于对ThreadLocal理解出错，使用它做线程安全的控制，导致没能实现真的线程安全。所以作为一个拿两万的JAVA程序员这点基础是要有的。</p>
+</blockquote>
+</li>
+<li><p>第二你需要有全面的互联网技术相关知识。</p>
+<blockquote>
+<p>从底层说起，你起码得深入了解mysql，redis，mongodb，nginx，tomcat，rpc，jms等方面的知识。你要问需要了解到什么程度，我可以给你说个大慨。首先对于MySQL，你要知道常见的参数设置，存储引擎怎么去选择，还需要了解常见的索引引擎，知道怎么去选择。知道怎么去设计表，怎么优化sql，怎么根据执行计划去调优。高级的你需要去做分库分表的设计和优化，一般互联网企业的数据库都是读写分离，还会垂直与水平拆分，所以这个也有经验的成分在里面。然后redis，mongodb都是需要了解原理，需要会调整参数的，而nginx和tomcat几乎都是JAVA互联网方面必配，其实很阿里的技术栈选择有点关系。至于rpc相关的就多的去，必须各种网络协议，序列化技术，SOA等等，你要有一个深入的理解。现在应用比较广的rpc框架，在国内就是dubbo了，可以自行搜索。至于jms相关的起码得了解原理吧，一般情况下不是专门开发中间件系统和支撑系统的不需要了解太多细节，国内企业常用的主要是activeMQ和kafka。你能对我说的都研究的比较深入，阿里p7都不是太大问题的，当然这个还需要看你的架构能力方面的面试表现了。</p>
+</blockquote>
+</li>
+<li><p>第三就是编程能力</p>
+<blockquote>
+<p>编程思想，算法能力，架构能力。首先2W程序员对算法的要求我觉得还是比较低，再高级也最多红黑树吧，但是排序和查询的基本算法得会。编程思想是必须的，问你个AOP和IOC你起码的清清楚楚，设计模式不说每种都用过，但也能了解个几种吧。编程能力这个我觉得不好去评价，但是拿一个2000W用户根据姓名年龄排序这种题目也能信手拈来。最后就是架构能力，这种不是说要你设计个多牛逼多高并发的系统，起码让你做一个秒杀系统，防重请求的设计能快速搞定而没有坑吧。</p>
+</blockquote>
+</li>
+</ul>
+<h3><span id="感谢">感谢</span></h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39890405/answer/83676977">在北京做Java开发如何月薪达到两万，需要技术水平达到什么程度？</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/40801731/answer/91814769">零基础应该选择学习 java、php、前端 还是 python？</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1567,7 +1571,7 @@ Eureka Server会定时（间隔值是eureka.server.eviction-interval-timer-in-ms
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">341</span>
+          <span class="site-state-item-count">340</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
