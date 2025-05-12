@@ -13,6 +13,10 @@
     <name>Earyant</name>
     
   </author>
+  <follow_challenge>
+    <feedId>144687567483590656</feedId>
+    <userId>99747802354122752</userId>
+  </follow_challenge>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
