@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="true">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="true">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.lirui.pub","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+
+
+  <meta name="baidu-site-verification" content="zqFkvU5IKZXfWGBL" />
+
+  <meta name="description" content="过去很多 RAG 项目在 PoC 阶段表现不错，一进生产就“体验崩盘”。 典型反馈是：  回答看起来专业，但不解决问题。 能引用文档，但不能推进流程。 一遇到复杂请求就回避。  这说明一个事实：传统 RAG 的上限是“知识回答系统”，而业务真正要的是“任务执行系统”。 为什么 Agentic RAG 会成为 2026 主线RAG 的价值正在从“补充知识”转向“驱动动作”。 Agentic RAG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAG 要么升级，要么淘汰：2026 年最猛增量是 Agentic RAG">
+<meta property="og:url" content="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/RAG%20%E8%A6%81%E4%B9%88%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A6%81%E4%B9%88%E6%B7%98%E6%B1%B0%EF%BC%9A2026%20%E5%B9%B4%E6%9C%80%E7%8C%9B%E5%A2%9E%E9%87%8F%E6%98%AF%20Agentic%20RAG/index.html">
+<meta property="og:site_name" content="Earyant的技术博客">
+<meta property="og:description" content="过去很多 RAG 项目在 PoC 阶段表现不错，一进生产就“体验崩盘”。 典型反馈是：  回答看起来专业，但不解决问题。 能引用文档，但不能推进流程。 一遇到复杂请求就回避。  这说明一个事实：传统 RAG 的上限是“知识回答系统”，而业务真正要的是“任务执行系统”。 为什么 Agentic RAG 会成为 2026 主线RAG 的价值正在从“补充知识”转向“驱动动作”。 Agentic RAG">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.lirui.pub/images/diagrams/agentic-rag-pipeline.svg">
+<meta property="og:image" content="https://blog.lirui.pub/images/diagrams/agentic-rag-sequence.svg">
+<meta property="article:published_time" content="2026-03-03T10:40:00.000Z">
+<meta property="article:modified_time" content="2026-03-04T03:56:03.605Z">
+<meta property="article:author" content="Earyant">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="RAG">
+<meta property="article:tag" content="Agentic RAG">
+<meta property="article:tag" content="企业AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.lirui.pub/images/diagrams/agentic-rag-pipeline.svg">
+
+<link rel="canonical" href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/RAG%20%E8%A6%81%E4%B9%88%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A6%81%E4%B9%88%E6%B7%98%E6%B1%B0%EF%BC%9A2026%20%E5%B9%B4%E6%9C%80%E7%8C%9B%E5%A2%9E%E9%87%8F%E6%98%AF%20Agentic%20RAG/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RAG 要么升级，要么淘汰：2026 年最猛增量是 Agentic RAG | Earyant的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b631c63a156a1da87aae10873b41f51";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Earyant的技术博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Earyant的技术博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到Earyant的技术博客，在这里我将与你分享新技术。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">110</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">348</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-8990335822972779"
+            data-ad-slot="3743679245"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/earyantLe" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/RAG%20%E8%A6%81%E4%B9%88%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A6%81%E4%B9%88%E6%B7%98%E6%B1%B0%EF%BC%9A2026%20%E5%B9%B4%E6%9C%80%E7%8C%9B%E5%A2%9E%E9%87%8F%E6%98%AF%20Agentic%20RAG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me/me2.png">
+      <meta itemprop="name" content="Earyant">
+      <meta itemprop="description" content="个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Earyant的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RAG 要么升级，要么淘汰：2026 年最猛增量是 Agentic RAG
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-03 18:40:00" itemprop="dateCreated datePublished" datetime="2026-03-03T18:40:00+08:00">2026-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-04 11:56:03" itemprop="dateModified" datetime="2026-03-04T11:56:03+08:00">2026-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI%E5%89%8D%E6%B2%BF/" itemprop="url" rel="index"><span itemprop="name">AI前沿</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+  
+	<div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+          crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8990335822972779"
+          data-ad-slot="3743679245"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </div>
+  
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+
+        <p>过去很多 RAG 项目在 PoC 阶段表现不错，一进生产就“体验崩盘”。</p>
+<p>典型反馈是：</p>
+<ul>
+<li>回答看起来专业，但不解决问题。</li>
+<li>能引用文档，但不能推进流程。</li>
+<li>一遇到复杂请求就回避。</li>
+</ul>
+<p>这说明一个事实：<code>传统 RAG</code> 的上限是“知识回答系统”，而业务真正要的是“任务执行系统”。</p>
+<h2><span id="为什么-agentic-rag-会成为-2026-主线">为什么 Agentic RAG 会成为 2026 主线</span></h2><p>RAG 的价值正在从“补充知识”转向“驱动动作”。</p>
+<p>Agentic RAG 的核心不是多加几个插件，而是让系统具备这条闭环：</p>
+<blockquote>
+<p>识别意图 -&gt; 获取证据 -&gt; 形成判断 -&gt; 执行动作 -&gt; 回写结果 -&gt; 复盘评估</p>
+</blockquote>
+<h2><span id="图表1传统-rag-与-agentic-rag-的本质差异">图表1：传统 RAG 与 Agentic RAG 的本质差异</span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统 RAG</th>
+<th>Agentic RAG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心目标</td>
+<td>回答正确</td>
+<td>完成任务</td>
+</tr>
+<tr>
+<td>执行能力</td>
+<td>基本没有</td>
+<td>有工具调用与动作链</td>
+</tr>
+<tr>
+<td>输出形式</td>
+<td>文本结论</td>
+<td>结论 + 动作 + 证据</td>
+</tr>
+<tr>
+<td>错误处理</td>
+<td>回答失败</td>
+<td>可回退、重试、转人工</td>
+</tr>
+<tr>
+<td>业务嵌入度</td>
+<td>中</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="图表2生产级-agentic-rag-架构">图表2：生产级 Agentic RAG 架构</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">  A[&quot;用户请求&quot;] --&gt; B[&quot;Intent Classifier&quot;]</span><br><span class="line">  B --&gt; C[&quot;Retriever: 混合检索&quot;]</span><br><span class="line">  C --&gt; D[&quot;Reranker: 证据重排&quot;]</span><br><span class="line">  D --&gt; E[&quot;Planner: 动作规划&quot;]</span><br><span class="line">  E --&gt; F[&quot;Tool Executor: 调用系统&quot;]</span><br><span class="line">  F --&gt; G[&quot;Verifier: 结果与证据校验&quot;]</span><br><span class="line">  G --&gt; H&#123;&quot;满足成功条件?&quot;&#125;</span><br><span class="line">  H --&gt;|&quot;否&quot;| E</span><br><span class="line">  H --&gt;|&quot;是&quot;| I[&quot;Answer + Action Log&quot;]</span><br></pre></td></tr></table></figure>
+<h2><span id="工程拆解四个关键模块">工程拆解：四个关键模块</span></h2><h3><span id="1-检索层混合检索是底线">1. 检索层：混合检索是底线</span></h3><p>只做向量检索，往往会漏掉关键词精确匹配场景。建议采用：</p>
+<ul>
+<li>关键词检索（BM25 类）处理精确术语。</li>
+<li>向量检索处理语义匹配。</li>
+<li>重排模型做最终证据排序。</li>
+</ul>
+<h3><span id="2-规划层把答案升级成动作计划">2. 规划层：把“答案”升级成“动作计划”</span></h3><p>同一个问题，系统要先判断：</p>
+<ul>
+<li>只是答复就够？</li>
+<li>还是需要触发外部动作？</li>
+<li>动作是否需要人工确认？</li>
+</ul>
+<h3><span id="3-执行层工具契约要强约束">3. 执行层：工具契约要强约束</span></h3><p>每个工具都要定义：</p>
+<ul>
+<li>参数 schema。</li>
+<li>幂等键。</li>
+<li>重试策略。</li>
+<li>超时与回滚。</li>
+</ul>
+<h3><span id="4-评估层建立线上可观测指标">4. 评估层：建立线上可观测指标</span></h3><p>不要只看离线准确率，必须看线上：</p>
+<ul>
+<li>完成率（Task Completion Rate）。</li>
+<li>人工接管率（Escalation Rate）。</li>
+<li>错误分布（检索错/规划错/执行错）。</li>
+<li>单任务成本（Cost per Task）。</li>
+</ul>
+<h2><span id="图表3从-poc-到生产的进阶路线">图表3：从 PoC 到生产的进阶路线</span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>目标</th>
+<th>退出标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 验证</td>
+<td>Top 场景可回答</td>
+<td>关键问题可复现</td>
+</tr>
+<tr>
+<td>P1 可信</td>
+<td>引用可追溯</td>
+<td>证据命中率达标</td>
+</tr>
+<tr>
+<td>P2 可执行</td>
+<td>触发业务动作</td>
+<td>动作成功率可衡量</td>
+</tr>
+<tr>
+<td>P3 稳定化</td>
+<td>线上可治理</td>
+<td>错误率/成本稳定</td>
+</tr>
+<tr>
+<td>P4 规模化</td>
+<td>多团队复用</td>
+<td>模块模板化沉淀</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="代码层建议先做结构化输出">代码层建议：先做结构化输出</span></h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;intent&quot;</span><span class="punctuation">:</span> <span class="string">&quot;refund_request&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;evidence&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;doc_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;policy_2026_03&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;score&quot;</span><span class="punctuation">:</span> <span class="number">0.91</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;action_plan&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ticket.add_comment&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;refund.create_case&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;order_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A123&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;confidence&quot;</span><span class="punctuation">:</span> <span class="number">0.86</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;fallback&quot;</span><span class="punctuation">:</span> <span class="string">&quot;human_review&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>结构化输出的价值在于：可审计、可测试、可回放。</p>
+<h2><span id="常见失败模式真实项目高频">常见失败模式（真实项目高频）</span></h2><ol>
+<li>文档切片策略粗糙，导致证据缺上下文。</li>
+<li>重排缺失，召回看似高但命中质量差。</li>
+<li>让模型直接拼工具参数，缺 schema 校验。</li>
+<li>没有失败兜底，最终用户体验断崖下跌。</li>
+</ol>
+<h2><span id="落地清单一周可推进版本">落地清单：一周可推进版本</span></h2><ol>
+<li>先定义 3 个高频任务，不贪多。</li>
+<li>给每个任务写成功条件和回退策略。</li>
+<li>检索链路接入重排与证据回显。</li>
+<li>工具调用强制 schema 校验。</li>
+<li>每周复盘错误归因，持续迭代。</li>
+</ol>
+<h2><span id="结语">结语</span></h2><p>RAG 不会消失，但“只会回答的 RAG”会越来越难进入核心流程。未来两年，真正有壁垒的是：</p>
+<ul>
+<li>证据可靠。</li>
+<li>动作可控。</li>
+<li>成本可衡量。</li>
+</ul>
+<p>这三点加在一起，才是 Agentic RAG 的护城河。</p>
+<h2><span id="参考来源">参考来源</span></h2><ul>
+<li>OpenAI：New tools for building agents（2025-03-11）<br><a target="_blank" rel="noopener" href="https://openai.com/index/new-tools-for-building-agents/">https://openai.com/index/new-tools-for-building-agents/</a></li>
+<li>GitHub：RAGFlow<br><a target="_blank" rel="noopener" href="https://github.com/infiniflow/ragflow">https://github.com/infiniflow/ragflow</a></li>
+<li>知乎：RAG 与企业检索实战讨论<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1955668804727207627">https://zhuanlan.zhihu.com/p/1955668804727207627</a></li>
+<li>知乎：从 RAG 到 KAG 的演进<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1977739890704798545">https://zhuanlan.zhihu.com/p/1977739890704798545</a></li>
+<li>哔哩哔哩：Agentic RAG 全流程实战<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ZiEEzLE3X/">https://www.bilibili.com/video/BV1ZiEEzLE3X/</a></li>
+</ul>
+<h2><span id="专业架构图kroki-生成">专业架构图（Kroki 生成）</span></h2><h3><span id="agentic-rag-生产流水线">Agentic RAG 生产流水线</span></h3><p><img data-src="/images/diagrams/agentic-rag-pipeline.svg" alt="Agentic RAG Pipeline"></p>
+<h3><span id="agentic-rag-执行时序">Agentic RAG 执行时序</span></h3><p><img data-src="/images/diagrams/agentic-rag-sequence.svg" alt="Agentic RAG Sequence"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/lirui940403">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">Zhihu</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/earyantLe">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/RAG/" rel="tag"># RAG</a>
+              <a href="/tags/Agentic-RAG/" rel="tag"># Agentic RAG</a>
+              <a href="/tags/%E4%BC%81%E4%B8%9AAI/" rel="tag"># 企业AI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E5%86%8D%E5%8F%AA%E8%81%8A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E4%BA%86%EF%BC%9A2026%20%E7%9C%9F%E6%AD%A3%E6%8B%89%E5%BC%80%E5%B7%AE%E8%B7%9D%E7%9A%84%E6%98%AF%20Agentic%20AI%20+%20MCP/" rel="prev" title="别再只聊大模型参数了：2026 真正拉开差距的是 Agentic AI + MCP">
+      <i class="fa fa-chevron-left"></i> 别再只聊大模型参数了：2026 真正拉开差距的是 Agentic AI + MCP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/AI%E5%89%8D%E6%B2%BF/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BC%9A%E8%A2%AB%E6%9B%BF%E4%BB%A3%E5%90%97%EF%BC%9F%E5%85%88%E5%88%AB%E6%85%8C%EF%BC%8C2026%20%E5%B9%B4%E7%9C%9F%E6%AD%A3%E9%A2%A0%E8%A6%86%E7%9A%84%E6%98%AF%20AI%20Coding%20Agent%20%E5%B7%A5%E4%BD%9C%E6%B5%81/" rel="next" title="程序员会被替代吗？先别慌，2026 年真正颠覆的是 AI Coding Agent 工作流">
+      程序员会被替代吗？先别慌，2026 年真正颠覆的是 AI Coding Agent 工作流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+              crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-8990335822972779"
+              data-ad-slot="3743679245"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990335822972779"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8990335822972779"
+     data-ad-slot="3743679245"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">为什么 Agentic RAG 会成为 2026 主线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">图表1：传统 RAG 与 Agentic RAG 的本质差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">图表2：生产级 Agentic RAG 架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">工程拆解：四个关键模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">1. 检索层：混合检索是底线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">2. 规划层：把“答案”升级成“动作计划”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">3. 执行层：工具契约要强约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">4. 评估层：建立线上可观测指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">图表3：从 PoC 到生产的进阶路线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">代码层建议：先做结构化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">常见失败模式（真实项目高频）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">落地清单：一周可推进版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">参考来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">专业架构图（Kroki 生成）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">11.1.</span> <span class="nav-text">Agentic RAG 生产流水线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">11.2.</span> <span class="nav-text">Agentic RAG 执行时序</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Earyant"
+      src="/images/me/me2.png">
+  <p class="site-author-name" itemprop="name">Earyant</p>
+  <div class="site-description" itemprop="description">个人技术博客，分享开发中遇到的问题，以及想学的新技术，会持续更新，可以订阅rss。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">348</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/earyantLe" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lirui940403@gmail.com" title="E-Mail → mailto:lirui940403@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/earyant" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/earyantLe" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;earyantLe" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/earyant" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/earyant" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;earyant" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/lirui940403" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lirui940403" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhuyuanxiang.github.io/" title="https:&#x2F;&#x2F;zhuyuanxiang.github.io&#x2F;" rel="noopener" target="_blank">zYx.Tom</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mofanpy.com/" title="https:&#x2F;&#x2F;mofanpy.com&#x2F;" rel="noopener" target="_blank">mofan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/timqian/chinese-independent-blogs" title="https:&#x2F;&#x2F;github.com&#x2F;timqian&#x2F;chinese-independent-blogs" rel="noopener" target="_blank">中文独立博客推荐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ruanyifeng.com/blog/" title="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">阮一峰</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/1567748478" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;1567748478" rel="noopener" target="_blank">李沐</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://seekbetter.me/" title="https:&#x2F;&#x2F;seekbetter.me&#x2F;" rel="noopener" target="_blank">加菲猫</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jetli.com.cn/" title="http:&#x2F;&#x2F;www.jetli.com.cn&#x2F;" rel="noopener" target="_blank">优秀博客导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Earyant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'dc57e777868f7d0d0d6e',
+      clientSecret: 'd54ae953e61c3d6fe846828c2765958a001a8654',
+      repo        : 'earyant.github.io-comment',
+      owner       : 'earyantLe',
+      admin       : ['earyantLe'],
+      id          : '81f5b90262ace4dacbea4cec7e251aad',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+
+</body>
+</html>

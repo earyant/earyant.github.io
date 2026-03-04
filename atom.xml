@@ -6,7 +6,7 @@
   <link href="https://blog.lirui.pub/atom.xml" rel="self"/>
   
   <link href="https://blog.lirui.pub/"/>
-  <updated>2025-04-03T13:54:54.000Z</updated>
+  <updated>2026-03-04T03:56:03.605Z</updated>
   <id>https://blog.lirui.pub/</id>
   
   <author>
@@ -15,6 +15,230 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>别把 AI 评测当作打分：从 Evals 到回归门禁的工程化方法</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E6%8A%8A%20AI%20%E8%AF%84%E6%B5%8B%E5%BD%93%E4%BD%9C%E6%89%93%E5%88%86%EF%BC%9A%E4%BB%8E%20Evals%20%E5%88%B0%E5%9B%9E%E5%BD%92%E9%97%A8%E7%A6%81%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%96%B9%E6%B3%95/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E6%8A%8A%20AI%20%E8%AF%84%E6%B5%8B%E5%BD%93%E4%BD%9C%E6%89%93%E5%88%86%EF%BC%9A%E4%BB%8E%20Evals%20%E5%88%B0%E5%9B%9E%E5%BD%92%E9%97%A8%E7%A6%81%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%96%B9%E6%B3%95/</id>
+    <published>2026-03-04T02:50:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="Evals" scheme="https://blog.lirui.pub/tags/Evals/"/>
+    
+    <category term="质量门禁" scheme="https://blog.lirui.pub/tags/%E8%B4%A8%E9%87%8F%E9%97%A8%E7%A6%81/"/>
+    
+    <category term="工程实践" scheme="https://blog.lirui.pub/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>当上下文窗口不再免费：2026 年 SLM + RAG 的降本架构实战</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%BD%93%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3%E4%B8%8D%E5%86%8D%E5%85%8D%E8%B4%B9%EF%BC%9A2026%20%E5%B9%B4%20SLM%20+%20RAG%20%E7%9A%84%E9%99%8D%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%AE%9E%E6%88%98/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%BD%93%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3%E4%B8%8D%E5%86%8D%E5%85%8D%E8%B4%B9%EF%BC%9A2026%20%E5%B9%B4%20SLM%20+%20RAG%20%E7%9A%84%E9%99%8D%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%AE%9E%E6%88%98/</id>
+    <published>2026-03-04T02:35:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="RAG" scheme="https://blog.lirui.pub/tags/RAG/"/>
+    
+    <category term="SLM" scheme="https://blog.lirui.pub/tags/SLM/"/>
+    
+    <category term="成本优化" scheme="https://blog.lirui.pub/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MCP 不只是连接器：企业落地 Agent 前必须补的安全治理栈</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/MCP%20%E4%B8%8D%E5%8F%AA%E6%98%AF%E8%BF%9E%E6%8E%A5%E5%99%A8%EF%BC%9A%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%20Agent%20%E5%89%8D%E5%BF%85%E9%A1%BB%E8%A1%A5%E7%9A%84%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%A0%88/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/MCP%20%E4%B8%8D%E5%8F%AA%E6%98%AF%E8%BF%9E%E6%8E%A5%E5%99%A8%EF%BC%9A%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%20Agent%20%E5%89%8D%E5%BF%85%E9%A1%BB%E8%A1%A5%E7%9A%84%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%A0%88/</id>
+    <published>2026-03-04T02:20:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="MCP" scheme="https://blog.lirui.pub/tags/MCP/"/>
+    
+    <category term="Agent安全" scheme="https://blog.lirui.pub/tags/Agent%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="企业架构" scheme="https://blog.lirui.pub/tags/%E4%BC%81%E4%B8%9A%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>别再盲选框架：2026 开源 Agent 平台选型，一步错可能重构半年</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E5%86%8D%E7%9B%B2%E9%80%89%E6%A1%86%E6%9E%B6%EF%BC%9A2026%20%E5%BC%80%E6%BA%90%20Agent%20%E5%B9%B3%E5%8F%B0%E9%80%89%E5%9E%8B%EF%BC%8C%E4%B8%80%E6%AD%A5%E9%94%99%E5%8F%AF%E8%83%BD%E9%87%8D%E6%9E%84%E5%8D%8A%E5%B9%B4/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E5%86%8D%E7%9B%B2%E9%80%89%E6%A1%86%E6%9E%B6%EF%BC%9A2026%20%E5%BC%80%E6%BA%90%20Agent%20%E5%B9%B3%E5%8F%B0%E9%80%89%E5%9E%8B%EF%BC%8C%E4%B8%80%E6%AD%A5%E9%94%99%E5%8F%AF%E8%83%BD%E9%87%8D%E6%9E%84%E5%8D%8A%E5%B9%B4/</id>
+    <published>2026-03-03T11:10:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="Agent" scheme="https://blog.lirui.pub/tags/Agent/"/>
+    
+    <category term="开源" scheme="https://blog.lirui.pub/tags/%E5%BC%80%E6%BA%90/"/>
+    
+    <category term="技术选型" scheme="https://blog.lirui.pub/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>流量要变天了：2026 多模态视频生成正在重写内容行业的成本结构</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E6%B5%81%E9%87%8F%E8%A6%81%E5%8F%98%E5%A4%A9%E4%BA%86%EF%BC%9A2026%20%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%AD%A3%E5%9C%A8%E9%87%8D%E5%86%99%E5%86%85%E5%AE%B9%E8%A1%8C%E4%B8%9A%E7%9A%84%E6%88%90%E6%9C%AC%E7%BB%93%E6%9E%84/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E6%B5%81%E9%87%8F%E8%A6%81%E5%8F%98%E5%A4%A9%E4%BA%86%EF%BC%9A2026%20%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%AD%A3%E5%9C%A8%E9%87%8D%E5%86%99%E5%86%85%E5%AE%B9%E8%A1%8C%E4%B8%9A%E7%9A%84%E6%88%90%E6%9C%AC%E7%BB%93%E6%9E%84/</id>
+    <published>2026-03-03T11:00:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="多模态" scheme="https://blog.lirui.pub/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/"/>
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="视频生成" scheme="https://blog.lirui.pub/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/"/>
+    
+    <category term="内容创作" scheme="https://blog.lirui.pub/tags/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员会被替代吗？先别慌，2026 年真正颠覆的是 AI Coding Agent 工作流</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BC%9A%E8%A2%AB%E6%9B%BF%E4%BB%A3%E5%90%97%EF%BC%9F%E5%85%88%E5%88%AB%E6%85%8C%EF%BC%8C2026%20%E5%B9%B4%E7%9C%9F%E6%AD%A3%E9%A2%A0%E8%A6%86%E7%9A%84%E6%98%AF%20AI%20Coding%20Agent%20%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BC%9A%E8%A2%AB%E6%9B%BF%E4%BB%A3%E5%90%97%EF%BC%9F%E5%85%88%E5%88%AB%E6%85%8C%EF%BC%8C2026%20%E5%B9%B4%E7%9C%9F%E6%AD%A3%E9%A2%A0%E8%A6%86%E7%9A%84%E6%98%AF%20AI%20Coding%20Agent%20%E5%B7%A5%E4%BD%9C%E6%B5%81/</id>
+    <published>2026-03-03T10:50:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="Coding Agent" scheme="https://blog.lirui.pub/tags/Coding-Agent/"/>
+    
+    <category term="开发效率" scheme="https://blog.lirui.pub/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/"/>
+    
+    <category term="工程管理" scheme="https://blog.lirui.pub/tags/%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RAG 要么升级，要么淘汰：2026 年最猛增量是 Agentic RAG</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/RAG%20%E8%A6%81%E4%B9%88%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A6%81%E4%B9%88%E6%B7%98%E6%B1%B0%EF%BC%9A2026%20%E5%B9%B4%E6%9C%80%E7%8C%9B%E5%A2%9E%E9%87%8F%E6%98%AF%20Agentic%20RAG/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/RAG%20%E8%A6%81%E4%B9%88%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A6%81%E4%B9%88%E6%B7%98%E6%B1%B0%EF%BC%9A2026%20%E5%B9%B4%E6%9C%80%E7%8C%9B%E5%A2%9E%E9%87%8F%E6%98%AF%20Agentic%20RAG/</id>
+    <published>2026-03-03T10:40:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="RAG" scheme="https://blog.lirui.pub/tags/RAG/"/>
+    
+    <category term="Agentic RAG" scheme="https://blog.lirui.pub/tags/Agentic-RAG/"/>
+    
+    <category term="企业AI" scheme="https://blog.lirui.pub/tags/%E4%BC%81%E4%B8%9AAI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>别再只聊大模型参数了：2026 真正拉开差距的是 Agentic AI + MCP</title>
+    <link href="https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E5%86%8D%E5%8F%AA%E8%81%8A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E4%BA%86%EF%BC%9A2026%20%E7%9C%9F%E6%AD%A3%E6%8B%89%E5%BC%80%E5%B7%AE%E8%B7%9D%E7%9A%84%E6%98%AF%20Agentic%20AI%20+%20MCP/"/>
+    <id>https://blog.lirui.pub/posts/AI%E5%89%8D%E6%B2%BF/%E5%88%AB%E5%86%8D%E5%8F%AA%E8%81%8A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E4%BA%86%EF%BC%9A2026%20%E7%9C%9F%E6%AD%A3%E6%8B%89%E5%BC%80%E5%B7%AE%E8%B7%9D%E7%9A%84%E6%98%AF%20Agentic%20AI%20+%20MCP/</id>
+    <published>2026-03-03T10:30:00.000Z</published>
+    <updated>2026-03-04T03:56:03.605Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="AI前沿" scheme="https://blog.lirui.pub/categories/AI%E5%89%8D%E6%B2%BF/"/>
+    
+    
+    <category term="AI" scheme="https://blog.lirui.pub/tags/AI/"/>
+    
+    <category term="MCP" scheme="https://blog.lirui.pub/tags/MCP/"/>
+    
+    <category term="Agentic AI" scheme="https://blog.lirui.pub/tags/Agentic-AI/"/>
+    
+    <category term="AI基础设施" scheme="https://blog.lirui.pub/tags/AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/"/>
+    
+  </entry>
   
   <entry>
     <title>查理芒格的100个思维模型</title>
@@ -39,7 +263,7 @@
     <link href="https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>https://blog.lirui.pub/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
     <published>2024-01-03T09:20:02.000Z</published>
-    <updated>2026-01-24T10:57:58.501Z</updated>
+    <updated>2026-03-04T03:56:03.635Z</updated>
     
     
       
@@ -273,162 +497,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>晚点</title>
-    <link href="https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E6%99%9A%E7%82%B9/"/>
-    <id>https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E6%99%9A%E7%82%B9/</id>
-    <published>2023-08-10T07:37:19.000Z</published>
-    <updated>2023-08-10T07:37:19.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>十点读书</title>
-    <link href="https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E5%8D%81%E7%82%B9%E8%AF%BB%E4%B9%A6/"/>
-    <id>https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E5%8D%81%E7%82%B9%E8%AF%BB%E4%B9%A6/</id>
-    <published>2023-08-10T07:33:27.000Z</published>
-    <updated>2023-08-10T07:33:27.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>阿猫读书</title>
-    <link href="https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E9%98%BF%E7%8C%AB%E8%AF%BB%E4%B9%A6/"/>
-    <id>https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E5%85%AC%E4%BC%97%E5%8F%B7/%E9%98%BF%E7%8C%AB%E8%AF%BB%E4%B9%A6/</id>
-    <published>2023-08-09T09:27:56.000Z</published>
-    <updated>2023-08-09T09:27:56.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>鬼谷子识人之道</title>
-    <link href="https://blog.lirui.pub/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E9%AC%BC%E8%B0%B7%E5%AD%90%E8%AF%86%E4%BA%BA%E4%B9%8B%E9%81%93/"/>
-    <id>https://blog.lirui.pub/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E9%AC%BC%E8%B0%B7%E5%AD%90%E8%AF%86%E4%BA%BA%E4%B9%8B%E9%81%93/</id>
-    <published>2023-08-09T08:25:27.000Z</published>
-    <updated>2023-08-09T08:25:27.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>面对工作不如意我该怎么处理？</title>
-    <link href="https://blog.lirui.pub/posts/%E6%80%9D%E8%80%83/%E9%9D%A2%E5%AF%B9%E5%B7%A5%E4%BD%9C%E4%B8%8D%E5%A6%82%E6%84%8F%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86/"/>
-    <id>https://blog.lirui.pub/posts/%E6%80%9D%E8%80%83/%E9%9D%A2%E5%AF%B9%E5%B7%A5%E4%BD%9C%E4%B8%8D%E5%A6%82%E6%84%8F%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86/</id>
-    <published>2023-07-18T08:27:44.000Z</published>
-    <updated>2023-07-18T08:27:44.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="认知升级" scheme="https://blog.lirui.pub/categories/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/"/>
-    
-    
-    <category term="认知升级" scheme="https://blog.lirui.pub/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>4R原子法</title>
-    <link href="https://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/4R%E5%8E%9F%E5%AD%90%E6%B3%95/"/>
-    <id>https://blog.lirui.pub/posts/%E5%BF%83%E7%90%86%E5%AD%A6/4R%E5%8E%9F%E5%AD%90%E6%B3%95/</id>
-    <published>2023-03-16T13:41:52.000Z</published>
-    <updated>2023-03-16T13:41:52.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>贝尔宾团队角色</title>
-    <link href="https://blog.lirui.pub/posts/%E6%80%9D%E8%80%83/%E8%B4%9D%E5%B0%94%E5%AE%BE%E5%9B%A2%E9%98%9F%E8%A7%92%E8%89%B2/"/>
-    <id>https://blog.lirui.pub/posts/%E6%80%9D%E8%80%83/%E8%B4%9D%E5%B0%94%E5%AE%BE%E5%9B%A2%E9%98%9F%E8%A7%92%E8%89%B2/</id>
-    <published>2023-02-23T02:44:07.000Z</published>
-    <updated>2023-02-23T02:44:07.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>摄影书单</title>
-    <link href="https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E4%B9%A6%E5%8D%95/"/>
-    <id>https://blog.lirui.pub/posts/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E4%B9%A6%E5%8D%95/</id>
-    <published>2023-02-20T03:11:40.000Z</published>
-    <updated>2023-02-20T03:11:40.000Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="书单" scheme="https://blog.lirui.pub/categories/%E4%B9%A6%E5%8D%95/"/>
-    
-    <category term="摄影资源" scheme="https://blog.lirui.pub/categories/%E4%B9%A6%E5%8D%95/%E6%91%84%E5%BD%B1%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="书单" scheme="https://blog.lirui.pub/tags/%E4%B9%A6%E5%8D%95/"/>
-    
-    <category term="摄影资源" scheme="https://blog.lirui.pub/tags/%E6%91%84%E5%BD%B1%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
